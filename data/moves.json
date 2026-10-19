@@ -1,0 +1,1320 @@
+{
+  "tackle": {
+    "name": "Placaje",
+    "type": "normal",
+    "category": "physical",
+    "power": 4,
+    "cost": 0,
+    "cooldown": 0,
+    "range": "melee"
+  },
+  "hyperFang": {
+    "name": "Hipercolmillo",
+    "type": "normal",
+    "category": "physical",
+    "power": 7,
+    "cost": 1,
+    "cooldown": 1,
+    "range": "melee",
+    "critCoins": 3
+  },
+  "slam": {
+    "name": "Atizar",
+    "type": "normal",
+    "category": "physical",
+    "power": 11,
+    "cost": 2,
+    "cooldown": 2,
+    "range": "melee"
+  },
+  "harden": {
+    "name": "Fortaleza",
+    "type": "normal",
+    "category": "status",
+    "power": 0,
+    "cost": 1,
+    "cooldown": 2,
+    "range": "any",
+    "targetSide": "self",
+    "effects": [
+      {
+        "type": "shield",
+        "amount": 6,
+        "target": "self"
+      }
+    ]
+  },
+  "focusEnergy": {
+    "name": "Foco energético",
+    "type": "normal",
+    "category": "status",
+    "power": 0,
+    "cost": 0,
+    "cooldown": 3,
+    "range": "any",
+    "targetSide": "self",
+    "effects": [
+      {
+        "type": "luckyCoin",
+        "amount": 1
+      }
+    ]
+  },
+  "vineWhip": {
+    "name": "Látigo cepa",
+    "type": "grass",
+    "category": "physical",
+    "power": 4,
+    "cost": 0,
+    "cooldown": 0,
+    "range": "melee"
+  },
+  "razorLeaf": {
+    "name": "Hoja afilada",
+    "type": "grass",
+    "category": "physical",
+    "power": 7,
+    "cost": 1,
+    "cooldown": 1,
+    "range": "any",
+    "critCoins": 3,
+    "targetMode": "targetRow",
+    "spreadMultiplier": 0.8
+  },
+  "leafStorm": {
+    "name": "Tormenta de hojas",
+    "type": "grass",
+    "category": "special",
+    "power": 12,
+    "cost": 2,
+    "cooldown": 3,
+    "range": "any"
+  },
+  "synthesis": {
+    "name": "Síntesis",
+    "type": "grass",
+    "category": "status",
+    "power": 0,
+    "cost": 1,
+    "cooldown": 3,
+    "range": "any",
+    "targetSide": "self",
+    "effects": [
+      {
+        "type": "heal",
+        "amount": 10,
+        "target": "self"
+      }
+    ]
+  },
+  "ember": {
+    "name": "Ascuas",
+    "type": "fire",
+    "category": "special",
+    "power": 4,
+    "cost": 0,
+    "cooldown": 0,
+    "range": "any",
+    "effects": [
+      {
+        "type": "status",
+        "status": "burn",
+        "chance": 0.2
+      }
+    ]
+  },
+  "fireFang": {
+    "name": "Colmillo ígneo",
+    "type": "fire",
+    "category": "physical",
+    "power": 7,
+    "cost": 1,
+    "cooldown": 1,
+    "range": "melee",
+    "effects": [
+      {
+        "type": "status",
+        "status": "burn",
+        "chance": 0.25
+      }
+    ]
+  },
+  "flamethrower": {
+    "name": "Lanzallamas",
+    "type": "fire",
+    "category": "special",
+    "power": 11,
+    "cost": 2,
+    "cooldown": 2,
+    "range": "any",
+    "effects": [
+      {
+        "type": "status",
+        "status": "burn",
+        "chance": 0.2
+      }
+    ]
+  },
+  "flareBlitz": {
+    "name": "Envite ígneo",
+    "type": "fire",
+    "category": "physical",
+    "power": 13,
+    "cost": 2,
+    "cooldown": 3,
+    "range": "melee",
+    "effects": [
+      {
+        "type": "status",
+        "status": "burn",
+        "chance": 0.2
+      }
+    ]
+  },
+  "armThrust": {
+    "name": "Empujón",
+    "type": "fighting",
+    "category": "physical",
+    "power": 7,
+    "cost": 1,
+    "cooldown": 1,
+    "range": "melee"
+  },
+  "hammerArm": {
+    "name": "Machada",
+    "type": "fighting",
+    "category": "physical",
+    "power": 12,
+    "cost": 2,
+    "cooldown": 2,
+    "range": "melee"
+  },
+  "waterGun": {
+    "name": "Pistola agua",
+    "type": "water",
+    "category": "special",
+    "power": 4,
+    "cost": 0,
+    "cooldown": 0,
+    "range": "any"
+  },
+  "aquaJet": {
+    "name": "Acua jet",
+    "type": "water",
+    "category": "physical",
+    "power": 7,
+    "cost": 1,
+    "cooldown": 1,
+    "range": "melee"
+  },
+  "surf": {
+    "name": "Surf",
+    "type": "water",
+    "category": "special",
+    "power": 11,
+    "cost": 2,
+    "cooldown": 2,
+    "range": "any",
+    "targetMode": "allEnemies",
+    "spreadMultiplier": 0.68
+  },
+  "razorShell": {
+    "name": "Concha filo",
+    "type": "water",
+    "category": "physical",
+    "power": 12,
+    "cost": 2,
+    "cooldown": 2,
+    "range": "melee",
+    "critCoins": 3
+  },
+  "gust": {
+    "name": "Tornado",
+    "type": "flying",
+    "category": "special",
+    "power": 4,
+    "cost": 0,
+    "cooldown": 0,
+    "range": "any"
+  },
+  "aerialAce": {
+    "name": "Golpe aéreo",
+    "type": "flying",
+    "category": "physical",
+    "power": 7,
+    "cost": 1,
+    "cooldown": 1,
+    "range": "melee",
+    "critCoins": 3
+  },
+  "braveBird": {
+    "name": "Pájaro osado",
+    "type": "flying",
+    "category": "physical",
+    "power": 13,
+    "cost": 2,
+    "cooldown": 3,
+    "range": "melee"
+  },
+  "rockThrow": {
+    "name": "Lanzarrocas",
+    "type": "rock",
+    "category": "physical",
+    "power": 4,
+    "cost": 0,
+    "cooldown": 0,
+    "range": "any"
+  },
+  "rockSlide": {
+    "name": "Avalancha",
+    "type": "rock",
+    "category": "physical",
+    "power": 7,
+    "cost": 1,
+    "cooldown": 1,
+    "range": "any",
+    "effects": [
+      {
+        "type": "status",
+        "status": "flinch",
+        "chance": 0.2
+      }
+    ],
+    "targetMode": "targetRow",
+    "spreadMultiplier": 0.8
+  },
+  "stoneEdge": {
+    "name": "Roca afilada",
+    "type": "rock",
+    "category": "physical",
+    "power": 12,
+    "cost": 2,
+    "cooldown": 2,
+    "range": "any",
+    "critCoins": 3
+  },
+  "mudSlap": {
+    "name": "Bofetón lodo",
+    "type": "ground",
+    "category": "special",
+    "power": 4,
+    "cost": 0,
+    "cooldown": 0,
+    "range": "any"
+  },
+  "bite": {
+    "name": "Mordisco",
+    "type": "dark",
+    "category": "physical",
+    "power": 7,
+    "cost": 1,
+    "cooldown": 1,
+    "range": "melee",
+    "effects": [
+      {
+        "type": "status",
+        "status": "flinch",
+        "chance": 0.3
+      }
+    ]
+  },
+  "snarl": {
+    "name": "Alarido",
+    "type": "dark",
+    "category": "special",
+    "power": 6,
+    "cost": 1,
+    "cooldown": 1,
+    "range": "any"
+  },
+  "crunch": {
+    "name": "Triturar",
+    "type": "dark",
+    "category": "physical",
+    "power": 11,
+    "cost": 2,
+    "cooldown": 2,
+    "range": "melee",
+    "effects": [
+      {
+        "type": "status",
+        "status": "flinch",
+        "chance": 0.2
+      }
+    ]
+  },
+  "nightSlash": {
+    "name": "Tajo umbrío",
+    "type": "dark",
+    "category": "physical",
+    "power": 11,
+    "cost": 2,
+    "cooldown": 2,
+    "range": "melee",
+    "critCoins": 3
+  },
+  "thunderShock": {
+    "name": "Impactrueno",
+    "type": "electric",
+    "category": "special",
+    "power": 4,
+    "cost": 0,
+    "cooldown": 0,
+    "range": "any",
+    "effects": [
+      {
+        "type": "status",
+        "status": "paralysis",
+        "chance": 0.1
+      }
+    ]
+  },
+  "spark": {
+    "name": "Chispa",
+    "type": "electric",
+    "category": "physical",
+    "power": 7,
+    "cost": 1,
+    "cooldown": 1,
+    "range": "melee",
+    "effects": [
+      {
+        "type": "status",
+        "status": "paralysis",
+        "chance": 0.3
+      }
+    ]
+  },
+  "thunderbolt": {
+    "name": "Rayo",
+    "type": "electric",
+    "category": "special",
+    "power": 11,
+    "cost": 2,
+    "cooldown": 2,
+    "range": "any",
+    "effects": [
+      {
+        "type": "status",
+        "status": "paralysis",
+        "chance": 0.1
+      }
+    ]
+  },
+  "wildCharge": {
+    "name": "Voltio cruel",
+    "type": "electric",
+    "category": "physical",
+    "power": 12,
+    "cost": 2,
+    "cooldown": 2,
+    "range": "melee"
+  },
+  "agility": {
+    "name": "Agilidad",
+    "type": "psychic",
+    "category": "status",
+    "power": 0,
+    "cost": 1,
+    "cooldown": 3,
+    "range": "any",
+    "targetSide": "self",
+    "effects": [
+      {
+        "type": "reduceCooldown",
+        "amount": 1,
+        "target": "allAllies"
+      }
+    ]
+  },
+  "trickRoom": {
+    "name": "Espacio raro",
+    "type": "psychic",
+    "category": "status",
+    "power": 0,
+    "cost": 2,
+    "cooldown": 6,
+    "range": "any",
+    "targetSide": "self",
+    "effects": [
+      {
+        "type": "costModifier",
+        "amount": -1,
+        "turns": 5,
+        "minCost": 1,
+        "label": "Espacio raro"
+      }
+    ]
+  },
+  "swordsDance": {
+    "name": "Danza espada",
+    "type": "normal",
+    "category": "status",
+    "power": 0,
+    "cost": 1,
+    "cooldown": 4,
+    "range": "any",
+    "targetSide": "self",
+    "effects": [
+      {
+        "type": "powerModifier",
+        "amount": 3,
+        "turns": 3,
+        "category": "physical",
+        "label": "Danza espada"
+      }
+    ]
+  },
+  "nastyPlot": {
+    "name": "Maquinación",
+    "type": "dark",
+    "category": "status",
+    "power": 0,
+    "cost": 1,
+    "cooldown": 4,
+    "range": "any",
+    "targetSide": "self",
+    "effects": [
+      {
+        "type": "powerModifier",
+        "amount": 3,
+        "turns": 3,
+        "category": "special",
+        "label": "Maquinación"
+      }
+    ]
+  },
+  "charge": {
+    "name": "Carga",
+    "type": "electric",
+    "category": "status",
+    "power": 0,
+    "cost": 0,
+    "cooldown": 4,
+    "range": "any",
+    "targetSide": "self",
+    "effects": [
+      {
+        "type": "addCards",
+        "cardId": "energyBasic",
+        "amount": 2
+      }
+    ]
+  },
+  "rest": {
+    "name": "Descanso",
+    "type": "normal",
+    "category": "status",
+    "power": 0,
+    "cost": 2,
+    "cooldown": 5,
+    "range": "any",
+    "targetSide": "self",
+    "effects": [
+      {
+        "type": "heal",
+        "amount": 25,
+        "target": "self"
+      }
+    ]
+  },
+  "bulkUp": {
+    "name": "Corpulencia",
+    "type": "fighting",
+    "category": "status",
+    "power": 0,
+    "cost": 1,
+    "cooldown": 3,
+    "range": "any",
+    "targetSide": "self",
+    "effects": [
+      {
+        "type": "shield",
+        "amount": 5,
+        "target": "self"
+      },
+      {
+        "type": "powerModifier",
+        "amount": 2,
+        "turns": 3,
+        "category": "physical",
+        "label": "Corpulencia"
+      }
+    ]
+  },
+  "earthquake": {
+    "name": "Terremoto",
+    "type": "ground",
+    "category": "physical",
+    "power": 12,
+    "cost": 2,
+    "cooldown": 2,
+    "range": "any",
+    "targetMode": "allEnemies",
+    "spreadMultiplier": 0.65
+  },
+  "mudShot": {
+    "name": "Disparo lodo",
+    "type": "ground",
+    "category": "special",
+    "power": 7,
+    "cost": 1,
+    "cooldown": 1,
+    "range": "any"
+  },
+  "metalClaw": {
+    "name": "Garra metal",
+    "type": "steel",
+    "category": "physical",
+    "power": 7,
+    "cost": 1,
+    "cooldown": 1,
+    "range": "melee"
+  },
+  "ironHead": {
+    "name": "Cabeza de hierro",
+    "type": "steel",
+    "category": "physical",
+    "power": 12,
+    "cost": 2,
+    "cooldown": 2,
+    "range": "melee"
+  },
+  "flashCannon": {
+    "name": "Foco resplandor",
+    "type": "steel",
+    "category": "special",
+    "power": 11,
+    "cost": 2,
+    "cooldown": 2,
+    "range": "any"
+  },
+  "poisonSting": {
+    "name": "Picotazo veneno",
+    "type": "poison",
+    "category": "physical",
+    "power": 4,
+    "cost": 0,
+    "cooldown": 0,
+    "range": "melee",
+    "effects": [
+      {
+        "type": "status",
+        "status": "poison",
+        "chance": 0.4
+      }
+    ]
+  },
+  "sludgeBomb": {
+    "name": "Bomba lodo",
+    "type": "poison",
+    "category": "special",
+    "power": 11,
+    "cost": 2,
+    "cooldown": 2,
+    "range": "any",
+    "effects": [
+      {
+        "type": "status",
+        "status": "poison",
+        "chance": 0.35
+      }
+    ]
+  },
+  "scratch": {
+    "name": "Arañazo",
+    "type": "normal",
+    "category": "physical",
+    "power": 4,
+    "cost": 0,
+    "cooldown": 0,
+    "range": "melee"
+  },
+  "slash": {
+    "name": "Cuchillada",
+    "type": "normal",
+    "category": "physical",
+    "power": 8,
+    "cost": 1,
+    "cooldown": 1,
+    "range": "melee",
+    "critCoins": 3
+  },
+  "bubbleBeam": {
+    "name": "Rayo burbuja",
+    "type": "water",
+    "category": "special",
+    "power": 7,
+    "cost": 1,
+    "cooldown": 1,
+    "range": "any"
+  },
+  "hydroPump": {
+    "name": "Hidrobomba",
+    "type": "water",
+    "category": "special",
+    "power": 14,
+    "cost": 2,
+    "cooldown": 3,
+    "range": "any"
+  },
+  "energyBall": {
+    "name": "Energibola",
+    "type": "grass",
+    "category": "special",
+    "power": 9,
+    "cost": 1,
+    "cooldown": 1,
+    "range": "any"
+  },
+  "seedBomb": {
+    "name": "Bomba germen",
+    "type": "grass",
+    "category": "physical",
+    "power": 11,
+    "cost": 2,
+    "cooldown": 2,
+    "range": "any"
+  },
+  "closeCombat": {
+    "name": "A bocajarro",
+    "type": "fighting",
+    "category": "physical",
+    "power": 14,
+    "cost": 2,
+    "cooldown": 3,
+    "range": "melee"
+  },
+  "bugBite": {
+    "name": "Picadura",
+    "type": "bug",
+    "category": "physical",
+    "power": 5,
+    "cost": 0,
+    "cooldown": 0,
+    "range": "melee"
+  },
+  "xScissor": {
+    "name": "Tijera X",
+    "type": "bug",
+    "category": "physical",
+    "power": 10,
+    "cost": 2,
+    "cooldown": 2,
+    "range": "melee"
+  },
+  "poisonTail": {
+    "name": "Cola veneno",
+    "type": "poison",
+    "category": "physical",
+    "power": 7,
+    "cost": 1,
+    "cooldown": 1,
+    "range": "melee",
+    "effects": [
+      {
+        "type": "status",
+        "status": "poison",
+        "chance": 0.3
+      }
+    ]
+  },
+  "bugBuzz": {
+    "name": "Zumbido",
+    "type": "bug",
+    "category": "special",
+    "power": 10,
+    "cost": 2,
+    "cooldown": 2,
+    "range": "any",
+    "targetMode": "targetRow",
+    "spreadMultiplier": 0.78
+  },
+  "shadowSneak": {
+    "name": "Sombra vil",
+    "type": "ghost",
+    "category": "physical",
+    "power": 5,
+    "cost": 0,
+    "cooldown": 0,
+    "range": "any"
+  },
+  "shadowBall": {
+    "name": "Bola sombra",
+    "type": "ghost",
+    "category": "special",
+    "power": 10,
+    "cost": 2,
+    "cooldown": 2,
+    "range": "any",
+    "effects": [
+      {
+        "type": "status",
+        "status": "flinch",
+        "chance": 0.12
+      }
+    ]
+  },
+  "willOWisp": {
+    "name": "Fuego fatuo",
+    "type": "fire",
+    "category": "status",
+    "power": 0,
+    "cost": 1,
+    "cooldown": 2,
+    "range": "any",
+    "effects": [
+      {
+        "type": "status",
+        "status": "burn",
+        "chance": 0.85
+      }
+    ]
+  },
+  "psybeam": {
+    "name": "Psicorrayo",
+    "type": "psychic",
+    "category": "special",
+    "power": 7,
+    "cost": 1,
+    "cooldown": 1,
+    "range": "any"
+  },
+  "psychic": {
+    "name": "Psíquico",
+    "type": "psychic",
+    "category": "special",
+    "power": 12,
+    "cost": 2,
+    "cooldown": 2,
+    "range": "any"
+  },
+  "dragonBreath": {
+    "name": "Dragoaliento",
+    "type": "dragon",
+    "category": "special",
+    "power": 6,
+    "cost": 1,
+    "cooldown": 1,
+    "range": "any",
+    "effects": [
+      {
+        "type": "status",
+        "status": "flinch",
+        "chance": 0.2
+      }
+    ]
+  },
+  "dragonClaw": {
+    "name": "Garra dragón",
+    "type": "dragon",
+    "category": "physical",
+    "power": 10,
+    "cost": 2,
+    "cooldown": 2,
+    "range": "melee"
+  },
+  "ironDefense": {
+    "name": "Defensa férrea",
+    "type": "steel",
+    "category": "status",
+    "power": 0,
+    "cost": 1,
+    "cooldown": 2,
+    "range": "any",
+    "targetSide": "self",
+    "effects": [
+      {
+        "type": "shield",
+        "amount": 10,
+        "target": "self"
+      }
+    ]
+  },
+  "muddyWater": {
+    "name": "Agua lodosa",
+    "type": "water",
+    "category": "special",
+    "power": 9,
+    "cost": 2,
+    "cooldown": 2,
+    "range": "any",
+    "targetMode": "allEnemies",
+    "spreadMultiplier": 0.69
+  },
+  "hex": {
+    "name": "Infortunio",
+    "type": "ghost",
+    "category": "special",
+    "power": 7,
+    "cost": 1,
+    "cooldown": 1,
+    "range": "any",
+    "effects": [
+      {
+        "type": "status",
+        "status": "flinch",
+        "chance": 0.12
+      }
+    ]
+  },
+  "drainPunch": {
+    "name": "Puño drenaje",
+    "type": "fighting",
+    "category": "physical",
+    "power": 8,
+    "cost": 2,
+    "cooldown": 2,
+    "range": "melee"
+  },
+  "iceBeam": {
+    "name": "Rayo hielo",
+    "type": "ice",
+    "category": "special",
+    "power": 10,
+    "cost": 2,
+    "cooldown": 2,
+    "range": "any"
+  },
+  "discharge": {
+    "name": "Chispazo",
+    "type": "electric",
+    "category": "special",
+    "power": 8,
+    "cost": 2,
+    "cooldown": 2,
+    "range": "any",
+    "targetMode": "allEnemies",
+    "spreadMultiplier": 0.67,
+    "effects": [
+      {
+        "type": "status",
+        "status": "paralysis",
+        "chance": 0.3
+      }
+    ]
+  },
+  "toxic": {
+    "name": "Tóxico",
+    "type": "poison",
+    "category": "status",
+    "power": 0,
+    "cost": 1,
+    "cooldown": 3,
+    "range": "any",
+    "effects": [
+      {
+        "type": "status",
+        "status": "poison",
+        "chance": 0.9
+      }
+    ]
+  },
+  "flameCharge": {
+    "name": "Nitrocarga",
+    "type": "fire",
+    "category": "physical",
+    "power": 7,
+    "cost": 1,
+    "cooldown": 1,
+    "range": "melee"
+  },
+  "quickAttack": {
+    "name": "Ataque rápido",
+    "type": "normal",
+    "category": "physical",
+    "power": 5,
+    "cost": 0,
+    "cooldown": 1,
+    "range": "melee"
+  },
+  "bodySlam": {
+    "name": "Golpe cuerpo",
+    "type": "normal",
+    "category": "physical",
+    "power": 9,
+    "cost": 1,
+    "cooldown": 1,
+    "range": "melee",
+    "effects": [
+      {
+        "type": "status",
+        "status": "paralysis",
+        "chance": 0.3
+      }
+    ]
+  },
+  "doubleEdge": {
+    "name": "Doble filo",
+    "type": "normal",
+    "category": "physical",
+    "power": 12,
+    "cost": 2,
+    "cooldown": 2,
+    "range": "melee"
+  },
+  "fireBlast": {
+    "name": "Llamarada",
+    "type": "fire",
+    "category": "special",
+    "power": 13,
+    "cost": 3,
+    "cooldown": 3,
+    "range": "any",
+    "effects": [
+      {
+        "type": "status",
+        "status": "burn",
+        "chance": 0.3
+      }
+    ]
+  },
+  "heatWave": {
+    "name": "Onda ígnea",
+    "type": "fire",
+    "category": "special",
+    "power": 10,
+    "cost": 2,
+    "cooldown": 2,
+    "range": "any",
+    "targetMode": "allEnemies",
+    "spreadMultiplier": 0.65,
+    "effects": [
+      {
+        "type": "status",
+        "status": "burn",
+        "chance": 0.12
+      }
+    ]
+  },
+  "flameWheel": {
+    "name": "Rueda fuego",
+    "type": "fire",
+    "category": "physical",
+    "power": 8,
+    "cost": 1,
+    "cooldown": 1,
+    "range": "melee",
+    "effects": [
+      {
+        "type": "status",
+        "status": "burn",
+        "chance": 0.15
+      }
+    ]
+  },
+  "waterfall": {
+    "name": "Cascada",
+    "type": "water",
+    "category": "physical",
+    "power": 10,
+    "cost": 2,
+    "cooldown": 2,
+    "range": "melee",
+    "effects": [
+      {
+        "type": "status",
+        "status": "flinch",
+        "chance": 0.2
+      }
+    ]
+  },
+  "aquaTail": {
+    "name": "Acua cola",
+    "type": "water",
+    "category": "physical",
+    "power": 9,
+    "cost": 1,
+    "cooldown": 2,
+    "range": "melee"
+  },
+  "electroBall": {
+    "name": "Electrobola",
+    "type": "electric",
+    "category": "special",
+    "power": 8,
+    "cost": 1,
+    "cooldown": 1,
+    "range": "any"
+  },
+  "thunder": {
+    "name": "Trueno",
+    "type": "electric",
+    "category": "special",
+    "power": 13,
+    "cost": 3,
+    "cooldown": 3,
+    "range": "any",
+    "effects": [
+      {
+        "type": "status",
+        "status": "paralysis",
+        "chance": 0.3
+      }
+    ]
+  },
+  "gigaDrain": {
+    "name": "Gigadrenado",
+    "type": "grass",
+    "category": "special",
+    "power": 8,
+    "cost": 2,
+    "cooldown": 2,
+    "range": "any",
+    "effects": [
+      {
+        "type": "heal",
+        "amount": 4,
+        "target": "self"
+      }
+    ]
+  },
+  "solarBeam": {
+    "name": "Rayo solar",
+    "type": "grass",
+    "category": "special",
+    "power": 13,
+    "cost": 3,
+    "cooldown": 3,
+    "range": "any"
+  },
+  "iceShard": {
+    "name": "Canto helado",
+    "type": "ice",
+    "category": "physical",
+    "power": 5,
+    "cost": 0,
+    "cooldown": 1,
+    "range": "any"
+  },
+  "icyWind": {
+    "name": "Viento hielo",
+    "type": "ice",
+    "category": "special",
+    "power": 7,
+    "cost": 1,
+    "cooldown": 2,
+    "range": "any",
+    "targetMode": "targetRow",
+    "spreadMultiplier": 0.75
+  },
+  "blizzard": {
+    "name": "Ventisca",
+    "type": "ice",
+    "category": "special",
+    "power": 12,
+    "cost": 3,
+    "cooldown": 3,
+    "range": "any",
+    "targetMode": "allEnemies",
+    "spreadMultiplier": 0.65
+  },
+  "lowKick": {
+    "name": "Patada baja",
+    "type": "fighting",
+    "category": "physical",
+    "power": 7,
+    "cost": 1,
+    "cooldown": 1,
+    "range": "melee"
+  },
+  "auraSphere": {
+    "name": "Esfera aural",
+    "type": "fighting",
+    "category": "special",
+    "power": 11,
+    "cost": 2,
+    "cooldown": 2,
+    "range": "any"
+  },
+  "zenHeadbutt": {
+    "name": "Cabezazo zen",
+    "type": "psychic",
+    "category": "physical",
+    "power": 9,
+    "cost": 2,
+    "cooldown": 2,
+    "range": "melee",
+    "effects": [
+      {
+        "type": "status",
+        "status": "flinch",
+        "chance": 0.2
+      }
+    ]
+  },
+  "darkPulse": {
+    "name": "Pulso umbrío",
+    "type": "dark",
+    "category": "special",
+    "power": 10,
+    "cost": 2,
+    "cooldown": 2,
+    "range": "any",
+    "effects": [
+      {
+        "type": "status",
+        "status": "flinch",
+        "chance": 0.2
+      }
+    ]
+  },
+  "pursuit": {
+    "name": "Persecución",
+    "type": "dark",
+    "category": "physical",
+    "power": 6,
+    "cost": 0,
+    "cooldown": 1,
+    "range": "melee"
+  },
+  "ghostWind": {
+    "name": "Viento aciago",
+    "type": "ghost",
+    "category": "special",
+    "power": 8,
+    "cost": 1,
+    "cooldown": 2,
+    "range": "any",
+    "targetMode": "targetRow",
+    "spreadMultiplier": 0.75
+  },
+  "dragonPulse": {
+    "name": "Pulso dragón",
+    "type": "dragon",
+    "category": "special",
+    "power": 11,
+    "cost": 2,
+    "cooldown": 2,
+    "range": "any"
+  },
+  "outrage": {
+    "name": "Enfado",
+    "type": "dragon",
+    "category": "physical",
+    "power": 13,
+    "cost": 3,
+    "cooldown": 3,
+    "range": "melee"
+  },
+  "silverWind": {
+    "name": "Viento plata",
+    "type": "bug",
+    "category": "special",
+    "power": 8,
+    "cost": 1,
+    "cooldown": 2,
+    "range": "any",
+    "targetMode": "targetRow",
+    "spreadMultiplier": 0.75
+  },
+  "megahorn": {
+    "name": "Megacuerno",
+    "type": "bug",
+    "category": "physical",
+    "power": 12,
+    "cost": 2,
+    "cooldown": 3,
+    "range": "melee"
+  },
+  "bulletPunch": {
+    "name": "Puño bala",
+    "type": "steel",
+    "category": "physical",
+    "power": 5,
+    "cost": 0,
+    "cooldown": 1,
+    "range": "melee"
+  },
+  "meteorMash": {
+    "name": "Puño meteoro",
+    "type": "steel",
+    "category": "physical",
+    "power": 11,
+    "cost": 2,
+    "cooldown": 2,
+    "range": "melee"
+  },
+  "earthPower": {
+    "name": "Tierra viva",
+    "type": "ground",
+    "category": "special",
+    "power": 10,
+    "cost": 2,
+    "cooldown": 2,
+    "range": "any"
+  },
+  "powerGem": {
+    "name": "Joya de luz",
+    "type": "rock",
+    "category": "special",
+    "power": 9,
+    "cost": 1,
+    "cooldown": 2,
+    "range": "any"
+  },
+  "crossPoison": {
+    "name": "Veneno X",
+    "type": "poison",
+    "category": "physical",
+    "power": 9,
+    "cost": 1,
+    "cooldown": 2,
+    "range": "melee",
+    "effects": [
+      {
+        "type": "status",
+        "status": "poison",
+        "chance": 0.3
+      }
+    ]
+  },
+  "thunderWave": {
+    "name": "Onda trueno",
+    "type": "electric",
+    "category": "status",
+    "power": 0,
+    "cost": 1,
+    "cooldown": 2,
+    "range": "any",
+    "effects": [
+      {
+        "type": "status",
+        "status": "paralysis",
+        "chance": 1
+      }
+    ]
+  },
+  "stunSpore": {
+    "name": "Paralizador",
+    "type": "grass",
+    "category": "status",
+    "power": 0,
+    "cost": 1,
+    "cooldown": 2,
+    "range": "any",
+    "effects": [
+      {
+        "type": "status",
+        "status": "paralysis",
+        "chance": 0.85
+      }
+    ]
+  },
+  "glare": {
+    "name": "Deslumbrar",
+    "type": "normal",
+    "category": "status",
+    "power": 0,
+    "cost": 1,
+    "cooldown": 2,
+    "range": "any",
+    "effects": [
+      {
+        "type": "status",
+        "status": "paralysis",
+        "chance": 0.9
+      }
+    ]
+  }
+}

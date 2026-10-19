@@ -1,0 +1,74 @@
+{
+  "energyBasic": {
+    "name": "Energía",
+    "kind": "energy",
+    "energyValue": 1,
+    "boostMultiplier": 1,
+    "playModes": ["pay", "boostAttack", "boostDefense"],
+    "target": "none",
+    "effects": []
+  },
+  "energyDouble": {
+    "name": "Energía doble",
+    "kind": "energy",
+    "energyValue": 2,
+    "boostMultiplier": 1,
+    "playModes": ["pay", "boostAttack", "boostDefense"],
+    "target": "none",
+    "effects": []
+  },
+  "wildcard": {
+    "name": "Comodín",
+    "kind": "energy",
+    "energyValue": 1,
+    "boostMultiplier": 2,
+    "playModes": ["pay", "boostAttack", "boostDefense"],
+    "target": "none",
+    "effects": []
+  },
+  "insight": {
+    "name": "Intuición",
+    "kind": "utility",
+    "energyValue": 0,
+    "boostMultiplier": 0,
+    "playModes": ["utility"],
+    "target": "none",
+    "effects": [{ "type": "drawCards", "amount": 2 }]
+  },
+  "potion": {
+    "name": "Poción",
+    "kind": "utility",
+    "energyValue": 0,
+    "boostMultiplier": 0,
+    "playModes": ["utility"],
+    "target": "ally",
+    "effects": [{ "type": "heal", "amount": 15, "target": "target" }]
+  },
+  "quickStep": {
+    "name": "Paso ágil",
+    "kind": "utility",
+    "energyValue": 0,
+    "boostMultiplier": 0,
+    "playModes": ["utility"],
+    "target": "ally",
+    "effects": [{ "type": "reduceCooldown", "amount": 1, "target": "target" }]
+  },
+  "luckyCoin": {
+    "name": "Moneda de la suerte",
+    "kind": "utility",
+    "energyValue": 0,
+    "boostMultiplier": 0,
+    "playModes": ["utility"],
+    "target": "none",
+    "effects": [{ "type": "luckyCoin", "amount": 1 }]
+  },
+  "barrier": {
+    "name": "Barrera",
+    "kind": "utility",
+    "energyValue": 0,
+    "boostMultiplier": 0,
+    "playModes": ["utility"],
+    "target": "ally",
+    "effects": [{ "type": "shield", "amount": 8, "target": "target" }]
+  }
+}

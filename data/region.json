@@ -1,0 +1,804 @@
+{
+  "start": {
+    "gold": 40,
+    "items": {
+      "healBerry": 2,
+      "antidote": 1,
+      "burnHeal": 1
+    },
+    "starterChoices": [
+      {
+        "region": "Kanto",
+        "species": [
+          "bulbasaur",
+          "charmander",
+          "squirtle"
+        ]
+      },
+      {
+        "region": "Johto",
+        "species": [
+          "chikorita",
+          "cyndaquil",
+          "totodile"
+        ]
+      },
+      {
+        "region": "Hoenn",
+        "species": [
+          "treecko",
+          "torchic",
+          "mudkip"
+        ]
+      },
+      {
+        "region": "Sinnoh",
+        "species": [
+          "turtwig",
+          "chimchar",
+          "piplup"
+        ]
+      },
+      {
+        "region": "Teselia",
+        "species": [
+          "snivy",
+          "tepig",
+          "oshawott"
+        ]
+      }
+    ]
+  },
+  "stepPools": [
+    [
+      "wild",
+      "wild",
+      "combat"
+    ],
+    [
+      "combat",
+      "wild",
+      "elite"
+    ],
+    [
+      "camp",
+      "shop",
+      "elite",
+      "wild"
+    ],
+    [
+      "camp",
+      "shop"
+    ]
+  ],
+  "nodeRules": {
+    "combat": {
+      "kind": "normal",
+      "minEnemies": 1,
+      "maxEnemies": 3,
+      "profileId": "default",
+      "goldPerExp": 1.5,
+      "cardChoices": 3,
+      "scaleBonus": 0.85,
+      "captureChance": 0.5,
+      "maxOverParty": 0,
+      "itemDropChance": 0.12
+    },
+    "wild": {
+      "kind": "normal",
+      "minEnemies": 1,
+      "maxEnemies": 2,
+      "profileId": "wild",
+      "goldPerExp": 1,
+      "cardChoices": 3,
+      "scaleBonus": 0.8,
+      "captureChance": 1,
+      "maxOverParty": 0,
+      "itemDropChance": 0.18
+    },
+    "elite": {
+      "kind": "normal",
+      "minEnemies": 3,
+      "maxEnemies": 3,
+      "profileId": "aggressive",
+      "goldPerExp": 2.5,
+      "cardChoices": 3,
+      "scaleBonus": 1.0,
+      "itemDrop": true,
+      "captureChance": 0.35,
+      "maxOverParty": 1,
+      "itemDropChance": 1
+    },
+    "gym": {
+      "goldPerExp": 3,
+      "cardChoices": 3
+    },
+    "eliteFour": {
+      "goldPerExp": 3,
+      "cardChoices": 3
+    },
+    "champion": {
+      "goldPerExp": 0,
+      "cardChoices": 0
+    }
+  },
+  "camp": {
+    "restHealFraction": 0.4,
+    "reviveHpFraction": 0.25,
+    "trainExp": 12
+  },
+  "shop": {
+    "itemSlots": 4,
+    "cardSlots": 3,
+    "items": [
+      "healBerry",
+      "revive",
+      "rareCandy",
+      "shinyStone",
+      "linkCable",
+      "superPotion",
+      "maxPotion",
+      "antidote",
+      "burnHeal",
+      "fullHeal",
+      "fullRestore",
+      "maxRevive",
+      "duskStone",
+      "paralyzeHeal"
+    ],
+    "cardPrices": {
+      "energyBasic": 10,
+      "energyDouble": 20,
+      "wildcard": 25,
+      "insight": 30,
+      "potion": 20,
+      "quickStep": 20,
+      "luckyCoin": 35,
+      "barrier": 25
+    }
+  },
+  "cardRewards": {
+    "energyBasic": 2,
+    "energyDouble": 4,
+    "wildcard": 3,
+    "insight": 3,
+    "potion": 2,
+    "quickStep": 2,
+    "luckyCoin": 2,
+    "barrier": 2
+  },
+  "stages": [
+    {
+      "id": "stage1",
+      "name": "Ruta 1 - Líder Normal",
+      "badge": "Medalla 1",
+      "wildPool": [
+        "patrat",
+        "pidove",
+        "minccino",
+        "roggenrola",
+        "sewaddle",
+        "venipede",
+        "tympole",
+        "drilbur",
+        "joltik",
+        "solosis"
+      ],
+      "scale": {
+        "hp": 0.65,
+        "stats": 0.75
+      },
+      "gym": {
+        "kind": "gym",
+        "enemies": [
+          {
+            "speciesId": "patrat",
+            "row": "front",
+            "profileId": "default"
+          },
+          {
+            "speciesId": "minccino",
+            "row": "front",
+            "profileId": "default"
+          },
+          {
+            "speciesId": "pidove",
+            "row": "back",
+            "profileId": "default"
+          },
+          {
+            "speciesId": "patrat",
+            "row": "back",
+            "profileId": "wild"
+          }
+        ]
+      },
+      "gymItem": "rareCandy"
+    },
+    {
+      "id": "stage2",
+      "name": "Ruta 2 - Líder Roca",
+      "badge": "Medalla 2",
+      "wildPool": [
+        "patrat",
+        "pidove",
+        "minccino",
+        "roggenrola",
+        "sewaddle",
+        "venipede",
+        "tympole",
+        "drilbur",
+        "joltik",
+        "solosis",
+        "sandile",
+        "purrloin",
+        "ferroseed",
+        "litwick",
+        "yamask",
+        "timburr",
+        "frillish"
+      ],
+      "scale": {
+        "hp": 0.92,
+        "stats": 0.95
+      },
+      "gym": {
+        "kind": "gym",
+        "enemies": [
+          {
+            "speciesId": "roggenrola",
+            "row": "front",
+            "profileId": "aggressive"
+          },
+          {
+            "speciesId": "boldore",
+            "row": "front",
+            "profileId": "default"
+          },
+          {
+            "speciesId": "roggenrola",
+            "row": "back",
+            "profileId": "threatHunter"
+          },
+          {
+            "speciesId": "sandile",
+            "row": "back",
+            "profileId": "default"
+          }
+        ]
+      },
+      "gymItem": "healBerry"
+    },
+    {
+      "id": "stage3",
+      "name": "Ruta 3 - Líder Eléctrico",
+      "badge": "Medalla 3",
+      "wildPool": [
+        "sandile",
+        "purrloin",
+        "blitzle",
+        "sewaddle",
+        "venipede",
+        "tympole",
+        "drilbur",
+        "joltik",
+        "solosis",
+        "ferroseed",
+        "litwick",
+        "yamask",
+        "timburr",
+        "frillish",
+        "swadloon",
+        "whirlipede",
+        "palpitoad",
+        "duosion",
+        "gurdurr"
+      ],
+      "scale": {
+        "hp": 1.07,
+        "stats": 1.05
+      },
+      "gym": {
+        "kind": "gym",
+        "enemies": [
+          {
+            "speciesId": "joltik",
+            "row": "front",
+            "profileId": "aggressive"
+          },
+          {
+            "speciesId": "blitzle",
+            "row": "front",
+            "profileId": "default"
+          },
+          {
+            "speciesId": "galvantula",
+            "row": "back",
+            "profileId": "threatHunter"
+          },
+          {
+            "speciesId": "zebstrika",
+            "row": "back",
+            "profileId": "assassin"
+          }
+        ]
+      },
+      "gymItem": "rareCandy"
+    },
+    {
+      "id": "stage4",
+      "name": "Ruta 4 - Líder Siniestro",
+      "badge": "Medalla 4",
+      "wildPool": [
+        "blitzle",
+        "sandile",
+        "purrloin",
+        "venipede",
+        "joltik",
+        "litwick",
+        "solosis",
+        "yamask",
+        "frillish",
+        "timburr",
+        "drilbur",
+        "ferroseed",
+        "axew",
+        "swadloon",
+        "whirlipede",
+        "palpitoad",
+        "duosion",
+        "gurdurr"
+      ],
+      "scale": {
+        "hp": 1.3,
+        "stats": 1.15
+      },
+      "gym": {
+        "kind": "gym",
+        "enemies": [
+          {
+            "speciesId": "sandile",
+            "row": "front",
+            "profileId": "aggressive"
+          },
+          {
+            "speciesId": "purrloin",
+            "row": "front",
+            "profileId": "assassin"
+          },
+          {
+            "speciesId": "krokorok",
+            "row": "front",
+            "profileId": "aggressive"
+          },
+          {
+            "speciesId": "liepard",
+            "row": "back",
+            "profileId": "assassin"
+          }
+        ]
+      },
+      "gymItem": "shinyStone"
+    },
+    {
+      "id": "stage5",
+      "name": "Ruta 5 - Líder Volador",
+      "badge": "Medalla 5",
+      "wildPool": [
+        "zebstrika",
+        "krokorok",
+        "liepard",
+        "galvantula",
+        "litwick",
+        "lampent",
+        "duosion",
+        "palpitoad",
+        "drilbur",
+        "excadrill",
+        "ferroseed",
+        "timburr",
+        "gurdurr",
+        "frillish",
+        "jellicent",
+        "swadloon",
+        "venipede",
+        "whirlipede",
+        "axew"
+      ],
+      "scale": {
+        "hp": 1.4,
+        "stats": 1.2
+      },
+      "gym": {
+        "kind": "gym",
+        "enemies": [
+          {
+            "speciesId": "tranquill",
+            "row": "front",
+            "profileId": "default"
+          },
+          {
+            "speciesId": "pidove",
+            "row": "front",
+            "profileId": "aggressive"
+          },
+          {
+            "speciesId": "unfezant",
+            "row": "back",
+            "profileId": "threatHunter"
+          },
+          {
+            "speciesId": "tranquill",
+            "row": "back",
+            "profileId": "default"
+          }
+        ]
+      },
+      "gymItem": "revive"
+    },
+    {
+      "id": "stage6",
+      "name": "Ruta 6 - Líder Fantasma",
+      "badge": "Medalla 6",
+      "wildPool": [
+        "galvantula",
+        "leavanny",
+        "scolipede",
+        "seismitoad",
+        "reuniclus",
+        "excadrill",
+        "ferrothorn",
+        "cofagrigus",
+        "fraxure",
+        "gurdurr",
+        "jellicent",
+        "lampent",
+        "zorua",
+        "samurott",
+        "serperior",
+        "emboar"
+      ],
+      "scale": {
+        "hp": 1.5,
+        "stats": 1.25
+      },
+      "gym": {
+        "kind": "gym",
+        "enemies": [
+          {
+            "speciesId": "yamask",
+            "row": "front",
+            "profileId": "aggressive"
+          },
+          {
+            "speciesId": "litwick",
+            "row": "front",
+            "profileId": "default"
+          },
+          {
+            "speciesId": "cofagrigus",
+            "row": "back",
+            "profileId": "threatHunter"
+          },
+          {
+            "speciesId": "lampent",
+            "row": "back",
+            "profileId": "default"
+          }
+        ]
+      },
+      "gymItem": "linkCable"
+    },
+    {
+      "id": "stage7",
+      "name": "Ruta 7 - Líder Psíquico",
+      "badge": "Medalla 7",
+      "wildPool": [
+        "galvantula",
+        "leavanny",
+        "scolipede",
+        "seismitoad",
+        "reuniclus",
+        "excadrill",
+        "ferrothorn",
+        "cofagrigus",
+        "fraxure",
+        "conkeldurr",
+        "jellicent",
+        "chandelure",
+        "gigalith",
+        "unfezant",
+        "blaziken",
+        "charizard"
+      ],
+      "scale": {
+        "hp": 1.65,
+        "stats": 1.3
+      },
+      "gym": {
+        "kind": "gym",
+        "enemies": [
+          {
+            "speciesId": "solosis",
+            "row": "front",
+            "profileId": "aggressive"
+          },
+          {
+            "speciesId": "duosion",
+            "row": "front",
+            "profileId": "assassin"
+          },
+          {
+            "speciesId": "duosion",
+            "row": "back",
+            "profileId": "default"
+          },
+          {
+            "speciesId": "reuniclus",
+            "row": "back",
+            "profileId": "threatHunter"
+          }
+        ]
+      },
+      "gymItem": "rareCandy"
+    },
+    {
+      "id": "stage8",
+      "name": "Ruta 8 - Líder Dragón",
+      "badge": "Medalla 8",
+      "wildPool": [
+        "haxorus",
+        "chandelure",
+        "conkeldurr",
+        "ferrothorn",
+        "seismitoad",
+        "reuniclus",
+        "excadrill",
+        "scolipede",
+        "galvantula",
+        "leavanny",
+        "cofagrigus",
+        "jellicent",
+        "gigalith",
+        "feraligatr",
+        "empoleon",
+        "typhlosion"
+      ],
+      "scale": {
+        "hp": 1.8,
+        "stats": 1.35
+      },
+      "gym": {
+        "kind": "gym",
+        "enemies": [
+          {
+            "speciesId": "axew",
+            "row": "front",
+            "profileId": "aggressive"
+          },
+          {
+            "speciesId": "fraxure",
+            "row": "front",
+            "profileId": "aggressive"
+          },
+          {
+            "speciesId": "fraxure",
+            "row": "back",
+            "profileId": "threatHunter"
+          },
+          {
+            "speciesId": "haxorus",
+            "row": "back",
+            "profileId": "assassin"
+          }
+        ]
+      },
+      "gymItem": "revive"
+    }
+  ],
+  "league": {
+    "eliteFour": [
+      {
+        "kind": "eliteFour",
+        "enemies": [
+          {
+            "speciesId": "krokorok",
+            "row": "front",
+            "profileId": "aggressive"
+          },
+          {
+            "speciesId": "zebstrika",
+            "row": "front",
+            "profileId": "aggressive"
+          },
+          {
+            "speciesId": "tranquill",
+            "row": "front",
+            "profileId": "default"
+          },
+          {
+            "speciesId": "liepard",
+            "row": "back",
+            "profileId": "assassin"
+          },
+          {
+            "speciesId": "unfezant",
+            "row": "back",
+            "profileId": "threatHunter"
+          }
+        ]
+      },
+      {
+        "kind": "eliteFour",
+        "enemies": [
+          {
+            "speciesId": "gigalith",
+            "row": "front",
+            "profileId": "aggressive"
+          },
+          {
+            "speciesId": "boldore",
+            "row": "front",
+            "profileId": "default"
+          },
+          {
+            "speciesId": "watchog",
+            "row": "front",
+            "profileId": "default"
+          },
+          {
+            "speciesId": "zorua",
+            "row": "back",
+            "profileId": "assassin"
+          },
+          {
+            "speciesId": "liepard",
+            "row": "back",
+            "profileId": "assassin"
+          }
+        ]
+      },
+      {
+        "kind": "eliteFour",
+        "enemies": [
+          {
+            "speciesId": "unfezant",
+            "row": "front",
+            "profileId": "aggressive"
+          },
+          {
+            "speciesId": "zebstrika",
+            "row": "front",
+            "profileId": "aggressive"
+          },
+          {
+            "speciesId": "krokorok",
+            "row": "front",
+            "profileId": "threatHunter"
+          },
+          {
+            "speciesId": "cinccino",
+            "row": "back",
+            "profileId": "default"
+          },
+          {
+            "speciesId": "zorua",
+            "row": "back",
+            "profileId": "assassin"
+          }
+        ]
+      },
+      {
+        "kind": "eliteFour",
+        "enemies": [
+          {
+            "speciesId": "gigalith",
+            "row": "front",
+            "profileId": "aggressive"
+          },
+          {
+            "speciesId": "krokorok",
+            "row": "front",
+            "profileId": "aggressive"
+          },
+          {
+            "speciesId": "unfezant",
+            "row": "front",
+            "profileId": "threatHunter"
+          },
+          {
+            "speciesId": "liepard",
+            "row": "back",
+            "profileId": "assassin"
+          },
+          {
+            "speciesId": "zebstrika",
+            "row": "back",
+            "profileId": "threatHunter"
+          }
+        ]
+      }
+    ],
+    "champion": {
+      "kind": "champion",
+      "enemies": [
+        {
+          "speciesId": "gigalith",
+          "row": "front",
+          "profileId": "aggressive"
+        },
+        {
+          "speciesId": "krokorok",
+          "row": "front",
+          "profileId": "aggressive"
+        },
+        {
+          "speciesId": "zebstrika",
+          "row": "front",
+          "profileId": "threatHunter"
+        },
+        {
+          "speciesId": "unfezant",
+          "row": "back",
+          "profileId": "threatHunter"
+        },
+        {
+          "speciesId": "liepard",
+          "row": "back",
+          "profileId": "assassin"
+        },
+        {
+          "speciesId": "cinccino",
+          "row": "back",
+          "profileId": "aggressive"
+        }
+      ]
+    },
+    "scale": {
+      "hp": 2.0,
+      "stats": 1.4
+    },
+    "championScale": {
+      "hp": 2.2,
+      "stats": 1.5
+    }
+  },
+  "itemDrops": [
+    {
+      "id": "healBerry",
+      "weight": 5
+    },
+    {
+      "id": "superPotion",
+      "weight": 4
+    },
+    {
+      "id": "revive",
+      "weight": 2
+    },
+    {
+      "id": "antidote",
+      "weight": 3
+    },
+    {
+      "id": "burnHeal",
+      "weight": 3
+    },
+    {
+      "id": "fullHeal",
+      "weight": 3
+    },
+    {
+      "id": "rareCandy",
+      "weight": 1
+    },
+    {
+      "id": "maxPotion",
+      "weight": 1
+    },
+    {
+      "id": "paralyzeHeal",
+      "weight": 4
+    }
+  ]
+}

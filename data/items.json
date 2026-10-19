@@ -1,0 +1,96 @@
+{
+  "healBerry": {
+    "name": "Baya curativa",
+    "effect": "heal",
+    "amount": 20,
+    "price": 15,
+    "description": "Cura 20 PS a un Pokémon en pie."
+  },
+  "revive": {
+    "name": "Revivir",
+    "effect": "revive",
+    "hpFraction": 0.5,
+    "price": 50,
+    "description": "Revive a un Pokémon debilitado con la mitad de sus PS."
+  },
+  "rareCandy": {
+    "name": "Caramelo raro",
+    "effect": "exp",
+    "amount": 15,
+    "price": 25,
+    "description": "Suma 15 EXP a un Pokémon en pie."
+  },
+  "shinyStone": {
+    "name": "Piedra día",
+    "effect": "evolve",
+    "price": 60,
+    "description": "Evoluciona a los Pokémon que reaccionan a ella."
+  },
+  "linkCable": {
+    "name": "Cable link",
+    "effect": "evolve",
+    "price": 60,
+    "description": "Evoluciona a los Pokémon que reaccionan al intercambio."
+  },
+  "superPotion": {
+    "name": "Superpoción",
+    "effect": "heal",
+    "amount": 40,
+    "price": 35,
+    "description": "Recupera 40 PS a un Pokémon."
+  },
+  "maxPotion": {
+    "name": "Máxima poción",
+    "effect": "heal",
+    "amount": 999,
+    "price": 85,
+    "description": "Restaura todos los PS de un Pokémon en pie."
+  },
+  "antidote": {
+    "name": "Antídoto",
+    "effect": "cure",
+    "status": "poison",
+    "price": 18,
+    "description": "Elimina el envenenamiento."
+  },
+  "burnHeal": {
+    "name": "Antiquemar",
+    "effect": "cure",
+    "status": "burn",
+    "price": 18,
+    "description": "Cura las quemaduras."
+  },
+  "paralyzeHeal": {
+    "name": "Antiparalizador",
+    "effect": "cure",
+    "status": "paralysis",
+    "price": 18,
+    "description": "Cura la parálisis de un Pokémon."
+  },
+  "fullHeal": {
+    "name": "Cura total",
+    "effect": "cure",
+    "price": 35,
+    "description": "Cura cualquier problema de estado."
+  },
+  "fullRestore": {
+    "name": "Restaurar todo",
+    "effect": "restore",
+    "amount": 999,
+    "price": 95,
+    "description": "Restaura PS y cura alteraciones de estado."
+  },
+  "maxRevive": {
+    "name": "Revivir máx.",
+    "effect": "revive",
+    "hpFraction": 1,
+    "price": 105,
+    "description": "Revive a un Pokémon con todos sus PS."
+  },
+  "duskStone": {
+    "name": "Piedra noche",
+    "effect": "evolve",
+    "price": 65,
+    "description": "Evoluciona determinadas especies de tipo Fantasma."
+  }
+}

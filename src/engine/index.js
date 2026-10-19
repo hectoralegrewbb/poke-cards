@@ -1,0 +1,16 @@
+export { createRng } from "./rng.js";
+export { getTypeMultiplier } from "./typeChart.js";
+export { applyDamage, calculateDamage, calculateMoveDamage, flipCritCoins } from "./damage.js";
+export { addModifier, getMoveCost, getPowerBonus, tickModifiers } from "./modifiers.js";
+export { addCardToHand, buildDeckList, createDeck, discardFromHand, drawCards, findInHand, validateDeck } from "./deck.js";
+export { applySpecies, createPokemon, isAlive, resetForCombat, tickCooldowns } from "./pokemon.js";
+export { calculateExpReward, calculatePartyExpReward, evolve, findEvolution, grantExp } from "./progression.js";
+export { checkCombatEnd, emit, findPokemon, getLiving, getOpponentSide, getTeam } from "./combatState.js";
+export { applyEffects, hasEffect, registerEffect } from "./effects.js";
+export { getMoveTargets, getValidTargets, hasTargetingStrategy, pickTarget, registerTargetingStrategy } from "./targeting.js";
+export { executeMove } from "./moveExecution.js";
+export { chooseTarget, movePolicies, planEnemyIntent, resolveEnemyIntent } from "./enemyAi.js";
+export { playMove, playShield, playUtility } from "./actions.js";
+export { createCombat, endPlayerTurn } from "./combat.js";
+export { validateGameData } from "./validateData.js";
+export { consumeFlinch, inflictStatus, statusNames, tickStatusForSide } from "./status.js";

@@ -1,0 +1,5672 @@
+{
+  "snivy": {
+    "name": "Snivy",
+    "types": [
+      "grass"
+    ],
+    "expYield": 6,
+    "stats": {
+      "hp": 18,
+      "atk": 6,
+      "def": 7,
+      "spa": 6,
+      "spd": 7
+    },
+    "moves": [
+      "vineWhip",
+      "razorLeaf",
+      "synthesis",
+      "harden"
+    ],
+    "evolutions": [
+      {
+        "to": "servine",
+        "method": "exp",
+        "expRequired": 55,
+        "minBadges": 1
+      }
+    ]
+  },
+  "servine": {
+    "name": "Servine",
+    "types": [
+      "grass"
+    ],
+    "expYield": 10,
+    "stats": {
+      "hp": 24,
+      "atk": 8,
+      "def": 9,
+      "spa": 8,
+      "spd": 9
+    },
+    "moves": [
+      "vineWhip",
+      "razorLeaf",
+      "synthesis",
+      "harden"
+    ],
+    "evolutions": [
+      {
+        "to": "serperior",
+        "method": "exp",
+        "expRequired": 110,
+        "minBadges": 5
+      }
+    ]
+  },
+  "serperior": {
+    "name": "Serperior",
+    "types": [
+      "grass"
+    ],
+    "expYield": 16,
+    "stats": {
+      "hp": 30,
+      "atk": 9,
+      "def": 12,
+      "spa": 9,
+      "spd": 12
+    },
+    "moves": [
+      "vineWhip",
+      "razorLeaf",
+      "leafStorm",
+      "synthesis"
+    ],
+    "passive": {
+      "name": "Savia veloz",
+      "description": "Roba 1 carta extra al inicio de cada turno.",
+      "trigger": "turnStart",
+      "effects": [
+        {
+          "type": "drawCards",
+          "amount": 1
+        }
+      ]
+    }
+  },
+  "tepig": {
+    "name": "Tepig",
+    "types": [
+      "fire"
+    ],
+    "expYield": 6,
+    "stats": {
+      "hp": 26,
+      "atk": 8,
+      "def": 6,
+      "spa": 6,
+      "spd": 6
+    },
+    "moves": [
+      "ember",
+      "tackle",
+      "fireFang",
+      "harden"
+    ],
+    "evolutions": [
+      {
+        "to": "pignite",
+        "method": "exp",
+        "expRequired": 55,
+        "minBadges": 1
+      }
+    ]
+  },
+  "pignite": {
+    "name": "Pignite",
+    "types": [
+      "fire",
+      "fighting"
+    ],
+    "expYield": 10,
+    "stats": {
+      "hp": 36,
+      "atk": 12,
+      "def": 7,
+      "spa": 9,
+      "spd": 7
+    },
+    "moves": [
+      "ember",
+      "armThrust",
+      "fireFang",
+      "flamethrower"
+    ],
+    "evolutions": [
+      {
+        "to": "emboar",
+        "method": "exp",
+        "expRequired": 110,
+        "minBadges": 5
+      }
+    ]
+  },
+  "emboar": {
+    "name": "Emboar",
+    "types": [
+      "fire",
+      "fighting"
+    ],
+    "expYield": 16,
+    "stats": {
+      "hp": 44,
+      "atk": 15,
+      "def": 8,
+      "spa": 13,
+      "spd": 8
+    },
+    "moves": [
+      "armThrust",
+      "hammerArm",
+      "flareBlitz",
+      "ember"
+    ]
+  },
+  "oshawott": {
+    "name": "Oshawott",
+    "types": [
+      "water"
+    ],
+    "expYield": 6,
+    "stats": {
+      "hp": 22,
+      "atk": 7,
+      "def": 6,
+      "spa": 8,
+      "spd": 6
+    },
+    "moves": [
+      "waterGun",
+      "tackle",
+      "aquaJet",
+      "harden"
+    ],
+    "evolutions": [
+      {
+        "to": "dewott",
+        "method": "exp",
+        "expRequired": 55,
+        "minBadges": 1
+      }
+    ]
+  },
+  "dewott": {
+    "name": "Dewott",
+    "types": [
+      "water"
+    ],
+    "expYield": 10,
+    "stats": {
+      "hp": 30,
+      "atk": 9,
+      "def": 8,
+      "spa": 10,
+      "spd": 8
+    },
+    "moves": [
+      "waterGun",
+      "aquaJet",
+      "razorShell",
+      "harden"
+    ],
+    "evolutions": [
+      {
+        "to": "samurott",
+        "method": "exp",
+        "expRequired": 110,
+        "minBadges": 5
+      }
+    ]
+  },
+  "samurott": {
+    "name": "Samurott",
+    "types": [
+      "water"
+    ],
+    "expYield": 16,
+    "stats": {
+      "hp": 38,
+      "atk": 13,
+      "def": 11,
+      "spa": 14,
+      "spd": 9
+    },
+    "moves": [
+      "waterGun",
+      "aquaJet",
+      "razorShell",
+      "surf"
+    ]
+  },
+  "patrat": {
+    "name": "Patrat",
+    "types": [
+      "normal"
+    ],
+    "expYield": 4,
+    "stats": {
+      "hp": 18,
+      "atk": 7,
+      "def": 5,
+      "spa": 4,
+      "spd": 5
+    },
+    "moves": [
+      "tackle",
+      "hyperFang",
+      "focusEnergy",
+      "harden"
+    ],
+    "evolutions": [
+      {
+        "to": "watchog",
+        "method": "exp",
+        "expRequired": 55,
+        "minBadges": 1
+      }
+    ]
+  },
+  "watchog": {
+    "name": "Watchog",
+    "types": [
+      "normal"
+    ],
+    "expYield": 9,
+    "stats": {
+      "hp": 24,
+      "atk": 11,
+      "def": 9,
+      "spa": 8,
+      "spd": 9
+    },
+    "moves": [
+      "tackle",
+      "hyperFang",
+      "slam",
+      "focusEnergy"
+    ]
+  },
+  "minccino": {
+    "name": "Minccino",
+    "types": [
+      "normal"
+    ],
+    "expYield": 5,
+    "stats": {
+      "hp": 22,
+      "atk": 6,
+      "def": 5,
+      "spa": 5,
+      "spd": 5
+    },
+    "moves": [
+      "tackle",
+      "hyperFang",
+      "harden",
+      "focusEnergy"
+    ],
+    "evolutions": [
+      {
+        "to": "cinccino",
+        "method": "item",
+        "itemId": "shinyStone"
+      }
+    ]
+  },
+  "cinccino": {
+    "name": "Cinccino",
+    "types": [
+      "normal"
+    ],
+    "expYield": 12,
+    "stats": {
+      "hp": 30,
+      "atk": 12,
+      "def": 8,
+      "spa": 8,
+      "spd": 8
+    },
+    "moves": [
+      "tackle",
+      "hyperFang",
+      "slam",
+      "rest"
+    ]
+  },
+  "pidove": {
+    "name": "Pidove",
+    "types": [
+      "normal",
+      "flying"
+    ],
+    "expYield": 4,
+    "stats": {
+      "hp": 20,
+      "atk": 7,
+      "def": 6,
+      "spa": 5,
+      "spd": 4
+    },
+    "moves": [
+      "gust",
+      "tackle",
+      "aerialAce",
+      "harden"
+    ],
+    "evolutions": [
+      {
+        "to": "tranquill",
+        "method": "exp",
+        "expRequired": 55,
+        "minBadges": 1
+      }
+    ]
+  },
+  "tranquill": {
+    "name": "Tranquill",
+    "types": [
+      "normal",
+      "flying"
+    ],
+    "expYield": 8,
+    "stats": {
+      "hp": 25,
+      "atk": 10,
+      "def": 8,
+      "spa": 6,
+      "spd": 5
+    },
+    "moves": [
+      "gust",
+      "aerialAce",
+      "hyperFang",
+      "agility"
+    ],
+    "evolutions": [
+      {
+        "to": "unfezant",
+        "method": "exp",
+        "expRequired": 110,
+        "minBadges": 5
+      }
+    ]
+  },
+  "unfezant": {
+    "name": "Unfezant",
+    "types": [
+      "normal",
+      "flying"
+    ],
+    "expYield": 14,
+    "stats": {
+      "hp": 32,
+      "atk": 14,
+      "def": 10,
+      "spa": 8,
+      "spd": 7
+    },
+    "moves": [
+      "gust",
+      "aerialAce",
+      "braveBird",
+      "agility"
+    ]
+  },
+  "roggenrola": {
+    "name": "Roggenrola",
+    "types": [
+      "rock"
+    ],
+    "expYield": 5,
+    "stats": {
+      "hp": 22,
+      "atk": 9,
+      "def": 11,
+      "spa": 3,
+      "spd": 3
+    },
+    "moves": [
+      "rockThrow",
+      "tackle",
+      "rockSlide",
+      "harden"
+    ],
+    "evolutions": [
+      {
+        "to": "boldore",
+        "method": "exp",
+        "expRequired": 55,
+        "minBadges": 1
+      }
+    ]
+  },
+  "boldore": {
+    "name": "Boldore",
+    "types": [
+      "rock"
+    ],
+    "expYield": 9,
+    "stats": {
+      "hp": 28,
+      "atk": 13,
+      "def": 13,
+      "spa": 6,
+      "spd": 5
+    },
+    "moves": [
+      "rockThrow",
+      "rockSlide",
+      "slam",
+      "harden"
+    ],
+    "evolutions": [
+      {
+        "to": "gigalith",
+        "method": "item",
+        "itemId": "linkCable"
+      }
+    ]
+  },
+  "gigalith": {
+    "name": "Gigalith",
+    "types": [
+      "rock"
+    ],
+    "expYield": 15,
+    "stats": {
+      "hp": 34,
+      "atk": 17,
+      "def": 16,
+      "spa": 8,
+      "spd": 10
+    },
+    "moves": [
+      "rockThrow",
+      "rockSlide",
+      "stoneEdge",
+      "harden"
+    ],
+    "passive": {
+      "name": "Roca firme",
+      "description": "Gana 4 de escudo al inicio de cada turno.",
+      "trigger": "turnStart",
+      "effects": [
+        {
+          "type": "shield",
+          "amount": 4,
+          "target": "self"
+        }
+      ]
+    }
+  },
+  "sandile": {
+    "name": "Sandile",
+    "types": [
+      "ground",
+      "dark"
+    ],
+    "expYield": 5,
+    "stats": {
+      "hp": 20,
+      "atk": 9,
+      "def": 4,
+      "spa": 4,
+      "spd": 4
+    },
+    "moves": [
+      "mudSlap",
+      "tackle",
+      "bite",
+      "harden"
+    ],
+    "evolutions": [
+      {
+        "to": "krokorok",
+        "method": "exp",
+        "expRequired": 55,
+        "minBadges": 1
+      }
+    ]
+  },
+  "krokorok": {
+    "name": "Krokorok",
+    "types": [
+      "ground",
+      "dark"
+    ],
+    "expYield": 9,
+    "stats": {
+      "hp": 24,
+      "atk": 10,
+      "def": 6,
+      "spa": 6,
+      "spd": 6
+    },
+    "moves": [
+      "mudSlap",
+      "bite",
+      "crunch",
+      "swordsDance"
+    ]
+  },
+  "blitzle": {
+    "name": "Blitzle",
+    "types": [
+      "electric"
+    ],
+    "expYield": 5,
+    "stats": {
+      "hp": 18,
+      "atk": 8,
+      "def": 4,
+      "spa": 6,
+      "spd": 4
+    },
+    "moves": [
+      "thunderShock",
+      "tackle",
+      "spark",
+      "charge"
+    ],
+    "evolutions": [
+      {
+        "to": "zebstrika",
+        "method": "exp",
+        "expRequired": 55,
+        "minBadges": 1
+      }
+    ]
+  },
+  "zebstrika": {
+    "name": "Zebstrika",
+    "types": [
+      "electric"
+    ],
+    "expYield": 13,
+    "stats": {
+      "hp": 30,
+      "atk": 13,
+      "def": 8,
+      "spa": 10,
+      "spd": 8
+    },
+    "moves": [
+      "thunderShock",
+      "spark",
+      "thunderWave",
+      "charge"
+    ]
+  },
+  "purrloin": {
+    "name": "Purrloin",
+    "types": [
+      "dark"
+    ],
+    "expYield": 5,
+    "stats": {
+      "hp": 16,
+      "atk": 6,
+      "def": 5,
+      "spa": 6,
+      "spd": 5
+    },
+    "moves": [
+      "tackle",
+      "bite",
+      "snarl",
+      "harden"
+    ],
+    "evolutions": [
+      {
+        "to": "liepard",
+        "method": "exp",
+        "expRequired": 55,
+        "minBadges": 1
+      }
+    ]
+  },
+  "liepard": {
+    "name": "Liepard",
+    "types": [
+      "dark"
+    ],
+    "expYield": 12,
+    "stats": {
+      "hp": 26,
+      "atk": 11,
+      "def": 6,
+      "spa": 11,
+      "spd": 6
+    },
+    "moves": [
+      "tackle",
+      "bite",
+      "nightSlash",
+      "nastyPlot"
+    ]
+  },
+  "zorua": {
+    "name": "Zorua",
+    "types": [
+      "dark"
+    ],
+    "expYield": 8,
+    "stats": {
+      "hp": 16,
+      "atk": 8,
+      "def": 5,
+      "spa": 10,
+      "spd": 5
+    },
+    "moves": [
+      "tackle",
+      "bite",
+      "snarl",
+      "trickRoom"
+    ]
+  },
+  "bulbasaur": {
+    "name": "Bulbasaur",
+    "types": [
+      "grass",
+      "poison"
+    ],
+    "expYield": 6,
+    "stats": {
+      "hp": 18,
+      "atk": 6,
+      "def": 6,
+      "spa": 8,
+      "spd": 8
+    },
+    "moves": [
+      "vineWhip",
+      "poisonSting",
+      "synthesis",
+      "harden"
+    ],
+    "evolutions": [
+      {
+        "to": "ivysaur",
+        "method": "exp",
+        "expRequired": 55,
+        "minBadges": 1
+      }
+    ]
+  },
+  "ivysaur": {
+    "name": "Ivysaur",
+    "types": [
+      "grass",
+      "poison"
+    ],
+    "expYield": 10,
+    "stats": {
+      "hp": 24,
+      "atk": 8,
+      "def": 8,
+      "spa": 10,
+      "spd": 10
+    },
+    "moves": [
+      "vineWhip",
+      "razorLeaf",
+      "sludgeBomb",
+      "synthesis"
+    ],
+    "evolutions": [
+      {
+        "to": "venusaur",
+        "method": "exp",
+        "expRequired": 110,
+        "minBadges": 5
+      }
+    ]
+  },
+  "venusaur": {
+    "name": "Venusaur",
+    "types": [
+      "grass",
+      "poison"
+    ],
+    "expYield": 16,
+    "stats": {
+      "hp": 32,
+      "atk": 10,
+      "def": 10,
+      "spa": 12,
+      "spd": 12
+    },
+    "moves": [
+      "razorLeaf",
+      "energyBall",
+      "sludgeBomb",
+      "vineWhip"
+    ],
+    "passive": {
+      "name": "Espesura",
+      "description": "Al inicio de cada turno se cura 3 PS.",
+      "trigger": "turnStart",
+      "effects": [
+        {
+          "type": "heal",
+          "amount": 3,
+          "target": "self"
+        }
+      ]
+    }
+  },
+  "charmander": {
+    "name": "Charmander",
+    "types": [
+      "fire"
+    ],
+    "expYield": 6,
+    "stats": {
+      "hp": 16,
+      "atk": 6,
+      "def": 5,
+      "spa": 8,
+      "spd": 6
+    },
+    "moves": [
+      "scratch",
+      "ember",
+      "fireFang",
+      "swordsDance"
+    ],
+    "evolutions": [
+      {
+        "to": "charmeleon",
+        "method": "exp",
+        "expRequired": 55,
+        "minBadges": 1
+      }
+    ]
+  },
+  "charmeleon": {
+    "name": "Charmeleon",
+    "types": [
+      "fire"
+    ],
+    "expYield": 10,
+    "stats": {
+      "hp": 23,
+      "atk": 8,
+      "def": 7,
+      "spa": 10,
+      "spd": 8
+    },
+    "moves": [
+      "ember",
+      "slash",
+      "flamethrower",
+      "swordsDance"
+    ],
+    "evolutions": [
+      {
+        "to": "charizard",
+        "method": "exp",
+        "expRequired": 110,
+        "minBadges": 5
+      }
+    ]
+  },
+  "charizard": {
+    "name": "Charizard",
+    "types": [
+      "fire",
+      "flying"
+    ],
+    "expYield": 16,
+    "stats": {
+      "hp": 31,
+      "atk": 10,
+      "def": 10,
+      "spa": 14,
+      "spd": 11
+    },
+    "moves": [
+      "gust",
+      "flamethrower",
+      "braveBird",
+      "swordsDance"
+    ],
+    "passive": {
+      "name": "Técnico",
+      "description": "Sus técnicas sin costo ganan +2 de poder.",
+      "trigger": "static",
+      "effects": [],
+      "static": [
+        {
+          "kind": "power",
+          "amount": 2,
+          "maxCost": 0
+        }
+      ]
+    }
+  },
+  "squirtle": {
+    "name": "Squirtle",
+    "types": [
+      "water"
+    ],
+    "expYield": 6,
+    "stats": {
+      "hp": 18,
+      "atk": 6,
+      "def": 8,
+      "spa": 6,
+      "spd": 8
+    },
+    "moves": [
+      "tackle",
+      "waterGun",
+      "aquaJet",
+      "harden"
+    ],
+    "evolutions": [
+      {
+        "to": "wartortle",
+        "method": "exp",
+        "expRequired": 55,
+        "minBadges": 1
+      }
+    ]
+  },
+  "wartortle": {
+    "name": "Wartortle",
+    "types": [
+      "water"
+    ],
+    "expYield": 10,
+    "stats": {
+      "hp": 24,
+      "atk": 8,
+      "def": 10,
+      "spa": 8,
+      "spd": 10
+    },
+    "moves": [
+      "waterGun",
+      "aquaJet",
+      "bubbleBeam",
+      "harden"
+    ],
+    "evolutions": [
+      {
+        "to": "blastoise",
+        "method": "exp",
+        "expRequired": 110,
+        "minBadges": 5
+      }
+    ]
+  },
+  "blastoise": {
+    "name": "Blastoise",
+    "types": [
+      "water"
+    ],
+    "expYield": 16,
+    "stats": {
+      "hp": 32,
+      "atk": 10,
+      "def": 12,
+      "spa": 11,
+      "spd": 13
+    },
+    "moves": [
+      "waterGun",
+      "bubbleBeam",
+      "hydroPump",
+      "harden"
+    ],
+    "passive": {
+      "name": "Torrente",
+      "description": "Empieza el combate con 6 de escudo.",
+      "trigger": "combatStart",
+      "effects": [
+        {
+          "type": "shield",
+          "amount": 6,
+          "target": "self"
+        }
+      ]
+    }
+  },
+  "chikorita": {
+    "name": "Chikorita",
+    "types": [
+      "grass"
+    ],
+    "expYield": 6,
+    "stats": {
+      "hp": 18,
+      "atk": 6,
+      "def": 8,
+      "spa": 6,
+      "spd": 8
+    },
+    "moves": [
+      "tackle",
+      "vineWhip",
+      "synthesis",
+      "harden"
+    ],
+    "evolutions": [
+      {
+        "to": "bayleef",
+        "method": "exp",
+        "expRequired": 55,
+        "minBadges": 1
+      }
+    ]
+  },
+  "bayleef": {
+    "name": "Bayleef",
+    "types": [
+      "grass"
+    ],
+    "expYield": 10,
+    "stats": {
+      "hp": 24,
+      "atk": 8,
+      "def": 10,
+      "spa": 8,
+      "spd": 10
+    },
+    "moves": [
+      "vineWhip",
+      "razorLeaf",
+      "synthesis",
+      "harden"
+    ],
+    "evolutions": [
+      {
+        "to": "meganium",
+        "method": "exp",
+        "expRequired": 110,
+        "minBadges": 5
+      }
+    ]
+  },
+  "meganium": {
+    "name": "Meganium",
+    "types": [
+      "grass"
+    ],
+    "expYield": 16,
+    "stats": {
+      "hp": 32,
+      "atk": 10,
+      "def": 12,
+      "spa": 10,
+      "spd": 12
+    },
+    "moves": [
+      "razorLeaf",
+      "energyBall",
+      "synthesis",
+      "vineWhip"
+    ],
+    "passive": {
+      "name": "Aroma sanador",
+      "description": "Al inicio de cada turno cura 2 PS a todo el equipo.",
+      "trigger": "turnStart",
+      "effects": [
+        {
+          "type": "heal",
+          "amount": 2,
+          "target": "allAllies"
+        }
+      ]
+    }
+  },
+  "cyndaquil": {
+    "name": "Cyndaquil",
+    "types": [
+      "fire"
+    ],
+    "expYield": 6,
+    "stats": {
+      "hp": 16,
+      "atk": 6,
+      "def": 5,
+      "spa": 8,
+      "spd": 6
+    },
+    "moves": [
+      "tackle",
+      "ember",
+      "fireFang",
+      "harden"
+    ],
+    "evolutions": [
+      {
+        "to": "quilava",
+        "method": "exp",
+        "expRequired": 55,
+        "minBadges": 1
+      }
+    ]
+  },
+  "quilava": {
+    "name": "Quilava",
+    "types": [
+      "fire"
+    ],
+    "expYield": 10,
+    "stats": {
+      "hp": 23,
+      "atk": 8,
+      "def": 7,
+      "spa": 10,
+      "spd": 8
+    },
+    "moves": [
+      "ember",
+      "fireFang",
+      "flamethrower",
+      "focusEnergy"
+    ],
+    "evolutions": [
+      {
+        "to": "typhlosion",
+        "method": "exp",
+        "expRequired": 110,
+        "minBadges": 5
+      }
+    ]
+  },
+  "typhlosion": {
+    "name": "Typhlosion",
+    "types": [
+      "fire"
+    ],
+    "expYield": 16,
+    "stats": {
+      "hp": 31,
+      "atk": 10,
+      "def": 10,
+      "spa": 14,
+      "spd": 11
+    },
+    "moves": [
+      "ember",
+      "flamethrower",
+      "flareBlitz",
+      "focusEnergy"
+    ],
+    "passive": {
+      "name": "Llama viva",
+      "description": "Sus técnicas especiales ganan +2 de poder.",
+      "trigger": "static",
+      "effects": [],
+      "static": [
+        {
+          "kind": "power",
+          "amount": 2,
+          "category": "special"
+        }
+      ]
+    }
+  },
+  "totodile": {
+    "name": "Totodile",
+    "types": [
+      "water"
+    ],
+    "expYield": 6,
+    "stats": {
+      "hp": 20,
+      "atk": 8,
+      "def": 8,
+      "spa": 6,
+      "spd": 6
+    },
+    "moves": [
+      "scratch",
+      "waterGun",
+      "bite",
+      "harden"
+    ],
+    "evolutions": [
+      {
+        "to": "croconaw",
+        "method": "exp",
+        "expRequired": 55,
+        "minBadges": 1
+      }
+    ]
+  },
+  "croconaw": {
+    "name": "Croconaw",
+    "types": [
+      "water"
+    ],
+    "expYield": 10,
+    "stats": {
+      "hp": 26,
+      "atk": 10,
+      "def": 10,
+      "spa": 7,
+      "spd": 8
+    },
+    "moves": [
+      "waterGun",
+      "bite",
+      "aquaJet",
+      "swordsDance"
+    ],
+    "evolutions": [
+      {
+        "to": "feraligatr",
+        "method": "exp",
+        "expRequired": 110,
+        "minBadges": 5
+      }
+    ]
+  },
+  "feraligatr": {
+    "name": "Feraligatr",
+    "types": [
+      "water"
+    ],
+    "expYield": 16,
+    "stats": {
+      "hp": 34,
+      "atk": 13,
+      "def": 12,
+      "spa": 10,
+      "spd": 10
+    },
+    "moves": [
+      "bite",
+      "aquaJet",
+      "crunch",
+      "waterGun"
+    ],
+    "passive": {
+      "name": "Mandíbula fuerte",
+      "description": "Sus técnicas físicas de costo 2 o más cuestan 1 menos.",
+      "trigger": "static",
+      "effects": [],
+      "static": [
+        {
+          "kind": "cost",
+          "amount": -1,
+          "minCost": 2,
+          "category": "physical"
+        }
+      ]
+    }
+  },
+  "treecko": {
+    "name": "Treecko",
+    "types": [
+      "grass"
+    ],
+    "expYield": 6,
+    "stats": {
+      "hp": 16,
+      "atk": 6,
+      "def": 4,
+      "spa": 8,
+      "spd": 7
+    },
+    "moves": [
+      "scratch",
+      "vineWhip",
+      "razorLeaf",
+      "agility"
+    ],
+    "evolutions": [
+      {
+        "to": "grovyle",
+        "method": "exp",
+        "expRequired": 55,
+        "minBadges": 1
+      }
+    ]
+  },
+  "grovyle": {
+    "name": "Grovyle",
+    "types": [
+      "grass"
+    ],
+    "expYield": 10,
+    "stats": {
+      "hp": 20,
+      "atk": 8,
+      "def": 6,
+      "spa": 11,
+      "spd": 8
+    },
+    "moves": [
+      "vineWhip",
+      "razorLeaf",
+      "slash",
+      "agility"
+    ],
+    "evolutions": [
+      {
+        "to": "sceptile",
+        "method": "exp",
+        "expRequired": 110,
+        "minBadges": 5
+      }
+    ]
+  },
+  "sceptile": {
+    "name": "Sceptile",
+    "types": [
+      "grass"
+    ],
+    "expYield": 16,
+    "stats": {
+      "hp": 28,
+      "atk": 11,
+      "def": 8,
+      "spa": 13,
+      "spd": 11
+    },
+    "moves": [
+      "razorLeaf",
+      "energyBall",
+      "slash",
+      "vineWhip"
+    ],
+    "passive": {
+      "name": "Reflejos",
+      "description": "Al inicio de cada turno reduce 1 el cooldown de sus técnicas.",
+      "trigger": "turnStart",
+      "effects": [
+        {
+          "type": "reduceCooldown",
+          "amount": 1,
+          "target": "self"
+        }
+      ]
+    }
+  },
+  "torchic": {
+    "name": "Torchic",
+    "types": [
+      "fire"
+    ],
+    "expYield": 6,
+    "stats": {
+      "hp": 18,
+      "atk": 8,
+      "def": 5,
+      "spa": 9,
+      "spd": 6
+    },
+    "moves": [
+      "scratch",
+      "ember",
+      "fireFang",
+      "focusEnergy"
+    ],
+    "evolutions": [
+      {
+        "to": "combusken",
+        "method": "exp",
+        "expRequired": 55,
+        "minBadges": 1
+      }
+    ]
+  },
+  "combusken": {
+    "name": "Combusken",
+    "types": [
+      "fire",
+      "fighting"
+    ],
+    "expYield": 10,
+    "stats": {
+      "hp": 24,
+      "atk": 11,
+      "def": 8,
+      "spa": 11,
+      "spd": 8
+    },
+    "moves": [
+      "ember",
+      "fireFang",
+      "armThrust",
+      "swordsDance"
+    ],
+    "evolutions": [
+      {
+        "to": "blaziken",
+        "method": "exp",
+        "expRequired": 110,
+        "minBadges": 5
+      }
+    ]
+  },
+  "blaziken": {
+    "name": "Blaziken",
+    "types": [
+      "fire",
+      "fighting"
+    ],
+    "expYield": 16,
+    "stats": {
+      "hp": 32,
+      "atk": 15,
+      "def": 9,
+      "spa": 14,
+      "spd": 9
+    },
+    "moves": [
+      "armThrust",
+      "flareBlitz",
+      "closeCombat",
+      "ember"
+    ],
+    "passive": {
+      "name": "Impulso",
+      "description": "Sus técnicas de costo 2 o más cuestan 1 menos.",
+      "trigger": "static",
+      "effects": [],
+      "static": [
+        {
+          "kind": "cost",
+          "amount": -1,
+          "minCost": 2
+        }
+      ]
+    }
+  },
+  "mudkip": {
+    "name": "Mudkip",
+    "types": [
+      "water"
+    ],
+    "expYield": 6,
+    "stats": {
+      "hp": 20,
+      "atk": 9,
+      "def": 6,
+      "spa": 6,
+      "spd": 6
+    },
+    "moves": [
+      "tackle",
+      "waterGun",
+      "mudSlap",
+      "harden"
+    ],
+    "evolutions": [
+      {
+        "to": "marshtomp",
+        "method": "exp",
+        "expRequired": 55,
+        "minBadges": 1
+      }
+    ]
+  },
+  "marshtomp": {
+    "name": "Marshtomp",
+    "types": [
+      "water",
+      "ground"
+    ],
+    "expYield": 10,
+    "stats": {
+      "hp": 28,
+      "atk": 11,
+      "def": 9,
+      "spa": 8,
+      "spd": 9
+    },
+    "moves": [
+      "waterGun",
+      "mudShot",
+      "aquaJet",
+      "harden"
+    ],
+    "evolutions": [
+      {
+        "to": "swampert",
+        "method": "exp",
+        "expRequired": 110,
+        "minBadges": 5
+      }
+    ]
+  },
+  "swampert": {
+    "name": "Swampert",
+    "types": [
+      "water",
+      "ground"
+    ],
+    "expYield": 16,
+    "stats": {
+      "hp": 40,
+      "atk": 14,
+      "def": 11,
+      "spa": 11,
+      "spd": 11
+    },
+    "moves": [
+      "mudShot",
+      "surf",
+      "earthquake",
+      "waterGun"
+    ],
+    "passive": {
+      "name": "Coraza de fango",
+      "description": "Al inicio de cada turno gana 3 de escudo.",
+      "trigger": "turnStart",
+      "effects": [
+        {
+          "type": "shield",
+          "amount": 3,
+          "target": "self"
+        }
+      ]
+    }
+  },
+  "turtwig": {
+    "name": "Turtwig",
+    "types": [
+      "grass"
+    ],
+    "expYield": 6,
+    "stats": {
+      "hp": 22,
+      "atk": 8,
+      "def": 8,
+      "spa": 6,
+      "spd": 7
+    },
+    "moves": [
+      "tackle",
+      "vineWhip",
+      "synthesis",
+      "harden"
+    ],
+    "evolutions": [
+      {
+        "to": "grotle",
+        "method": "exp",
+        "expRequired": 55,
+        "minBadges": 1
+      }
+    ]
+  },
+  "grotle": {
+    "name": "Grotle",
+    "types": [
+      "grass"
+    ],
+    "expYield": 10,
+    "stats": {
+      "hp": 30,
+      "atk": 11,
+      "def": 11,
+      "spa": 7,
+      "spd": 8
+    },
+    "moves": [
+      "vineWhip",
+      "razorLeaf",
+      "mudShot",
+      "harden"
+    ],
+    "evolutions": [
+      {
+        "to": "torterra",
+        "method": "exp",
+        "expRequired": 110,
+        "minBadges": 5
+      }
+    ]
+  },
+  "torterra": {
+    "name": "Torterra",
+    "types": [
+      "grass",
+      "ground"
+    ],
+    "expYield": 16,
+    "stats": {
+      "hp": 38,
+      "atk": 14,
+      "def": 13,
+      "spa": 9,
+      "spd": 11
+    },
+    "moves": [
+      "razorLeaf",
+      "seedBomb",
+      "earthquake",
+      "vineWhip"
+    ],
+    "passive": {
+      "name": "Caparazón firme",
+      "description": "Empieza el combate con 3 de escudo para todo el equipo.",
+      "trigger": "combatStart",
+      "effects": [
+        {
+          "type": "shield",
+          "amount": 3,
+          "target": "allAllies"
+        }
+      ]
+    }
+  },
+  "chimchar": {
+    "name": "Chimchar",
+    "types": [
+      "fire"
+    ],
+    "expYield": 6,
+    "stats": {
+      "hp": 18,
+      "atk": 7,
+      "def": 6,
+      "spa": 7,
+      "spd": 6
+    },
+    "moves": [
+      "scratch",
+      "ember",
+      "fireFang",
+      "focusEnergy"
+    ],
+    "evolutions": [
+      {
+        "to": "monferno",
+        "method": "exp",
+        "expRequired": 55,
+        "minBadges": 1
+      }
+    ]
+  },
+  "monferno": {
+    "name": "Monferno",
+    "types": [
+      "fire",
+      "fighting"
+    ],
+    "expYield": 10,
+    "stats": {
+      "hp": 26,
+      "atk": 10,
+      "def": 6,
+      "spa": 10,
+      "spd": 6
+    },
+    "moves": [
+      "ember",
+      "armThrust",
+      "fireFang",
+      "swordsDance"
+    ],
+    "evolutions": [
+      {
+        "to": "infernape",
+        "method": "exp",
+        "expRequired": 110,
+        "minBadges": 5
+      }
+    ]
+  },
+  "infernape": {
+    "name": "Infernape",
+    "types": [
+      "fire",
+      "fighting"
+    ],
+    "expYield": 16,
+    "stats": {
+      "hp": 30,
+      "atk": 13,
+      "def": 9,
+      "spa": 13,
+      "spd": 9
+    },
+    "moves": [
+      "armThrust",
+      "flamethrower",
+      "closeCombat",
+      "ember"
+    ],
+    "passive": {
+      "name": "Técnico",
+      "description": "Sus técnicas sin costo ganan +2 de poder.",
+      "trigger": "static",
+      "effects": [],
+      "static": [
+        {
+          "kind": "power",
+          "amount": 2,
+          "maxCost": 0
+        }
+      ]
+    }
+  },
+  "piplup": {
+    "name": "Piplup",
+    "types": [
+      "water"
+    ],
+    "expYield": 6,
+    "stats": {
+      "hp": 21,
+      "atk": 6,
+      "def": 7,
+      "spa": 8,
+      "spd": 7
+    },
+    "moves": [
+      "tackle",
+      "waterGun",
+      "aquaJet",
+      "harden"
+    ],
+    "evolutions": [
+      {
+        "to": "prinplup",
+        "method": "exp",
+        "expRequired": 55,
+        "minBadges": 1
+      }
+    ]
+  },
+  "prinplup": {
+    "name": "Prinplup",
+    "types": [
+      "water"
+    ],
+    "expYield": 10,
+    "stats": {
+      "hp": 26,
+      "atk": 8,
+      "def": 8,
+      "spa": 10,
+      "spd": 10
+    },
+    "moves": [
+      "waterGun",
+      "bubbleBeam",
+      "metalClaw",
+      "harden"
+    ],
+    "evolutions": [
+      {
+        "to": "empoleon",
+        "method": "exp",
+        "expRequired": 110,
+        "minBadges": 5
+      }
+    ]
+  },
+  "empoleon": {
+    "name": "Empoleon",
+    "types": [
+      "water",
+      "steel"
+    ],
+    "expYield": 16,
+    "stats": {
+      "hp": 34,
+      "atk": 11,
+      "def": 11,
+      "spa": 14,
+      "spd": 13
+    },
+    "moves": [
+      "waterGun",
+      "surf",
+      "flashCannon",
+      "agility"
+    ],
+    "passive": {
+      "name": "Ojo avizor",
+      "description": "Empieza el combate con una moneda de la suerte.",
+      "trigger": "combatStart",
+      "effects": [
+        {
+          "type": "luckyCoin",
+          "amount": 1
+        }
+      ]
+    }
+  },
+  "sewaddle": {
+    "name": "Sewaddle",
+    "types": [
+      "bug",
+      "grass"
+    ],
+    "expYield": 6,
+    "stats": {
+      "hp": 17,
+      "atk": 6,
+      "def": 6,
+      "spa": 4,
+      "spd": 5
+    },
+    "moves": [
+      "bugBite",
+      "vineWhip",
+      "tackle",
+      "razorLeaf"
+    ],
+    "evolutions": [
+      {
+        "to": "swadloon",
+        "method": "exp",
+        "expRequired": 55,
+        "minBadges": 1
+      }
+    ]
+  },
+  "swadloon": {
+    "name": "Swadloon",
+    "types": [
+      "bug",
+      "grass"
+    ],
+    "expYield": 11,
+    "stats": {
+      "hp": 25,
+      "atk": 6,
+      "def": 10,
+      "spa": 6,
+      "spd": 9
+    },
+    "moves": [
+      "bugBite",
+      "razorLeaf",
+      "harden",
+      "xScissor"
+    ],
+    "evolutions": [
+      {
+        "to": "leavanny",
+        "method": "exp",
+        "expRequired": 110,
+        "minBadges": 5
+      }
+    ]
+  },
+  "leavanny": {
+    "name": "Leavanny",
+    "types": [
+      "bug",
+      "grass"
+    ],
+    "expYield": 19,
+    "stats": {
+      "hp": 33,
+      "atk": 11,
+      "def": 9,
+      "spa": 8,
+      "spd": 9
+    },
+    "moves": [
+      "xScissor",
+      "razorLeaf",
+      "leafStorm",
+      "vineWhip"
+    ]
+  },
+  "venipede": {
+    "name": "Venipede",
+    "types": [
+      "bug",
+      "poison"
+    ],
+    "expYield": 6,
+    "stats": {
+      "hp": 18,
+      "atk": 6,
+      "def": 6,
+      "spa": 4,
+      "spd": 4
+    },
+    "moves": [
+      "poisonSting",
+      "bugBite",
+      "tackle",
+      "agility"
+    ],
+    "evolutions": [
+      {
+        "to": "whirlipede",
+        "method": "exp",
+        "expRequired": 55,
+        "minBadges": 1
+      }
+    ]
+  },
+  "whirlipede": {
+    "name": "Whirlipede",
+    "types": [
+      "bug",
+      "poison"
+    ],
+    "expYield": 11,
+    "stats": {
+      "hp": 27,
+      "atk": 7,
+      "def": 10,
+      "spa": 5,
+      "spd": 8
+    },
+    "moves": [
+      "poisonTail",
+      "bugBite",
+      "harden",
+      "xScissor"
+    ],
+    "evolutions": [
+      {
+        "to": "scolipede",
+        "method": "exp",
+        "expRequired": 110,
+        "minBadges": 5
+      }
+    ]
+  },
+  "scolipede": {
+    "name": "Scolipede",
+    "types": [
+      "bug",
+      "poison"
+    ],
+    "expYield": 20,
+    "stats": {
+      "hp": 35,
+      "atk": 12,
+      "def": 9,
+      "spa": 6,
+      "spd": 8
+    },
+    "moves": [
+      "poisonTail",
+      "xScissor",
+      "sludgeBomb",
+      "poisonSting"
+    ]
+  },
+  "joltik": {
+    "name": "Joltik",
+    "types": [
+      "bug",
+      "electric"
+    ],
+    "expYield": 6,
+    "stats": {
+      "hp": 16,
+      "atk": 4,
+      "def": 5,
+      "spa": 8,
+      "spd": 6
+    },
+    "moves": [
+      "thunderShock",
+      "bugBite",
+      "spark",
+      "agility"
+    ],
+    "evolutions": [
+      {
+        "to": "galvantula",
+        "method": "exp",
+        "expRequired": 55,
+        "minBadges": 1
+      }
+    ]
+  },
+  "galvantula": {
+    "name": "Galvantula",
+    "types": [
+      "bug",
+      "electric"
+    ],
+    "expYield": 19,
+    "stats": {
+      "hp": 31,
+      "atk": 7,
+      "def": 8,
+      "spa": 12,
+      "spd": 9
+    },
+    "moves": [
+      "thunderWave",
+      "bugBuzz",
+      "thunderbolt",
+      "thunderShock"
+    ]
+  },
+  "litwick": {
+    "name": "Litwick",
+    "types": [
+      "ghost",
+      "fire"
+    ],
+    "expYield": 6,
+    "stats": {
+      "hp": 18,
+      "atk": 4,
+      "def": 6,
+      "spa": 8,
+      "spd": 7
+    },
+    "moves": [
+      "ember",
+      "shadowSneak",
+      "willOWisp",
+      "fireFang"
+    ],
+    "evolutions": [
+      {
+        "to": "lampent",
+        "method": "exp",
+        "expRequired": 55,
+        "minBadges": 1
+      }
+    ]
+  },
+  "lampent": {
+    "name": "Lampent",
+    "types": [
+      "ghost",
+      "fire"
+    ],
+    "expYield": 12,
+    "stats": {
+      "hp": 26,
+      "atk": 5,
+      "def": 7,
+      "spa": 11,
+      "spd": 8
+    },
+    "moves": [
+      "flamethrower",
+      "shadowBall",
+      "willOWisp",
+      "ember"
+    ],
+    "evolutions": [
+      {
+        "to": "chandelure",
+        "method": "item",
+        "itemId": "duskStone"
+      }
+    ]
+  },
+  "chandelure": {
+    "name": "Chandelure",
+    "types": [
+      "ghost",
+      "fire"
+    ],
+    "expYield": 21,
+    "stats": {
+      "hp": 34,
+      "atk": 7,
+      "def": 9,
+      "spa": 15,
+      "spd": 11
+    },
+    "moves": [
+      "flamethrower",
+      "shadowBall",
+      "willOWisp",
+      "ember"
+    ]
+  },
+  "tympole": {
+    "name": "Tympole",
+    "types": [
+      "water"
+    ],
+    "expYield": 6,
+    "stats": {
+      "hp": 19,
+      "atk": 5,
+      "def": 5,
+      "spa": 7,
+      "spd": 5
+    },
+    "moves": [
+      "waterGun",
+      "mudSlap",
+      "bubbleBeam",
+      "tackle"
+    ],
+    "evolutions": [
+      {
+        "to": "palpitoad",
+        "method": "exp",
+        "expRequired": 55,
+        "minBadges": 1
+      }
+    ]
+  },
+  "palpitoad": {
+    "name": "Palpitoad",
+    "types": [
+      "water",
+      "ground"
+    ],
+    "expYield": 12,
+    "stats": {
+      "hp": 27,
+      "atk": 7,
+      "def": 7,
+      "spa": 9,
+      "spd": 7
+    },
+    "moves": [
+      "muddyWater",
+      "mudShot",
+      "bubbleBeam",
+      "waterGun"
+    ],
+    "evolutions": [
+      {
+        "to": "seismitoad",
+        "method": "exp",
+        "expRequired": 110,
+        "minBadges": 5
+      }
+    ]
+  },
+  "seismitoad": {
+    "name": "Seismitoad",
+    "types": [
+      "water",
+      "ground"
+    ],
+    "expYield": 21,
+    "stats": {
+      "hp": 38,
+      "atk": 11,
+      "def": 9,
+      "spa": 10,
+      "spd": 9
+    },
+    "moves": [
+      "earthquake",
+      "surf",
+      "muddyWater",
+      "waterGun"
+    ]
+  },
+  "solosis": {
+    "name": "Solosis",
+    "types": [
+      "psychic"
+    ],
+    "expYield": 6,
+    "stats": {
+      "hp": 17,
+      "atk": 4,
+      "def": 5,
+      "spa": 9,
+      "spd": 7
+    },
+    "moves": [
+      "psybeam",
+      "harden",
+      "psychic",
+      "tackle"
+    ],
+    "evolutions": [
+      {
+        "to": "duosion",
+        "method": "exp",
+        "expRequired": 55,
+        "minBadges": 1
+      }
+    ]
+  },
+  "duosion": {
+    "name": "Duosion",
+    "types": [
+      "psychic"
+    ],
+    "expYield": 12,
+    "stats": {
+      "hp": 24,
+      "atk": 6,
+      "def": 7,
+      "spa": 11,
+      "spd": 9
+    },
+    "moves": [
+      "psybeam",
+      "psychic",
+      "nastyPlot",
+      "tackle"
+    ],
+    "evolutions": [
+      {
+        "to": "reuniclus",
+        "method": "exp",
+        "expRequired": 110,
+        "minBadges": 5
+      }
+    ]
+  },
+  "reuniclus": {
+    "name": "Reuniclus",
+    "types": [
+      "psychic"
+    ],
+    "expYield": 21,
+    "stats": {
+      "hp": 36,
+      "atk": 8,
+      "def": 10,
+      "spa": 14,
+      "spd": 10
+    },
+    "moves": [
+      "psychic",
+      "psybeam",
+      "nastyPlot",
+      "tackle"
+    ]
+  },
+  "drilbur": {
+    "name": "Drilbur",
+    "types": [
+      "ground"
+    ],
+    "expYield": 6,
+    "stats": {
+      "hp": 18,
+      "atk": 8,
+      "def": 5,
+      "spa": 3,
+      "spd": 5
+    },
+    "moves": [
+      "mudSlap",
+      "scratch",
+      "mudShot",
+      "swordsDance"
+    ],
+    "evolutions": [
+      {
+        "to": "excadrill",
+        "method": "exp",
+        "expRequired": 55,
+        "minBadges": 1
+      }
+    ]
+  },
+  "excadrill": {
+    "name": "Excadrill",
+    "types": [
+      "ground",
+      "steel"
+    ],
+    "expYield": 20,
+    "stats": {
+      "hp": 35,
+      "atk": 14,
+      "def": 10,
+      "spa": 5,
+      "spd": 8
+    },
+    "moves": [
+      "earthquake",
+      "ironHead",
+      "slash",
+      "mudSlap"
+    ]
+  },
+  "ferroseed": {
+    "name": "Ferroseed",
+    "types": [
+      "grass",
+      "steel"
+    ],
+    "expYield": 7,
+    "stats": {
+      "hp": 20,
+      "atk": 6,
+      "def": 11,
+      "spa": 4,
+      "spd": 8
+    },
+    "moves": [
+      "vineWhip",
+      "metalClaw",
+      "harden",
+      "seedBomb"
+    ],
+    "evolutions": [
+      {
+        "to": "ferrothorn",
+        "method": "exp",
+        "expRequired": 55,
+        "minBadges": 4
+      }
+    ]
+  },
+  "ferrothorn": {
+    "name": "Ferrothorn",
+    "types": [
+      "grass",
+      "steel"
+    ],
+    "expYield": 20,
+    "stats": {
+      "hp": 38,
+      "atk": 11,
+      "def": 14,
+      "spa": 5,
+      "spd": 12
+    },
+    "moves": [
+      "ironHead",
+      "seedBomb",
+      "ironDefense",
+      "vineWhip"
+    ]
+  },
+  "yamask": {
+    "name": "Yamask",
+    "types": [
+      "ghost"
+    ],
+    "expYield": 6,
+    "stats": {
+      "hp": 19,
+      "atk": 4,
+      "def": 8,
+      "spa": 8,
+      "spd": 8
+    },
+    "moves": [
+      "shadowSneak",
+      "hex",
+      "harden",
+      "willOWisp"
+    ],
+    "evolutions": [
+      {
+        "to": "cofagrigus",
+        "method": "exp",
+        "expRequired": 55,
+        "minBadges": 4
+      }
+    ]
+  },
+  "cofagrigus": {
+    "name": "Cofagrigus",
+    "types": [
+      "ghost"
+    ],
+    "expYield": 19,
+    "stats": {
+      "hp": 35,
+      "atk": 6,
+      "def": 14,
+      "spa": 10,
+      "spd": 11
+    },
+    "moves": [
+      "shadowBall",
+      "hex",
+      "willOWisp",
+      "shadowSneak"
+    ]
+  },
+  "axew": {
+    "name": "Axew",
+    "types": [
+      "dragon"
+    ],
+    "expYield": 7,
+    "stats": {
+      "hp": 19,
+      "atk": 9,
+      "def": 6,
+      "spa": 4,
+      "spd": 6
+    },
+    "moves": [
+      "scratch",
+      "dragonBreath",
+      "bite",
+      "slash"
+    ],
+    "evolutions": [
+      {
+        "to": "fraxure",
+        "method": "exp",
+        "expRequired": 55,
+        "minBadges": 1
+      }
+    ]
+  },
+  "fraxure": {
+    "name": "Fraxure",
+    "types": [
+      "dragon"
+    ],
+    "expYield": 13,
+    "stats": {
+      "hp": 28,
+      "atk": 12,
+      "def": 8,
+      "spa": 5,
+      "spd": 8
+    },
+    "moves": [
+      "dragonClaw",
+      "dragonBreath",
+      "crunch",
+      "tackle"
+    ],
+    "evolutions": [
+      {
+        "to": "haxorus",
+        "method": "exp",
+        "expRequired": 110,
+        "minBadges": 5
+      }
+    ]
+  },
+  "haxorus": {
+    "name": "Haxorus",
+    "types": [
+      "dragon"
+    ],
+    "expYield": 22,
+    "stats": {
+      "hp": 37,
+      "atk": 16,
+      "def": 10,
+      "spa": 7,
+      "spd": 9
+    },
+    "moves": [
+      "dragonClaw",
+      "dragonBreath",
+      "crunch",
+      "tackle"
+    ]
+  },
+  "timburr": {
+    "name": "Timburr",
+    "types": [
+      "fighting"
+    ],
+    "expYield": 7,
+    "stats": {
+      "hp": 23,
+      "atk": 9,
+      "def": 6,
+      "spa": 3,
+      "spd": 5
+    },
+    "moves": [
+      "armThrust",
+      "tackle",
+      "bulkUp",
+      "hammerArm"
+    ],
+    "evolutions": [
+      {
+        "to": "gurdurr",
+        "method": "exp",
+        "expRequired": 55,
+        "minBadges": 1
+      }
+    ]
+  },
+  "gurdurr": {
+    "name": "Gurdurr",
+    "types": [
+      "fighting"
+    ],
+    "expYield": 13,
+    "stats": {
+      "hp": 32,
+      "atk": 12,
+      "def": 8,
+      "spa": 5,
+      "spd": 7
+    },
+    "moves": [
+      "armThrust",
+      "hammerArm",
+      "bulkUp",
+      "tackle"
+    ],
+    "evolutions": [
+      {
+        "to": "conkeldurr",
+        "method": "exp",
+        "expRequired": 110,
+        "minBadges": 5
+      }
+    ]
+  },
+  "conkeldurr": {
+    "name": "Conkeldurr",
+    "types": [
+      "fighting"
+    ],
+    "expYield": 22,
+    "stats": {
+      "hp": 42,
+      "atk": 15,
+      "def": 10,
+      "spa": 6,
+      "spd": 8
+    },
+    "moves": [
+      "drainPunch",
+      "hammerArm",
+      "closeCombat",
+      "tackle"
+    ]
+  },
+  "frillish": {
+    "name": "Frillish",
+    "types": [
+      "water",
+      "ghost"
+    ],
+    "expYield": 7,
+    "stats": {
+      "hp": 21,
+      "atk": 4,
+      "def": 6,
+      "spa": 8,
+      "spd": 8
+    },
+    "moves": [
+      "waterGun",
+      "shadowSneak",
+      "hex",
+      "bubbleBeam"
+    ],
+    "evolutions": [
+      {
+        "to": "jellicent",
+        "method": "exp",
+        "expRequired": 55,
+        "minBadges": 4
+      }
+    ]
+  },
+  "jellicent": {
+    "name": "Jellicent",
+    "types": [
+      "water",
+      "ghost"
+    ],
+    "expYield": 21,
+    "stats": {
+      "hp": 37,
+      "atk": 7,
+      "def": 10,
+      "spa": 11,
+      "spd": 11
+    },
+    "moves": [
+      "surf",
+      "shadowBall",
+      "hex",
+      "waterGun"
+    ]
+  },
+  "pidgey": {
+    "name": "Pidgey",
+    "types": [
+      "normal",
+      "flying"
+    ],
+    "expYield": 7,
+    "stats": {
+      "hp": 23,
+      "atk": 7,
+      "def": 6,
+      "spa": 7,
+      "spd": 6
+    },
+    "moves": [
+      "tackle",
+      "hyperFang",
+      "gust",
+      "bodySlam"
+    ],
+    "evolutions": [
+      {
+        "to": "pidgeotto",
+        "method": "exp",
+        "expRequired": 55,
+        "minBadges": 1
+      }
+    ]
+  },
+  "pidgeotto": {
+    "name": "Pidgeotto",
+    "types": [
+      "normal",
+      "flying"
+    ],
+    "expYield": 11,
+    "stats": {
+      "hp": 31,
+      "atk": 10,
+      "def": 9,
+      "spa": 10,
+      "spd": 9
+    },
+    "moves": [
+      "tackle",
+      "hyperFang",
+      "gust",
+      "bodySlam"
+    ],
+    "evolutions": [
+      {
+        "to": "pidgeot",
+        "method": "exp",
+        "expRequired": 110,
+        "minBadges": 5
+      }
+    ]
+  },
+  "pidgeot": {
+    "name": "Pidgeot",
+    "types": [
+      "normal",
+      "flying"
+    ],
+    "expYield": 15,
+    "stats": {
+      "hp": 39,
+      "atk": 10,
+      "def": 12,
+      "spa": 10,
+      "spd": 12
+    },
+    "moves": [
+      "tackle",
+      "quickAttack",
+      "doubleEdge",
+      "bodySlam"
+    ]
+  },
+  "raichu": {
+    "name": "Raichu",
+    "types": [
+      "electric"
+    ],
+    "expYield": 15,
+    "stats": {
+      "hp": 37,
+      "atk": 12,
+      "def": 12,
+      "spa": 12,
+      "spd": 12
+    },
+    "moves": [
+      "thunderShock",
+      "discharge",
+      "thunder",
+      "electroBall"
+    ]
+  },
+  "clefairy": {
+    "name": "Clefairy",
+    "types": [
+      "normal"
+    ],
+    "expYield": 7,
+    "stats": {
+      "hp": 22,
+      "atk": 8,
+      "def": 9,
+      "spa": 8,
+      "spd": 9
+    },
+    "moves": [
+      "tackle",
+      "hyperFang",
+      "harden",
+      "bodySlam"
+    ]
+  },
+  "oddish": {
+    "name": "Oddish",
+    "types": [
+      "grass",
+      "poison"
+    ],
+    "expYield": 7,
+    "stats": {
+      "hp": 25,
+      "atk": 7,
+      "def": 9,
+      "spa": 7,
+      "spd": 9
+    },
+    "moves": [
+      "vineWhip",
+      "stunSpore",
+      "poisonSting",
+      "gigaDrain"
+    ],
+    "evolutions": [
+      {
+        "to": "vileplume",
+        "method": "exp",
+        "expRequired": 55,
+        "minBadges": 4
+      }
+    ]
+  },
+  "vileplume": {
+    "name": "Vileplume",
+    "types": [
+      "grass",
+      "poison"
+    ],
+    "expYield": 15,
+    "stats": {
+      "hp": 36,
+      "atk": 10,
+      "def": 11,
+      "spa": 10,
+      "spd": 11
+    },
+    "moves": [
+      "vineWhip",
+      "energyBall",
+      "solarBeam",
+      "gigaDrain"
+    ]
+  },
+  "growlithe": {
+    "name": "Growlithe",
+    "types": [
+      "fire"
+    ],
+    "expYield": 7,
+    "stats": {
+      "hp": 25,
+      "atk": 7,
+      "def": 8,
+      "spa": 7,
+      "spd": 8
+    },
+    "moves": [
+      "ember",
+      "flameCharge",
+      "tackle",
+      "flameWheel"
+    ],
+    "evolutions": [
+      {
+        "to": "arcanine",
+        "method": "exp",
+        "expRequired": 55,
+        "minBadges": 5
+      }
+    ]
+  },
+  "arcanine": {
+    "name": "Arcanine",
+    "types": [
+      "fire"
+    ],
+    "expYield": 15,
+    "stats": {
+      "hp": 40,
+      "atk": 12,
+      "def": 13,
+      "spa": 12,
+      "spd": 13
+    },
+    "moves": [
+      "ember",
+      "flameCharge",
+      "heatWave",
+      "flameWheel"
+    ]
+  },
+  "abra": {
+    "name": "Abra",
+    "types": [
+      "psychic"
+    ],
+    "expYield": 7,
+    "stats": {
+      "hp": 25,
+      "atk": 6,
+      "def": 9,
+      "spa": 6,
+      "spd": 9
+    },
+    "moves": [
+      "psybeam",
+      "psychic",
+      "tackle",
+      "zenHeadbutt"
+    ],
+    "evolutions": [
+      {
+        "to": "kadabra",
+        "method": "exp",
+        "expRequired": 55,
+        "minBadges": 1
+      }
+    ]
+  },
+  "kadabra": {
+    "name": "Kadabra",
+    "types": [
+      "psychic"
+    ],
+    "expYield": 11,
+    "stats": {
+      "hp": 33,
+      "atk": 9,
+      "def": 8,
+      "spa": 9,
+      "spd": 8
+    },
+    "moves": [
+      "psybeam",
+      "psychic",
+      "tackle",
+      "zenHeadbutt"
+    ],
+    "evolutions": [
+      {
+        "to": "alakazam",
+        "method": "exp",
+        "expRequired": 110,
+        "minBadges": 5
+      }
+    ]
+  },
+  "alakazam": {
+    "name": "Alakazam",
+    "types": [
+      "psychic"
+    ],
+    "expYield": 15,
+    "stats": {
+      "hp": 36,
+      "atk": 12,
+      "def": 11,
+      "spa": 12,
+      "spd": 11
+    },
+    "moves": [
+      "psybeam",
+      "psychic",
+      "zenHeadbutt",
+      "tackle"
+    ]
+  },
+  "machamp": {
+    "name": "Machamp",
+    "types": [
+      "fighting"
+    ],
+    "expYield": 15,
+    "stats": {
+      "hp": 39,
+      "atk": 12,
+      "def": 10,
+      "spa": 12,
+      "spd": 10
+    },
+    "moves": [
+      "armThrust",
+      "hammerArm",
+      "auraSphere",
+      "tackle"
+    ]
+  },
+  "geodude": {
+    "name": "Geodude",
+    "types": [
+      "rock",
+      "ground"
+    ],
+    "expYield": 7,
+    "stats": {
+      "hp": 26,
+      "atk": 8,
+      "def": 8,
+      "spa": 8,
+      "spd": 8
+    },
+    "moves": [
+      "rockThrow",
+      "stoneEdge",
+      "mudSlap",
+      "powerGem"
+    ]
+  },
+  "ponyta": {
+    "name": "Ponyta",
+    "types": [
+      "fire"
+    ],
+    "expYield": 7,
+    "stats": {
+      "hp": 24,
+      "atk": 8,
+      "def": 7,
+      "spa": 8,
+      "spd": 7
+    },
+    "moves": [
+      "ember",
+      "flameCharge",
+      "tackle",
+      "flameWheel"
+    ],
+    "evolutions": [
+      {
+        "to": "rapidash",
+        "method": "exp",
+        "expRequired": 55,
+        "minBadges": 4
+      }
+    ]
+  },
+  "rapidash": {
+    "name": "Rapidash",
+    "types": [
+      "fire"
+    ],
+    "expYield": 15,
+    "stats": {
+      "hp": 39,
+      "atk": 10,
+      "def": 12,
+      "spa": 10,
+      "spd": 12
+    },
+    "moves": [
+      "ember",
+      "flameCharge",
+      "heatWave",
+      "flameWheel"
+    ]
+  },
+  "magnemite": {
+    "name": "Magnemite",
+    "types": [
+      "electric",
+      "steel"
+    ],
+    "expYield": 7,
+    "stats": {
+      "hp": 23,
+      "atk": 6,
+      "def": 7,
+      "spa": 6,
+      "spd": 7
+    },
+    "moves": [
+      "thunderShock",
+      "discharge",
+      "metalClaw",
+      "electroBall"
+    ],
+    "evolutions": [
+      {
+        "to": "magneton",
+        "method": "exp",
+        "expRequired": 55,
+        "minBadges": 4
+      }
+    ]
+  },
+  "magneton": {
+    "name": "Magneton",
+    "types": [
+      "electric",
+      "steel"
+    ],
+    "expYield": 15,
+    "stats": {
+      "hp": 38,
+      "atk": 11,
+      "def": 12,
+      "spa": 11,
+      "spd": 12
+    },
+    "moves": [
+      "thunderShock",
+      "discharge",
+      "thunder",
+      "electroBall"
+    ]
+  },
+  "dewgong": {
+    "name": "Dewgong",
+    "types": [
+      "water",
+      "ice"
+    ],
+    "expYield": 15,
+    "stats": {
+      "hp": 38,
+      "atk": 10,
+      "def": 13,
+      "spa": 10,
+      "spd": 13
+    },
+    "moves": [
+      "waterGun",
+      "bubbleBeam",
+      "aquaTail",
+      "waterfall"
+    ]
+  },
+  "gastly": {
+    "name": "Gastly",
+    "types": [
+      "ghost",
+      "poison"
+    ],
+    "expYield": 7,
+    "stats": {
+      "hp": 24,
+      "atk": 8,
+      "def": 6,
+      "spa": 8,
+      "spd": 6
+    },
+    "moves": [
+      "shadowSneak",
+      "shadowBall",
+      "poisonSting",
+      "ghostWind"
+    ],
+    "evolutions": [
+      {
+        "to": "haunter",
+        "method": "exp",
+        "expRequired": 55,
+        "minBadges": 1
+      }
+    ]
+  },
+  "haunter": {
+    "name": "Haunter",
+    "types": [
+      "ghost",
+      "poison"
+    ],
+    "expYield": 11,
+    "stats": {
+      "hp": 32,
+      "atk": 8,
+      "def": 9,
+      "spa": 8,
+      "spd": 9
+    },
+    "moves": [
+      "shadowSneak",
+      "shadowBall",
+      "poisonSting",
+      "ghostWind"
+    ],
+    "evolutions": [
+      {
+        "to": "gengar",
+        "method": "exp",
+        "expRequired": 110,
+        "minBadges": 5
+      }
+    ]
+  },
+  "gengar": {
+    "name": "Gengar",
+    "types": [
+      "ghost",
+      "poison"
+    ],
+    "expYield": 15,
+    "stats": {
+      "hp": 40,
+      "atk": 11,
+      "def": 12,
+      "spa": 11,
+      "spd": 12
+    },
+    "moves": [
+      "shadowSneak",
+      "ghostWind",
+      "poisonSting",
+      "sludgeBomb"
+    ]
+  },
+  "onix": {
+    "name": "Onix",
+    "types": [
+      "rock",
+      "ground"
+    ],
+    "expYield": 7,
+    "stats": {
+      "hp": 22,
+      "atk": 8,
+      "def": 9,
+      "spa": 8,
+      "spd": 9
+    },
+    "moves": [
+      "rockThrow",
+      "stoneEdge",
+      "mudSlap",
+      "powerGem"
+    ]
+  },
+  "voltorb": {
+    "name": "Voltorb",
+    "types": [
+      "electric"
+    ],
+    "expYield": 7,
+    "stats": {
+      "hp": 22,
+      "atk": 7,
+      "def": 6,
+      "spa": 7,
+      "spd": 6
+    },
+    "moves": [
+      "thunderShock",
+      "discharge",
+      "tackle",
+      "electroBall"
+    ]
+  },
+  "koffing": {
+    "name": "Koffing",
+    "types": [
+      "poison"
+    ],
+    "expYield": 7,
+    "stats": {
+      "hp": 26,
+      "atk": 7,
+      "def": 7,
+      "spa": 7,
+      "spd": 7
+    },
+    "moves": [
+      "poisonSting",
+      "sludgeBomb",
+      "tackle",
+      "crossPoison"
+    ],
+    "evolutions": [
+      {
+        "to": "weezing",
+        "method": "exp",
+        "expRequired": 55,
+        "minBadges": 4
+      }
+    ]
+  },
+  "weezing": {
+    "name": "Weezing",
+    "types": [
+      "poison"
+    ],
+    "expYield": 15,
+    "stats": {
+      "hp": 36,
+      "atk": 12,
+      "def": 12,
+      "spa": 12,
+      "spd": 12
+    },
+    "moves": [
+      "poisonSting",
+      "sludgeBomb",
+      "crossPoison",
+      "poisonTail"
+    ]
+  },
+  "rhyhorn": {
+    "name": "Rhyhorn",
+    "types": [
+      "ground",
+      "rock"
+    ],
+    "expYield": 7,
+    "stats": {
+      "hp": 23,
+      "atk": 6,
+      "def": 9,
+      "spa": 6,
+      "spd": 9
+    },
+    "moves": [
+      "mudSlap",
+      "earthquake",
+      "rockThrow",
+      "earthPower"
+    ],
+    "evolutions": [
+      {
+        "to": "rhydon",
+        "method": "exp",
+        "expRequired": 55,
+        "minBadges": 4
+      }
+    ]
+  },
+  "rhydon": {
+    "name": "Rhydon",
+    "types": [
+      "ground",
+      "rock"
+    ],
+    "expYield": 15,
+    "stats": {
+      "hp": 38,
+      "atk": 11,
+      "def": 10,
+      "spa": 11,
+      "spd": 10
+    },
+    "moves": [
+      "mudSlap",
+      "earthquake",
+      "earthPower",
+      "rockThrow"
+    ]
+  },
+  "staryu": {
+    "name": "Staryu",
+    "types": [
+      "water"
+    ],
+    "expYield": 7,
+    "stats": {
+      "hp": 22,
+      "atk": 6,
+      "def": 6,
+      "spa": 6,
+      "spd": 6
+    },
+    "moves": [
+      "waterGun",
+      "bubbleBeam",
+      "tackle",
+      "waterfall"
+    ],
+    "evolutions": [
+      {
+        "to": "starmie",
+        "method": "exp",
+        "expRequired": 55,
+        "minBadges": 4
+      }
+    ]
+  },
+  "starmie": {
+    "name": "Starmie",
+    "types": [
+      "water",
+      "psychic"
+    ],
+    "expYield": 15,
+    "stats": {
+      "hp": 37,
+      "atk": 11,
+      "def": 11,
+      "spa": 11,
+      "spd": 11
+    },
+    "moves": [
+      "waterGun",
+      "bubbleBeam",
+      "aquaTail",
+      "waterfall"
+    ]
+  },
+  "scyther": {
+    "name": "Scyther",
+    "types": [
+      "bug",
+      "flying"
+    ],
+    "expYield": 7,
+    "stats": {
+      "hp": 25,
+      "atk": 6,
+      "def": 9,
+      "spa": 6,
+      "spd": 9
+    },
+    "moves": [
+      "bugBite",
+      "bugBuzz",
+      "gust",
+      "silverWind"
+    ]
+  },
+  "lapras": {
+    "name": "Lapras",
+    "types": [
+      "water",
+      "ice"
+    ],
+    "expYield": 15,
+    "stats": {
+      "hp": 37,
+      "atk": 12,
+      "def": 13,
+      "spa": 12,
+      "spd": 13
+    },
+    "moves": [
+      "waterGun",
+      "iceShard",
+      "aquaTail",
+      "waterfall"
+    ]
+  },
+  "dragonair": {
+    "name": "Dragonair",
+    "types": [
+      "dragon"
+    ],
+    "expYield": 11,
+    "stats": {
+      "hp": 32,
+      "atk": 9,
+      "def": 8,
+      "spa": 9,
+      "spd": 8
+    },
+    "moves": [
+      "dragonBreath",
+      "dragonClaw",
+      "tackle",
+      "dragonPulse"
+    ]
+  },
+  "dragonite": {
+    "name": "Dragonite",
+    "types": [
+      "dragon",
+      "flying"
+    ],
+    "expYield": 15,
+    "stats": {
+      "hp": 40,
+      "atk": 12,
+      "def": 11,
+      "spa": 12,
+      "spd": 11
+    },
+    "moves": [
+      "dragonBreath",
+      "dragonPulse",
+      "outrage",
+      "gust"
+    ]
+  },
+  "articuno": {
+    "name": "Articuno",
+    "types": [
+      "ice",
+      "flying"
+    ],
+    "expYield": 19,
+    "stats": {
+      "hp": 47,
+      "atk": 12,
+      "def": 12,
+      "spa": 12,
+      "spd": 12
+    },
+    "moves": [
+      "iceBeam",
+      "blizzard",
+      "icyWind",
+      "gust"
+    ],
+    "legendary": true
+  },
+  "zapdos": {
+    "name": "Zapdos",
+    "types": [
+      "electric",
+      "flying"
+    ],
+    "expYield": 19,
+    "stats": {
+      "hp": 43,
+      "atk": 13,
+      "def": 13,
+      "spa": 13,
+      "spd": 13
+    },
+    "moves": [
+      "thunderShock",
+      "thunder",
+      "electroBall",
+      "gust"
+    ],
+    "legendary": true
+  },
+  "moltres": {
+    "name": "Moltres",
+    "types": [
+      "fire",
+      "flying"
+    ],
+    "expYield": 19,
+    "stats": {
+      "hp": 44,
+      "atk": 14,
+      "def": 14,
+      "spa": 14,
+      "spd": 14
+    },
+    "moves": [
+      "ember",
+      "fireBlast",
+      "heatWave",
+      "flameWheel"
+    ],
+    "legendary": true
+  },
+  "mewtwo": {
+    "name": "Mewtwo",
+    "types": [
+      "psychic"
+    ],
+    "expYield": 19,
+    "stats": {
+      "hp": 43,
+      "atk": 12,
+      "def": 14,
+      "spa": 12,
+      "spd": 14
+    },
+    "moves": [
+      "psybeam",
+      "psychic",
+      "zenHeadbutt",
+      "tackle"
+    ],
+    "legendary": true
+  },
+  "spinarak": {
+    "name": "Spinarak",
+    "types": [
+      "bug",
+      "poison"
+    ],
+    "expYield": 7,
+    "stats": {
+      "hp": 24,
+      "atk": 8,
+      "def": 9,
+      "spa": 8,
+      "spd": 9
+    },
+    "moves": [
+      "bugBite",
+      "bugBuzz",
+      "poisonSting",
+      "silverWind"
+    ],
+    "evolutions": [
+      {
+        "to": "ariados",
+        "method": "exp",
+        "expRequired": 55,
+        "minBadges": 4
+      }
+    ]
+  },
+  "ariados": {
+    "name": "Ariados",
+    "types": [
+      "bug",
+      "poison"
+    ],
+    "expYield": 15,
+    "stats": {
+      "hp": 39,
+      "atk": 10,
+      "def": 10,
+      "spa": 10,
+      "spd": 10
+    },
+    "moves": [
+      "bugBite",
+      "bugBuzz",
+      "megahorn",
+      "silverWind"
+    ]
+  },
+  "crobat": {
+    "name": "Crobat",
+    "types": [
+      "poison",
+      "flying"
+    ],
+    "expYield": 15,
+    "stats": {
+      "hp": 40,
+      "atk": 11,
+      "def": 11,
+      "spa": 11,
+      "spd": 11
+    },
+    "moves": [
+      "poisonSting",
+      "sludgeBomb",
+      "crossPoison",
+      "gust"
+    ]
+  },
+  "xatu": {
+    "name": "Xatu",
+    "types": [
+      "psychic",
+      "flying"
+    ],
+    "expYield": 15,
+    "stats": {
+      "hp": 39,
+      "atk": 11,
+      "def": 12,
+      "spa": 11,
+      "spd": 12
+    },
+    "moves": [
+      "psybeam",
+      "psychic",
+      "zenHeadbutt",
+      "gust"
+    ]
+  },
+  "steelix": {
+    "name": "Steelix",
+    "types": [
+      "steel",
+      "ground"
+    ],
+    "expYield": 15,
+    "stats": {
+      "hp": 39,
+      "atk": 11,
+      "def": 10,
+      "spa": 11,
+      "spd": 10
+    },
+    "moves": [
+      "metalClaw",
+      "ironHead",
+      "meteorMash",
+      "mudSlap"
+    ]
+  },
+  "swinub": {
+    "name": "Swinub",
+    "types": [
+      "ice",
+      "ground"
+    ],
+    "expYield": 7,
+    "stats": {
+      "hp": 22,
+      "atk": 7,
+      "def": 6,
+      "spa": 7,
+      "spd": 6
+    },
+    "moves": [
+      "iceBeam",
+      "mudSlap",
+      "harden",
+      "icyWind"
+    ],
+    "evolutions": [
+      {
+        "to": "piloswine",
+        "method": "exp",
+        "expRequired": 55,
+        "minBadges": 4
+      }
+    ]
+  },
+  "piloswine": {
+    "name": "Piloswine",
+    "types": [
+      "ice",
+      "ground"
+    ],
+    "expYield": 15,
+    "stats": {
+      "hp": 37,
+      "atk": 12,
+      "def": 11,
+      "spa": 12,
+      "spd": 11
+    },
+    "moves": [
+      "iceBeam",
+      "mudSlap",
+      "blizzard",
+      "icyWind"
+    ]
+  },
+  "houndoom": {
+    "name": "Houndoom",
+    "types": [
+      "dark",
+      "fire"
+    ],
+    "expYield": 15,
+    "stats": {
+      "hp": 40,
+      "atk": 11,
+      "def": 11,
+      "spa": 11,
+      "spd": 11
+    },
+    "moves": [
+      "snarl",
+      "crunch",
+      "darkPulse",
+      "ember"
+    ]
+  },
+  "kingdra": {
+    "name": "Kingdra",
+    "types": [
+      "water",
+      "dragon"
+    ],
+    "expYield": 15,
+    "stats": {
+      "hp": 36,
+      "atk": 12,
+      "def": 12,
+      "spa": 12,
+      "spd": 12
+    },
+    "moves": [
+      "waterGun",
+      "bubbleBeam",
+      "aquaTail",
+      "waterfall"
+    ]
+  },
+  "miltank": {
+    "name": "Miltank",
+    "types": [
+      "normal"
+    ],
+    "expYield": 15,
+    "stats": {
+      "hp": 37,
+      "atk": 11,
+      "def": 11,
+      "spa": 11,
+      "spd": 11
+    },
+    "moves": [
+      "tackle",
+      "hyperFang",
+      "doubleEdge",
+      "bodySlam"
+    ]
+  },
+  "raikou": {
+    "name": "Raikou",
+    "types": [
+      "electric"
+    ],
+    "expYield": 19,
+    "stats": {
+      "hp": 46,
+      "atk": 12,
+      "def": 15,
+      "spa": 12,
+      "spd": 15
+    },
+    "moves": [
+      "thunderShock",
+      "thunderWave",
+      "thunder",
+      "electroBall"
+    ],
+    "legendary": true
+  },
+  "entei": {
+    "name": "Entei",
+    "types": [
+      "fire"
+    ],
+    "expYield": 19,
+    "stats": {
+      "hp": 47,
+      "atk": 13,
+      "def": 12,
+      "spa": 13,
+      "spd": 12
+    },
+    "moves": [
+      "ember",
+      "flameCharge",
+      "heatWave",
+      "flameWheel"
+    ],
+    "legendary": true
+  },
+  "suicune": {
+    "name": "Suicune",
+    "types": [
+      "water"
+    ],
+    "expYield": 19,
+    "stats": {
+      "hp": 43,
+      "atk": 14,
+      "def": 13,
+      "spa": 14,
+      "spd": 13
+    },
+    "moves": [
+      "waterGun",
+      "bubbleBeam",
+      "aquaTail",
+      "waterfall"
+    ],
+    "legendary": true
+  },
+  "lugia": {
+    "name": "Lugia",
+    "types": [
+      "psychic",
+      "flying"
+    ],
+    "expYield": 19,
+    "stats": {
+      "hp": 47,
+      "atk": 12,
+      "def": 13,
+      "spa": 12,
+      "spd": 13
+    },
+    "moves": [
+      "psybeam",
+      "psychic",
+      "zenHeadbutt",
+      "gust"
+    ],
+    "legendary": true
+  },
+  "hoOh": {
+    "name": "Ho-Oh",
+    "types": [
+      "fire",
+      "flying"
+    ],
+    "expYield": 19,
+    "stats": {
+      "hp": 43,
+      "atk": 13,
+      "def": 14,
+      "spa": 13,
+      "spd": 14
+    },
+    "moves": [
+      "ember",
+      "flameCharge",
+      "heatWave",
+      "flameWheel"
+    ],
+    "legendary": true
+  },
+  "slakoth": {
+    "name": "Slakoth",
+    "types": [
+      "normal"
+    ],
+    "expYield": 7,
+    "stats": {
+      "hp": 24,
+      "atk": 8,
+      "def": 9,
+      "spa": 8,
+      "spd": 9
+    },
+    "moves": [
+      "tackle",
+      "hyperFang",
+      "harden",
+      "bodySlam"
+    ],
+    "evolutions": [
+      {
+        "to": "vigoroth",
+        "method": "exp",
+        "expRequired": 55,
+        "minBadges": 1
+      }
+    ]
+  },
+  "vigoroth": {
+    "name": "Vigoroth",
+    "types": [
+      "normal"
+    ],
+    "expYield": 11,
+    "stats": {
+      "hp": 32,
+      "atk": 8,
+      "def": 8,
+      "spa": 8,
+      "spd": 8
+    },
+    "moves": [
+      "tackle",
+      "hyperFang",
+      "harden",
+      "bodySlam"
+    ],
+    "evolutions": [
+      {
+        "to": "slaking",
+        "method": "exp",
+        "expRequired": 110,
+        "minBadges": 5
+      }
+    ]
+  },
+  "slaking": {
+    "name": "Slaking",
+    "types": [
+      "normal"
+    ],
+    "expYield": 15,
+    "stats": {
+      "hp": 40,
+      "atk": 11,
+      "def": 11,
+      "spa": 11,
+      "spd": 11
+    },
+    "moves": [
+      "tackle",
+      "hyperFang",
+      "doubleEdge",
+      "bodySlam"
+    ]
+  },
+  "makuhita": {
+    "name": "Makuhita",
+    "types": [
+      "fighting"
+    ],
+    "expYield": 7,
+    "stats": {
+      "hp": 23,
+      "atk": 8,
+      "def": 6,
+      "spa": 8,
+      "spd": 6
+    },
+    "moves": [
+      "armThrust",
+      "hammerArm",
+      "tackle",
+      "lowKick"
+    ],
+    "evolutions": [
+      {
+        "to": "hariyama",
+        "method": "exp",
+        "expRequired": 55,
+        "minBadges": 4
+      }
+    ]
+  },
+  "hariyama": {
+    "name": "Hariyama",
+    "types": [
+      "fighting"
+    ],
+    "expYield": 15,
+    "stats": {
+      "hp": 38,
+      "atk": 10,
+      "def": 11,
+      "spa": 10,
+      "spd": 11
+    },
+    "moves": [
+      "armThrust",
+      "hammerArm",
+      "auraSphere",
+      "tackle"
+    ]
+  },
+  "nosepass": {
+    "name": "Nosepass",
+    "types": [
+      "rock"
+    ],
+    "expYield": 7,
+    "stats": {
+      "hp": 26,
+      "atk": 8,
+      "def": 9,
+      "spa": 8,
+      "spd": 9
+    },
+    "moves": [
+      "rockThrow",
+      "stoneEdge",
+      "tackle",
+      "powerGem"
+    ]
+  },
+  "electrike": {
+    "name": "Electrike",
+    "types": [
+      "electric"
+    ],
+    "expYield": 7,
+    "stats": {
+      "hp": 26,
+      "atk": 6,
+      "def": 7,
+      "spa": 6,
+      "spd": 7
+    },
+    "moves": [
+      "thunderShock",
+      "discharge",
+      "tackle",
+      "electroBall"
+    ],
+    "evolutions": [
+      {
+        "to": "manectric",
+        "method": "exp",
+        "expRequired": 55,
+        "minBadges": 4
+      }
+    ]
+  },
+  "manectric": {
+    "name": "Manectric",
+    "types": [
+      "electric"
+    ],
+    "expYield": 15,
+    "stats": {
+      "hp": 36,
+      "atk": 11,
+      "def": 12,
+      "spa": 11,
+      "spd": 12
+    },
+    "moves": [
+      "thunderShock",
+      "thunderWave",
+      "thunder",
+      "electroBall"
+    ]
+  },
+  "numel": {
+    "name": "Numel",
+    "types": [
+      "fire",
+      "ground"
+    ],
+    "expYield": 7,
+    "stats": {
+      "hp": 24,
+      "atk": 7,
+      "def": 8,
+      "spa": 7,
+      "spd": 8
+    },
+    "moves": [
+      "ember",
+      "flameCharge",
+      "mudSlap",
+      "flameWheel"
+    ],
+    "evolutions": [
+      {
+        "to": "camerupt",
+        "method": "exp",
+        "expRequired": 55,
+        "minBadges": 5
+      }
+    ]
+  },
+  "camerupt": {
+    "name": "Camerupt",
+    "types": [
+      "fire",
+      "ground"
+    ],
+    "expYield": 15,
+    "stats": {
+      "hp": 39,
+      "atk": 12,
+      "def": 13,
+      "spa": 12,
+      "spd": 13
+    },
+    "moves": [
+      "ember",
+      "flameCharge",
+      "heatWave",
+      "flameWheel"
+    ]
+  },
+  "torkoal": {
+    "name": "Torkoal",
+    "types": [
+      "fire"
+    ],
+    "expYield": 15,
+    "stats": {
+      "hp": 40,
+      "atk": 10,
+      "def": 10,
+      "spa": 10,
+      "spd": 10
+    },
+    "moves": [
+      "ember",
+      "flameCharge",
+      "heatWave",
+      "flameWheel"
+    ]
+  },
+  "swablu": {
+    "name": "Swablu",
+    "types": [
+      "normal",
+      "flying"
+    ],
+    "expYield": 7,
+    "stats": {
+      "hp": 25,
+      "atk": 6,
+      "def": 7,
+      "spa": 6,
+      "spd": 7
+    },
+    "moves": [
+      "tackle",
+      "hyperFang",
+      "gust",
+      "bodySlam"
+    ],
+    "evolutions": [
+      {
+        "to": "altaria",
+        "method": "exp",
+        "expRequired": 55,
+        "minBadges": 4
+      }
+    ]
+  },
+  "altaria": {
+    "name": "Altaria",
+    "types": [
+      "dragon",
+      "flying"
+    ],
+    "expYield": 15,
+    "stats": {
+      "hp": 40,
+      "atk": 11,
+      "def": 12,
+      "spa": 11,
+      "spd": 12
+    },
+    "moves": [
+      "dragonBreath",
+      "dragonClaw",
+      "outrage",
+      "gust"
+    ]
+  },
+  "lunatone": {
+    "name": "Lunatone",
+    "types": [
+      "rock",
+      "psychic"
+    ],
+    "expYield": 7,
+    "stats": {
+      "hp": 24,
+      "atk": 7,
+      "def": 7,
+      "spa": 7,
+      "spd": 7
+    },
+    "moves": [
+      "rockThrow",
+      "stoneEdge",
+      "psybeam",
+      "powerGem"
+    ]
+  },
+  "solrock": {
+    "name": "Solrock",
+    "types": [
+      "rock",
+      "psychic"
+    ],
+    "expYield": 7,
+    "stats": {
+      "hp": 25,
+      "atk": 8,
+      "def": 8,
+      "spa": 8,
+      "spd": 8
+    },
+    "moves": [
+      "rockThrow",
+      "stoneEdge",
+      "psybeam",
+      "powerGem"
+    ]
+  },
+  "dusclops": {
+    "name": "Dusclops",
+    "types": [
+      "ghost"
+    ],
+    "expYield": 15,
+    "stats": {
+      "hp": 37,
+      "atk": 12,
+      "def": 10,
+      "spa": 12,
+      "spd": 10
+    },
+    "moves": [
+      "shadowSneak",
+      "shadowBall",
+      "ghostWind",
+      "hex"
+    ]
+  },
+  "absol": {
+    "name": "Absol",
+    "types": [
+      "dark"
+    ],
+    "expYield": 15,
+    "stats": {
+      "hp": 40,
+      "atk": 12,
+      "def": 13,
+      "spa": 12,
+      "spd": 13
+    },
+    "moves": [
+      "snarl",
+      "crunch",
+      "darkPulse",
+      "tackle"
+    ]
+  },
+  "walrein": {
+    "name": "Walrein",
+    "types": [
+      "ice",
+      "water"
+    ],
+    "expYield": 15,
+    "stats": {
+      "hp": 36,
+      "atk": 12,
+      "def": 11,
+      "spa": 12,
+      "spd": 11
+    },
+    "moves": [
+      "iceBeam",
+      "waterGun",
+      "blizzard",
+      "icyWind"
+    ]
+  },
+  "salamence": {
+    "name": "Salamence",
+    "types": [
+      "dragon",
+      "flying"
+    ],
+    "expYield": 15,
+    "stats": {
+      "hp": 39,
+      "atk": 11,
+      "def": 11,
+      "spa": 11,
+      "spd": 11
+    },
+    "moves": [
+      "dragonBreath",
+      "dragonClaw",
+      "outrage",
+      "gust"
+    ]
+  },
+  "metagross": {
+    "name": "Metagross",
+    "types": [
+      "steel",
+      "psychic"
+    ],
+    "expYield": 15,
+    "stats": {
+      "hp": 37,
+      "atk": 11,
+      "def": 10,
+      "spa": 11,
+      "spd": 10
+    },
+    "moves": [
+      "metalClaw",
+      "ironHead",
+      "meteorMash",
+      "tackle"
+    ]
+  },
+  "regirock": {
+    "name": "Regirock",
+    "types": [
+      "rock"
+    ],
+    "expYield": 19,
+    "stats": {
+      "hp": 45,
+      "atk": 14,
+      "def": 13,
+      "spa": 14,
+      "spd": 13
+    },
+    "moves": [
+      "rockThrow",
+      "stoneEdge",
+      "powerGem",
+      "rockSlide"
+    ],
+    "legendary": true
+  },
+  "regice": {
+    "name": "Regice",
+    "types": [
+      "ice"
+    ],
+    "expYield": 19,
+    "stats": {
+      "hp": 46,
+      "atk": 12,
+      "def": 14,
+      "spa": 12,
+      "spd": 14
+    },
+    "moves": [
+      "iceBeam",
+      "slam",
+      "blizzard",
+      "tackle"
+    ],
+    "legendary": true
+  },
+  "registeel": {
+    "name": "Registeel",
+    "types": [
+      "steel"
+    ],
+    "expYield": 19,
+    "stats": {
+      "hp": 47,
+      "atk": 13,
+      "def": 15,
+      "spa": 13,
+      "spd": 15
+    },
+    "moves": [
+      "metalClaw",
+      "ironHead",
+      "meteorMash",
+      "tackle"
+    ],
+    "legendary": true
+  },
+  "kyogre": {
+    "name": "Kyogre",
+    "types": [
+      "water"
+    ],
+    "expYield": 19,
+    "stats": {
+      "hp": 45,
+      "atk": 13,
+      "def": 14,
+      "spa": 13,
+      "spd": 14
+    },
+    "moves": [
+      "waterGun",
+      "bubbleBeam",
+      "aquaTail",
+      "waterfall"
+    ],
+    "legendary": true
+  },
+  "groudon": {
+    "name": "Groudon",
+    "types": [
+      "ground"
+    ],
+    "expYield": 19,
+    "stats": {
+      "hp": 46,
+      "atk": 14,
+      "def": 15,
+      "spa": 14,
+      "spd": 15
+    },
+    "moves": [
+      "mudSlap",
+      "earthPower",
+      "earthquake",
+      "mudShot"
+    ],
+    "legendary": true
+  },
+  "budew": {
+    "name": "Budew",
+    "types": [
+      "grass",
+      "poison"
+    ],
+    "expYield": 7,
+    "stats": {
+      "hp": 23,
+      "atk": 7,
+      "def": 8,
+      "spa": 7,
+      "spd": 8
+    },
+    "moves": [
+      "vineWhip",
+      "energyBall",
+      "poisonSting",
+      "gigaDrain"
+    ],
+    "evolutions": [
+      {
+        "to": "roselia",
+        "method": "exp",
+        "expRequired": 55,
+        "minBadges": 1
+      }
+    ]
+  },
+  "roselia": {
+    "name": "Roselia",
+    "types": [
+      "grass",
+      "poison"
+    ],
+    "expYield": 11,
+    "stats": {
+      "hp": 29,
+      "atk": 8,
+      "def": 11,
+      "spa": 8,
+      "spd": 11
+    },
+    "moves": [
+      "vineWhip",
+      "energyBall",
+      "poisonSting",
+      "gigaDrain"
+    ],
+    "evolutions": [
+      {
+        "to": "roserade",
+        "method": "exp",
+        "expRequired": 110,
+        "minBadges": 5
+      }
+    ]
+  },
+  "roserade": {
+    "name": "Roserade",
+    "types": [
+      "grass",
+      "poison"
+    ],
+    "expYield": 15,
+    "stats": {
+      "hp": 38,
+      "atk": 12,
+      "def": 13,
+      "spa": 12,
+      "spd": 13
+    },
+    "moves": [
+      "vineWhip",
+      "energyBall",
+      "solarBeam",
+      "gigaDrain"
+    ]
+  },
+  "meditite": {
+    "name": "Meditite",
+    "types": [
+      "fighting",
+      "psychic"
+    ],
+    "expYield": 7,
+    "stats": {
+      "hp": 24,
+      "atk": 7,
+      "def": 9,
+      "spa": 7,
+      "spd": 9
+    },
+    "moves": [
+      "armThrust",
+      "hammerArm",
+      "psybeam",
+      "tackle"
+    ],
+    "evolutions": [
+      {
+        "to": "medicham",
+        "method": "exp",
+        "expRequired": 55,
+        "minBadges": 4
+      }
+    ]
+  },
+  "medicham": {
+    "name": "Medicham",
+    "types": [
+      "fighting",
+      "psychic"
+    ],
+    "expYield": 15,
+    "stats": {
+      "hp": 39,
+      "atk": 12,
+      "def": 10,
+      "spa": 12,
+      "spd": 10
+    },
+    "moves": [
+      "armThrust",
+      "hammerArm",
+      "auraSphere",
+      "tackle"
+    ]
+  },
+  "shinx": {
+    "name": "Shinx",
+    "types": [
+      "electric"
+    ],
+    "expYield": 7,
+    "stats": {
+      "hp": 25,
+      "atk": 7,
+      "def": 9,
+      "spa": 7,
+      "spd": 9
+    },
+    "moves": [
+      "thunderShock",
+      "discharge",
+      "tackle",
+      "electroBall"
+    ],
+    "evolutions": [
+      {
+        "to": "luxio",
+        "method": "exp",
+        "expRequired": 55,
+        "minBadges": 1
+      }
+    ]
+  },
+  "luxio": {
+    "name": "Luxio",
+    "types": [
+      "electric"
+    ],
+    "expYield": 11,
+    "stats": {
+      "hp": 33,
+      "atk": 10,
+      "def": 8,
+      "spa": 10,
+      "spd": 8
+    },
+    "moves": [
+      "thunderShock",
+      "discharge",
+      "tackle",
+      "electroBall"
+    ],
+    "evolutions": [
+      {
+        "to": "luxray",
+        "method": "exp",
+        "expRequired": 110,
+        "minBadges": 5
+      }
+    ]
+  },
+  "luxray": {
+    "name": "Luxray",
+    "types": [
+      "electric"
+    ],
+    "expYield": 15,
+    "stats": {
+      "hp": 36,
+      "atk": 10,
+      "def": 11,
+      "spa": 10,
+      "spd": 11
+    },
+    "moves": [
+      "thunderShock",
+      "thunderWave",
+      "thunder",
+      "electroBall"
+    ]
+  },
+  "cranidos": {
+    "name": "Cranidos",
+    "types": [
+      "rock"
+    ],
+    "expYield": 7,
+    "stats": {
+      "hp": 25,
+      "atk": 6,
+      "def": 6,
+      "spa": 6,
+      "spd": 6
+    },
+    "moves": [
+      "rockThrow",
+      "stoneEdge",
+      "tackle",
+      "powerGem"
+    ],
+    "evolutions": [
+      {
+        "to": "rampardos",
+        "method": "exp",
+        "expRequired": 55,
+        "minBadges": 4
+      }
+    ]
+  },
+  "rampardos": {
+    "name": "Rampardos",
+    "types": [
+      "rock"
+    ],
+    "expYield": 15,
+    "stats": {
+      "hp": 40,
+      "atk": 11,
+      "def": 11,
+      "spa": 11,
+      "spd": 11
+    },
+    "moves": [
+      "rockThrow",
+      "stoneEdge",
+      "powerGem",
+      "rockSlide"
+    ]
+  },
+  "shieldon": {
+    "name": "Shieldon",
+    "types": [
+      "rock",
+      "steel"
+    ],
+    "expYield": 7,
+    "stats": {
+      "hp": 22,
+      "atk": 8,
+      "def": 8,
+      "spa": 8,
+      "spd": 8
+    },
+    "moves": [
+      "rockThrow",
+      "stoneEdge",
+      "metalClaw",
+      "powerGem"
+    ],
+    "evolutions": [
+      {
+        "to": "bastiodon",
+        "method": "exp",
+        "expRequired": 55,
+        "minBadges": 4
+      }
+    ]
+  },
+  "bastiodon": {
+    "name": "Bastiodon",
+    "types": [
+      "rock",
+      "steel"
+    ],
+    "expYield": 15,
+    "stats": {
+      "hp": 37,
+      "atk": 10,
+      "def": 13,
+      "spa": 10,
+      "spd": 13
+    },
+    "moves": [
+      "rockThrow",
+      "stoneEdge",
+      "powerGem",
+      "rockSlide"
+    ]
+  },
+  "vespiquen": {
+    "name": "Vespiquen",
+    "types": [
+      "bug",
+      "flying"
+    ],
+    "expYield": 15,
+    "stats": {
+      "hp": 37,
+      "atk": 12,
+      "def": 10,
+      "spa": 12,
+      "spd": 10
+    },
+    "moves": [
+      "bugBite",
+      "bugBuzz",
+      "megahorn",
+      "silverWind"
+    ]
+  },
+  "buizel": {
+    "name": "Buizel",
+    "types": [
+      "water"
+    ],
+    "expYield": 7,
+    "stats": {
+      "hp": 25,
+      "atk": 7,
+      "def": 8,
+      "spa": 7,
+      "spd": 8
+    },
+    "moves": [
+      "waterGun",
+      "bubbleBeam",
+      "tackle",
+      "waterfall"
+    ],
+    "evolutions": [
+      {
+        "to": "floatzel",
+        "method": "exp",
+        "expRequired": 55,
+        "minBadges": 5
+      }
+    ]
+  },
+  "floatzel": {
+    "name": "Floatzel",
+    "types": [
+      "water"
+    ],
+    "expYield": 15,
+    "stats": {
+      "hp": 40,
+      "atk": 12,
+      "def": 13,
+      "spa": 12,
+      "spd": 13
+    },
+    "moves": [
+      "waterGun",
+      "bubbleBeam",
+      "aquaTail",
+      "waterfall"
+    ]
+  },
+  "drifloon": {
+    "name": "Drifloon",
+    "types": [
+      "ghost",
+      "flying"
+    ],
+    "expYield": 7,
+    "stats": {
+      "hp": 22,
+      "atk": 8,
+      "def": 7,
+      "spa": 8,
+      "spd": 7
+    },
+    "moves": [
+      "shadowSneak",
+      "shadowBall",
+      "gust",
+      "ghostWind"
+    ],
+    "evolutions": [
+      {
+        "to": "drifblim",
+        "method": "exp",
+        "expRequired": 55,
+        "minBadges": 4
+      }
+    ]
+  },
+  "drifblim": {
+    "name": "Drifblim",
+    "types": [
+      "ghost",
+      "flying"
+    ],
+    "expYield": 15,
+    "stats": {
+      "hp": 37,
+      "atk": 10,
+      "def": 12,
+      "spa": 10,
+      "spd": 12
+    },
+    "moves": [
+      "shadowSneak",
+      "shadowBall",
+      "ghostWind",
+      "gust"
+    ]
+  },
+  "mismagius": {
+    "name": "Mismagius",
+    "types": [
+      "ghost"
+    ],
+    "expYield": 15,
+    "stats": {
+      "hp": 40,
+      "atk": 10,
+      "def": 11,
+      "spa": 10,
+      "spd": 11
+    },
+    "moves": [
+      "shadowSneak",
+      "shadowBall",
+      "ghostWind",
+      "hex"
+    ]
+  },
+  "bronzor": {
+    "name": "Bronzor",
+    "types": [
+      "steel",
+      "psychic"
+    ],
+    "expYield": 11,
+    "stats": {
+      "hp": 30,
+      "atk": 9,
+      "def": 8,
+      "spa": 9,
+      "spd": 8
+    },
+    "moves": [
+      "metalClaw",
+      "ironHead",
+      "psybeam",
+      "tackle"
+    ],
+    "evolutions": [
+      {
+        "to": "bronzong",
+        "method": "exp",
+        "expRequired": 55,
+        "minBadges": 4
+      }
+    ]
+  },
+  "bronzong": {
+    "name": "Bronzong",
+    "types": [
+      "steel",
+      "psychic"
+    ],
+    "expYield": 15,
+    "stats": {
+      "hp": 38,
+      "atk": 12,
+      "def": 11,
+      "spa": 12,
+      "spd": 11
+    },
+    "moves": [
+      "metalClaw",
+      "ironHead",
+      "meteorMash",
+      "tackle"
+    ]
+  },
+  "garchomp": {
+    "name": "Garchomp",
+    "types": [
+      "dragon",
+      "ground"
+    ],
+    "expYield": 15,
+    "stats": {
+      "hp": 36,
+      "atk": 11,
+      "def": 11,
+      "spa": 11,
+      "spd": 11
+    },
+    "moves": [
+      "dragonBreath",
+      "dragonClaw",
+      "outrage",
+      "mudSlap"
+    ]
+  },
+  "lucario": {
+    "name": "Lucario",
+    "types": [
+      "fighting",
+      "steel"
+    ],
+    "expYield": 15,
+    "stats": {
+      "hp": 39,
+      "atk": 11,
+      "def": 10,
+      "spa": 11,
+      "spd": 10
+    },
+    "moves": [
+      "armThrust",
+      "hammerArm",
+      "auraSphere",
+      "tackle"
+    ]
+  },
+  "hippowdon": {
+    "name": "Hippowdon",
+    "types": [
+      "ground"
+    ],
+    "expYield": 15,
+    "stats": {
+      "hp": 36,
+      "atk": 10,
+      "def": 12,
+      "spa": 10,
+      "spd": 12
+    },
+    "moves": [
+      "mudSlap",
+      "earthquake",
+      "earthPower",
+      "mudShot"
+    ]
+  },
+  "snover": {
+    "name": "Snover",
+    "types": [
+      "grass",
+      "ice"
+    ],
+    "expYield": 7,
+    "stats": {
+      "hp": 26,
+      "atk": 6,
+      "def": 9,
+      "spa": 6,
+      "spd": 9
+    },
+    "moves": [
+      "vineWhip",
+      "energyBall",
+      "iceBeam",
+      "gigaDrain"
+    ],
+    "evolutions": [
+      {
+        "to": "abomasnow",
+        "method": "exp",
+        "expRequired": 55,
+        "minBadges": 4
+      }
+    ]
+  },
+  "abomasnow": {
+    "name": "Abomasnow",
+    "types": [
+      "grass",
+      "ice"
+    ],
+    "expYield": 15,
+    "stats": {
+      "hp": 36,
+      "atk": 11,
+      "def": 10,
+      "spa": 11,
+      "spd": 10
+    },
+    "moves": [
+      "vineWhip",
+      "blizzard",
+      "solarBeam",
+      "gigaDrain"
+    ]
+  },
+  "gallade": {
+    "name": "Gallade",
+    "types": [
+      "psychic",
+      "fighting"
+    ],
+    "expYield": 15,
+    "stats": {
+      "hp": 36,
+      "atk": 11,
+      "def": 13,
+      "spa": 11,
+      "spd": 13
+    },
+    "moves": [
+      "psybeam",
+      "psychic",
+      "zenHeadbutt",
+      "tackle"
+    ]
+  },
+  "uxie": {
+    "name": "Uxie",
+    "types": [
+      "psychic"
+    ],
+    "expYield": 19,
+    "stats": {
+      "hp": 43,
+      "atk": 12,
+      "def": 12,
+      "spa": 12,
+      "spd": 12
+    },
+    "moves": [
+      "psybeam",
+      "psychic",
+      "zenHeadbutt",
+      "tackle"
+    ],
+    "legendary": true
+  },
+  "mesprit": {
+    "name": "Mesprit",
+    "types": [
+      "psychic"
+    ],
+    "expYield": 19,
+    "stats": {
+      "hp": 44,
+      "atk": 13,
+      "def": 13,
+      "spa": 13,
+      "spd": 13
+    },
+    "moves": [
+      "psybeam",
+      "psychic",
+      "zenHeadbutt",
+      "tackle"
+    ],
+    "legendary": true
+  },
+  "azelf": {
+    "name": "Azelf",
+    "types": [
+      "psychic"
+    ],
+    "expYield": 19,
+    "stats": {
+      "hp": 45,
+      "atk": 14,
+      "def": 14,
+      "spa": 14,
+      "spd": 14
+    },
+    "moves": [
+      "psybeam",
+      "psychic",
+      "zenHeadbutt",
+      "tackle"
+    ],
+    "legendary": true
+  },
+  "dialga": {
+    "name": "Dialga",
+    "types": [
+      "steel",
+      "dragon"
+    ],
+    "expYield": 19,
+    "stats": {
+      "hp": 46,
+      "atk": 12,
+      "def": 15,
+      "spa": 12,
+      "spd": 15
+    },
+    "moves": [
+      "metalClaw",
+      "ironHead",
+      "meteorMash",
+      "tackle"
+    ],
+    "legendary": true
+  },
+  "palkia": {
+    "name": "Palkia",
+    "types": [
+      "water",
+      "dragon"
+    ],
+    "expYield": 19,
+    "stats": {
+      "hp": 47,
+      "atk": 13,
+      "def": 12,
+      "spa": 13,
+      "spd": 12
+    },
+    "moves": [
+      "waterGun",
+      "bubbleBeam",
+      "aquaTail",
+      "waterfall"
+    ],
+    "legendary": true
+  },
+  "pansage": {
+    "name": "Pansage",
+    "types": [
+      "grass"
+    ],
+    "expYield": 7,
+    "stats": {
+      "hp": 23,
+      "atk": 7,
+      "def": 9,
+      "spa": 7,
+      "spd": 9
+    },
+    "moves": [
+      "vineWhip",
+      "energyBall",
+      "tackle",
+      "gigaDrain"
+    ],
+    "evolutions": [
+      {
+        "to": "simisage",
+        "method": "exp",
+        "expRequired": 55,
+        "minBadges": 4
+      }
+    ]
+  },
+  "simisage": {
+    "name": "Simisage",
+    "types": [
+      "grass"
+    ],
+    "expYield": 15,
+    "stats": {
+      "hp": 38,
+      "atk": 12,
+      "def": 10,
+      "spa": 12,
+      "spd": 10
+    },
+    "moves": [
+      "vineWhip",
+      "energyBall",
+      "solarBeam",
+      "gigaDrain"
+    ]
+  },
+  "pansear": {
+    "name": "Pansear",
+    "types": [
+      "fire"
+    ],
+    "expYield": 7,
+    "stats": {
+      "hp": 25,
+      "atk": 6,
+      "def": 7,
+      "spa": 6,
+      "spd": 7
+    },
+    "moves": [
+      "ember",
+      "flameCharge",
+      "tackle",
+      "flameWheel"
+    ],
+    "evolutions": [
+      {
+        "to": "simisear",
+        "method": "exp",
+        "expRequired": 55,
+        "minBadges": 4
+      }
+    ]
+  },
+  "simisear": {
+    "name": "Simisear",
+    "types": [
+      "fire"
+    ],
+    "expYield": 15,
+    "stats": {
+      "hp": 40,
+      "atk": 11,
+      "def": 12,
+      "spa": 11,
+      "spd": 12
+    },
+    "moves": [
+      "ember",
+      "flameCharge",
+      "heatWave",
+      "flameWheel"
+    ]
+  },
+  "panpour": {
+    "name": "Panpour",
+    "types": [
+      "water"
+    ],
+    "expYield": 7,
+    "stats": {
+      "hp": 22,
+      "atk": 8,
+      "def": 9,
+      "spa": 8,
+      "spd": 9
+    },
+    "moves": [
+      "waterGun",
+      "bubbleBeam",
+      "tackle",
+      "waterfall"
+    ],
+    "evolutions": [
+      {
+        "to": "simipour",
+        "method": "exp",
+        "expRequired": 55,
+        "minBadges": 4
+      }
+    ]
+  },
+  "simipour": {
+    "name": "Simipour",
+    "types": [
+      "water"
+    ],
+    "expYield": 15,
+    "stats": {
+      "hp": 37,
+      "atk": 10,
+      "def": 10,
+      "spa": 10,
+      "spd": 10
+    },
+    "moves": [
+      "waterGun",
+      "bubbleBeam",
+      "aquaTail",
+      "waterfall"
+    ]
+  },
+  "krookodile": {
+    "name": "Krookodile",
+    "types": [
+      "ground",
+      "dark"
+    ],
+    "expYield": 15,
+    "stats": {
+      "hp": 39,
+      "atk": 11,
+      "def": 11,
+      "spa": 11,
+      "spd": 11
+    },
+    "moves": [
+      "mudSlap",
+      "earthquake",
+      "earthPower",
+      "bite"
+    ]
+  },
+  "swanna": {
+    "name": "Swanna",
+    "types": [
+      "water",
+      "flying"
+    ],
+    "expYield": 15,
+    "stats": {
+      "hp": 37,
+      "atk": 12,
+      "def": 11,
+      "spa": 12,
+      "spd": 11
+    },
+    "moves": [
+      "waterGun",
+      "bubbleBeam",
+      "aquaTail",
+      "waterfall"
+    ]
+  },
+  "vanillish": {
+    "name": "Vanillish",
+    "types": [
+      "ice"
+    ],
+    "expYield": 15,
+    "stats": {
+      "hp": 39,
+      "atk": 11,
+      "def": 13,
+      "spa": 11,
+      "spd": 13
+    },
+    "moves": [
+      "iceBeam",
+      "slam",
+      "blizzard",
+      "tackle"
+    ]
+  },
+  "bisharp": {
+    "name": "Bisharp",
+    "types": [
+      "dark",
+      "steel"
+    ],
+    "expYield": 15,
+    "stats": {
+      "hp": 36,
+      "atk": 11,
+      "def": 11,
+      "spa": 11,
+      "spd": 11
+    },
+    "moves": [
+      "snarl",
+      "meteorMash",
+      "darkPulse",
+      "tackle"
+    ]
+  },
+  "volcarona": {
+    "name": "Volcarona",
+    "types": [
+      "bug",
+      "fire"
+    ],
+    "expYield": 15,
+    "stats": {
+      "hp": 38,
+      "atk": 11,
+      "def": 11,
+      "spa": 11,
+      "spd": 11
+    },
+    "moves": [
+      "bugBite",
+      "bugBuzz",
+      "megahorn",
+      "silverWind"
+    ]
+  },
+  "cobalion": {
+    "name": "Cobalion",
+    "types": [
+      "steel",
+      "fighting"
+    ],
+    "expYield": 19,
+    "stats": {
+      "hp": 46,
+      "atk": 14,
+      "def": 14,
+      "spa": 14,
+      "spd": 14
+    },
+    "moves": [
+      "metalClaw",
+      "ironHead",
+      "meteorMash",
+      "tackle"
+    ],
+    "legendary": true
+  },
+  "terrakion": {
+    "name": "Terrakion",
+    "types": [
+      "rock",
+      "fighting"
+    ],
+    "expYield": 19,
+    "stats": {
+      "hp": 47,
+      "atk": 12,
+      "def": 15,
+      "spa": 12,
+      "spd": 15
+    },
+    "moves": [
+      "rockThrow",
+      "stoneEdge",
+      "powerGem",
+      "armThrust"
+    ],
+    "legendary": true
+  },
+  "virizion": {
+    "name": "Virizion",
+    "types": [
+      "grass",
+      "fighting"
+    ],
+    "expYield": 19,
+    "stats": {
+      "hp": 43,
+      "atk": 13,
+      "def": 12,
+      "spa": 13,
+      "spd": 12
+    },
+    "moves": [
+      "vineWhip",
+      "energyBall",
+      "solarBeam",
+      "gigaDrain"
+    ],
+    "legendary": true
+  },
+  "reshiram": {
+    "name": "Reshiram",
+    "types": [
+      "dragon",
+      "fire"
+    ],
+    "expYield": 19,
+    "stats": {
+      "hp": 46,
+      "atk": 13,
+      "def": 15,
+      "spa": 13,
+      "spd": 15
+    },
+    "moves": [
+      "dragonBreath",
+      "dragonClaw",
+      "outrage",
+      "ember"
+    ],
+    "legendary": true
+  },
+  "zekrom": {
+    "name": "Zekrom",
+    "types": [
+      "dragon",
+      "electric"
+    ],
+    "expYield": 19,
+    "stats": {
+      "hp": 47,
+      "atk": 14,
+      "def": 12,
+      "spa": 14,
+      "spd": 12
+    },
+    "moves": [
+      "dragonBreath",
+      "dragonClaw",
+      "outrage",
+      "thunderShock"
+    ],
+    "legendary": true
+  },
+  "meowth": {
+    "name": "Meowth",
+    "types": [
+      "normal"
+    ],
+    "expYield": 7,
+    "stats": {
+      "hp": 23,
+      "atk": 7,
+      "def": 7,
+      "spa": 7,
+      "spd": 7
+    },
+    "moves": [
+      "tackle",
+      "hyperFang",
+      "bite",
+      "bodySlam"
+    ]
+  },
+  "ekans": {
+    "name": "Ekans",
+    "types": [
+      "poison"
+    ],
+    "expYield": 7,
+    "stats": {
+      "hp": 26,
+      "atk": 8,
+      "def": 8,
+      "spa": 8,
+      "spd": 8
+    },
+    "moves": [
+      "poisonSting",
+      "glare",
+      "tackle",
+      "crossPoison"
+    ],
+    "evolutions": [
+      {
+        "to": "arbok",
+        "method": "exp",
+        "expRequired": 55,
+        "minBadges": 4
+      }
+    ]
+  },
+  "arbok": {
+    "name": "Arbok",
+    "types": [
+      "poison"
+    ],
+    "expYield": 15,
+    "stats": {
+      "hp": 37,
+      "atk": 10,
+      "def": 10,
+      "spa": 10,
+      "spd": 10
+    },
+    "moves": [
+      "poisonSting",
+      "sludgeBomb",
+      "crossPoison",
+      "poisonTail"
+    ]
+  },
+  "carvanha": {
+    "name": "Carvanha",
+    "types": [
+      "water",
+      "dark"
+    ],
+    "expYield": 7,
+    "stats": {
+      "hp": 25,
+      "atk": 6,
+      "def": 6,
+      "spa": 6,
+      "spd": 6
+    },
+    "moves": [
+      "waterGun",
+      "aquaJet",
+      "bite",
+      "waterfall"
+    ],
+    "evolutions": [
+      {
+        "to": "sharpedo",
+        "method": "exp",
+        "expRequired": 55,
+        "minBadges": 4
+      }
+    ]
+  },
+  "sharpedo": {
+    "name": "Sharpedo",
+    "types": [
+      "water",
+      "dark"
+    ],
+    "expYield": 15,
+    "stats": {
+      "hp": 40,
+      "atk": 11,
+      "def": 11,
+      "spa": 11,
+      "spd": 11
+    },
+    "moves": [
+      "waterGun",
+      "aquaJet",
+      "aquaTail",
+      "waterfall"
+    ]
+  },
+  "glameow": {
+    "name": "Glameow",
+    "types": [
+      "normal"
+    ],
+    "expYield": 7,
+    "stats": {
+      "hp": 26,
+      "atk": 8,
+      "def": 8,
+      "spa": 8,
+      "spd": 8
+    },
+    "moves": [
+      "tackle",
+      "hyperFang",
+      "bite",
+      "bodySlam"
+    ],
+    "evolutions": [
+      {
+        "to": "purugly",
+        "method": "exp",
+        "expRequired": 55,
+        "minBadges": 4
+      }
+    ]
+  },
+  "purugly": {
+    "name": "Purugly",
+    "types": [
+      "normal"
+    ],
+    "expYield": 15,
+    "stats": {
+      "hp": 37,
+      "atk": 10,
+      "def": 10,
+      "spa": 10,
+      "spd": 10
+    },
+    "moves": [
+      "tackle",
+      "hyperFang",
+      "doubleEdge",
+      "bodySlam"
+    ]
+  },
+  "croagunk": {
+    "name": "Croagunk",
+    "types": [
+      "poison",
+      "fighting"
+    ],
+    "expYield": 7,
+    "stats": {
+      "hp": 24,
+      "atk": 6,
+      "def": 6,
+      "spa": 6,
+      "spd": 6
+    },
+    "moves": [
+      "poisonSting",
+      "sludgeBomb",
+      "armThrust",
+      "crossPoison"
+    ],
+    "evolutions": [
+      {
+        "to": "toxicroak",
+        "method": "exp",
+        "expRequired": 55,
+        "minBadges": 4
+      }
+    ]
+  },
+  "toxicroak": {
+    "name": "Toxicroak",
+    "types": [
+      "poison",
+      "fighting"
+    ],
+    "expYield": 15,
+    "stats": {
+      "hp": 39,
+      "atk": 11,
+      "def": 11,
+      "spa": 11,
+      "spd": 11
+    },
+    "moves": [
+      "poisonSting",
+      "sludgeBomb",
+      "crossPoison",
+      "armThrust"
+    ]
+  },
+  "zubat": {
+    "name": "Zubat",
+    "types": [
+      "poison",
+      "flying"
+    ],
+    "expYield": 7,
+    "stats": {
+      "hp": 24,
+      "atk": 8,
+      "def": 8,
+      "spa": 8,
+      "spd": 8
+    },
+    "moves": [
+      "poisonSting",
+      "sludgeBomb",
+      "gust",
+      "crossPoison"
+    ],
+    "evolutions": [
+      {
+        "to": "golbat",
+        "method": "exp",
+        "expRequired": 55,
+        "minBadges": 4
+      }
+    ]
+  },
+  "golbat": {
+    "name": "Golbat",
+    "types": [
+      "poison",
+      "flying"
+    ],
+    "expYield": 15,
+    "stats": {
+      "hp": 39,
+      "atk": 10,
+      "def": 10,
+      "spa": 10,
+      "spd": 10
+    },
+    "moves": [
+      "poisonSting",
+      "sludgeBomb",
+      "crossPoison",
+      "gust"
+    ]
+  }
+}

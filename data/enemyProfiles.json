@@ -1,0 +1,31 @@
+{
+  "default": {
+    "movePolicy": "strongestFirst",
+    "targeting": [{ "strategy": "random", "weight": 1 }]
+  },
+  "wild": {
+    "movePolicy": "random",
+    "targeting": [{ "strategy": "random", "weight": 1 }]
+  },
+  "aggressive": {
+    "movePolicy": "strongestFirst",
+    "targeting": [
+      { "strategy": "typeAdvantage", "weight": 3 },
+      { "strategy": "lowestHp", "weight": 1 }
+    ]
+  },
+  "assassin": {
+    "movePolicy": "strongestFirst",
+    "targeting": [
+      { "strategy": "lowestHp", "weight": 4 },
+      { "strategy": "highestThreat", "weight": 1 }
+    ]
+  },
+  "threatHunter": {
+    "movePolicy": "strongestFirst",
+    "targeting": [
+      { "strategy": "highestThreat", "weight": 3 },
+      { "strategy": "random", "weight": 1 }
+    ]
+  }
+}

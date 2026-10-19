@@ -1,0 +1,4 @@
+node_modules/
+
+# Sprites y otros assets de terceros: nunca se versionan ni se publican.
+assets/

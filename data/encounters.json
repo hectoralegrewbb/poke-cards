@@ -1,0 +1,47 @@
+{
+  "route1Duo": {
+    "kind": "normal",
+    "enemies": [
+      { "speciesId": "patrat", "row": "front", "profileId": "wild" },
+      { "speciesId": "pidove", "row": "back", "profileId": "wild" }
+    ]
+  },
+  "route2Trio": {
+    "kind": "normal",
+    "enemies": [
+      { "speciesId": "sandile", "row": "front", "profileId": "aggressive" },
+      { "speciesId": "blitzle", "row": "front", "profileId": "default" },
+      { "speciesId": "purrloin", "row": "back", "profileId": "assassin" }
+    ]
+  },
+  "gymRockExample": {
+    "kind": "gym",
+    "enemies": [
+      { "speciesId": "roggenrola", "row": "front", "profileId": "aggressive" },
+      { "speciesId": "boldore", "row": "front", "profileId": "aggressive" },
+      { "speciesId": "roggenrola", "row": "back", "profileId": "threatHunter" },
+      { "speciesId": "boldore", "row": "back", "profileId": "default" }
+    ]
+  },
+  "eliteFourExample": {
+    "kind": "eliteFour",
+    "enemies": [
+      { "speciesId": "krokorok", "row": "front", "profileId": "aggressive" },
+      { "speciesId": "zebstrika", "row": "front", "profileId": "aggressive" },
+      { "speciesId": "tranquill", "row": "front", "profileId": "default" },
+      { "speciesId": "liepard", "row": "back", "profileId": "assassin" },
+      { "speciesId": "unfezant", "row": "back", "profileId": "threatHunter" }
+    ]
+  },
+  "championExample": {
+    "kind": "champion",
+    "enemies": [
+      { "speciesId": "gigalith", "row": "front", "profileId": "aggressive" },
+      { "speciesId": "krokorok", "row": "front", "profileId": "aggressive" },
+      { "speciesId": "cinccino", "row": "front", "profileId": "default" },
+      { "speciesId": "zebstrika", "row": "back", "profileId": "threatHunter" },
+      { "speciesId": "liepard", "row": "back", "profileId": "assassin" },
+      { "speciesId": "unfezant", "row": "back", "profileId": "aggressive" }
+    ]
+  }
+}

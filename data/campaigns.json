@@ -1,0 +1,438 @@
+{
+  "regions": {
+    "kanto": {
+      "name": "Kanto",
+      "villain": "Team Rocket",
+      "gyms": [
+        {
+          "leader": "Brock",
+          "type": "rock",
+          "ace": "onix",
+          "badge": "Medalla Roca"
+        },
+        {
+          "leader": "Misty",
+          "type": "water",
+          "ace": "starmie",
+          "badge": "Medalla Cascada"
+        },
+        {
+          "leader": "Lt. Surge",
+          "type": "electric",
+          "ace": "raichu",
+          "badge": "Medalla Trueno"
+        },
+        {
+          "leader": "Erika",
+          "type": "grass",
+          "ace": "vileplume",
+          "badge": "Medalla Arcoíris"
+        },
+        {
+          "leader": "Koga",
+          "type": "poison",
+          "ace": "weezing",
+          "badge": "Medalla Alma"
+        },
+        {
+          "leader": "Sabrina",
+          "type": "psychic",
+          "ace": "alakazam",
+          "badge": "Medalla Pantano"
+        },
+        {
+          "leader": "Blaine",
+          "type": "fire",
+          "ace": "rapidash",
+          "badge": "Medalla Volcán"
+        },
+        {
+          "leader": "Giovanni",
+          "type": "ground",
+          "ace": "rhydon",
+          "badge": "Medalla Tierra"
+        }
+      ],
+      "eliteFour": [
+        {
+          "leader": "Lorelei",
+          "type": "ice",
+          "ace": "lapras"
+        },
+        {
+          "leader": "Bruno",
+          "type": "fighting",
+          "ace": "machamp"
+        },
+        {
+          "leader": "Agatha",
+          "type": "ghost",
+          "ace": "gengar"
+        },
+        {
+          "leader": "Lance",
+          "type": "dragon",
+          "ace": "dragonite"
+        }
+      ],
+      "champion": {
+        "leader": "Azul",
+        "ace": "pidgeot"
+      },
+      "legendaries": [
+        "articuno",
+        "zapdos",
+        "moltres",
+        "mewtwo"
+      ]
+    },
+    "johto": {
+      "name": "Johto",
+      "villain": "Team Rocket",
+      "gyms": [
+        {
+          "leader": "Pegaso",
+          "type": "flying",
+          "ace": "pidgeotto",
+          "badge": "Medalla Céfiro"
+        },
+        {
+          "leader": "Antón",
+          "type": "bug",
+          "ace": "scyther",
+          "badge": "Medalla Colmena"
+        },
+        {
+          "leader": "Blanca",
+          "type": "normal",
+          "ace": "miltank",
+          "badge": "Medalla Planicie"
+        },
+        {
+          "leader": "Morti",
+          "type": "ghost",
+          "ace": "gengar",
+          "badge": "Medalla Niebla"
+        },
+        {
+          "leader": "Aníbal",
+          "type": "fighting",
+          "ace": "hariyama",
+          "badge": "Medalla Tormenta"
+        },
+        {
+          "leader": "Yasmina",
+          "type": "steel",
+          "ace": "steelix",
+          "badge": "Medalla Mineral"
+        },
+        {
+          "leader": "Fredo",
+          "type": "ice",
+          "ace": "piloswine",
+          "badge": "Medalla Glaciar"
+        },
+        {
+          "leader": "Débora",
+          "type": "dragon",
+          "ace": "kingdra",
+          "badge": "Medalla Dragón"
+        }
+      ],
+      "eliteFour": [
+        {
+          "leader": "Will",
+          "type": "psychic",
+          "ace": "xatu"
+        },
+        {
+          "leader": "Koga",
+          "type": "poison",
+          "ace": "crobat"
+        },
+        {
+          "leader": "Bruno",
+          "type": "fighting",
+          "ace": "machamp"
+        },
+        {
+          "leader": "Karen",
+          "type": "dark",
+          "ace": "houndoom"
+        }
+      ],
+      "champion": {
+        "leader": "Lance",
+        "ace": "dragonite"
+      },
+      "legendaries": [
+        "raikou",
+        "entei",
+        "suicune",
+        "lugia",
+        "hoOh"
+      ]
+    },
+    "hoenn": {
+      "name": "Hoenn",
+      "villain": "Team Aqua / Magma",
+      "gyms": [
+        {
+          "leader": "Petra",
+          "type": "rock",
+          "ace": "nosepass",
+          "badge": "Medalla Piedra"
+        },
+        {
+          "leader": "Marcial",
+          "type": "fighting",
+          "ace": "hariyama",
+          "badge": "Medalla Puño"
+        },
+        {
+          "leader": "Erico",
+          "type": "electric",
+          "ace": "manectric",
+          "badge": "Medalla Dínamo"
+        },
+        {
+          "leader": "Candela",
+          "type": "fire",
+          "ace": "torkoal",
+          "badge": "Medalla Calor"
+        },
+        {
+          "leader": "Norman",
+          "type": "normal",
+          "ace": "slaking",
+          "badge": "Medalla Equilibrio"
+        },
+        {
+          "leader": "Alana",
+          "type": "flying",
+          "ace": "altaria",
+          "badge": "Medalla Pluma"
+        },
+        {
+          "leader": "Vito y Leti",
+          "type": "psychic",
+          "ace": "solrock",
+          "badge": "Medalla Mente"
+        },
+        {
+          "leader": "Juan",
+          "type": "water",
+          "ace": "starmie",
+          "badge": "Medalla Lluvia"
+        }
+      ],
+      "eliteFour": [
+        {
+          "leader": "Sixto",
+          "type": "dark",
+          "ace": "absol"
+        },
+        {
+          "leader": "Fátima",
+          "type": "ghost",
+          "ace": "dusclops"
+        },
+        {
+          "leader": "Nívea",
+          "type": "ice",
+          "ace": "walrein"
+        },
+        {
+          "leader": "Dracón",
+          "type": "dragon",
+          "ace": "salamence"
+        }
+      ],
+      "champion": {
+        "leader": "Máximo",
+        "ace": "metagross"
+      },
+      "legendaries": [
+        "regirock",
+        "regice",
+        "registeel",
+        "kyogre",
+        "groudon"
+      ]
+    },
+    "sinnoh": {
+      "name": "Sinnoh",
+      "villain": "Team Galaxia",
+      "gyms": [
+        {
+          "leader": "Roco",
+          "type": "rock",
+          "ace": "rampardos",
+          "badge": "Medalla Lignito"
+        },
+        {
+          "leader": "Gardenia",
+          "type": "grass",
+          "ace": "roserade",
+          "badge": "Medalla Bosque"
+        },
+        {
+          "leader": "Brega",
+          "type": "fighting",
+          "ace": "lucario",
+          "badge": "Medalla Adoquín"
+        },
+        {
+          "leader": "Mananti",
+          "type": "water",
+          "ace": "floatzel",
+          "badge": "Medalla Ciénaga"
+        },
+        {
+          "leader": "Fantina",
+          "type": "ghost",
+          "ace": "mismagius",
+          "badge": "Medalla Reliquia"
+        },
+        {
+          "leader": "Acerón",
+          "type": "steel",
+          "ace": "bastiodon",
+          "badge": "Medalla Mina"
+        },
+        {
+          "leader": "Inverna",
+          "type": "ice",
+          "ace": "abomasnow",
+          "badge": "Medalla Carámbano"
+        },
+        {
+          "leader": "Lectro",
+          "type": "electric",
+          "ace": "luxray",
+          "badge": "Medalla Faro"
+        }
+      ],
+      "eliteFour": [
+        {
+          "leader": "Alecrán",
+          "type": "bug",
+          "ace": "vespiquen"
+        },
+        {
+          "leader": "Gaia",
+          "type": "ground",
+          "ace": "hippowdon"
+        },
+        {
+          "leader": "Fausto",
+          "type": "fire",
+          "ace": "infernape"
+        },
+        {
+          "leader": "Delos",
+          "type": "psychic",
+          "ace": "gallade"
+        }
+      ],
+      "champion": {
+        "leader": "Cintia",
+        "ace": "garchomp"
+      },
+      "legendaries": [
+        "uxie",
+        "mesprit",
+        "azelf",
+        "dialga",
+        "palkia"
+      ]
+    },
+    "unova": {
+      "name": "Teselia",
+      "villain": "Team Plasma",
+      "gyms": [
+        {
+          "leader": "Trío Striaton",
+          "type": "grass",
+          "ace": "simisage",
+          "badge": "Medalla Trío"
+        },
+        {
+          "leader": "Aloe",
+          "type": "normal",
+          "ace": "watchog",
+          "badge": "Medalla Básica"
+        },
+        {
+          "leader": "Camus",
+          "type": "bug",
+          "ace": "leavanny",
+          "badge": "Medalla Élitro"
+        },
+        {
+          "leader": "Camila",
+          "type": "electric",
+          "ace": "zebstrika",
+          "badge": "Medalla Voltio"
+        },
+        {
+          "leader": "Yakón",
+          "type": "ground",
+          "ace": "excadrill",
+          "badge": "Medalla Temblor"
+        },
+        {
+          "leader": "Gerania",
+          "type": "flying",
+          "ace": "swanna",
+          "badge": "Medalla Jet"
+        },
+        {
+          "leader": "Junco",
+          "type": "ice",
+          "ace": "vanillish",
+          "badge": "Medalla Candelizo"
+        },
+        {
+          "leader": "Lirio / Iris",
+          "type": "dragon",
+          "ace": "haxorus",
+          "badge": "Medalla Leyenda"
+        }
+      ],
+      "eliteFour": [
+        {
+          "leader": "Anís",
+          "type": "ghost",
+          "ace": "chandelure"
+        },
+        {
+          "leader": "Aza",
+          "type": "dark",
+          "ace": "bisharp"
+        },
+        {
+          "leader": "Catleya",
+          "type": "psychic",
+          "ace": "reuniclus"
+        },
+        {
+          "leader": "Lotto",
+          "type": "fighting",
+          "ace": "conkeldurr"
+        }
+      ],
+      "champion": {
+        "leader": "Mirto",
+        "ace": "volcarona"
+      },
+      "legendaries": [
+        "cobalion",
+        "terrakion",
+        "virizion",
+        "reshiram",
+        "zekrom"
+      ]
+    }
+  }
+}

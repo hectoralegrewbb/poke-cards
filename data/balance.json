@@ -1,0 +1,53 @@
+{
+  "deck": {
+    "minSize": 40,
+    "maxSize": 45
+  },
+  "party": {
+    "maxSize": 6
+  },
+  "hand": {
+    "initialSize": 6,
+    "drawPerTurn": 1,
+    "maxSize": 10
+  },
+  "combat": {
+    "actionsPerPokemonPerTurn": 1,
+    "critCoins": 4,
+    "critMultiplier": 1.5,
+    "stabMultiplier": 1.5,
+    "statRatioMin": 0.5,
+    "statRatioMax": 2,
+    "attackBoostPerCard": 3,
+    "defenseBoostPerCard": 5,
+    "maxBoostCardsPerAttack": 3
+  },
+  "encounters": {
+    "normal": {
+      "min": 1,
+      "max": 3
+    },
+    "gym": {
+      "min": 2,
+      "max": 4
+    },
+    "eliteFour": {
+      "min": 5,
+      "max": 5
+    },
+    "champion": {
+      "min": 6,
+      "max": 6
+    }
+  },
+  "wildMoveCostCaps": [
+    0,
+    1,
+    1,
+    2,
+    2,
+    2,
+    3,
+    3
+  ]
+}
