@@ -1,6 +1,6 @@
 {
   "name": "pokecards-dungeon",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "private": true,
   "type": "module",
   "description": "Motor de combate y datos de un fan game roguelike de cartas. Uso privado, sin fines de lucro.",
@@ -10,6 +10,7 @@
     "sprites": "node scripts/checkSprites.js",
     "simulate": "node scripts/simulate.js",
     "simulateRun": "node scripts/simulateRun.js",
+    "balance": "node scripts/balanceReport.js",
     "sprites:download": "node scripts/downloadSprites.js",
     "dex:sync": "node scripts/syncPokedex.js"
   },

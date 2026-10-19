@@ -1,4 +1,4 @@
-> **v0.5:** encuentros salvajes escalados por medallas y potencia, parálisis, ataque gratis para todas las especies y un sincronizador de Pokédex hasta 649. Ver [`CHANGELOG-v0.5.md`](CHANGELOG-v0.5.md) y [`QA-v0.5.md`](QA-v0.5.md).
+> **v0.6:** revisión completa: corrección de la semilla repetible, curva de dificultad calibrada con un bot de referencia, Liga y campeón más fuertes, carga de energía que reserva comodines para reforzar y confirmación al terminar turno con Pokémon sin actuar. Ver [`docs/CHANGELOG-v0.6.md`](docs/CHANGELOG-v0.6.md) y [`docs/QA-v0.6.md`](docs/QA-v0.6.md).
 
 # Pokécards Dungeon
 
@@ -57,7 +57,7 @@ La interfaz incorpora guías de 3 pasos, objetivos de tramo, indicadores de peli
 - **Críticos:** `critCoins` monedas (4 por defecto); crítico si todas salen cara (6,25 %; con 3 monedas, 12,5 %). Cada Moneda de la suerte quita una moneda en la siguiente tirada.
 - **Los 6 Pokémon están activos.** Cada uno actúa una vez por turno. Los enemigos eligen objetivo según su perfil (`data/enemyProfiles.json`), mezclando estrategias por peso: `lowestHp`, `highestThreat`, `typeAdvantage`, `random`.
 - **Intención visible:** cada enemigo anuncia movimiento, objetivo y daño estimado al inicio de la ronda (`enemy.intent`). Si el objetivo cae antes de resolver, reelige.
-- **Encuentros:** normal 1-3 enemigos, gimnasio 2-4 (progresivos según medallas), Alto Mando 5, campeón 6 (`balance.encounters`).
+- **Encuentros:** normal 1-3 enemigos, gimnasio 2 (el primero), 3 (gimnasios 2-4) y 4 (gimnasios 5-8), Alto Mando 5, campeón 6 (`balance.encounters`).
 - **Progreso:** EXP de combate repartida con rendimientos decrecientes según la cantidad de aliados en pie (`0,7 / √N` de la EXP total para cada uno). No existe un nivel numérico en esta versión: la EXP alimenta las evoluciones. Evolución inicial desde 55 EXP y 1 medalla, evolución final desde 110 EXP y 5 medallas; las piedras evolucionan según especie. (`findEvolution` / `evolve`).
 
 ### Estados alterados y animaciones (v0.3)
@@ -152,4 +152,6 @@ Para extender sin tocar el motor: `registerEffect(type, handler)` (efectos de mo
 - **Estadísticas:** pruebas de regresión automatizadas y simulación con bot heurístico, no playtests humanos. Ninguna corrida del bot llegó a ganar la Liga; el balance endgame es provisional.
 - **Revisión visual:** el código web pasó chequeo de sintaxis y el servidor entregó los archivos correctamente, pero Chromium headless no completó captura en este entorno: revisar modo selector, responsividad, GIF y animaciones en navegador real.
 
-Cambios y validación: `CHANGELOG-v0.4.md` y `QA-v0.4.md`. Historial anterior: `CHANGELOG-v0.3.md`, `QA-v0.3.md` y `docs/v0.2/`.
+Cambios y validación: `docs/CHANGELOG-v0.6.md` y `docs/QA-v0.6.md`. Historial: `docs/CHANGELOG-v0.3.md` a `v0.5`, `docs/QA-v0.3.md` a `v0.5` y `docs/v0.2/`.
+
+**Reporte de balance:** `npm run balance -- 300 trainer regional [región|random]` simula corridas con un bot razonable (`src/tools/smartRunBot.js`) y muestra victorias y PS restantes por gimnasio, ruta, Liga y tipo de nodo. Es una referencia relativa (dónde se endurece el juego), no una medida de dificultad humana.

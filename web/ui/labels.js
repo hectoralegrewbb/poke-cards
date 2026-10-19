@@ -26,6 +26,13 @@ export const nodeLabels = {
   villain: { title: "Conflicto regional", text: "Enfrentate a la organización rival de esta región." }
 };
 
+// Estados alterados: etiqueta corta (casillero y panel de equipo) y explicación (tooltip).
+export const statusInfo = {
+  poison: { short: "VEN", hint: "Envenenado: pierde PS cada turno" },
+  burn: { short: "QUE", hint: "Quemado: pierde PS y baja su ataque físico" },
+  paralysis: { short: "PAR", hint: "Parálisis: 25% de perder la acción por turno" }
+};
+
 export const errorText = {
   notPlayerTurn: "No es tu turno.",
   unknownPokemon: "Pokémon desconocido.",

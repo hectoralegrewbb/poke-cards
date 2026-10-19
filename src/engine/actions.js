@@ -107,3 +107,34 @@ export function playUtility(state, { cardUid, targetUid }) {
   applyEffects(state, cardDef.effects, { side: "player", source: null, target });
   return { ok: true, events: state.log.slice(startIndex) };
 }
+
+// Elige qué cartas de energía pagan un costo gastando lo menos valioso: primero la que cubre lo que falta
+// con el menor desperdicio y el menor refuerzo; así Comodines y cartas de refuerzo alto quedan para potenciar.
+// Devuelve { pay, energy }; si las cartas no alcanzan, energy < cost y pay contiene todo lo que podía pagar.
+export function choosePayCards(cardDefs, cards, cost) {
+  let pool = cards.filter((card) => cardDefs[card.cardId].playModes.includes("pay"));
+  const pay = [];
+  let energy = 0;
+  const byWaste = (a, b) => cardDefs[a.cardId].energyValue - cardDefs[b.cardId].energyValue || cardDefs[a.cardId].boostMultiplier - cardDefs[b.cardId].boostMultiplier;
+  while (energy < cost && pool.length > 0) {
+    const remaining = cost - energy;
+    const pick = pool.filter((card) => cardDefs[card.cardId].energyValue >= remaining).sort(byWaste)[0]
+      ?? [...pool].sort((a, b) => cardDefs[b.cardId].energyValue - cardDefs[a.cardId].energyValue || cardDefs[a.cardId].boostMultiplier - cardDefs[b.cardId].boostMultiplier)[0];
+    pay.push(pick);
+    pool = pool.filter((card) => card !== pick);
+    energy += cardDefs[pick.cardId].energyValue;
+  }
+  return { pay, energy };
+}
+
+// Reparte las cartas cargadas en un Pokémon entre "pagan" y "refuerzan" (solo si la técnica daña).
+export function splitCharge(cardDefs, cards, { cost, power, maxBoostCards }) {
+  const { pay, energy } = choosePayCards(cardDefs, cards, cost);
+  const rest = cards.filter((card) => !pay.includes(card));
+  const boost = power > 0
+    ? rest.filter((card) => cardDefs[card.cardId].playModes.includes("boostAttack"))
+        .sort((a, b) => cardDefs[b.cardId].boostMultiplier - cardDefs[a.cardId].boostMultiplier)
+        .slice(0, maxBoostCards)
+    : [];
+  return { pay, boost, energy };
+}

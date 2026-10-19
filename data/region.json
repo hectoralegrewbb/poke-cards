@@ -350,8 +350,8 @@
         "gurdurr"
       ],
       "scale": {
-        "hp": 1.3,
-        "stats": 1.15
+        "hp": 1.22,
+        "stats": 1.1
       },
       "gym": {
         "kind": "gym",
@@ -512,8 +512,8 @@
         "charizard"
       ],
       "scale": {
-        "hp": 1.65,
-        "stats": 1.3
+        "hp": 1.55,
+        "stats": 1.26
       },
       "gym": {
         "kind": "gym",
@@ -565,8 +565,8 @@
         "typhlosion"
       ],
       "scale": {
-        "hp": 1.8,
-        "stats": 1.35
+        "hp": 1.62,
+        "stats": 1.28
       },
       "gym": {
         "kind": "gym",
@@ -755,12 +755,12 @@
       ]
     },
     "scale": {
-      "hp": 2.0,
-      "stats": 1.4
+      "hp": 1.4,
+      "stats": 1.18
     },
     "championScale": {
-      "hp": 2.2,
-      "stats": 1.5
+      "hp": 1.5,
+      "stats": 1.25
     }
   },
   "itemDrops": [

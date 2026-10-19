@@ -4,11 +4,11 @@
 // Las cartas sobrantes vuelven a la mano si el Pokémon no las usa.
 // Jugar: arrastrá energía sobre un Pokémon (zona CARGAR) o sobre ESCUDO; arrastrá una técnica sobre un rival.
 // Con clic: Pokémon -> cartas (se cargan) -> técnica -> objetivo -> ¡USAR!
-import { calculateMoveDamage, endPlayerTurn, getMoveCost, getPowerBonus, getMoveTargets, getValidTargets, isAlive, playMove, playShield, playUtility } from "../../src/engine/index.js";
+import { calculateMoveDamage, endPlayerTurn, getMoveCost, getPowerBonus, getMoveTargets, getValidTargets, isAlive, playMove, playShield, playUtility, splitCharge } from "../../src/engine/index.js";
 import { attachDrag } from "./dragDrop.js";
 import { h } from "./dom.js";
 import { icon } from "./pixelIcons.js";
-import { describeCard, describeEffects, errorText, formatEvent, typeColors, typeNames } from "./labels.js";
+import { describeCard, describeEffects, errorText, formatEvent, statusInfo, typeColors, typeNames } from "./labels.js";
 import { sfx } from "./sfx.js";
 
 const sel = { ref: null, actorUid: null, moveIndex: null, targetUid: null, cardUids: [], mode: "attack", utilityUid: null };
@@ -64,22 +64,14 @@ function sanitizeSelection(state) {
 const handCard = (state, uid) => state.deck.hand.find((card) => card.uid === uid);
 const stagedOf = (uid) => staged[uid] ?? [];
 
-// Las primeras cartas cargadas pagan hasta cubrir el costo; las demás refuerzan (solo si la técnica daña).
+// Las cartas cargadas pagan el costo gastando las menos valiosas (ver splitCharge); las demás refuerzan,
+// solo si la técnica daña. Así un Comodín no se "desperdicia" pagando cuando sobra otra carta.
 function loadFor(state, actor, move) {
   const { cards, balance } = state.data;
-  const pay = [];
-  const boost = [];
-  let energy = 0;
   const cost = actor && move ? getMoveCost(state, actor, move) : 0;
-  for (const uid of actor ? stagedOf(actor.uid) : []) {
-    const card = handCard(state, uid);
-    if (!card) continue;
-    const def = cards[card.cardId];
-    if (move && energy < cost && def.playModes.includes("pay")) {
-      pay.push(card);
-      energy += def.energyValue;
-    } else if (move && move.power > 0 && def.playModes.includes("boostAttack") && boost.length < balance.combat.maxBoostCardsPerAttack) boost.push(card);
-  }
+  const staged = (actor ? stagedOf(actor.uid) : []).map((uid) => handCard(state, uid)).filter(Boolean);
+  if (!move) return { pay: [], boost: [], energy: 0, cost, boostPower: 0 };
+  const { pay, boost, energy } = splitCharge(cards, staged, { cost, power: move.power, maxBoostCards: balance.combat.maxBoostCardsPerAttack });
   const boostPower = boost.reduce((total, card) => total + cards[card.cardId].boostMultiplier, 0) * balance.combat.attackBoostPerCard;
   return { pay, boost, energy, cost, boostPower };
 }
@@ -240,7 +232,7 @@ function pokemonTile(ctx, state, pokemon, validSet) {
     h("div", { class: "spriteBox" }, h("div", { class: "platform" }), ctx.sprites.element(pokemon.speciesId, { facing: isPlayer ? "back" : "front", spriteKey: `${state.seed}:${pokemon.side}:${pokemon.uid}` })),
     h("div", { class: "plate" },
       h("div", { class: "pname" }, pokemon.name, h("small", {}, pokemon.row === "front" ? "F" : "B")),
-      pokemon.status ? h("span", { class: `statusTag ${pokemon.status}`, title: pokemon.status === "burn" ? "Quemado: pierde PS y baja su ataque físico" : pokemon.status === "paralysis" ? "Parálisis: 25% de perder la acción por turno" : "Envenenado: pierde PS cada turno" }, pokemon.status === "poison" ? "VEN" : pokemon.status === "paralysis" ? "PAR" : "QUE") : null,
+      pokemon.status ? h("span", { class: `statusTag ${pokemon.status}`, title: statusInfo[pokemon.status].hint }, statusInfo[pokemon.status].short) : null,
       h("div", { class: "types" }, pokemon.types.map(typeChip)),
       hpBar(pokemon),
       isPlayer ? null : intentLine(state, pokemon)));
@@ -496,6 +488,23 @@ function handView(ctx, state) {
   }));
 }
 
+// Terminar el turno con Pokémon sin actuar pide una segunda pulsación (evita un toque accidental, sobre todo en móvil).
+const endTurnWindowMs = 2400;
+let endTurnArmedAt = 0;
+const endTurnArmed = () => Date.now() - endTurnArmedAt < endTurnWindowMs;
+
+function endTurnClicked(ctx, state, readyCount) {
+  if (readyCount > 0 && !endTurnArmed()) {
+    endTurnArmedAt = Date.now();
+    sfx.play("deny");
+    ctx.notify(`Todavía ${readyCount === 1 ? "hay 1 Pokémon" : `hay ${readyCount} Pokémon`} sin actuar. Tocá de nuevo para terminar el turno.`);
+    return ctx.rerender();
+  }
+  endTurnArmedAt = 0;
+  sfx.play("select");
+  runAction(ctx, state, endPlayerTurn(state));
+}
+
 function pile(label, amount) {
   return h("div", { class: "pile" }, h("div", { class: "pileBack" }, icon("cards", { scale: 3 })), h("small", {}, `${label} ${amount}`));
 }
@@ -521,7 +530,7 @@ export function renderCombat(ctx) {
         h("span", {}, h("b", {}, "1"), " Seleccioná un aliado"),
         h("span", {}, h("b", {}, "2"), " Cargá energía (solo si cuesta)"),
         h("span", {}, h("b", {}, "3"), " Técnica → objetivo → ¡USAR!"),
-        h("small", {}, "LIBRE no gasta cartas · ÁREA alcanza a todos · FILA golpea a una fila · VEN y QUE hacen daño por turno y se curan con ítems.")) : null),
+        h("small", {}, "LIBRE no gasta cartas · ÁREA alcanza a todos · FILA golpea a una fila · VEN y QUE hacen daño por turno, PAR puede anular una acción; se curan con ítems.")) : null),
     h("header", { class: "hud" },
       h("span", {}, `TURNO ${state.turn}`), h("span", { class: "kind" }, kindNames[state.kind] ?? state.kind),
       h("span", {}, state.luckyCoins ? [icon("clover", { scale: 2 }), ` x${state.luckyCoins}`] : "")),
@@ -540,7 +549,8 @@ export function renderCombat(ctx) {
       h("div", { class: "handSide" },
         pile("DESC.", state.deck.discardPile.length),
         h("button", { class: `btn ${sel.mode === "shield" ? "on" : ""}`, onClick: () => { sel.mode = sel.mode === "shield" ? "attack" : "shield"; clearChoice(); sfx.play("select"); ctx.rerender(); } }, "ESCUDO"),
-        h("button", { class: "btn danger", disabled: finished, title: readyCount ? `${readyCount} Pokémon todavía pueden actuar` : "Resolver acciones enemigas", onClick: () => { sfx.play("select"); runAction(ctx, state, endPlayerTurn(state)); } }, readyCount ? `FIN TURNO (${readyCount}) ▶` : "FIN TURNO ▶"))),
+        h("button", { class: "btn danger", disabled: finished, title: readyCount ? `${readyCount} Pokémon todavía pueden actuar` : "Resolver acciones enemigas", onClick: () => endTurnClicked(ctx, state, readyCount) },
+          readyCount && endTurnArmed() ? "¿SEGURO? ▶" : readyCount ? `FIN TURNO (${readyCount}) ▶` : "FIN TURNO ▶"))),
     finished ? h("div", { class: "overlay" }, h("div", { class: "window dialogBig" },
       h("h2", { class: state.result === "victory" ? "win" : "lose" }, state.result === "victory" ? "¡VICTORIA!" : "DERROTA"),
       h("button", { class: "btn primary", onClick: () => ctx.onCombatFinished() }, "CONTINUAR ▶"))) : null);

@@ -2,14 +2,16 @@
 import { isAlive } from "../../src/engine/index.js";
 import { setRow, swapPartyBox, useItem } from "../../src/run/index.js";
 import { h } from "./dom.js";
-import { errorText, typeColors, typeNames } from "./labels.js";
+import { errorText, statusInfo, typeColors, typeNames } from "./labels.js";
 import { icon } from "./pixelIcons.js";
 import { sfx } from "./sfx.js";
 
 const ui = { itemId: null, boxUid: null };
 
 function expInfo(ctx, pokemon) {
-  const evolution = ctx.data.species[pokemon.speciesId].evolutions?.[0];
+  const evolutions = ctx.data.species[pokemon.speciesId].evolutions ?? [];
+  // Si la especie tiene varias evoluciones, se muestra la de EXP (la de piedra se ve en el ítem).
+  const evolution = evolutions.find((entry) => entry.method === "exp") ?? evolutions[0];
   if (!evolution) return `EXP ${pokemon.exp}`;
   if (evolution.method === "exp") {
     const minBadges = evolution.minBadges ?? 0;
@@ -49,7 +51,7 @@ function memberRow(ctx, pokemon, inBox) {
   return h("div", { class: `member ${alive ? "" : "dead"} ${ui.boxUid === pokemon.uid ? "selected" : ""}`, onClick },
     ctx.sprites.element(pokemon.speciesId, { facing: "front", spriteKey: `roster:${pokemon.uid}` }),
     h("div", { class: "memberInfo" },
-      h("div", { class: "pname" }, pokemon.name, pokemon.status ? h("span", { class: `statusTag ${pokemon.status}` }, pokemon.status === "poison" ? " VEN" : " QUE") : null),
+      h("div", { class: "pname" }, pokemon.name, pokemon.status ? h("span", { class: `statusTag ${pokemon.status}`, title: statusInfo[pokemon.status].hint }, ` ${statusInfo[pokemon.status].short}`) : null),
       h("div", { class: "types" }, pokemon.types.map((type) => h("span", { class: "chip", style: `background:${typeColors[type]}` }, typeNames[type]))),
       alive ? h("div", { class: "hp" }, h("span", { class: "hpLabel" }, "PS"), h("div", { class: "hpTrack" }, h("div", { class: `hpFill ${tone}`, style: `width:${percent}%` })), h("span", { class: "hpNum" }, `${pokemon.hp}/${pokemon.maxHp}`)) : h("div", { class: "fainted" }, "DEBILITADO"),
       h("small", {}, expInfo(ctx, pokemon))),

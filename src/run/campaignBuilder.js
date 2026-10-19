@@ -1,7 +1,7 @@
 // Una campaña es un snapshot determinista: Regional conserva el orden oficial;
 // Global mezcla líderes por etapa y crea una Liga Mundial. No muta los datos originales.
 import { nationalDex } from "../shared/nationalDex.js";
-import { eligiblePool } from "./wildEligibility.js";
+import { eligiblePool, speciesThreat } from "./wildEligibility.js";
 
 const regions = ["kanto", "johto", "hoenn", "sinnoh", "unova"];
 
@@ -33,11 +33,18 @@ function makeWildPool(data, rng, regionId, stageIndex) {
   return pool.length ? pool : global;
 }
 
-function buildTeam(data, rng, { type, ace, regionId }, count, stageIndex) {
+// Equipos de Liga: salen de entre los más fuertes disponibles (con azar para que no sean siempre los mismos).
+// Los gimnasios no lo usan: su fuerza la limita wildEligibility por medalla.
+function strongestFirst(data, rng, ids, headSize) {
+  const ranked = rng.shuffle([...ids]).sort((a, b) => speciesThreat(data.species[b]) - speciesThreat(data.species[a]));
+  return [...rng.shuffle(ranked.slice(0, headSize)), ...ranked.slice(headSize)];
+}
+
+function buildTeam(data, rng, { type, ace, regionId }, count, stageIndex, { strong = false } = {}) {
+  const prefer = (ids) => (strong ? strongestFirst(data, rng, ids, (count - 1) * 2) : rng.shuffle([...ids]));
   const local = eligiblePool(data, availableSpecies(data, { regionId, type }), stageIndex);
   const matching = eligiblePool(data, availableSpecies(data, { type }), stageIndex);
-  const other = eligiblePool(data, availableSpecies(data, { type }), stageIndex);
-  const candidates = [...rng.shuffle(local), ...rng.shuffle(matching), ...rng.shuffle(other)];
+  const candidates = [...prefer(local), ...prefer(matching)];
   const selected = [];
   for (const id of candidates) {
     if (id !== ace && !selected.includes(id)) selected.push(id);
@@ -63,7 +70,7 @@ function stageOf(data, rng, gym, regionId, stageIndex) {
     badge: gym.badge,
     scale: base.scale,
     wildPool: makeWildPool(data, rng, regionId, stageIndex),
-    gym: { kind: "gym", enemies: buildTeam(data, rng, { ...gym, regionId }, stageIndex === 0 ? 2 : stageIndex < 3 ? 3 : 4, stageIndex) },
+    gym: { kind: "gym", enemies: buildTeam(data, rng, { ...gym, regionId }, stageIndex === 0 ? 2 : stageIndex < 4 ? 3 : 4, stageIndex) },
     gymItem: base.gymItem
   };
 }
@@ -74,12 +81,13 @@ function leagueOf(data, rng, eliteFour, champion, championRegion) {
     championScale: data.region.league.championScale,
     eliteFour: eliteFour.map(({ member, regionId }) => ({
       leader: member.leader, regionId, specialty: member.type,
-      kind: "eliteFour", enemies: buildTeam(data, rng, { ...member, regionId }, 5, 8)
+      kind: "eliteFour", enemies: buildTeam(data, rng, { ...member, regionId }, 5, 8, { strong: true })
     })),
     champion: {
       leader: champion.leader, regionId: championRegion,
       kind: "champion", enemies: [
-        ...rng.shuffle(availableSpecies(data, { regionId: championRegion })).slice(0, 5), champion.ace
+        ...strongestFirst(data, rng, eligiblePool(data, availableSpecies(data, { regionId: championRegion }), 8).filter((id) => id !== champion.ace), 10).slice(0, 5),
+        champion.ace
       ].map((speciesId, index) => ({ speciesId, row: index < 3 ? "front" : "back", profileId: index === 5 ? "aggressive" : "default" }))
     }
   };
@@ -103,7 +111,8 @@ export function buildCampaign(data, rng, { mode = "regional", regionId = "unova"
     : data.campaigns.regions[chosen].eliteFour.map((member) => ({ member, regionId: chosen }));
   const championRegion = mode === "global" ? rng.pick(regions) : chosen;
   const champion = data.campaigns.regions[championRegion].champion;
-  const pool = mode === "global" ? rng.shuffle(regions.flatMap((id) => data.campaigns.regions[id].legendaries)) : data.campaigns.regions[chosen].legendaries;
+  // Siempre una copia: barajar el arreglo del catálogo lo alteraría y la misma semilla daría otra corrida.
+  const pool = mode === "global" ? regions.flatMap((id) => data.campaigns.regions[id].legendaries) : [...data.campaigns.regions[chosen].legendaries];
   const campaign = {
     ...data.region,
     mode,

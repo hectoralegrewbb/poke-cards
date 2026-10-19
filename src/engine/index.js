@@ -10,7 +10,7 @@ export { applyEffects, hasEffect, registerEffect } from "./effects.js";
 export { getMoveTargets, getValidTargets, hasTargetingStrategy, pickTarget, registerTargetingStrategy } from "./targeting.js";
 export { executeMove } from "./moveExecution.js";
 export { chooseTarget, movePolicies, planEnemyIntent, resolveEnemyIntent } from "./enemyAi.js";
-export { playMove, playShield, playUtility } from "./actions.js";
+export { choosePayCards, playMove, playShield, playUtility, splitCharge } from "./actions.js";
 export { createCombat, endPlayerTurn } from "./combat.js";
 export { validateGameData } from "./validateData.js";
 export { consumeFlinch, inflictStatus, statusNames, tickStatusForSide } from "./status.js";

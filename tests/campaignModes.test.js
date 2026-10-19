@@ -36,7 +36,7 @@ test("regional: Kanto, Johto, Hoenn, Sinnoh y Teselia siguen sus 8 gimnasios y L
     assert.equal(run.campaign.league.champion.leader, region.champion.leader);
     assert.equal(run.campaign.stages.length, 8);
     for (let index = 0; index < 8; index += 1) {
-      assert.equal(run.campaign.stages[index].gym.enemies.length, index === 0 ? 2 : index < 3 ? 3 : 4);
+      assert.equal(run.campaign.stages[index].gym.enemies.length, index === 0 ? 2 : index < 4 ? 3 : 4);
       assert.equal(run.campaign.stages[index].gym.enemies.at(-1).speciesId, region.gyms[index].ace);
       assert.ok(run.campaign.stages[index].wildPool.every((id) => !data.species[id].legendary));
     }
