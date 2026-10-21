@@ -1,14 +1,13 @@
 import { decideCapture, pickCard } from "../../src/run/index.js";
 import { h } from "./dom.js";
-import { describeCard, errorText } from "./labels.js";
+import { cardEffectIcons, describeCard, errorText } from "./labels.js";
 import { icon } from "./pixelIcons.js";
 import { sfx } from "./sfx.js";
 
 const ui = { removeCardId: "" };
-const cardIcons = { drawCards: "cards", heal: "heart", shield: "shield", reduceCooldown: "clock", luckyCoin: "clover" };
 
 export function bigCard(def, onClick) {
-  const art = def.kind === "energy" ? (def.boostMultiplier > 1 ? [icon("star", { scale: 5 })] : Array.from({ length: def.energyValue }, () => icon("bolt", { scale: 5 }))) : [icon(cardIcons[def.effects[0]?.type] ?? "star", { scale: 5 })];
+  const art = def.kind === "energy" ? (def.boostMultiplier > 1 ? [icon("star", { scale: 5 })] : Array.from({ length: def.energyValue }, () => icon("bolt", { scale: 5 }))) : [icon(cardEffectIcons[def.effects[0]?.type] ?? "star", { scale: 5 })];
   const kind = def.kind === "utility" ? "utility" : def.boostMultiplier > 1 ? "wild" : "energy";
   return h("button", { class: `card big ${kind}`, onClick }, h("div", { class: "cardTop" }, def.name), h("div", { class: "cardArt" }, art), h("div", { class: "cardText" }, describeCard(def)));
 }
@@ -48,7 +47,8 @@ export function renderReward(ctx) {
       h("div", { class: "cardChoices" }, pending.cardChoices.map((cardId) => bigCard(data.cards[cardId], () => attempt(pickCard(run, cardId, ui.removeCardId || null))))),
       h("button", { class: "btn", onClick: () => attempt(pickCard(run, null)) }, "SALTAR")) : null,
     pending.capture ? h("div", { class: "capture" }, h("h3", {}, "¡UN POKÉMON QUIERE UNIRSE!"),
-      ctx.sprites.element(pending.capture, { facing: "front" }), h("div", { class: "pname" }, data.species[pending.capture].name),
+      ctx.sprites.element(pending.capture, { facing: "front", shiny: Boolean(pending.captureShiny) }), h("div", { class: "pname" }, pending.captureShiny ? "✦ " : "", data.species[pending.capture].name),
+      pending.captureShiny ? h("small", { class: "shinyNote" }, "¡Es variocolor!") : null,
       h("small", {}, run.party.length >= data.balance.party.maxSize ? "Tu party está llena: irá a la caja." : "Se suma a tu party."),
       h("div", { class: "row" }, h("button", { class: "btn primary", onClick: () => attempt(decideCapture(run, true)) }, "CAPTURAR"),
         h("button", { class: "btn", onClick: () => attempt(decideCapture(run, false)) }, "DEJAR IR"))) : null);

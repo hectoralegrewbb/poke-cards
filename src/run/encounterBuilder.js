@@ -3,6 +3,7 @@ import { isAlive } from "../engine/index.js";
 import { getStage } from "./mapGenerator.js";
 import { getDifficulty } from "./difficulty.js";
 import { eligiblePool } from "./wildEligibility.js";
+import { rollShiny } from "./shiny.js";
 
 function scaled(base, bonus = 1) {
   return { hp: Math.max(0.1, base.hp * bonus), stats: Math.max(0.1, base.stats * bonus) };
@@ -83,6 +84,6 @@ export function buildEncounter(run, node) {
     profileId: rule.profileId,
     maxMoveCost: maxWildMoveCost,
     scale
-  }));
+  })).map((enemy, index) => (rollShiny(run.seed, run.stageIndex, run.step, index, enemy.speciesId) ? { ...enemy, shiny: true } : enemy));
   return { kind: rule.kind, enemies };
 }

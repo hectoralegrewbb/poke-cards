@@ -12,6 +12,14 @@ export function remoteSpriteUrl(speciesId, facing = "front", animated = true) {
   return `${spriteRoot}${animated ? "/animated" : ""}${backPath}/${dex}.${animated ? "gif" : "png"}`;
 }
 
+// Variocolor: GIF animado > PNG estático, ambos de PokéAPI (Black/White).
+export function shinySpriteUrls(speciesId, facing = "front") {
+  const dex = nationalDex[speciesId];
+  if (!dex) return [];
+  const back = facing === "back" ? "/back" : "";
+  return [`${spriteRoot}/animated${back}/shiny/${dex}.gif`, `${spriteRoot}${back}/shiny/${dex}.png`];
+}
+
 export function spriteCandidates(speciesId, { facing = "front", basePath = "../assets/sprites", preferLocal = false } = {}) {
   const facings = facing === "back" ? ["back", "front"] : ["front"];
   const remote = facings.flatMap((side) => [remoteSpriteUrl(speciesId, side, true), remoteSpriteUrl(speciesId, side, false)]).filter(Boolean);

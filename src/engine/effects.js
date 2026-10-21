@@ -101,6 +101,16 @@ registerEffect("addCards", (state, effect, { side }) => {
   emit(state, { type: "cardsDrawn", count: added.length, cardUids: added.map((card) => card.uid), source: "effect" });
 });
 
+// Cura el estado mayor (veneno, quemadura, parálisis) de los objetivos que lo tengan.
+registerEffect("cureStatus", (state, effect, { targets }) => {
+  for (const pokemon of targets) {
+    if (!isAlive(pokemon) || !pokemon.status) continue;
+    const status = pokemon.status;
+    pokemon.status = null;
+    emit(state, { type: "statusCured", targetId: pokemon.uid, status });
+  }
+});
+
 // Probabilidad independiente por objetivo alcanzado; usa el RNG serializable del combate.
 registerEffect("status", (state, effect, { targets }) => {
   for (const pokemon of targets) inflictStatus(state, pokemon, effect.status, effect.chance ?? 1);

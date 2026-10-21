@@ -92,6 +92,12 @@ function playUtilityCards(state) {
       const target = allies().filter((p) => (incoming.get(p.uid) ?? 0) > 0)
         .sort((a, b) => (incoming.get(b.uid) ?? 0) - (incoming.get(a.uid) ?? 0))[0];
       if (target) play(card, target.uid);
+    } else if (id === "recharge" && state.deck.hand.length <= 8) play(card);
+    else if (id === "focus" && energyInHand(state).length >= 2 && allies().some((p) => p.actionsLeft > 0)) play(card);
+    else if (id === "haste" && energyInHand(state).length >= 3 && allies().some((p) => p.actionsLeft > 0)) play(card);
+    else if (id === "remedy") {
+      const target = allies().find((p) => p.status);
+      if (target) play(card, target.uid);
     } else if (id === "quickStep") {
       const target = allies().find((p) => p.actionsLeft > 0 && p.cooldowns.some((c, i) => c > 0 && state.data.moves[p.moves[i]].power >= 7));
       if (target) play(card, target.uid);

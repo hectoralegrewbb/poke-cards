@@ -378,3 +378,149 @@ button:focus-visible, [role="button"]:focus-visible, input:focus-visible, select
 /* Estado eléctrico: legible sobre los paneles oscuros */
 .statusTag.paralysis { color: #222128; background: #eecf55; border-color: #ffe58c; }
 .tile.afflicted-paralysis .spriteBox { filter: drop-shadow(0 0 5px #f5cd51); }
+
+/* Variocolor: marca discreta y brillo; el tinte solo aplica si falta el sprite shiny. */
+.sprite.shinyTint { filter: hue-rotate(120deg) saturate(1.3) drop-shadow(0 0 4px #ffe27a); }
+.sprite.shiny { filter: drop-shadow(0 0 4px #ffe27a); }
+.sprite.shiny.shinyTint { filter: hue-rotate(120deg) saturate(1.3) drop-shadow(0 0 4px #ffe27a); }
+.shinyMark { position: absolute; top: 2px; right: 4px; color: #ffe27a; text-shadow: 0 0 4px #000; font-size: 14px; pointer-events: none; animation: shinyPulse 1.6s ease-in-out infinite; }
+.shinyNote { color: #ffe27a; }
+@keyframes shinyPulse { 0%, 100% { opacity: .55; transform: scale(1); } 50% { opacity: 1; transform: scale(1.25); } }
+
+/* =====================================================================
+   v0.7 · Vista vertical en móvil (retrato). Un solo bloque, al final,
+   para que sea fácil de ajustar sin tocar el escritorio.
+   Combate: rivales arriba, aliados abajo, y la mano fija al pie.
+   ===================================================================== */
+button, .option, .member, .card, .stockItem, .starterCard { touch-action: manipulation; }
+@media (max-width: 640px) {
+  html { -webkit-text-size-adjust: 100%; }
+  body { font-size: 20px; }
+  .console { padding: 44px 6px calc(10px + env(safe-area-inset-bottom)); }
+  .window { padding: 12px; }
+  .sound { top: 6px; right: 8px; }
+  .sound .btn { font-size: 8px; padding: 6px 8px; }
+  h2 { font-size: 13px; }
+
+  /* ---- mapa, recompensas, tienda, campamento ---- */
+  .layout { gap: 10px; }
+  .route { flex-wrap: wrap; row-gap: 6px; }
+  .options { grid-template-columns: 1fr; gap: 10px; }
+  .option { min-height: 0; padding: 12px; gap: 6px; }
+  .option .pixIcon { float: right; margin: 0 0 0 8px; }
+  .optionText { font-size: 19px; line-height: 1.1; }
+  .routeAdvice { display: none; }
+  .stock, .campOptions { grid-template-columns: 1fr 1fr; gap: 8px; }
+  .cardChoices { justify-content: center; gap: 10px; }
+  .card.big { width: 128px; height: 184px; font-size: 17px; }
+  .capture .row, .starterButtons { width: 100%; }
+  .capture .row .btn, .starterButtons .btn { flex: 1; padding: 14px 8px; }
+  .btn { min-height: 40px; }
+  .member { grid-template-columns: 52px 1fr auto; gap: 6px; }
+  .member .sprite { height: 46px; max-width: 52px; }
+  .memberInfo small { font-size: 16px; line-height: 1.05; }
+  .starterCard { width: min(100%, 260px); }
+  .starterRow { gap: 8px; }
+
+  /* ---- combate ---- */
+  .combat { gap: 6px; }
+  .combatCoach { padding: 6px 8px; gap: 4px; }
+  .coachHeader { font-size: 8px; }
+  .coachSteps { font-size: 16px; gap: 4px 10px; }
+  .hud { padding: 5px 10px; font-size: 9px; border-width: 3px; }
+  .field { grid-template-columns: 1fr; min-height: 0; gap: 8px; padding: 8px 4px; }
+  .field::before { display: none; }
+  .enemySide { order: -1; align-content: start; }
+  .playerSide { align-content: start; }
+  .side { gap: 4px; }
+  .row { gap: 4px; }
+  .tile { width: calc((100vw - 28px) / 3); max-width: 128px; }
+  .spriteBox { height: 70px; }
+  .spriteBox .sprite, .spriteBox .spriteAnimated { height: 54px; max-width: 86px; margin-bottom: 6px; }
+  .platform { height: 20px; left: 4px; right: 4px; }
+  .plate { padding: 2px 4px 3px; }
+  .pname { font-size: 8px; }
+  .chip { font-size: 7px; padding: 2px 3px 1px; }
+  .hp .hpNum { font-size: 14px; }
+  .intent { font-size: 14px; }
+  .preview { top: -14px; right: -2px; padding: 2px 4px; font-size: 8px; }
+  .readyMark { top: -12px; font-size: 10px; }
+  .float { font-size: 13px; }
+  .float.crit { font-size: 17px; }
+  .shinyMark { font-size: 12px; }
+  .stagedTag { max-width: 86px; padding: 2px 3px; }
+  .zone { font-size: 8px; gap: 4px; }
+  .tile.lungePlayer .spriteBox { animation-name: lungeP; }
+
+  .bottom { gap: 6px; }
+  .window.dialog, .window.menu { min-height: 0; padding: 8px 10px; }
+  .lines { min-height: 0; font-size: 18px; max-height: 3.6em; overflow: hidden; display: flex; flex-direction: column; justify-content: flex-end; }
+  .line.new { animation-duration: .35s; }
+  .prompt { font-size: 17px; padding-top: 4px; }
+  .dialogButtons .btn { flex: 1; }
+  .menuTitle { margin-bottom: 3px; }
+  .menuHint { padding: 6px 2px; font-size: 18px; }
+  .move { grid-template-columns: 10px minmax(60px, 1fr) auto 50px 40px; font-size: 17px; min-height: 36px; }
+
+  /* mano fija al pie: controles en una fila y cartas deslizables */
+  .handRow {
+    position: sticky; bottom: 0; z-index: 60; margin: 0 -6px; padding: 6px 6px calc(6px + env(safe-area-inset-bottom));
+    background: var(--c0); border-top: 4px solid var(--c14);
+    grid-template-columns: auto 1fr; grid-template-areas: "deck side" "hand hand"; gap: 4px 8px; align-items: center;
+  }
+  .handRow > .pile:first-child { grid-area: deck; grid-auto-flow: column; display: flex; align-items: center; gap: 6px; }
+  .handRow > .pile:first-child .pileBack { width: 22px; height: 30px; border-width: 3px; box-shadow: inset 0 0 0 2px var(--c13); }
+  .handRow > .pile:first-child .pixIcon { transform: scale(.6); }
+  .handRow > .pile small { font-size: 8px; }
+  .handRow > .hand { grid-area: hand; }
+  .handSide { grid-area: side; display: flex; flex-direction: row; align-items: center; justify-content: flex-end; gap: 6px; }
+  .handSide .pile { display: flex; align-items: center; gap: 4px; }
+  .handSide .pile .pileBack { width: 18px; height: 24px; border-width: 3px; box-shadow: none; }
+  .handSide .pile .pixIcon { display: none; }
+  .handSide .btn { font-size: 8px; padding: 8px 10px; min-height: 36px; }
+  .hand { min-height: 112px; padding: 14px 4px 4px; justify-content: flex-start; }
+  .card { width: 76px; height: 104px; margin: 0 2px; border-width: 3px; }
+  .card:hover { transform: translateY(-6px); }
+  .card.picked { transform: translateY(-12px); }
+  .cardTop { font-size: 6px; padding: 4px 3px 3px; border-bottom-width: 3px; }
+  .cardArt { border-bottom-width: 3px; }
+  .cardText { font-size: 13px; padding: 2px 3px; min-height: 28px; }
+  .cardRole { font-size: 6px; top: -10px; right: -4px; padding: 2px 3px; }
+  .toast { bottom: 150px; font-size: 8px; max-width: calc(100vw - 16px); }
+  .overlay .dialogBig { padding: 22px 26px; }
+}
+@media (max-width: 380px) {
+  .tile { width: calc((100vw - 24px) / 3); }
+  .pname { font-size: 7px; }
+  .card { width: 70px; height: 98px; }
+}
+@media (max-width: 640px) {
+  .move .mstat, .move .mcd { white-space: nowrap; }
+  .move { grid-template-columns: 10px minmax(56px, 1fr) auto auto 38px; font-size: 16px; }
+  .move .chip, .move .typeChip { font-size: 6px; }
+  .coachHeader { flex-wrap: nowrap; }
+  .coachHeader small { font-size: 15px; }
+  .coachHeader .btn { flex: none; }
+  .heroLead, .mapMission p { font-size: 19px; line-height: 1.1; }
+  .mapMission { padding: 8px 10px; margin: 6px 0 10px; }
+}
+@media (max-width: 640px) {
+  .tile { width: calc((100vw - 50px) / 3); max-width: 124px; }
+  .row { flex-wrap: nowrap; }
+  .spriteBox { height: 62px; }
+  .spriteBox .sprite, .spriteBox .spriteAnimated { height: 48px; max-width: 76px; }
+  .plate .types { display: none; }
+  .tile.actor .plate .types, .tile.targeted .plate .types, .tile.valid .plate .types { display: flex; }
+  .intent { font-size: 13px; }
+}
+
+/* v0.7: efectos nuevos (eficacia, pasivas, avisos de modificadores, proyectiles normal/volador) */
+.float.note { top: 38px; font-size: 9px; }
+.float.note.good { color: var(--c4); }
+.float.note.weak { color: var(--c13); }
+.float.passiveFx { color: var(--c11); font-size: 9px; top: 4px; }
+.fxBanner { position: absolute; left: 50%; top: 42%; z-index: 40; transform: translate(-50%, -50%); pointer-events: none; padding: 8px 14px; background: var(--c0); border: 4px solid var(--c4); color: var(--c4); font: 11px/1.4 var(--px); text-align: center; white-space: nowrap; animation: bannerPop 1.3s steps(13) forwards; }
+@keyframes bannerPop { 0% { transform: translate(-50%, -30%) scale(.6); opacity: 0; } 15% { transform: translate(-50%, -50%) scale(1.1); opacity: 1; } 80% { opacity: 1; } 100% { transform: translate(-50%, -70%) scale(1); opacity: 0; } }
+.attackProjectile.type-normal { color: #f4f4f4; background: #a8a878; }
+.attackProjectile.type-flying { color: #c8e8ff; background: #a890f0; border-radius: 50%; }
+@media (max-width: 640px) { .fxBanner { font-size: 9px; padding: 6px 10px; } .float.note { top: 30px; font-size: 7px; } }

@@ -8,7 +8,7 @@ import { calculateMoveDamage, endPlayerTurn, getMoveCost, getPowerBonus, getMove
 import { attachDrag } from "./dragDrop.js";
 import { h } from "./dom.js";
 import { icon } from "./pixelIcons.js";
-import { describeCard, describeEffects, errorText, formatEvent, statusInfo, typeColors, typeNames } from "./labels.js";
+import { cardEffectIcons, describeCard, describeEffects, errorText, formatEvent, statusInfo, typeColors, typeNames } from "./labels.js";
 import { sfx } from "./sfx.js";
 
 const sel = { ref: null, actorUid: null, moveIndex: null, targetUid: null, cardUids: [], mode: "attack", utilityUid: null };
@@ -17,7 +17,8 @@ let staged = {};
 const logLines = [];
 const hpMemory = new Map();
 let loggedCount = 0;
-let helpExpanded = true;
+// En pantallas chicas la guía arranca plegada: el espacio vertical es lo más escaso.
+let helpExpanded = !(typeof matchMedia === "function" && matchMedia("(max-width: 640px)").matches);
 
 function resetSelection(state) {
   Object.assign(sel, { ref: state, actorUid: null, moveIndex: null, targetUid: null, cardUids: [], mode: "attack", utilityUid: null });
@@ -119,14 +120,17 @@ function pushEvents(ctx, state, events) {
     if (event.type === "moveUsed" && actor) {
       time += 520;
       const used = state.data.moves[event.moveId];
-      if (used.power > 0) ctx.fx.push({ projectile: true, fromUid: event.actorId, toUids: event.targetIds ?? [event.targetId], attackType: used.type, delay: time - 520 });
+      if (used.power > 0) ctx.fx.push({ projectile: true, fromUid: event.actorId, toUids: event.targetIds ?? [event.targetId], attackType: used.type, sound: `type:${used.type}`, delay: time - 520 });
       ctx.fx.push({ uid: actor.uid, cls: actor.side === "player" ? "lungePlayer" : "lungeEnemy", delay: time - 520 });
     }
     if (event.type === "damage") {
       const resisted = event.typeMultiplier > 0 && event.typeMultiplier < 1;
+      const effective = event.typeMultiplier > 1;
+      const note = effective ? "¡MUY EFICAZ!" : resisted ? "POCO EFICAZ" : event.typeMultiplier === 0 ? "NO AFECTA" : null;
       ctx.fx.push({
         uid: event.targetId, cls: "hit", text: event.amount > 0 ? `-${event.amount}` : "0", floatCls: "dmg", crit: event.isCrit,
-        burst: event.isCrit ? "crit" : "hit", sound: event.isCrit ? "crit" : resisted || event.amount === 0 ? "resist" : "hit", delay: time - 250, shake: event.isCrit
+        note, noteCls: effective ? "good" : "weak",
+        burst: event.isCrit ? "crit" : "hit", sound: event.isCrit ? "crit" : effective ? "super" : resisted || event.amount === 0 ? "resist" : "hit", delay: time - 250, shake: event.isCrit || effective
       });
     }
     if (event.type === "statusApplied") ctx.fx.push({ uid: event.targetId, cls: `afflicted-${event.status}`, text: event.status === "poison" ? "VENENO" : event.status === "burn" ? "QUEMA" : event.status === "paralysis" ? "PARÁLISIS" : "RETROCESO", floatCls: "statusFx", burst: event.status === "poison" ? "poison" : event.status === "paralysis" ? "electric" : "fire", delay: time });
@@ -137,7 +141,10 @@ function pushEvents(ctx, state, events) {
     if (event.type === "healed") ctx.fx.push({ uid: event.targetId, cls: "healed", text: `+${event.amount}`, floatCls: "heal", burst: "heal", sound: "heal", delay: time });
     if (event.type === "shieldGained") ctx.fx.push({ uid: event.targetId, cls: "shielded", text: `+${event.amount}`, floatCls: "shieldFx", burst: "shield", sound: "shield", delay: time });
     if (event.type === "cardsDrawn") event.cardUids.forEach((uid, index) => ctx.fx.push({ cardUid: uid, cls: "dealt", delay: 120 * index + time }));
-    if (event.type === "modifierAdded") ctx.fx.push({ sound: "shield", delay: time });
+    if (event.type === "modifierAdded") ctx.fx.push({ banner: `${event.label} · ${event.kind === "cost" ? `COSTOS ${event.amount}` : `POD +${event.amount}`}`, sound: "shield", delay: time });
+    if (event.type === "luckyCoinGained") ctx.fx.push({ banner: "¡MONEDA DE LA SUERTE!", sound: "passive", delay: time });
+    if (event.type === "statusCured") ctx.fx.push({ uid: event.targetId, cls: "healed", text: "CURADO", floatCls: "heal", burst: "heal", sound: "cure", delay: time });
+    if (event.type === "passiveTriggered") ctx.fx.push({ uid: event.pokemonId, cls: "charge", text: `✦ ${event.name}`, floatCls: "passiveFx", burst: "card", sound: "passive", delay: time });
     if (event.type === "combatEnded") ctx.fx.push({ sound: event.result === "victory" ? "victory" : "defeat", delay: time + 200 });
   }
   while (logLines.length > 60) logLines.shift();
@@ -229,9 +236,9 @@ function pokemonTile(ctx, state, pokemon, validSet) {
     }, loaded.map(() => icon("bolt", { scale: 2 }))) : null,
     isPlayer && alive && pokemon.actionsLeft > 0 ? h("div", { class: "readyMark" }, "▼") : null,
     previewBadge(state, pokemon),
-    h("div", { class: "spriteBox" }, h("div", { class: "platform" }), ctx.sprites.element(pokemon.speciesId, { facing: isPlayer ? "back" : "front", spriteKey: `${state.seed}:${pokemon.side}:${pokemon.uid}` })),
+    h("div", { class: "spriteBox" }, h("div", { class: "platform" }), ctx.sprites.element(pokemon.speciesId, { facing: isPlayer ? "back" : "front", spriteKey: `${state.seed}:${pokemon.side}:${pokemon.uid}`, shiny: Boolean(pokemon.shiny) }), pokemon.shiny ? h("span", { class: "shinyMark", title: "Variocolor" }, "✦") : null),
     h("div", { class: "plate" },
-      h("div", { class: "pname" }, pokemon.name, h("small", {}, pokemon.row === "front" ? "F" : "B")),
+      h("div", { class: "pname" }, pokemon.shiny ? "✦ " : "", pokemon.name, h("small", {}, pokemon.row === "front" ? "F" : "B")),
       pokemon.status ? h("span", { class: `statusTag ${pokemon.status}`, title: statusInfo[pokemon.status].hint }, statusInfo[pokemon.status].short) : null,
       h("div", { class: "types" }, pokemon.types.map(typeChip)),
       hpBar(pokemon),
@@ -245,8 +252,7 @@ function cardIcon(def) {
     return Array.from({ length: def.energyValue }, () => icon("bolt", { scale: 4 }));
   }
   const first = def.effects[0]?.type;
-  const map = { drawCards: "cards", heal: "heart", shield: "shield", reduceCooldown: "clock", luckyCoin: "clover" };
-  return [icon(map[first] ?? "star", { scale: 4 })];
+  return [icon(cardEffectIcons[first] ?? "star", { scale: 4 })];
 }
 
 function cardView(card, def, { role = "", picked = false, armed = false } = {}) {

@@ -51,6 +51,15 @@ export function playEffects(root, effects) {
     setTimeout(() => {
       if (fx.sound) sfx.play(fx.sound);
       if (fx.projectile) { launchProjectiles(root, fx); return; }
+      if (fx.banner) {
+        const field = root.querySelector(".field");
+        if (field) {
+          const banner = h("div", { class: "fxBanner", role: "status" }, fx.banner);
+          field.append(banner);
+          setTimeout(() => banner.remove(), 1400);
+        }
+        return;
+      }
       const element = fx.uid ? root.querySelector(`[data-uid="${fx.uid}"]`) : fx.cardUid ? root.querySelector(`[data-card="${fx.cardUid}"]`) : null;
       if (fx.shake) root.querySelector(".field")?.classList.add("shake");
       if (!element) return;
@@ -63,6 +72,11 @@ export function playEffects(root, effects) {
         const float = h("span", { class: `float ${fx.floatCls ?? ""} ${fx.crit ? "crit" : ""}` }, fx.text);
         element.append(float);
         setTimeout(() => float.remove(), 1200);
+      }
+      if (fx.note) {
+        const note = h("span", { class: `float note ${fx.noteCls ?? ""}` }, fx.note);
+        element.append(note);
+        setTimeout(() => note.remove(), 1300);
       }
       if (fx.burst) burst(element, fx.burst);
     }, fx.delay ?? 0);

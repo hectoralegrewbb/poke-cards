@@ -3,7 +3,7 @@
 // Fallbacks: GIF animado > PNG estático > pack local > marcador.
 import { h } from "./dom.js";
 import { typeColors } from "./labels.js";
-import { spriteCandidates } from "./spriteSources.js";
+import { shinySpriteUrls, spriteCandidates } from "./spriteSources.js";
 
 export function createAnimatedSpriteProvider({ data, basePath = "../assets/sprites", preferLocal = false } = {}) {
   const imageCache = new Map();
@@ -12,22 +12,25 @@ export function createAnimatedSpriteProvider({ data, basePath = "../assets/sprit
     return h("div", { class: "sprite placeholder", style: `background:${typeColors[species.types[0]]}`, role: "img", "aria-label": species.name }, species.name.slice(0, 2));
   }
 
-  function element(speciesId, { facing = "front", spriteKey = null } = {}) {
+  function element(speciesId, { facing = "front", spriteKey = null, shiny = false } = {}) {
     // Reutilizar el mismo <img> evita reiniciar el GIF en cada clic del combate.
-    const cacheKey = spriteKey ? `${spriteKey}:${speciesId}:${facing}` : null;
+    const cacheKey = spriteKey ? `${spriteKey}:${speciesId}:${facing}:${shiny ? "s" : "n"}` : null;
     if (cacheKey && imageCache.has(cacheKey)) return imageCache.get(cacheKey);
     const species = data.species[speciesId];
-    const urls = spriteCandidates(speciesId, { facing, basePath, preferLocal });
+    const shinyUrls = shiny ? shinySpriteUrls(speciesId, facing) : [];
+    const urls = [...shinyUrls, ...spriteCandidates(speciesId, { facing, basePath, preferLocal })];
     if (!urls.length) return placeholder(speciesId);
+    // Si no existe el sprite variocolor, se usa el normal con un tinte que lo distingue.
+    const tint = () => { if (shiny && index >= shinyUrls.length) image.classList.add("shinyTint"); };
 
     let index = 0;
     const image = h("img", {
-      class: "sprite spriteAnimated", src: urls[index], alt: species.name,
+      class: `sprite spriteAnimated${shiny ? " shiny" : ""}`, src: urls[index], alt: `${species.name}${shiny ? " variocolor" : ""}`,
       draggable: "false", decoding: "async", loading: "eager"
     });
     image.addEventListener("error", () => {
       index += 1;
-      if (index < urls.length) image.src = urls[index];
+      if (index < urls.length) { image.src = urls[index]; tint(); }
       else {
         if (cacheKey) imageCache.delete(cacheKey);
         image.replaceWith(placeholder(speciesId));

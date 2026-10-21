@@ -19,7 +19,7 @@ export function applySpecies(pokemon, speciesId, data) {
   return pokemon;
 }
 
-export function createPokemon({ uid, speciesId, side, row = "front", profileId = "default" }, data) {
+export function createPokemon({ uid, speciesId, side, row = "front", profileId = "default", shiny = false }, data) {
   const pokemon = {
     uid,
     side,
@@ -34,6 +34,7 @@ export function createPokemon({ uid, speciesId, side, row = "front", profileId =
     staggered: false,
     intent: null
   };
+  if (shiny) pokemon.shiny = true; // Solo cosmético: no altera estadísticas.
   applySpecies(pokemon, speciesId, data);
   pokemon.hp = pokemon.maxHp;
   return pokemon;

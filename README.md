@@ -1,3 +1,4 @@
+> **v0.7:** catálogo completo de 649 especies, variocolores (shiny), HUD para móvil en vertical, cartas y pasivas nuevas, y efectos de sonido y pantalla por tipo. Ver [`docs/CHANGELOG-v0.7.md`](docs/CHANGELOG-v0.7.md) y [`docs/QA-v0.7.md`](docs/QA-v0.7.md).
 > **v0.6:** revisión completa: corrección de la semilla repetible, curva de dificultad calibrada con un bot de referencia, Liga y campeón más fuertes, carga de energía que reserva comodines para reforzar y confirmación al terminar turno con Pokémon sin actuar. Ver [`docs/CHANGELOG-v0.6.md`](docs/CHANGELOG-v0.6.md) y [`docs/QA-v0.6.md`](docs/QA-v0.6.md).
 
 # Pokécards Dungeon
@@ -9,7 +10,7 @@ Fan game roguelike táctico de cartas en navegador: elegí un inicial, capturá 
 ```bash
 npm start                 # servidor local -> http://localhost:8080/web/  (no abras index.html con doble clic: hace falta el servidor)
 npm run sprites           # informa qué GIF faltan para jugar offline
-npm run dex:sync       # opcional, una vez con Internet: agrega las 420 especies faltantes (649 total)
+npm run dex:sync       # ya ejecutado en v0.7 (649 especies); repetible, no pisa las curadas ni las pasivas a mano
 npm run sprites:download  # baja 458 GIF con el catálogo base o hasta 1298 con Pokédex completa
 npm test                  # tests de reglas, dificultad, sprites y guardado (node:test)
 npm run simulate          # combates sueltos con jugador ingenuo
@@ -27,7 +28,7 @@ Al iniciar elegís una de dos campañas. **No son dificultades**: las dificultad
 
 **Eventos:** una posibilidad de encuentro con el rival o el grupo villano aparece durante algunas rutas; la organización depende de la región del gimnasio y en Kanto/Johto se presenta Team Rocket (Jessie y James). Tras las medallas **3 y 6** hay una batalla legendaria obligatoria con captura garantizada si ganás (podés rechazarla); a lo sumo **un legendario activo** en tu equipo, otros a la caja. Los eventos se desencadenan por nodos, no por temporizadores reales. La batalla del rival adapta su inicial y evolución a tus medallas.
 
-**Progreso de catálogo:** **229 especies precargadas (107 movimientos en v0.5)** y **649 después de `npm run dex:sync`** con Internet. Las especies autogeneradas tienen estadísticas y sets adaptados al combate de cartas, no son conversiones idénticas a sus contrapartes oficiales. Las 136 especies agregadas desde v0.3 usan estadísticas y sets adaptados al combate de cartas; requieren un balance posterior, no son conversiones exactas de los juegos oficiales.
+**Progreso de catálogo:** **649 especies (Gen I–V)** desde v0.7: 229 curadas a mano y 420 importadas con `npm run dex:sync`. Las importadas tienen estadísticas y sets adaptados al combate de cartas, no son conversiones idénticas a sus contrapartes oficiales. Las 136 especies agregadas desde v0.3 usan estadísticas y sets adaptados al combate de cartas; requieren un balance posterior, no son conversiones exactas de los juegos oficiales.
 
 **Guardado:** el snapshot conserva el modo, la región, los gimnasios, la Liga, los legendarios sorteados, las decisiones y los estados del RNG; se puede continuar con un guardado de v0.3 en su campaña clásica anterior (sin aplicar retroactivamente el modo nuevo).
 
@@ -52,7 +53,7 @@ La interfaz incorpora guías de 3 pasos, objetivos de tramo, indicadores de peli
 ## Reglas implementadas
 
 - **Mano:** 6 cartas en el turno 1; luego 1 por turno, más lo que den cartas (`drawCards`) y pasivas. Máximo en mano: 10. Mazo recomendado: 40-45 (`validateDeck` avisa, no bloquea).
-- **Energía universal:** las cartas no tienen tipo. Una carta de energía puede **pagar** un movimiento, **reforzar un ataque** (+3 de poder por carta, máx. 3) o **reforzar una defensa** (+5 de escudo por carta). Variantes: Energía (1), Energía doble (2), Comodín (valor 1, refuerzo x2). Cartas de utilidad: Intuición, Poción, Paso ágil, Moneda de la suerte, Barrera.
+- **Energía universal:** las cartas no tienen tipo. Una carta de energía puede **pagar** un movimiento, **reforzar un ataque** (+3 de poder por carta, máx. 3) o **reforzar una defensa** (+5 de escudo por carta). Variantes: Energía (1), Energía doble (2), Comodín (valor 1, refuerzo x2). Cartas de utilidad: Intuición, Poción, Paso ágil, Moneda de la suerte, Barrera, Recarga (+2 energía), Concentración (+3 POD un turno), Prisa (-1 costo un turno) y Remedio (cura el estado y 6 PS).
 - **Movimientos:** 4 fijos por especie; solo cambian al evolucionar. Cada uno tiene `cost` (energía) y `cooldown` (turnos propios inutilizable tras usarlo). Los que tienen `targetMode` pueden afectar `allEnemies` (Surf/Terremoto) o `targetRow` (Avalancha/Hoja afilada); `spreadMultiplier` atenúa el daño total para compensar que golpean a varios rivales.
 - **Críticos:** `critCoins` monedas (4 por defecto); crítico si todas salen cara (6,25 %; con 3 monedas, 12,5 %). Cada Moneda de la suerte quita una moneda en la siguiente tirada.
 - **Los 6 Pokémon están activos.** Cada uno actúa una vez por turno. Los enemigos eligen objetivo según su perfil (`data/enemyProfiles.json`), mezclando estrategias por peso: `lowestHp`, `highestThreat`, `typeAdvantage`, `random`.
@@ -98,6 +99,7 @@ Estas son **adaptaciones para el roguelike**, no una réplica exacta de probabil
 ## Habilidades, pasivas y efectos temporales
 
 - **Técnicas de apoyo con efecto sobre las reglas:** *Agilidad* baja 1 el cooldown de todo el equipo; *Espacio raro* hace que las técnicas de costo 1+ cuesten 1 menos durante 5 turnos; *Danza espada*/*Maquinación* suman +3 de poder físico/especial 3 turnos; *Carga* agrega 2 energías a la mano; *Descanso* cura; etc. Los efectos activos aparecen como chips bajo la barra superior (nombre · turnos restantes).
+- **Pasivas por tipo (v0.7):** las especies finales (sin evolución siguiente, no legendarias, fuerza mínima) reciben una pasiva temática según su primer tipo (`scripts/typePassives.js`). Las curadas a mano no se pisan. Al activarse una pasiva aparece su nombre sobre el Pokémon.
 - **Pasivas por especie** (se ven al elegir al Pokémon y en el tooltip del casillero): `turnStart` (curar, escudo, robar, bajar cooldowns), `combatStart` (escudo inicial, moneda de la suerte) y `static` (modificadores permanentes de costo o poder, p. ej. Técnico: +2 a técnicas sin costo).
 - Todo esto vive en `src/engine/modifiers.js` + registro de efectos (`registerEffect`), así que sumar uno nuevo es agregar datos o una función, sin tocar el combate.
 
@@ -109,7 +111,7 @@ Pixel art de 16 colores (paleta Sweetie 16), cajas con bordes escalonados, barra
 
 ## Sprites animados de 5.ª generación
 
-El provider `web/ui/spriteProvider.js` obtiene automáticamente los **GIF animados frontales y posteriores** de Pokémon Black/White a través de [PokeAPI/sprites](https://github.com/PokeAPI/sprites). `src/shared/nationalDex.js` traduce los IDs de especies del juego a su número en la Pokédex Nacional (229 de base y 649 luego de la sincronización); todos pertenecen a las primeras cinco generaciones.
+El provider `web/ui/spriteProvider.js` obtiene automáticamente los **GIF animados frontales y posteriores** de Pokémon Black/White a través de [PokeAPI/sprites](https://github.com/PokeAPI/sprites). `src/shared/nationalDex.js` traduce los IDs de especies del juego a su número en la Pokédex Nacional (las 649); todos pertenecen a las primeras cinco generaciones.
 
 - **Con Internet:** `npm start` alcanza. Se cargan GIF animados desde `raw.githubusercontent.com`; si falla uno, se intenta PNG estático de Gen 5 y después un recurso local o marcador. No requiere claves ni dependencias.
 - **Sin conexión:** ejecutá `npm run sprites:download` **una vez con conexión a Internet**. Los GIF (458 de base o hasta 1298 tras sincronizar la Pokédex) se guardan en `assets/sprites/front/` y `assets/sprites/back/`, creando un `manifest.json` para dar prioridad a los archivos locales. El servidor sirve estas rutas directamente.
@@ -129,7 +131,7 @@ El provider `web/ui/spriteProvider.js` obtiene automáticamente los **GIF animad
 ## Estructura
 
 ```
-data/                 balance, cartas, movimientos, 229 especies, tipos, perfiles enemigos, ítems, región base, campañas regionales
+data/                 balance, cartas, movimientos, 649 especies, tipos, perfiles enemigos, ítems, región base, campañas regionales
 src/engine/           reglas de combate puras: rng, mazo, daño, efectos, targeting, IA enemiga, acciones, turnos, progresión
 src/engine/status.js  estados alterados y retroceso
 src/run/              reglas de la corrida: modos, generación de campaña, mapa, eventos, encuentros, recompensas, campamento, tienda
@@ -146,12 +148,20 @@ Para extender sin tocar el motor: `registerEffect(type, handler)` (efectos de mo
 
 ## Pendientes y limitaciones (v0.4)
 
-- **Pokédex total:** faltan 420 especies para llegar a 649. Incorporarlas requiere un importador de datos, curaduría de movimientos, evoluciones y pruebas de combate.
+- **Pokédex:** las 420 especies importadas usan sets de ataques generados por fuerza y variedad (no los learnsets oficiales). Conviene curar a mano las que te importen.
 - **Fidelidad de equipos:** la identidad de gimnasios/Ligas (orden, líderes, tipos, insignias) está definida para cinco regiones, pero varias plantillas de rivales usan sustitutos del mismo tipo hasta completar el catálogo. Los iniciales y la regla de EXP siguen el balance roguelike, no las reglas exactas de Pokémon.
 - **Eventos anime:** la primera iteración cubre rival y Rocket/organizaciones. Falta contenido episódico específico, diálogos y decisiones narrativas ramificadas.
 - **Estadísticas:** pruebas de regresión automatizadas y simulación con bot heurístico, no playtests humanos. Ninguna corrida del bot llegó a ganar la Liga; el balance endgame es provisional.
 - **Revisión visual:** el código web pasó chequeo de sintaxis y el servidor entregó los archivos correctamente, pero Chromium headless no completó captura en este entorno: revisar modo selector, responsividad, GIF y animaciones en navegador real.
 
-Cambios y validación: `docs/CHANGELOG-v0.6.md` y `docs/QA-v0.6.md`. Historial: `docs/CHANGELOG-v0.3.md` a `v0.5`, `docs/QA-v0.3.md` a `v0.5` y `docs/v0.2/`.
+Cambios y validación: `docs/CHANGELOG-v0.7.md` y `docs/QA-v0.7.md`. Historial: `docs/CHANGELOG-v0.3.md` a `v0.5`, `docs/QA-v0.3.md` a `v0.5` y `docs/v0.2/`.
 
 **Reporte de balance:** `npm run balance -- 300 trainer regional [región|random]` simula corridas con un bot razonable (`src/tools/smartRunBot.js`) y muestra victorias y PS restantes por gimnasio, ruta, Liga y tipo de nodo. Es una referencia relativa (dónde se endurece el juego), no una medida de dificultad humana.
+
+## Variocolores (v0.7)
+
+Cada Pokémon salvaje tiene 1/64 de ser **variocolor** (`src/run/shiny.js`, sin consumir el RNG de la corrida: la misma semilla da los mismos variocolores). Es solo cosmético: sprite shiny de Black/White, marca ✦ y brillo. Si derrotás uno en una ruta, siempre se ofrece para capturar. La marca se conserva al evolucionar y al guardar. Si falta el sprite shiny remoto, se muestra el normal con un tinte.
+
+## Móvil en vertical (v0.7)
+
+Hasta 640 px de ancho, el combate pone los rivales arriba, los aliados abajo (3 por fila) y la mano fija al pie con MAZO, DESC., ESCUDO y FIN TURNO en una fila. La guía arranca plegada. Todo el CSS móvil está en un bloque al final de `web/styles.css`.

@@ -54,6 +54,12 @@ export const errorText = {
   invalidStock: "Ya no está disponible."
 };
 
+// Ícono de arte para cada tipo de efecto de carta (compartido por la mano y la pantalla de recompensas).
+export const cardEffectIcons = Object.freeze({
+  drawCards: "cards", heal: "heart", shield: "shield", reduceCooldown: "clock", luckyCoin: "clover",
+  addCards: "bolt", powerModifier: "sword", costModifier: "star", cureStatus: "leaf"
+});
+
 export function describeCard(card) {
   if (card.kind === "energy") {
     const parts = [`Energía ${card.energyValue}`];
@@ -67,7 +73,11 @@ export function describeCard(card) {
         heal: `Curás ${effect.amount} PS`,
         shield: `Escudo ${effect.amount}`,
         reduceCooldown: `-${effect.amount} cooldown`,
-        luckyCoin: "Moneda de la suerte"
+        luckyCoin: "Moneda de la suerte",
+        addCards: `Recibís ${effect.amount} energía`,
+        powerModifier: `POD +${effect.amount} este turno`,
+        costModifier: `Costos ${effect.amount} este turno`,
+        cureStatus: "Cura el estado"
       };
       return labels[effect.type] ?? effect.type;
     })
@@ -131,6 +141,8 @@ export function formatEvent(event, { names, data }) {
     case "modifierExpired": return `${event.label} terminó.`;
     case "cooldownReduced": return `${name(event.targetId)}: -${event.amount} de cooldown.`;
     case "luckyCoinGained": return "Ganás una moneda de la suerte.";
+    case "statusCured": return `${name(event.targetId)} se curó del estado.`;
+    case "passiveTriggered": return `${name(event.pokemonId)}: ${event.name}.`;
     case "enemySkipped": return `${name(event.actorId)} no puede actuar.`;
     case "expAwarded": return `Tu equipo gana ${event.amount} EXP.`;
     case "combatEnded": return event.result === "victory" ? "¡Victoria!" : "Derrota...";

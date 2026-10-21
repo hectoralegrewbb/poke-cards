@@ -6,8 +6,8 @@ import {
 } from "../run/index.js";
 import { playSmartTurn } from "./smartPlayer.js";
 
-const cardPriority = ["wildcard", "energyDouble", "insight", "barrier", "energyBasic", "potion", "quickStep", "luckyCoin"];
-const removalOrder = ["luckyCoin", "quickStep", "potion", "barrier", "energyBasic"];
+const cardPriority = ["wildcard", "energyDouble", "insight", "recharge", "barrier", "focus", "remedy", "energyBasic", "potion", "haste", "quickStep", "luckyCoin"];
+const removalOrder = ["luckyCoin", "quickStep", "haste", "potion", "remedy", "barrier", "energyBasic"];
 const statusCure = { poison: "antidote", burn: "burnHeal", paralysis: "paralyzeHeal" };
 
 const power = (run, pokemon) => Object.values(run.data.species[pokemon.speciesId].stats).reduce((sum, value) => sum + value, 0);
@@ -98,7 +98,7 @@ function handleCamp(run) {
 
 function handleShop(run) {
   const wishlist = [
-    ["card", "wildcard"], ["card", "energyDouble"], ["item", "revive"], ["card", "insight"], ["item", "superPotion"],
+    ["card", "wildcard"], ["card", "energyDouble"], ["item", "revive"], ["card", "insight"], ["card", "recharge"], ["card", "focus"], ["item", "superPotion"],
     ["item", "maxPotion"], ["item", "shinyStone"], ["item", "linkCable"], ["item", "duskStone"], ["item", "healBerry"], ["card", "barrier"]
   ];
   for (const [kind, id] of wishlist) {

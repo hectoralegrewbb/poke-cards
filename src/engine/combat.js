@@ -92,6 +92,7 @@ function startPlayerTurn(state) {
 function runPassives(state, trigger) {
   for (const pokemon of getLiving(state, "player")) {
     if (pokemon.passive?.trigger !== trigger) continue;
+    emit(state, { type: "passiveTriggered", pokemonId: pokemon.uid, name: pokemon.passive.name });
     applyEffects(state, pokemon.passive.effects, { side: "player", source: pokemon, target: pokemon });
   }
 }

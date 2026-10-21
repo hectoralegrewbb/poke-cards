@@ -51,9 +51,14 @@ export function grantVictoryRewards(run, node, defeatedEnemies) {
     events.push(emitRun(run, { type: "itemGained", itemId }));
   }
 
+  // Un variocolor derrotado siempre se ofrece para capturar (es raro y solo cosmético).
+  const shinyEnemy = defeatedEnemies.find((enemy) => enemy.shiny && (rule.captureChance ?? 0) > 0);
   run.pending = {
     cardChoices: rule.cardChoices > 0 ? pickCardChoices(run, rule.cardChoices) : null,
-    capture: node.type === "legendary" ? node.speciesId : run.rng.next() < (rule.captureChance ?? 0) ? run.rng.pick(defeatedEnemies).speciesId : null
+    capture: node.type === "legendary" ? node.speciesId
+      : shinyEnemy ? shinyEnemy.speciesId
+      : run.rng.next() < (rule.captureChance ?? 0) ? run.rng.pick(defeatedEnemies).speciesId : null,
+    captureShiny: Boolean(shinyEnemy) && node.type !== "legendary"
   };
   events.push(...evolvePartyByExp(run));
   return events;
@@ -73,11 +78,14 @@ export function takeCardReward(run, cardId, removeCardId = null) {
 export function resolveCapture(run, accept) {
   if (run.phase !== "reward" || !run.pending?.capture) return { ok: false, error: "noCapture" };
   const speciesId = run.pending.capture;
+  const shiny = Boolean(run.pending.captureShiny);
   run.pending.capture = null;
+  run.pending.captureShiny = false;
   if (!accept) return { ok: true, events: [emitRun(run, { type: "captureSkipped", speciesId })] };
   const pokemon = newPokemon(run, speciesId);
+  if (shiny) pokemon.shiny = true;
   const placedIn = addToRoster(run, pokemon);
-  return { ok: true, events: [emitRun(run, { type: "captured", uid: pokemon.uid, speciesId, placedIn })] };
+  return { ok: true, events: [emitRun(run, { type: "captured", uid: pokemon.uid, speciesId, placedIn, shiny })] };
 }
 
 export function isRewardSettled(run) {

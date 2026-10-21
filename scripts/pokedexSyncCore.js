@@ -1,3 +1,5 @@
+import { assignTypePassives } from './typePassives.js';
+
 // Importador puro de datos de PokeAPI: sin IO y sin efectos colaterales.
 // Normaliza las primeras 649 especies al sistema simplificado de cartas.
 const typeById = Object.freeze({
@@ -65,27 +67,40 @@ function genFiveTypes(identifier, rows) {
   return [...new Set(result)].slice(0, 2);
 }
 
-function moveSet(types, moves) {
-  const all = Object.entries(moves).filter(([, move]) => move.power > 0 && move.targetSide !== 'self');
+// Techo de costo según la fuerza de la especie: un Magikarp no lanza Hidrobomba y un legendario sí.
+function maxCostFor(threat) {
+  return threat >= 85 ? 3 : threat >= 55 ? 2 : 1;
+}
+
+// Elección determinista con variedad: la misma especie siempre recibe el mismo kit,
+// pero dos especies del mismo tipo no comparten por defecto los mismos ataques.
+function pickVaried(candidates, seed, salt) {
+  if (candidates.length === 0) return null;
+  return candidates[(seed * 31 + salt * 17) % candidates.length][0];
+}
+
+export function moveSet(types, moves, { threat = 60, seed = 0 } = {}) {
+  const ceiling = maxCostFor(threat);
+  const all = Object.entries(moves).filter(([, move]) => move.power > 0 && move.targetSide !== 'self' && move.cost <= ceiling);
   const same = all.filter(([, move]) => types.includes(move.type));
-  const suitable = (collection, cost) => collection.filter(([, move]) => move.cost === cost);
-  const first = suitable(same, 0).find(([, move]) => move.cooldown === 0)?.[0] ?? 'tackle';
-  const selected = [first];
-  function addOne(collection) {
-    const available = collection.find(([id]) => !selected.includes(id));
-    if (available) selected.push(available[0]);
-  }
-  addOne(suitable(same, 1));
-  addOne(suitable(same, 2));
-  addOne(suitable(all, 1).filter(([, move]) => types.some((type) => type !== move.type)));
+  const tier = (collection, cost) => collection.filter(([, move]) => move.cost === cost);
+  const selected = [];
+  const add = (id) => { if (id && !selected.includes(id)) selected.push(id); };
+  const free = same.filter(([, move]) => move.cost === 0 && move.cooldown === 0);
+  add(pickVaried(free, seed, 1) ?? 'tackle');
+  add(pickVaried(tier(same, 1).filter(([id]) => !selected.includes(id)), seed, 2));
+  if (ceiling >= 2) add(pickVaried(tier(same, 2).filter(([id]) => !selected.includes(id)), seed, 3));
+  if (ceiling >= 3) add(pickVaried(tier(same, 3).filter(([id]) => !selected.includes(id)), seed, 4));
+  // Cobertura: un golpe de costo 1 de otro tipo para no depender solo del STAB.
+  add(pickVaried(tier(all, 1).filter(([id, move]) => !selected.includes(id) && !types.includes(move.type)), seed, 5));
   for (const source of [same, all]) {
     for (const [id] of source) {
       if (selected.length >= 4) break;
-      if (!selected.includes(id)) selected.push(id);
+      add(id);
     }
   }
-  if (selected.length !== 4) throw new Error('Catálogo de ataques insuficiente');
-  return selected;
+  if (selected.length < 4) throw new Error('Catálogo de ataques insuficiente');
+  return selected.slice(0, 4);
 }
 
 export function importPokedex({ speciesCsv, pokemonCsv, typesCsv, statsCsv }, { species, moves }) {
@@ -122,7 +137,7 @@ export function importPokedex({ speciesCsv, pokemonCsv, typesCsv, statsCsv }, { 
     result[speciesId] = {
       name: displayName(row.identifier),
       types, expYield: legendary ? 19 : parentId ? 11 : isFinalOrStageTwo ? 7 : 9,
-      stats, moves: moveSet(types, moves),
+      stats, moves: moveSet(types, moves, { threat: Object.values(stats).reduce((sum, value) => sum + value, 0), seed: id }),
       ...(legendary ? { legendary: true } : {})
     };
     missingIds.push(id);
@@ -141,7 +156,7 @@ export function importPokedex({ speciesCsv, pokemonCsv, typesCsv, statsCsv }, { 
     const minBadges = threat > 87 ? 5 : threat > 74 ? 4 : 1;
     current.evolutions = [...path, { to: next, method: 'exp', expRequired: minBadges >= 4 ? 105 : 55, minBadges }];
   }
-  return { species: result, nationalDex: index, added: missingIds.length };
+  return { species: assignTypePassives(result), nationalDex: index, added: missingIds.length };
 }
 
 function groupRows(rows, key) {

@@ -49,9 +49,9 @@ function memberRow(ctx, pokemon, inBox) {
     }
   };
   return h("div", { class: `member ${alive ? "" : "dead"} ${ui.boxUid === pokemon.uid ? "selected" : ""}`, onClick },
-    ctx.sprites.element(pokemon.speciesId, { facing: "front", spriteKey: `roster:${pokemon.uid}` }),
+    ctx.sprites.element(pokemon.speciesId, { facing: "front", spriteKey: `roster:${pokemon.uid}`, shiny: Boolean(pokemon.shiny) }),
     h("div", { class: "memberInfo" },
-      h("div", { class: "pname" }, pokemon.name, pokemon.status ? h("span", { class: `statusTag ${pokemon.status}`, title: statusInfo[pokemon.status].hint }, ` ${statusInfo[pokemon.status].short}`) : null),
+      h("div", { class: "pname" }, pokemon.shiny ? "✦ " : "", pokemon.name, pokemon.status ? h("span", { class: `statusTag ${pokemon.status}`, title: statusInfo[pokemon.status].hint }, ` ${statusInfo[pokemon.status].short}`) : null),
       h("div", { class: "types" }, pokemon.types.map((type) => h("span", { class: "chip", style: `background:${typeColors[type]}` }, typeNames[type]))),
       alive ? h("div", { class: "hp" }, h("span", { class: "hpLabel" }, "PS"), h("div", { class: "hpTrack" }, h("div", { class: `hpFill ${tone}`, style: `width:${percent}%` })), h("span", { class: "hpNum" }, `${pokemon.hp}/${pokemon.maxHp}`)) : h("div", { class: "fainted" }, "DEBILITADO"),
       h("small", {}, expInfo(ctx, pokemon))),
