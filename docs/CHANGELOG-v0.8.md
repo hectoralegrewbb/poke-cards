@@ -34,3 +34,4 @@
 - **"Técnicas que no aparecen":** no se reprodujo un fallo de lógica (menú verificado con toques reales en los 649 especies y en todos los aliados). La causa más probable era que el menú quedaba fuera de pantalla bajo 4 filas apiladas; corregido. Si persiste, pasame los pasos exactos.
 - Fuzz: se eliminó el invariante antiguo "máx. 1 legendario".
 - Balance bot (200 corridas): regional 21%, global 22%, Explorador 73%, Experto 2%.
+- Corregido: la tarjeta COMBATE del mapa ocupaba toda la pantalla en móvil (la clase `.combat` del nodo chocaba con la del combate); ahora los estilos de combate se aplican solo a `section.combat`.

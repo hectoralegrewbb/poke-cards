@@ -98,7 +98,7 @@ h2.lose { color: var(--c2); font-size: 22px; text-shadow: 3px 3px 0 var(--c0); }
 .items { display: flex; flex-wrap: wrap; gap: 6px; }
 
 /* ---------- combate ---------- */
-.combat { display: grid; gap: 10px; position: relative; }
+section.combat { display: grid; gap: 10px; position: relative; }
 .hud { display: flex; justify-content: space-between; align-items: center; background: var(--c0); padding: 8px 14px; font: 10px var(--px); border: 4px solid var(--c14); }
 .hud .kind { color: var(--c4); }
 .field {
@@ -423,7 +423,7 @@ button, .option, .member, .card, .stockItem, .starterCard { touch-action: manipu
   .starterRow { gap: 8px; }
 
   /* ---- combate ---- */
-  .combat { gap: 6px; }
+  section.combat { gap: 6px; }
   .combatCoach { padding: 6px 8px; gap: 4px; }
   .coachHeader { font-size: 8px; }
   .coachSteps { font-size: 16px; gap: 4px 10px; }
@@ -568,7 +568,7 @@ button, .option, .member, .card, .stockItem, .starterCard { touch-action: manipu
 .enemySide { grid-column: 2; grid-row: 1; } .playerSide { grid-column: 1; grid-row: 1; }
 @media (max-width: 800px) {
   .enemySide { grid-column: 1; grid-row: 1; } .playerSide { grid-column: 1; grid-row: 2; }
-  .combat { gap: 4px; }
+  section.combat { gap: 4px; }
   .field { gap: 4px; padding: 6px 2px; }
   .side { gap: 2px; }
   .tile { width: calc((100vw - 24px) / 3); max-width: 120px; gap: 2px; }
