@@ -27,3 +27,10 @@
 ## Calidad
 - Tests: 141 (nuevos: `ownTypeMoves`, `optionalEvents`, `deckManager`, `luckyCoin`, `incomingThreats`). Fuzz 293 sin problemas; determinismo 0/80.
 - Balance (bot razonable, 200 corridas): Entrenador regional campeón 21%, global 21%, Explorador 70%, Experto 1%. El bot ahora gestiona el cofre (`optimizeDeck`). Referencia relativa, no dificultad humana.
+
+## v0.8.1 (revisión móvil y legendarios)
+- **Combate en móvil:** rivales arriba y tus Pokémon abajo (columnas explícitas en el DOM, ya no dependen de `order`); plates, diálogo y menú compactados para que todo entre sin scroll en 411×740; el menú de técnicas se trae a la vista al elegir un aliado. Insignias de amenaza reubicadas.
+- **Legendarios:** no hay tope de uso (party/caja aceptan cualquier cantidad; test). El límite real era que solo aparecían 2 por corrida (eventos de 3 y 6 medallas). Ahora el resto del pool de la región/modo puede aparecer como ruta opcional (20% por paso desde la 1.ª medalla, sin repetir); capturar es seguro al vencer y huir no cuesta nada ni consume el paso.
+- **"Técnicas que no aparecen":** no se reprodujo un fallo de lógica (menú verificado con toques reales en los 649 especies y en todos los aliados). La causa más probable era que el menú quedaba fuera de pantalla bajo 4 filas apiladas; corregido. Si persiste, pasame los pasos exactos.
+- Fuzz: se eliminó el invariante antiguo "máx. 1 legendario".
+- Balance bot (200 corridas): regional 21%, global 22%, Explorador 73%, Experto 2%.

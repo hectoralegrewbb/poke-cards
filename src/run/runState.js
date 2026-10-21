@@ -15,8 +15,7 @@ export function newPokemon(run, speciesId, row) {
 
 // Entra a la party si hay lugar; si no, va a la caja. Devuelve dónde quedó.
 export function addToRoster(run, pokemon) {
-  const legendaryActive = run.party.some((member) => run.data.species[member.speciesId]?.legendary);
-  if (run.party.length < run.data.balance.party.maxSize && !(run.data.species[pokemon.speciesId]?.legendary && legendaryActive)) {
+  if (run.party.length < run.data.balance.party.maxSize) {
     run.party.push(pokemon);
     return "party";
   }
@@ -71,10 +70,6 @@ export function swapPartyBox(run, partyUid, boxUid) {
   const partyIndex = run.party.findIndex((member) => member.uid === partyUid);
   const boxIndex = run.box.findIndex((member) => member.uid === boxUid);
   if (partyIndex === -1 || boxIndex === -1) return { ok: false, error: "unknownPokemon" };
-  if (run.data.species[run.box[boxIndex].speciesId]?.legendary &&
-      run.party.some((member, index) => index !== partyIndex && run.data.species[member.speciesId]?.legendary)) {
-    return { ok: false, error: "legendaryLimit" };
-  }
   [run.party[partyIndex], run.box[boxIndex]] = [run.box[boxIndex], run.party[partyIndex]];
   return { ok: true };
 }

@@ -51,7 +51,7 @@ select, input { font: 18px var(--body); color: var(--c0); background: var(--c12)
 
 /* ---------- título y fin ---------- */
 .title { display: grid; gap: 14px; justify-items: center; text-align: center; padding: 8vh 16px; }
-.window.title { margin: 10vh auto; max-width: 640px; }
+.window.title { margin: 10vh auto; max-width: 800px; }
 .logo { font: 40px/1.2 var(--px); color: var(--c12); text-shadow: 4px 4px 0 var(--c2), 8px 8px 0 var(--c0); display: grid; }
 .logo2 { color: var(--c4); text-shadow: 4px 4px 0 var(--c1), 8px 8px 0 var(--c0); }
 .logoIcons { display: flex; gap: 12px; }
@@ -303,7 +303,7 @@ button:focus-visible, [role="button"]:focus-visible, input:focus-visible, select
 .tile.valid { filter: drop-shadow(0 0 6px rgba(255, 205, 117, .28)); }
 .tile.actor .plate { outline: 2px solid var(--c4); outline-offset: 1px; }
 .toast { width: max-content; max-width: calc(100vw - 20px); line-height: 1.5; text-align: center; }
-@media (max-width: 700px) {
+@media (max-width: 800px) {
   .console { padding: 50px 8px 10px; }
   .goalGrid, .difficultyOptions { grid-template-columns: 1fr; }
   .goalCard { padding: 9px 12px; }
@@ -355,7 +355,7 @@ button:focus-visible, [role="button"]:focus-visible, input:focus-visible, select
 @keyframes poisonFlash { 50% { filter: sepia(1) saturate(6) hue-rotate(220deg) brightness(1.7); } }
 .options:has(> .option:only-child) { grid-template-columns: minmax(260px, 510px); }
 .option:focus-visible, .member:focus-visible, .btn:focus-visible, .stockItem:focus-visible { outline: 3px solid var(--c11); outline-offset: 3px; }
-.routeAdvice { margin: 12px 2px 3px; max-width: 640px; font: 8px/1.8 var(--px); color: var(--c13); }
+.routeAdvice { margin: 12px 2px 3px; max-width: 800px; font: 8px/1.8 var(--px); color: var(--c13); }
 
 /* v0.4: elección explícita de campaña y eventos del mapa */
 .gameModeOptions { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 12px; width: min(740px,100%); }
@@ -393,7 +393,7 @@ button:focus-visible, [role="button"]:focus-visible, input:focus-visible, select
    Combate: rivales arriba, aliados abajo, y la mano fija al pie.
    ===================================================================== */
 button, .option, .member, .card, .stockItem, .starterCard { touch-action: manipulation; }
-@media (max-width: 640px) {
+@media (max-width: 800px) {
   html { -webkit-text-size-adjust: 100%; }
   body { font-size: 20px; }
   .console { padding: 44px 6px calc(10px + env(safe-area-inset-bottom)); }
@@ -430,7 +430,7 @@ button, .option, .member, .card, .stockItem, .starterCard { touch-action: manipu
   .hud { padding: 5px 10px; font-size: 9px; border-width: 3px; }
   .field { grid-template-columns: 1fr; min-height: 0; gap: 8px; padding: 8px 4px; }
   .field::before { display: none; }
-  .enemySide { order: -1; align-content: start; }
+  .enemySide { align-content: start; }
   .playerSide { align-content: start; }
   .side { gap: 4px; }
   .row { gap: 4px; }
@@ -494,7 +494,7 @@ button, .option, .member, .card, .stockItem, .starterCard { touch-action: manipu
   .pname { font-size: 7px; }
   .card { width: 70px; height: 98px; }
 }
-@media (max-width: 640px) {
+@media (max-width: 800px) {
   .move .mstat, .move .mcd { white-space: nowrap; }
   .move { grid-template-columns: 10px minmax(56px, 1fr) auto auto 38px; font-size: 16px; }
   .move .chip, .move .typeChip { font-size: 6px; }
@@ -504,7 +504,7 @@ button, .option, .member, .card, .stockItem, .starterCard { touch-action: manipu
   .heroLead, .mapMission p { font-size: 19px; line-height: 1.1; }
   .mapMission { padding: 8px 10px; margin: 6px 0 10px; }
 }
-@media (max-width: 640px) {
+@media (max-width: 800px) {
   .tile { width: calc((100vw - 50px) / 3); max-width: 124px; }
   .row { flex-wrap: nowrap; }
   .spriteBox { height: 62px; }
@@ -523,7 +523,7 @@ button, .option, .member, .card, .stockItem, .starterCard { touch-action: manipu
 @keyframes bannerPop { 0% { transform: translate(-50%, -30%) scale(.6); opacity: 0; } 15% { transform: translate(-50%, -50%) scale(1.1); opacity: 1; } 80% { opacity: 1; } 100% { transform: translate(-50%, -70%) scale(1); opacity: 0; } }
 .attackProjectile.type-normal { color: #f4f4f4; background: #a8a878; }
 .attackProjectile.type-flying { color: #c8e8ff; background: #a890f0; border-radius: 50%; }
-@media (max-width: 640px) { .fxBanner { font-size: 9px; padding: 6px 10px; } .float.note { top: 30px; font-size: 7px; } }
+@media (max-width: 800px) { .fxBanner { font-size: 9px; padding: 6px 10px; } .float.note { top: 30px; font-size: 7px; } }
 
 /* v0.8: lectura del combate: amenaza por aliado y alcance de técnicas cuerpo a cuerpo */
 .threatBadge { position: absolute; top: -16px; left: -4px; z-index: 6; background: var(--c0); border: 3px solid var(--c2); color: var(--c3); padding: 2px 5px; font: 9px var(--px); display: flex; gap: 3px; align-items: baseline; }
@@ -533,7 +533,7 @@ button, .option, .member, .card, .stockItem, .starterCard { touch-action: manipu
 .meleeLabel { color: var(--c14); }
 .reachNote { position: absolute; top: 18px; left: 50%; transform: translateX(-50%); z-index: 8; background: var(--c0); border: 3px solid var(--c14); color: var(--c13); font: 7px var(--px); padding: 4px 6px; white-space: nowrap; pointer-events: none; }
 .tile.outOfReach .spriteBox { opacity: .45; filter: grayscale(.7); }
-@media (max-width: 640px) { .threatBadge { font-size: 8px; top: -14px; } .reachNote { font-size: 6px; padding: 3px 4px; top: 8px; } }
+@media (max-width: 800px) { .threatBadge { font-size: 8px; top: -14px; } .reachNote { font-size: 6px; padding: 3px 4px; top: 8px; } }
 
 /* Editor de mazo */
 .modalBackdrop { position: fixed; inset: 0; z-index: 200; background: rgba(26,28,44,.82); display: grid; place-items: center; padding: 12px; }
@@ -550,7 +550,7 @@ button, .option, .member, .card, .stockItem, .starterCard { touch-action: manipu
 .deckLine.utility { border-left-color: var(--c10); } .deckLine.energy { border-left-color: var(--c4); }
 .deckLineInfo { display: grid; gap: 3px; min-width: 0; } .deckLineInfo strong { font: 9px var(--px); color: var(--c4); } .deckLineInfo small { font-size: 12px; color: var(--c13); }
 .deckBtn { display: inline-flex; align-items: center; gap: 4px; }
-@media (max-width: 700px) {
+@media (max-width: 800px) {
   .deckColumns { grid-template-columns: 1fr; } .deckColumn { display: none; } .deckColumn.active { display: block; }
   .deckTabs { display: flex; } .deckList { max-height: 48vh; }
 }
@@ -563,3 +563,29 @@ button, .option, .member, .card, .stockItem, .starterCard { touch-action: manipu
 .audioRow input[type=range] { width: 100%; accent-color: var(--c4); min-height: 28px; }
 .audioValue { text-align: right; color: var(--c4); }
 .themeRow .row { display: flex; gap: 8px; }
+
+/* v0.8.1: columnas explícitas (el DOM pone al rival primero) y combate compacto en móvil */
+.enemySide { grid-column: 2; grid-row: 1; } .playerSide { grid-column: 1; grid-row: 1; }
+@media (max-width: 800px) {
+  .enemySide { grid-column: 1; grid-row: 1; } .playerSide { grid-column: 1; grid-row: 2; }
+  .combat { gap: 4px; }
+  .field { gap: 4px; padding: 6px 2px; }
+  .side { gap: 2px; }
+  .tile { width: calc((100vw - 24px) / 3); max-width: 120px; gap: 2px; }
+  .spriteBox { height: 50px; }
+  .spriteBox .sprite, .spriteBox .spriteAnimated { height: 40px; max-width: 64px; margin-bottom: 4px; }
+  .platform { height: 14px; }
+  .plate { padding: 1px 4px 2px; }
+  .hpTrack { height: 8px; }
+  .intent { font-size: 12px; }
+  .bottom { gap: 4px; }
+  .window.dialog { padding: 4px 8px; }
+  .lines { max-height: 1.3em; font-size: 16px; }
+  .prompt { font-size: 14px; padding-top: 2px; border-top-width: 2px; line-height: 1.1; }
+  .window.menu { padding: 4px 8px; }
+  .menuTitle { display: none; }
+  .move { min-height: 28px; font-size: 15px; padding: 0 4px; }
+  .moves { gap: 0; }
+  .hud { padding: 3px 10px; }
+}
+@media (max-width: 800px) { .threatBadge { top: 0; left: 2px; font-size: 12px; padding: 1px 4px; } .reachNote { top: 4px; } }

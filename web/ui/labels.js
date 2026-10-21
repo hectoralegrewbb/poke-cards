@@ -54,7 +54,6 @@ export const errorText = {
   noItem: "No tenés ese ítem.",
   noEffect: "No tendría ningún efecto.",
   notEnoughGold: "No te alcanza el oro.",
-  legendaryLimit: "Solo podés tener un legendario activo. Enviá el otro a la caja.",
   invalidStock: "Ya no está disponible."
 };
 

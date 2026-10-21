@@ -18,7 +18,7 @@ const logLines = [];
 const hpMemory = new Map();
 let loggedCount = 0;
 // En pantallas chicas la guía arranca plegada: el espacio vertical es lo más escaso.
-let helpExpanded = !(typeof matchMedia === "function" && matchMedia("(max-width: 640px)").matches);
+let helpExpanded = !(typeof matchMedia === "function" && matchMedia("(max-width: 800px)").matches);
 
 function resetSelection(state) {
   Object.assign(sel, { ref: state, actorUid: null, moveIndex: null, targetUid: null, cardUids: [], mode: "attack", utilityUid: null });
@@ -158,6 +158,7 @@ function runAction(ctx, state, result) {
   }
   pushEvents(ctx, state, result.events);
   clearChoice();
+  sel.mode = "attack"; // tras cualquier acción se vuelve al menú de técnicas (antes quedaba el modo escudo/utilidad pegado)
   ctx.rerender();
   return true;
 }
@@ -310,6 +311,8 @@ function onTileClick(ctx, state, pokemon) {
     clearChoice();
     sfx.play("select");
     ctx.rerender();
+    // En pantallas chicas el menú de técnicas puede quedar fuera de vista: se trae a la vista al elegir.
+    requestAnimationFrame(() => document.querySelector(".window.menu")?.scrollIntoView({ block: "nearest", behavior: "smooth" }));
   }
 }
 
@@ -323,7 +326,11 @@ function selectMove(ctx, state, actor, index) {
 
 function movesMenu(ctx, state) {
   const actor = findPokemon(state, sel.actorUid);
-  if (!actor || sel.mode !== "attack") return h("div", { class: "menuHint" }, sel.mode === "shield" ? "Elegí un aliado y cartas de energía." : sel.mode === "utility" ? "Elegí a qué aliado aplicarla." : "Elegí uno de tus Pokémon.");
+  if (!actor || sel.mode !== "attack") {
+    const hint = sel.mode === "shield" ? "Elegí un aliado y cartas de energía." : sel.mode === "utility" ? "Elegí a qué aliado aplicarla." : "Elegí uno de tus Pokémon.";
+    const cancel = sel.mode === "attack" ? null : h("button", { class: "btn mini", onClick: () => { sel.mode = "attack"; sel.utilityUid = null; sel.cardUids = []; sfx.play("deny"); ctx.rerender(); } }, "◀ VOLVER A TÉCNICAS");
+    return h("div", { class: "menuHint" }, hint, cancel ? h("div", {}, cancel) : null);
+  }
   const passive = actor.passive;
   return h("div", { class: "movesWrap" }, h("div", { class: "moves" }, actor.moves.map((moveId, index) => {
     const move = state.data.moves[moveId];
@@ -428,6 +435,12 @@ function handView(ctx, state) {
 
     const onCardClick = () => {
       if (def.kind === "utility") {
+        if (def.target === "ally" && sel.mode === "utility" && sel.utilityUid === card.uid) {
+          sel.mode = "attack"; // tocar de nuevo la carta armada la cancela
+          sel.utilityUid = null;
+          sfx.play("deny");
+          return ctx.rerender();
+        }
         if (def.target === "ally") {
           sel.mode = "utility";
           sel.utilityUid = card.uid;
@@ -567,8 +580,8 @@ export function renderCombat(ctx) {
       h("span", { class: `modChip ${modifier.kind}`, title: `${modifier.label}: quedan ${modifier.turnsLeft} turno(s)` },
         `${modifier.label} ${modifier.kind === "cost" ? modifier.amount : `+${modifier.amount} POD`} · ${modifier.turnsLeft}T`))) : null,
     h("div", { class: "field", "data-drop": "field" },
-      h("div", { class: "side playerSide" }, row("player", "front"), row("player", "back")),
-      h("div", { class: "side enemySide" }, row("enemy", "front"), row("enemy", "back"))),
+      h("div", { class: "side enemySide" }, row("enemy", "front"), row("enemy", "back")),
+      h("div", { class: "side playerSide" }, row("player", "front"), row("player", "back"))),
     h("div", { class: "bottom" },
       dialogBox(ctx, state),
       h("div", { class: "window menu" }, h("div", { class: "menuTitle" }, "TÉCNICAS"), movesMenu(ctx, state))),

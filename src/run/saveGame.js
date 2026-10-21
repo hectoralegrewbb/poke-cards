@@ -28,7 +28,8 @@ export function restoreRun(data, saved) {
     mode: fields.mode ?? "legacy",
     completedLegendaryMilestones: fields.completedLegendaryMilestones ?? [3, 6],
     eventHistory: fields.eventHistory ?? [],
-    chestCardIds: fields.chestCardIds ?? [] };
+    chestCardIds: fields.chestCardIds ?? [],
+    legendariesSeen: fields.legendariesSeen ?? [] };
   if (combatSnapshot) {
     const { rngState: combatRngState, ...combatFields } = combatSnapshot;
     if (!Number.isInteger(combatRngState) || !combatFields.teams?.enemy) throw new Error("Combate guardado inválido");
