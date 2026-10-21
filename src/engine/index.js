@@ -9,7 +9,7 @@ export { checkCombatEnd, emit, findPokemon, getLiving, getOpponentSide, getTeam 
 export { applyEffects, hasEffect, registerEffect } from "./effects.js";
 export { getMoveTargets, getValidTargets, hasTargetingStrategy, pickTarget, registerTargetingStrategy } from "./targeting.js";
 export { executeMove } from "./moveExecution.js";
-export { chooseTarget, movePolicies, planEnemyIntent, resolveEnemyIntent } from "./enemyAi.js";
+export { chooseTarget, getIncomingThreats, movePolicies, planEnemyIntent, resolveEnemyIntent } from "./enemyAi.js";
 export { choosePayCards, playMove, playShield, playUtility, splitCharge } from "./actions.js";
 export { createCombat, endPlayerTurn } from "./combat.js";
 export { validateGameData } from "./validateData.js";

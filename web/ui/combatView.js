@@ -4,7 +4,7 @@
 // Las cartas sobrantes vuelven a la mano si el Pokémon no las usa.
 // Jugar: arrastrá energía sobre un Pokémon (zona CARGAR) o sobre ESCUDO; arrastrá una técnica sobre un rival.
 // Con clic: Pokémon -> cartas (se cargan) -> técnica -> objetivo -> ¡USAR!
-import { calculateMoveDamage, endPlayerTurn, getMoveCost, getPowerBonus, getMoveTargets, getValidTargets, isAlive, playMove, playShield, playUtility, splitCharge } from "../../src/engine/index.js";
+import { calculateMoveDamage, endPlayerTurn, getIncomingThreats, getMoveCost, getPowerBonus, getMoveTargets, getValidTargets, isAlive, playMove, playShield, playUtility, splitCharge } from "../../src/engine/index.js";
 import { attachDrag } from "./dragDrop.js";
 import { h } from "./dom.js";
 import { icon } from "./pixelIcons.js";
@@ -194,9 +194,18 @@ function intentLine(state, enemy) {
   if (!enemy.intent || !isAlive(enemy)) return null;
   const move = state.data.moves[enemy.intent.moveId];
   const target = findPokemon(state, enemy.intent.targetId);
-  const area = move.targetMode === "allEnemies" ? " · TODOS" : move.targetMode === "targetRow" ? " · FILA" : "";
-  return h("div", { class: "intent" }, icon("sword", { scale: 2 }),
-    h("span", { title: move.name }, `${move.power > 0 ? `≈${enemy.intent.damagePreview}` : move.name}${area} › ${target?.name ?? "?"}`));
+  const area = move.targetMode === "allEnemies" ? "ÁREA" : move.targetMode === "targetRow" ? "FILA" : "";
+  const where = area ? `${area} (${target?.row === "front" ? "frente" : "fondo"})` : (target?.name ?? "?");
+  return h("div", { class: `intent ${area ? "areaIntent" : ""}`, title: area ? `${move.name}: golpea a ${move.targetMode === "allEnemies" ? "todo tu equipo" : "toda una fila"}` : move.name },
+    icon("sword", { scale: 2 }),
+    h("span", {}, `${move.power > 0 ? `≈${enemy.intent.damagePreview}` : move.name} › ${where}`));
+}
+
+// Aliado que recibirá daño este turno según las intenciones enemigas (incluye área y fila).
+function threatBadge(threat) {
+  if (!threat) return null;
+  return h("div", { class: "threatBadge", title: threat.hits > 1 ? `Recibe ${threat.hits} golpes anunciados` : "Golpe anunciado" },
+    `⚠ ${threat.damage}`, threat.hits > 1 ? h("small", {}, `x${threat.hits}`) : null);
 }
 
 function previewBadge(state, target) {
@@ -211,10 +220,18 @@ function previewBadge(state, target) {
   return h("div", { class: `preview m${mult === 0 ? "0" : mult > 1 ? "up" : mult < 1 ? "down" : "1"}` }, `≈${result.damage}`, h("small", {}, `${label}${result.isSpread ? " · ÁREA" : ""}${target.shield ? ` · ESC ${target.shield}` : ""}`));
 }
 
-function pokemonTile(ctx, state, pokemon, validSet) {
+// Un rival fuera de alcance: hay una técnica cuerpo a cuerpo elegida y la fila frontal lo protege.
+function isOutOfReach(state, pokemon) {
+  const actor = findPokemon(state, sel.actorUid);
+  const move = selectedMove(state);
+  if (!actor || !move || pokemon.side !== "enemy" || move.targetSide === "self" || move.targetSide === "ally") return false;
+  return move.range === "melee" && !getValidTargets(state, actor, move).some((candidate) => candidate.uid === pokemon.uid);
+}
+
+function pokemonTile(ctx, state, pokemon, validSet, threats) {
   const alive = isAlive(pokemon);
   const isPlayer = pokemon.side === "player";
-  const classes = ["tile", pokemon.side, alive ? "" : "dead", validSet.has(pokemon.uid) ? "valid" : "", pokemon.uid === sel.actorUid ? "actor" : "", pokemon.uid === sel.targetUid ? "targeted" : "", alive && isPlayer && pokemon.actionsLeft <= 0 ? "acted" : ""];
+  const classes = ["tile", pokemon.side, alive ? "" : "dead", validSet.has(pokemon.uid) ? "valid" : "", pokemon.uid === sel.actorUid ? "actor" : "", pokemon.uid === sel.targetUid ? "targeted" : "", alive && isPlayer && pokemon.actionsLeft <= 0 ? "acted" : "", alive && isOutOfReach(state, pokemon) ? "outOfReach" : "", alive && isPlayer && threats.has(pokemon.uid) ? "threatened" : ""];
   const loaded = stagedOf(pokemon.uid);
   const canCharge = alive && isPlayer && pokemon.actionsLeft > 0;
   const tile = h("div", {
@@ -236,6 +253,8 @@ function pokemonTile(ctx, state, pokemon, validSet) {
     }, loaded.map(() => icon("bolt", { scale: 2 }))) : null,
     isPlayer && alive && pokemon.actionsLeft > 0 ? h("div", { class: "readyMark" }, "▼") : null,
     previewBadge(state, pokemon),
+    isPlayer && alive ? threatBadge(threats.get(pokemon.uid)) : null,
+    alive && isOutOfReach(state, pokemon) ? h("div", { class: "reachNote" }, "FUERA DE ALCANCE") : null,
     h("div", { class: "spriteBox" }, h("div", { class: "platform" }), ctx.sprites.element(pokemon.speciesId, { facing: isPlayer ? "back" : "front", spriteKey: `${state.seed}:${pokemon.side}:${pokemon.uid}`, shiny: Boolean(pokemon.shiny) }), pokemon.shiny ? h("span", { class: "shinyMark", title: "Variocolor" }, "✦") : null),
     h("div", { class: "plate" },
       h("div", { class: "pname" }, pokemon.shiny ? "✦ " : "", pokemon.name, h("small", {}, pokemon.row === "front" ? "F" : "B")),
@@ -321,7 +340,8 @@ function movesMenu(ctx, state) {
       onClick: () => { selectMove(ctx, state, actor, index); ctx.rerender(); }
     },
       h("span", { class: "cursor" }, isSelected ? "▶" : ""),
-      h("span", { class: "mname" }, move.name, move.targetMode ? h("small", { class: "areaLabel" }, move.targetMode === "allEnemies" ? " · ÁREA" : " · FILA") : null),
+      h("span", { class: "mname" }, move.name, move.targetMode ? h("small", { class: "areaLabel" }, move.targetMode === "allEnemies" ? " · ÁREA" : " · FILA") : null,
+        move.range === "melee" ? h("small", { class: "areaLabel meleeLabel", title: "Cuerpo a cuerpo: solo llega a la fila frontal rival mientras quede alguien en ella" }, " · CC") : null),
       h("span", { class: "chipSlot" }, typeChip(move.type)),
       h("span", { class: `mstat ${bonus ? "buffed" : ""}` }, move.category === "status" ? "APOYO" : `POD ${move.power + bonus}`),
       h("span", { class: `pips ${cost < move.cost ? "cut" : cost > move.cost ? "up" : ""}`, title: cost !== move.cost ? `Costo base ${move.cost}` : null },
@@ -511,6 +531,8 @@ function endTurnClicked(ctx, state, readyCount) {
   runAction(ctx, state, endPlayerTurn(state));
 }
 
+const isOptionalEventKind = (run) => ["rival", "villain", "legendary"].includes(run.node?.type);
+
 function pile(label, amount) {
   return h("div", { class: "pile" }, h("div", { class: "pileBack" }, icon("cards", { scale: 3 })), h("small", {}, `${label} ${amount}`));
 }
@@ -522,7 +544,8 @@ export function renderCombat(ctx) {
   sanitizeSelection(state);
 
   const valid = validTargetUids(state);
-  const row = (side, rowName) => h("div", { class: `row ${side}` }, state.teams[side].filter((pokemon) => pokemon.row === rowName).map((pokemon) => pokemonTile(ctx, state, pokemon, valid)));
+  const threats = getIncomingThreats(state);
+  const row = (side, rowName) => h("div", { class: `row ${side}` }, state.teams[side].filter((pokemon) => pokemon.row === rowName).map((pokemon) => pokemonTile(ctx, state, pokemon, valid, threats)));
   const finished = Boolean(state.result);
   const kindNames = { normal: "RUTA", gym: "GIMNASIO", eliteFour: "ALTO MANDO", champion: "CAMPEÓN" };
 
@@ -536,10 +559,10 @@ export function renderCombat(ctx) {
         h("span", {}, h("b", {}, "1"), " Seleccioná un aliado"),
         h("span", {}, h("b", {}, "2"), " Cargá energía (solo si cuesta)"),
         h("span", {}, h("b", {}, "3"), " Técnica → objetivo → ¡USAR!"),
-        h("small", {}, "LIBRE no gasta cartas · ÁREA alcanza a todos · FILA golpea a una fila · VEN y QUE hacen daño por turno, PAR puede anular una acción; se curan con ítems.")) : null),
+        h("small", {}, "LIBRE no gasta cartas · ÁREA alcanza a todos · FILA golpea a una fila · CC (cuerpo a cuerpo) solo llega a la fila frontal rival · ⚠ marca el daño que recibirá un aliado · VEN y QUE hacen daño por turno, PAR puede anular una acción; se curan con ítems.")) : null),
     h("header", { class: "hud" },
       h("span", {}, `TURNO ${state.turn}`), h("span", { class: "kind" }, kindNames[state.kind] ?? state.kind),
-      h("span", {}, state.luckyCoins ? [icon("clover", { scale: 2 }), ` x${state.luckyCoins}`] : "")),
+      h("span", {}, state.luckyCoins ? h("span", { class: "luckyHud", title: "Cada moneda quita una moneda al próximo tiro de crítico (más chance). Se gasta al atacar." }, icon("clover", { scale: 2 }), ` SUERTE x${state.luckyCoins}`) : "")),
     state.modifiers.length ? h("div", { class: "modifiers" }, state.modifiers.map((modifier) =>
       h("span", { class: `modChip ${modifier.kind}`, title: `${modifier.label}: quedan ${modifier.turnsLeft} turno(s)` },
         `${modifier.label} ${modifier.kind === "cost" ? modifier.amount : `+${modifier.amount} POD`} · ${modifier.turnsLeft}T`))) : null,
@@ -558,6 +581,7 @@ export function renderCombat(ctx) {
         h("button", { class: "btn danger", disabled: finished, title: readyCount ? `${readyCount} Pokémon todavía pueden actuar` : "Resolver acciones enemigas", onClick: () => endTurnClicked(ctx, state, readyCount) },
           readyCount && endTurnArmed() ? "¿SEGURO? ▶" : readyCount ? `FIN TURNO (${readyCount}) ▶` : "FIN TURNO ▶"))),
     finished ? h("div", { class: "overlay" }, h("div", { class: "window dialogBig" },
-      h("h2", { class: state.result === "victory" ? "win" : "lose" }, state.result === "victory" ? "¡VICTORIA!" : "DERROTA"),
+      h("h2", { class: state.result === "victory" ? "win" : "lose" }, state.result === "victory" ? "¡VICTORIA!" : isOptionalEventKind(ctx.run) ? "¡TE RETIRAS!" : "DERROTA"),
+      state.result !== "victory" && isOptionalEventKind(ctx.run) ? h("p", { class: "muted" }, "Es un evento: no pierdes la partida. Tu equipo vuelve como estaba, sin recompensas.") : null,
       h("button", { class: "btn primary", onClick: () => ctx.onCombatFinished() }, "CONTINUAR ▶"))) : null);
 }

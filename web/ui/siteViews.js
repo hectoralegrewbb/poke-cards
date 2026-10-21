@@ -6,13 +6,14 @@ import { describeCard, errorText } from "./labels.js";
 import { icon } from "./pixelIcons.js";
 import { sfx } from "./sfx.js";
 
-const ui = { removeCardId: "" };
-
 function check(ctx, result, sound = "heal") {
   if (!result.ok) {
     sfx.play("deny");
     ctx.notify(errorText[result.error] ?? result.error);
-  } else sfx.play(sound);
+  } else {
+    sfx.play(sound);
+    if (result.events?.some((event) => event.to === "chest")) ctx.notify("Mazo lleno: la carta fue al COFRE.");
+  }
   ctx.rerender();
 }
 
@@ -36,18 +37,12 @@ export function renderCamp(ctx) {
 
 export function renderShop(ctx) {
   const { run, data } = ctx;
-  const full = run.deckCardIds.length >= data.balance.deck.maxSize;
-  const distinct = [...new Set(run.deckCardIds)];
-  const select = full ? h("label", { class: "deckFull" }, "MAZO LLENO. DESCARTÁ: ", h("select", { onChange: (event) => { ui.removeCardId = event.target.value; } },
-    h("option", { value: "" }, "— elegir —"), distinct.map((id) => h("option", { value: id, selected: ui.removeCardId === id }, data.cards[id].name)))) : null;
-
   return h("section", { class: "window shop" },
     h("h2", {}, icon("coin", { scale: 3 }), " TIENDA"),
     h("p", { class: "muted" }, `Tenés ${run.gold} de oro.`),
-    select,
     h("div", { class: "stock" }, run.shop.stock.map((entry, index) => {
       const def = entry.kind === "item" ? data.items[entry.id] : data.cards[entry.id];
-      return h("button", { class: `stockItem ${entry.sold ? "sold" : ""}`, disabled: entry.sold, onClick: () => check(ctx, buyFromShop(run, index, ui.removeCardId || null), "card") },
+      return h("button", { class: `stockItem ${entry.sold ? "sold" : ""}`, disabled: entry.sold, onClick: () => check(ctx, buyFromShop(run, index), "card") },
         h("strong", {}, def.name), h("small", {}, entry.kind === "item" ? def.description : describeCard(def)),
         h("span", { class: "price" }, entry.sold ? "VENDIDO" : [icon("coin", { scale: 2 }), ` ${entry.price}`]));
     })),

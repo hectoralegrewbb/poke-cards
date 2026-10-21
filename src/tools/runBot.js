@@ -44,8 +44,7 @@ function playCombat(run) {
 function resolveReward(run) {
   if (run.pending?.capture) decideCapture(run, true);
   if (run.phase === "reward" && run.pending?.cardChoices) {
-    const full = run.deckCardIds.length >= run.data.balance.deck.maxSize;
-    pickCard(run, run.pending.cardChoices[0], full ? "energyBasic" : null);
+    pickCard(run, run.pending.cardChoices[0]);
     if (run.phase === "reward") pickCard(run, null);
   }
 }

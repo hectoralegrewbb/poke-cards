@@ -1,6 +1,7 @@
 // Nodos sin combate: campamento y tienda.
 import { isAlive } from "../engine/index.js";
-import { addCardToDeck, addItem, emitRun, findInRoster } from "./runState.js";
+import { addCardToCollection } from "./deckManager.js";
+import { addItem, emitRun, findInRoster } from "./runState.js";
 import { evolvePokemonByExp } from "./rewards.js";
 
 export function openShop(run) {
@@ -21,21 +22,23 @@ export function openShop(run) {
   run.shop = { stock: [...items, ...cards] };
 }
 
-export function buyFromShop(run, stockIndex, removeCardId = null) {
+export function buyFromShop(run, stockIndex) {
   if (run.phase !== "shop") return { ok: false, error: "notInShop" };
   const entry = run.shop.stock[stockIndex];
   if (!entry || entry.sold) return { ok: false, error: "invalidStock" };
   if (run.gold < entry.price) return { ok: false, error: "notEnoughGold" };
 
+  let placedIn = null;
   if (entry.kind === "card") {
-    const added = addCardToDeck(run, entry.id, removeCardId);
+    const added = addCardToCollection(run, entry.id);
     if (!added.ok) return added;
+    placedIn = added.to;
   } else {
     addItem(run, entry.id);
   }
   run.gold -= entry.price;
   entry.sold = true;
-  return { ok: true, events: [emitRun(run, { type: "purchased", kind: entry.kind, id: entry.id, price: entry.price })] };
+  return { ok: true, events: [emitRun(run, { type: "purchased", kind: entry.kind, id: entry.id, price: entry.price, to: placedIn })] };
 }
 
 // action: "rest" (cura a todos), "revive" (uid caído) o "train" (uid vivo). Solo una por campamento.

@@ -524,3 +524,42 @@ button, .option, .member, .card, .stockItem, .starterCard { touch-action: manipu
 .attackProjectile.type-normal { color: #f4f4f4; background: #a8a878; }
 .attackProjectile.type-flying { color: #c8e8ff; background: #a890f0; border-radius: 50%; }
 @media (max-width: 640px) { .fxBanner { font-size: 9px; padding: 6px 10px; } .float.note { top: 30px; font-size: 7px; } }
+
+/* v0.8: lectura del combate: amenaza por aliado y alcance de técnicas cuerpo a cuerpo */
+.threatBadge { position: absolute; top: -16px; left: -4px; z-index: 6; background: var(--c0); border: 3px solid var(--c2); color: var(--c3); padding: 2px 5px; font: 9px var(--px); display: flex; gap: 3px; align-items: baseline; }
+.threatBadge small { font: 7px var(--px); color: var(--c4); }
+.tile.threatened .plate { box-shadow: inset 0 0 0 2px var(--c2); }
+.intent.areaIntent { color: var(--c3); }
+.meleeLabel { color: var(--c14); }
+.reachNote { position: absolute; top: 18px; left: 50%; transform: translateX(-50%); z-index: 8; background: var(--c0); border: 3px solid var(--c14); color: var(--c13); font: 7px var(--px); padding: 4px 6px; white-space: nowrap; pointer-events: none; }
+.tile.outOfReach .spriteBox { opacity: .45; filter: grayscale(.7); }
+@media (max-width: 640px) { .threatBadge { font-size: 8px; top: -14px; } .reachNote { font-size: 6px; padding: 3px 4px; top: 8px; } }
+
+/* Editor de mazo */
+.modalBackdrop { position: fixed; inset: 0; z-index: 200; background: rgba(26,28,44,.82); display: grid; place-items: center; padding: 12px; }
+.deckModal { width: min(920px, 100%); max-height: calc(100vh - 24px); overflow: auto; }
+.deckHead { display: flex; align-items: center; gap: 12px; justify-content: space-between; }
+.deckHead h2 { margin: 0; }
+.deckCount { font: 14px var(--px); } .deckCount.good, .deckNote.good { color: var(--c5); } .deckCount.bad, .deckNote.bad { color: var(--c3); }
+.deckNote { display: block; margin: 8px 0; line-height: 1.6; }
+.deckTabs { display: none; gap: 8px; margin-bottom: 8px; }
+.deckColumns { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.deckColumn { min-width: 0; }
+.deckList { display: grid; gap: 6px; max-height: 52vh; overflow: auto; padding-right: 4px; }
+.deckLine { display: flex; align-items: center; justify-content: space-between; gap: 8px; background: var(--c15); border: 3px solid var(--c0); padding: 6px 8px; }
+.deckLine.utility { border-left-color: var(--c10); } .deckLine.energy { border-left-color: var(--c4); }
+.deckLineInfo { display: grid; gap: 3px; min-width: 0; } .deckLineInfo strong { font: 9px var(--px); color: var(--c4); } .deckLineInfo small { font-size: 12px; color: var(--c13); }
+.deckBtn { display: inline-flex; align-items: center; gap: 4px; }
+@media (max-width: 700px) {
+  .deckColumns { grid-template-columns: 1fr; } .deckColumn { display: none; } .deckColumn.active { display: block; }
+  .deckTabs { display: flex; } .deckList { max-height: 48vh; }
+}
+.deckNote { font-size: 13px !important; line-height: 1.5; }
+.luckyHud { color: var(--c5); font: 9px var(--px); }
+
+/* Audio */
+.audioModal { width: min(440px, 100%); }
+.audioRow { display: grid; grid-template-columns: 96px 1fr 32px; align-items: center; gap: 10px; margin: 12px 0; font: 9px var(--px); }
+.audioRow input[type=range] { width: 100%; accent-color: var(--c4); min-height: 28px; }
+.audioValue { text-align: right; color: var(--c4); }
+.themeRow .row { display: flex; gap: 8px; }

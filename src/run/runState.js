@@ -24,6 +24,26 @@ export function addToRoster(run, pokemon) {
   return "box";
 }
 
+// Eventos opcionales (rival, grupo villano, legendario): si el jugador pierde, el equipo vuelve a como estaba.
+const optionalEventTypes = new Set(["rival", "villain", "legendary"]);
+export const isOptionalEvent = (node) => optionalEventTypes.has(node?.type);
+
+export function snapshotParty(run) {
+  return run.party.map(({ uid, hp, fainted, status }) => ({ uid, hp, fainted, status }));
+}
+
+export function restoreParty(run, snapshot) {
+  if (!snapshot) {
+    // Guardados anteriores a v0.8 no tienen copia: todos vuelven en pie con la mitad de sus PS.
+    for (const pokemon of run.party) Object.assign(pokemon, { hp: Math.max(pokemon.hp, Math.ceil(pokemon.maxHp / 2)), fainted: false, shield: 0, intent: null, staggered: false });
+    return;
+  }
+  for (const saved of snapshot) {
+    const pokemon = run.party.find((member) => member.uid === saved.uid);
+    if (pokemon) Object.assign(pokemon, { hp: saved.hp, fainted: saved.fainted, status: saved.status, shield: 0, intent: null, staggered: false });
+  }
+}
+
 export function findInRoster(run, uid) {
   return [...run.party, ...run.box].find((pokemon) => pokemon.uid === uid) ?? null;
 }
@@ -37,19 +57,6 @@ export function removeItem(run, itemId) {
   run.inventory[itemId] -= 1;
   if (run.inventory[itemId] === 0) delete run.inventory[itemId];
   return true;
-}
-
-// Con el mazo lleno (balance.deck.maxSize) hay que descartar una carta para sumar otra.
-export function addCardToDeck(run, cardId, removeCardId = null) {
-  if (!run.data.cards[cardId]) return { ok: false, error: "unknownCard" };
-  const full = run.deckCardIds.length >= run.data.balance.deck.maxSize;
-  if (full) {
-    const index = removeCardId === null ? -1 : run.deckCardIds.indexOf(removeCardId);
-    if (index === -1) return { ok: false, error: "deckFull" };
-    run.deckCardIds.splice(index, 1);
-  }
-  run.deckCardIds.push(cardId);
-  return { ok: true };
 }
 
 export function setRow(run, uid, row) {

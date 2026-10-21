@@ -1,7 +1,8 @@
 // Recompensas tras ganar un combate: oro, ítems, medalla, elección de carta y oferta de captura.
 import { calculateExpReward, evolve, findEvolution, isAlive } from "../engine/index.js";
 import { getStage } from "./mapGenerator.js";
-import { addCardToDeck, addItem, addToRoster, emitRun, newPokemon } from "./runState.js";
+import { addCardToCollection } from "./deckManager.js";
+import { addItem, addToRoster, emitRun, newPokemon } from "./runState.js";
 
 function pickCardChoices(run, count) {
   const entries = Object.entries(run.campaign.cardRewards).map(([cardId, weight]) => ({ cardId, weight }));
@@ -64,15 +65,17 @@ export function grantVictoryRewards(run, node, defeatedEnemies) {
   return events;
 }
 
-export function takeCardReward(run, cardId, removeCardId = null) {
+export function takeCardReward(run, cardId) {
   if (run.phase !== "reward" || !run.pending?.cardChoices) return { ok: false, error: "noCardReward" };
   if (cardId !== null) {
     if (!run.pending.cardChoices.includes(cardId)) return { ok: false, error: "cardNotOffered" };
-    const added = addCardToDeck(run, cardId, removeCardId);
+    const added = addCardToCollection(run, cardId);
     if (!added.ok) return added;
+    run.pending.cardChoices = null;
+    return { ok: true, events: [emitRun(run, { type: "cardChosen", cardId, to: added.to })] };
   }
   run.pending.cardChoices = null;
-  return { ok: true, events: [emitRun(run, { type: "cardChosen", cardId })] };
+  return { ok: true, events: [emitRun(run, { type: "cardChosen", cardId: null, to: null })] };
 }
 
 export function resolveCapture(run, accept) {

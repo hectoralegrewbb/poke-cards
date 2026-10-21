@@ -1,3 +1,4 @@
+import { ensureOwnTypeMoves } from './moveRules.js';
 import { assignTypePassives } from './typePassives.js';
 
 // Importador puro de datos de PokeAPI: sin IO y sin efectos colaterales.
@@ -156,7 +157,7 @@ export function importPokedex({ speciesCsv, pokemonCsv, typesCsv, statsCsv }, { 
     const minBadges = threat > 87 ? 5 : threat > 74 ? 4 : 1;
     current.evolutions = [...path, { to: next, method: 'exp', expRequired: minBadges >= 4 ? 105 : 55, minBadges }];
   }
-  return { species: assignTypePassives(result), nationalDex: index, added: missingIds.length };
+  return { species: assignTypePassives(ensureOwnTypeMoves(result, moves)), nationalDex: index, added: missingIds.length };
 }
 
 function groupRows(rows, key) {

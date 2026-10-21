@@ -4,21 +4,10 @@ import { cardEffectIcons, describeCard, errorText } from "./labels.js";
 import { icon } from "./pixelIcons.js";
 import { sfx } from "./sfx.js";
 
-const ui = { removeCardId: "" };
-
 export function bigCard(def, onClick) {
   const art = def.kind === "energy" ? (def.boostMultiplier > 1 ? [icon("star", { scale: 5 })] : Array.from({ length: def.energyValue }, () => icon("bolt", { scale: 5 }))) : [icon(cardEffectIcons[def.effects[0]?.type] ?? "star", { scale: 5 })];
   const kind = def.kind === "utility" ? "utility" : def.boostMultiplier > 1 ? "wild" : "energy";
   return h("button", { class: `card big ${kind}`, onClick }, h("div", { class: "cardTop" }, def.name), h("div", { class: "cardArt" }, art), h("div", { class: "cardText" }, describeCard(def)));
-}
-
-function deckSelect(ctx) {
-  const { run, data } = ctx;
-  if (run.deckCardIds.length < data.balance.deck.maxSize) return null;
-  const distinct = [...new Set(run.deckCardIds)];
-  return h("label", { class: "deckFull" }, "MAZO LLENO. DESCARTÁ: ",
-    h("select", { onChange: (event) => { ui.removeCardId = event.target.value; } },
-      h("option", { value: "" }, "— elegir —"), distinct.map((id) => h("option", { value: id, selected: ui.removeCardId === id }, data.cards[id].name))));
 }
 
 export function renderReward(ctx) {
@@ -36,15 +25,18 @@ export function renderReward(ctx) {
     if (!result.ok) {
       sfx.play("deny");
       ctx.notify(errorText[result.error] ?? result.error);
-    } else sfx.play("card");
+    } else {
+      sfx.play("card");
+      if (result.events?.some((event) => event.to === "chest")) ctx.notify("Mazo lleno: la carta fue al COFRE.");
+    }
     ctx.rerender();
   };
 
   return h("section", { class: "window reward" },
     h("h2", {}, "RECOMPENSAS"),
     h("div", { class: "summary" }, summary.map((line) => h("div", {}, line))),
-    pending.cardChoices ? h("div", {}, h("h3", {}, "ELEGÍ UNA CARTA"), deckSelect(ctx),
-      h("div", { class: "cardChoices" }, pending.cardChoices.map((cardId) => bigCard(data.cards[cardId], () => attempt(pickCard(run, cardId, ui.removeCardId || null))))),
+    pending.cardChoices ? h("div", {}, h("h3", {}, "ELEGÍ UNA CARTA"),
+      h("div", { class: "cardChoices" }, pending.cardChoices.map((cardId) => bigCard(data.cards[cardId], () => attempt(pickCard(run, cardId))))),
       h("button", { class: "btn", onClick: () => attempt(pickCard(run, null)) }, "SALTAR")) : null,
     pending.capture ? h("div", { class: "capture" }, h("h3", {}, "¡UN POKÉMON QUIERE UNIRSE!"),
       ctx.sprites.element(pending.capture, { facing: "front", shiny: Boolean(pending.captureShiny) }), h("div", { class: "pname" }, pending.captureShiny ? "✦ " : "", data.species[pending.capture].name),

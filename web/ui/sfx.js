@@ -1,20 +1,8 @@
-// Efectos de sonido chiptune con Web Audio (sin archivos). Se silencian con el botón SND.
-let audio = null;
-let muted = false;
-try {
-  muted = localStorage.getItem("pokecards.muted") === "1";
-} catch {
-  muted = false;
-}
+// Efectos de sonido chiptune con Web Audio (sin archivos). El volumen y el mute viven en audioMixer.
+import { mixer } from "./audioMixer.js";
 
 function context() {
-  if (!audio) {
-    const Ctor = window.AudioContext ?? window.webkitAudioContext;
-    if (!Ctor) return null;
-    audio = new Ctor();
-  }
-  if (audio.state === "suspended") audio.resume();
-  return audio;
+  return mixer.context();
 }
 
 function tone({ freq, to = freq, type = "square", duration = 0.08, volume = 0.05, delay = 0 }) {
@@ -28,7 +16,7 @@ function tone({ freq, to = freq, type = "square", duration = 0.08, volume = 0.05
   oscillator.frequency.linearRampToValueAtTime(to, start + duration);
   gain.gain.setValueAtTime(volume, start);
   gain.gain.exponentialRampToValueAtTime(0.0001, start + duration);
-  oscillator.connect(gain).connect(ac.destination);
+  oscillator.connect(gain).connect(mixer.sfxBus());
   oscillator.start(start);
   oscillator.stop(start + duration + 0.02);
 }
@@ -49,7 +37,7 @@ function noise({ duration = 0.12, volume = 0.05, delay = 0, freq = 1800, kind = 
   filter.frequency.setValueAtTime(freq, start);
   gain.gain.setValueAtTime(volume, start);
   gain.gain.exponentialRampToValueAtTime(0.0001, start + duration);
-  source.connect(filter).connect(gain).connect(ac.destination);
+  source.connect(filter).connect(gain).connect(mixer.sfxBus());
   source.start(start);
 }
 
@@ -96,21 +84,16 @@ const sounds = {
 
 export const sfx = {
   play(name) {
-    if (muted || !sounds[name]) return;
+    if (mixer.get().muted || !sounds[name]) return;
     try {
       sounds[name]();
     } catch {
       /* el audio nunca debe romper el juego */
     }
   },
-  isMuted: () => muted,
+  isMuted: () => mixer.get().muted,
   toggle() {
-    muted = !muted;
-    try {
-      localStorage.setItem("pokecards.muted", muted ? "1" : "0");
-    } catch {
-      /* sin storage: solo vale para esta sesión */
-    }
-    return muted;
+    mixer.set({ muted: !mixer.get().muted });
+    return mixer.get().muted;
   }
 };

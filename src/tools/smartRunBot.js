@@ -2,12 +2,11 @@
 // atenta: cuida la party, cambia caja/party, arma el mazo con energía fuerte y gasta oro con criterio.
 import { isAlive } from "../engine/index.js";
 import {
-  buyFromShop, chooseNode, decideCapture, finishCombat, leaveShop, pickCard, playCamp, setRow, swapPartyBox, useItem
+  buyFromShop, chooseNode, decideCapture, finishCombat, leaveShop, moveCardToChest, moveCardToDeck, pickCard, playCamp, setRow, swapPartyBox, useItem
 } from "../run/index.js";
 import { playSmartTurn } from "./smartPlayer.js";
 
 const cardPriority = ["wildcard", "energyDouble", "insight", "recharge", "barrier", "focus", "remedy", "energyBasic", "potion", "haste", "quickStep", "luckyCoin"];
-const removalOrder = ["luckyCoin", "quickStep", "haste", "potion", "remedy", "barrier", "energyBasic"];
 const statusCure = { poison: "antidote", burn: "burnHeal", paralysis: "paralyzeHeal" };
 
 const power = (run, pokemon) => Object.values(run.data.species[pokemon.speciesId].stats).reduce((sum, value) => sum + value, 0);
@@ -72,19 +71,26 @@ function pickOption(run) {
   return run.options.map((node, index) => ({ index, value: score(node.type) })).sort((a, b) => b.value - a.value)[0].index;
 }
 
-function pickCardToRemove(run) {
-  for (const id of removalOrder) if (run.deckCardIds.includes(id)) return id;
-  return run.deckCardIds[0];
+// Valor de una carta para el bot: más arriba en cardPriority = mejor. Las desconocidas valen poco.
+const cardRank = (id) => { const index = cardPriority.indexOf(id); return index === -1 ? cardPriority.length : index; };
+
+// Mantiene el mejor mazo activo: cambia la peor carta del mazo por la mejor del cofre mientras la mejora sea clara.
+function optimizeDeck(run) {
+  for (let guard = 0; guard < 60; guard += 1) {
+    const worst = [...run.deckCardIds].sort((a, b) => cardRank(b) - cardRank(a))[0];
+    const best = [...run.chestCardIds].sort((a, b) => cardRank(a) - cardRank(b))[0];
+    if (run.deckCardIds.length < run.data.balance.deck.maxSize && best) { moveCardToDeck(run, best); continue; }
+    if (!best || !worst || cardRank(best) >= cardRank(worst)) break;
+    moveCardToChest(run, worst);
+    moveCardToDeck(run, best);
+  }
 }
 
 function handleReward(run) {
   if (run.pending?.capture) decideCapture(run, true);
   if (run.phase === "reward" && run.pending?.cardChoices) {
-    const best = [...run.pending.cardChoices].sort((a, b) => cardPriority.indexOf(a) - cardPriority.indexOf(b))[0];
-    const full = run.deckCardIds.length >= run.data.balance.deck.maxSize;
-    // Con el mazo lleno solo cambia una carta floja por una claramente mejor.
-    if (full && cardPriority.indexOf(best) > cardPriority.indexOf("energyBasic")) pickCard(run, null);
-    else pickCard(run, best, full ? pickCardToRemove(run) : null);
+    const best = [...run.pending.cardChoices].sort((a, b) => cardRank(a) - cardRank(b))[0];
+    pickCard(run, best);
   }
 }
 
@@ -104,8 +110,7 @@ function handleShop(run) {
   for (const [kind, id] of wishlist) {
     const index = run.shop.stock.findIndex((entry) => entry.kind === kind && entry.id === id && !entry.sold);
     if (index === -1 || run.gold < run.shop.stock[index].price) continue;
-    const full = kind === "card" && run.deckCardIds.length >= run.data.balance.deck.maxSize;
-    buyFromShop(run, index, full ? pickCardToRemove(run) : null);
+    buyFromShop(run, index);
   }
   leaveShop(run);
 }
@@ -127,6 +132,7 @@ export function playSmartRun(run, { maxSteps = 600, onFight = null } = {}) {
     if (run.phase === "map") {
       manageRoster(run);
       useItems(run);
+      optimizeDeck(run);
       chooseNode(run, pickOption(run));
     } else if (run.phase === "combat") {
       while (!run.combat.result && run.combat.turn <= 60) playSmartTurn(run.combat);

@@ -7,6 +7,9 @@ import { sfx } from "./sfx.js";
 import { h } from "./dom.js";
 import { typeColors, typeNames } from "./labels.js";
 import { renderMap } from "./mapView.js";
+import { audioButton, audioPanel } from "./audioView.js";
+import { music } from "./music.js";
+import { renderDeckEditor } from "./deckView.js";
 import { renderReward } from "./rewardView.js";
 import { renderRoster } from "./rosterPanel.js";
 import { renderCamp, renderShop } from "./siteViews.js";
@@ -67,6 +70,8 @@ function notify(message) {
 function onCombatFinished() {
   const result = finishCombat(ctx.run);
   ctx.lastEvents = result.events ?? [];
+  const failed = ctx.lastEvents.find((event) => event.type === "eventFailed");
+  if (failed) notify(failed.nodeType === "legendary" ? "El legendario huyó. Tu equipo quedó como estaba." : "Perdiste el enfrentamiento, pero tu equipo quedó como estaba.");
   rerender();
 }
 
@@ -197,25 +202,42 @@ function applyFx() {
 }
 
 function soundButton() {
-  const button = h("button", { class: "btn mini sound", onClick: () => { sfx.toggle(); button.textContent = sfx.isMuted() ? "SND OFF" : "SND ON"; } }, sfx.isMuted() ? "SND OFF" : "SND ON");
-  return button;
+  return audioButton(() => { ctx.audioOpen = true; rerender(); });
+}
+
+function audioLayer() {
+  return ctx.audioOpen ? audioPanel(() => { ctx.audioOpen = false; rerender(); }) : null;
+}
+
+// Escena musical según la fase: los combates de líder/liga/evento usan el tema de jefe.
+function sceneFor(run) {
+  if (!run) return "title";
+  if (run.phase === "ended") return null;
+  if (run.phase !== "combat") return "map";
+  const bossKinds = ["gym", "eliteFour", "champion"];
+  const bossNodes = ["legendary", "rival", "villain"];
+  return bossKinds.includes(run.combat?.kind) || bossNodes.includes(run.node?.type) ? "boss" : "combat";
 }
 
 function rerender() {
   const run = ctx.run;
   if (!run) {
-    root.replaceChildren(ctx.starterPick ? starterScreen() : titleScreen(),
-      ctx.toast ? h("div", { class: "toast", role: "status" }, ctx.toast) : null, soundButton());
+    root.replaceChildren(...[ctx.starterPick ? starterScreen() : titleScreen(),
+      ctx.toast ? h("div", { class: "toast", role: "status" }, ctx.toast) : null, soundButton(), audioLayer()].filter(Boolean));
+    music.setScene("title");
     return;
   }
   persistRun(run);
   const inCombat = run.phase === "combat" || run.phase === "ended";
   const children = [
     h("div", { class: inCombat ? "layout single" : "layout" }, screenFor(run), inCombat ? null : renderRoster(ctx)),
+    ctx.deckOpen && !inCombat && run.phase !== "ended" ? renderDeckEditor(ctx) : null,
     ctx.toast ? h("div", { class: "toast", role: "status", "aria-live": "polite" }, ctx.toast) : null,
-    soundButton()
+    soundButton(),
+    audioLayer()
   ];
   root.replaceChildren(...children.filter(Boolean));
+  music.setScene(sceneFor(run));
   applyFx();
 }
 

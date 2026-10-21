@@ -15,9 +15,9 @@ const nodeMeta = {
   gym: { risk: "JEFE", reward: "Medalla + recompensa" },
   eliteFour: { risk: "JEFE DE LIGA", reward: "Sin descanso entre combates" },
   champion: { risk: "BATALLA FINAL", reward: "Victoria de la corrida" },
-  legendary: { risk: "ENCUENTRO ÚNICO", reward: "Captura garantizada al vencer" },
-  rival: { risk: "RIVAL", reward: "Recompensa de combate" },
-  villain: { risk: "HISTORIA", reward: "Oro, cartas e ítems" }
+  legendary: { risk: "ENCUENTRO ÚNICO · SIN PENA", reward: "Captura garantizada al vencer. Si perdés, huye y no perdés nada" },
+  rival: { risk: "RIVAL · SIN PENA", reward: "Recompensa al ganar; si perdés, no perdés nada" },
+  villain: { risk: "HISTORIA · SIN PENA", reward: "Oro, cartas e ítems al ganar; si perdés, no perdés nada" }
 };
 
 export function nodeIcon(type, scale = 4) {

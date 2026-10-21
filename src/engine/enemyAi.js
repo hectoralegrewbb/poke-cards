@@ -65,6 +65,32 @@ export function planEnemyIntent(state, enemy) {
   return enemy.intent;
 }
 
+// Daño anunciado sobre cada aliado: suma las intenciones enemigas, expandiendo las de área y de fila.
+// Devuelve Map uid -> { damage, hits }. Lo usan la interfaz (marca de amenaza) y los bots.
+export function getIncomingThreats(state) {
+  const threats = new Map();
+  for (const enemy of state.teams.enemy) {
+    const intent = enemy.intent;
+    if (!intent || enemy.fainted || enemy.hp <= 0) continue;
+    const move = state.data.moves[intent.moveId];
+    if (move.power <= 0 || (move.targetSide ?? "enemy") !== "enemy") continue;
+    const primary = state.teams.player.find((pokemon) => pokemon.uid === intent.targetId);
+    if (!primary) continue;
+    const targets = getMoveTargets(state, enemy, move, primary);
+    for (const defender of targets) {
+      const { damage } = calculateMoveDamage({
+        attacker: enemy, defender, move, isCrit: false, balance: state.data.balance,
+        typeChart: state.data.typeChart, targetCount: targets.length
+      });
+      const entry = threats.get(defender.uid) ?? { damage: 0, hits: 0 };
+      entry.damage += damage;
+      entry.hits += 1;
+      threats.set(defender.uid, entry);
+    }
+  }
+  return threats;
+}
+
 // Si el objetivo anunciado ya no es válido (cayó), se vuelve a elegir con el mismo perfil.
 export function resolveEnemyIntent(state, enemy) {
   const intent = enemy.intent;

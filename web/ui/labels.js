@@ -46,7 +46,11 @@ export const errorText = {
   tooManyBoostCards: "Demasiadas cartas de refuerzo.",
   boostNotApplicable: "Ese movimiento no se puede reforzar.",
   insufficientEnergy: "Falta energía para pagar el movimiento.",
-  deckFull: "El mazo está lleno: elegí una carta para descartar.",
+  deckFull: "El mazo activo está lleno (máx. 45). Mové una carta al cofre primero.",
+  deckInvalid: "Tu mazo activo debe tener entre 40 y 45 cartas para salir. Abrí MAZO y ajustalo.",
+  cardNotInDeck: "Esa carta no está en el mazo.",
+  cardNotInChest: "Esa carta no está en el cofre.",
+  notDuringCombat: "No se puede editar el mazo en combate.",
   noItem: "No tenés ese ítem.",
   noEffect: "No tendría ningún efecto.",
   notEnoughGold: "No te alcanza el oro.",
@@ -73,7 +77,7 @@ export function describeCard(card) {
         heal: `Curás ${effect.amount} PS`,
         shield: `Escudo ${effect.amount}`,
         reduceCooldown: `-${effect.amount} cooldown`,
-        luckyCoin: "Moneda de la suerte",
+        luckyCoin: "Próx. ataque: más chance de crítico",
         addCards: `Recibís ${effect.amount} energía`,
         powerModifier: `POD +${effect.amount} este turno`,
         costModifier: `Costos ${effect.amount} este turno`,
@@ -96,7 +100,7 @@ export function describeEffects(effects = []) {
       case "shield": return `Escudo ${effect.amount}${who}`;
       case "reduceCooldown": return `-${effect.amount} cooldown${effect.target === "allAllies" ? " a todo el equipo" : ""}`;
       case "drawCards": return `Robás ${effect.amount}`;
-      case "luckyCoin": return "Moneda de la suerte";
+      case "luckyCoin": return "Tu próximo ataque tiene el doble de chance de crítico";
       case "addCards": return `+${effect.amount} energías a la mano`;
       case "costModifier": return `Técnicas ${effect.amount < 0 ? "-" : "+"}${Math.abs(effect.amount)} costo · ${effect.turns} turnos`;
       case "powerModifier": return `+${effect.amount} poder ${categoryNames[effect.category] ?? ""} · ${effect.turns} turnos`.replace("  ", " ");
@@ -140,7 +144,7 @@ export function formatEvent(event, { names, data }) {
     case "modifierAdded": return `${event.label}: ${event.kind === "cost" ? `costos ${event.amount}` : `poder +${event.amount}`} por ${event.turns} turnos.`;
     case "modifierExpired": return `${event.label} terminó.`;
     case "cooldownReduced": return `${name(event.targetId)}: -${event.amount} de cooldown.`;
-    case "luckyCoinGained": return "Ganás una moneda de la suerte.";
+    case "luckyCoinGained": return "Ganás una moneda de la suerte: tu próximo ataque crítica con más chance.";
     case "statusCured": return `${name(event.targetId)} se curó del estado.`;
     case "passiveTriggered": return `${name(event.pokemonId)}: ${event.name}.`;
     case "enemySkipped": return `${name(event.actorId)} no puede actuar.`;

@@ -2,7 +2,7 @@
 // A diferencia de greedyPlayer.js usa lo que usaría una persona: refuerza ataques con energía,
 // protege con escudos a quien está por caer, juega utilidades y evita tirar cartas útiles.
 import {
-  calculateMoveDamage, choosePayCards, endPlayerTurn, getLiving, getMoveCost, getMoveTargets, getPowerBonus,
+  calculateMoveDamage, choosePayCards, endPlayerTurn, getIncomingThreats, getLiving, getMoveCost, getMoveTargets, getPowerBonus,
   getValidTargets, playMove, playShield, playUtility
 } from "../engine/index.js";
 
@@ -16,19 +16,9 @@ function energyInHand(state) {
   return state.deck.hand.filter((card) => isEnergy(state, card));
 }
 
+// uid -> daño anunciado (incluye área y fila).
 function incomingDamage(state) {
-  const incoming = new Map();
-  for (const enemy of getLiving(state, "enemy")) {
-    const intent = enemy.intent;
-    if (!intent) continue;
-    const move = state.data.moves[intent.moveId];
-    if (move.power <= 0) continue;
-    const target = state.teams.player.find((pokemon) => pokemon.uid === intent.targetId);
-    if (!target) continue;
-    const hits = getMoveTargets(state, enemy, move, target);
-    for (const hit of hits) incoming.set(hit.uid, (incoming.get(hit.uid) ?? 0) + intent.damagePreview);
-  }
-  return incoming;
+  return new Map([...getIncomingThreats(state)].map(([uid, entry]) => [uid, entry.damage]));
 }
 
 function estimate(state, actor, move, target, boostPower = 0) {

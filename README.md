@@ -1,3 +1,5 @@
+> **v0.8:** mazo + cofre con editor, eventos opcionales sin riesgo de muerte, ataque del propio tipo garantizado, audio (volúmenes + música en loop sin cortes), tema visual moderno. Ver [`docs/CHANGELOG-v0.8.md`](docs/CHANGELOG-v0.8.md) y [`docs/QA-v0.8.md`](docs/QA-v0.8.md).
+
 > **v0.7:** catálogo completo de 649 especies, variocolores (shiny), HUD para móvil en vertical, cartas y pasivas nuevas, y efectos de sonido y pantalla por tipo. Ver [`docs/CHANGELOG-v0.7.md`](docs/CHANGELOG-v0.7.md) y [`docs/QA-v0.7.md`](docs/QA-v0.7.md).
 > **v0.6:** revisión completa: corrección de la semilla repetible, curva de dificultad calibrada con un bot de referencia, Liga y campeón más fuertes, carga de energía que reserva comodines para reforzar y confirmación al terminar turno con Pokémon sin actuar. Ver [`docs/CHANGELOG-v0.6.md`](docs/CHANGELOG-v0.6.md) y [`docs/QA-v0.6.md`](docs/QA-v0.6.md).
 

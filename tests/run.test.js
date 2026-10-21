@@ -83,16 +83,16 @@ test("elegir un combate crea el combate y ganar da oro y deja pendiente la carta
   assert.equal(run.pending.cardChoices.length, 3);
 });
 
-test("recompensa de carta: suma al mazo, o exige descartar con el mazo lleno", () => {
+test("recompensa de carta: suma al mazo, o va al cofre si el mazo está lleno", () => {
   const run = createRun({ data, seed: 3 });
   chooseNode(run, 0);
   run.combat.result = "victory";
   finishCombat(run);
   const cardId = run.pending.cardChoices[0];
-  run.deckCardIds.push(...Array(3).fill("energyBasic")); // 45 = lleno
-  assert.equal(pickCard(run, cardId).error, "deckFull");
-  assert.equal(pickCard(run, cardId, "energyBasic").ok, true);
+  run.deckCardIds.push(...Array(45 - run.deckCardIds.length).fill("energyBasic")); // 45 = lleno
+  assert.equal(pickCard(run, cardId).ok, true);
   assert.equal(run.deckCardIds.length, 45);
+  assert.deepEqual(run.chestCardIds, [cardId]);
 });
 
 test("derrota termina la corrida", () => {

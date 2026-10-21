@@ -458,7 +458,7 @@
       "gust",
       "aerialAce",
       "braveBird",
-      "agility"
+      "tackle"
     ],
     "passive": {
       "name": "Adaptable",
@@ -2854,7 +2854,7 @@
     },
     "moves": [
       "tackle",
-      "quickAttack",
+      "gust",
       "doubleEdge",
       "bodySlam"
     ],
@@ -2983,7 +2983,7 @@
       "vineWhip",
       "energyBall",
       "solarBeam",
-      "gigaDrain"
+      "poisonSting"
     ],
     "passive": {
       "name": "Espesura",
@@ -3315,7 +3315,7 @@
     },
     "moves": [
       "thunderShock",
-      "discharge",
+      "ironHead",
       "thunder",
       "electroBall"
     ],
@@ -3344,7 +3344,7 @@
     },
     "moves": [
       "waterGun",
-      "bubbleBeam",
+      "iceShard",
       "aquaTail",
       "waterfall"
     ],
@@ -3673,7 +3673,7 @@
     },
     "moves": [
       "waterGun",
-      "bubbleBeam",
+      "psybeam",
       "aquaTail",
       "waterfall"
     ],
@@ -3876,7 +3876,7 @@
       "ember",
       "fireBlast",
       "heatWave",
-      "flameWheel"
+      "aerialAce"
     ],
     "legendary": true
   },
@@ -3948,7 +3948,7 @@
       "bugBite",
       "bugBuzz",
       "megahorn",
-      "silverWind"
+      "sludgeBomb"
     ],
     "passive": {
       "name": "Enjambre",
@@ -4169,7 +4169,7 @@
     },
     "moves": [
       "waterGun",
-      "bubbleBeam",
+      "dragonPulse",
       "aquaTail",
       "waterfall"
     ],
@@ -4318,7 +4318,7 @@
     },
     "moves": [
       "ember",
-      "flameCharge",
+      "braveBird",
       "heatWave",
       "flameWheel"
     ],
@@ -4606,7 +4606,7 @@
     },
     "moves": [
       "ember",
-      "flameCharge",
+      "mudSlap",
       "heatWave",
       "flameWheel"
     ],
@@ -4928,7 +4928,7 @@
       "spd": 10
     },
     "moves": [
-      "metalClaw",
+      "psychic",
       "ironHead",
       "meteorMash",
       "tackle"
@@ -5127,7 +5127,7 @@
       "vineWhip",
       "energyBall",
       "solarBeam",
-      "gigaDrain"
+      "poisonTail"
     ],
     "passive": {
       "name": "Espesura",
@@ -5186,7 +5186,7 @@
       "spd": 10
     },
     "moves": [
-      "armThrust",
+      "zenHeadbutt",
       "hammerArm",
       "auraSphere",
       "tackle"
@@ -5401,7 +5401,7 @@
       "rockThrow",
       "stoneEdge",
       "powerGem",
-      "rockSlide"
+      "bulletPunch"
     ],
     "passive": {
       "name": "Roca firme",
@@ -5434,7 +5434,7 @@
       "bugBite",
       "bugBuzz",
       "megahorn",
-      "silverWind"
+      "aerialAce"
     ],
     "passive": {
       "name": "Enjambre",
@@ -5652,7 +5652,7 @@
       "spd": 11
     },
     "moves": [
-      "metalClaw",
+      "zenHeadbutt",
       "ironHead",
       "meteorMash",
       "tackle"
@@ -5719,7 +5719,7 @@
       "spd": 10
     },
     "moves": [
-      "armThrust",
+      "bulletPunch",
       "hammerArm",
       "auraSphere",
       "tackle"
@@ -5848,7 +5848,7 @@
       "spd": 13
     },
     "moves": [
-      "psybeam",
+      "auraSphere",
       "psychic",
       "zenHeadbutt",
       "tackle"
@@ -5943,7 +5943,7 @@
       "spd": 15
     },
     "moves": [
-      "metalClaw",
+      "dragonClaw",
       "ironHead",
       "meteorMash",
       "tackle"
@@ -5966,7 +5966,7 @@
     },
     "moves": [
       "waterGun",
-      "bubbleBeam",
+      "dragonPulse",
       "aquaTail",
       "waterfall"
     ],
@@ -6202,7 +6202,7 @@
     },
     "moves": [
       "waterGun",
-      "bubbleBeam",
+      "gust",
       "aquaTail",
       "waterfall"
     ],
@@ -6298,7 +6298,7 @@
       "bugBite",
       "bugBuzz",
       "megahorn",
-      "silverWind"
+      "flareBlitz"
     ],
     "passive": {
       "name": "Enjambre",
@@ -6329,7 +6329,7 @@
       "spd": 14
     },
     "moves": [
-      "metalClaw",
+      "lowKick",
       "ironHead",
       "meteorMash",
       "tackle"
@@ -6376,7 +6376,7 @@
       "vineWhip",
       "energyBall",
       "solarBeam",
-      "gigaDrain"
+      "armThrust"
     ],
     "legendary": true
   },
@@ -6557,7 +6557,7 @@
     },
     "moves": [
       "waterGun",
-      "aquaJet",
+      "snarl",
       "aquaTail",
       "waterfall"
     ],
@@ -7306,7 +7306,7 @@
       "poisonSting",
       "crossPoison",
       "sludgeBomb",
-      "aerialAce"
+      "mudSlap"
     ],
     "passive": {
       "name": "Toxina vital",
@@ -7926,7 +7926,7 @@
       "waterGun",
       "aquaJet",
       "razorShell",
-      "spark"
+      "lowKick"
     ],
     "passive": {
       "name": "Torrente",
@@ -8014,7 +8014,7 @@
     "moves": [
       "vineWhip",
       "energyBall",
-      "dragonBreath",
+      "poisonTail",
       "razorLeaf"
     ],
     "evolutions": [
@@ -8230,7 +8230,7 @@
       "waterGun",
       "aquaTail",
       "razorShell",
-      "energyBall"
+      "zenHeadbutt"
     ],
     "evolutions": [
       {
@@ -8329,7 +8329,7 @@
     "moves": [
       "scratch",
       "slash",
-      "energyBall",
+      "aerialAce",
       "tackle"
     ],
     "evolutions": [
@@ -8690,7 +8690,7 @@
     "moves": [
       "vineWhip",
       "energyBall",
-      "snarl",
+      "psybeam",
       "razorLeaf"
     ],
     "evolutions": [
@@ -9595,7 +9595,7 @@
       "waterGun",
       "aquaTail",
       "muddyWater",
-      "electroBall"
+      "stoneEdge"
     ],
     "passive": {
       "name": "Roca firme",
@@ -9657,7 +9657,7 @@
       "waterGun",
       "aquaJet",
       "surf",
-      "snarl"
+      "rockThrow"
     ],
     "passive": {
       "name": "Roca firme",
@@ -9690,7 +9690,7 @@
       "rockThrow",
       "powerGem",
       "stoneEdge",
-      "bite"
+      "aerialAce"
     ],
     "passive": {
       "name": "Roca firme",
@@ -9861,7 +9861,7 @@
     "moves": [
       "tackle",
       "bodySlam",
-      "flameCharge",
+      "aerialAce",
       "hyperFang"
     ],
     "evolutions": [
@@ -10015,7 +10015,7 @@
       "waterGun",
       "aquaJet",
       "surf",
-      "energyBall"
+      "thunderShock"
     ],
     "passive": {
       "name": "Torrente",
@@ -10461,7 +10461,7 @@
     "moves": [
       "vineWhip",
       "energyBall",
-      "ghostWind",
+      "aerialAce",
       "razorLeaf"
     ],
     "evolutions": [
@@ -10824,7 +10824,7 @@
       "waterGun",
       "aquaTail",
       "muddyWater",
-      "dragonBreath"
+      "psybeam"
     ],
     "passive": {
       "name": "Torrente",
@@ -10947,7 +10947,7 @@
       "tackle",
       "bodySlam",
       "slam",
-      "spark"
+      "psychic"
     ],
     "passive": {
       "name": "Adaptable",
@@ -11007,7 +11007,7 @@
       "bugBite",
       "silverWind",
       "megahorn",
-      "hyperFang"
+      "meteorMash"
     ],
     "passive": {
       "name": "Enjambre",
@@ -11160,7 +11160,7 @@
       "waterGun",
       "aquaJet",
       "muddyWater",
-      "razorLeaf"
+      "poisonTail"
     ],
     "passive": {
       "name": "Torrente",
@@ -11295,7 +11295,7 @@
       "tackle",
       "bite",
       "crunch",
-      "hyperFang"
+      "iceBeam"
     ],
     "evolutions": [
       {
@@ -11411,7 +11411,7 @@
       "ember",
       "flameWheel",
       "flamethrower",
-      "crossPoison"
+      "stoneEdge"
     ],
     "passive": {
       "name": "Llama viva",
@@ -12431,7 +12431,7 @@
       "waterGun",
       "aquaJet",
       "hydroPump",
-      "flameWheel"
+      "leafStorm"
     ],
     "passive": {
       "name": "Torrente",
@@ -12553,7 +12553,7 @@
     "moves": [
       "scratch",
       "slash",
-      "metalClaw",
+      "gust",
       "tackle"
     ],
     "evolutions": [
@@ -12644,7 +12644,7 @@
       "waterGun",
       "aquaTail",
       "surf",
-      "powerGem"
+      "gust"
     ],
     "passive": {
       "name": "Torrente",
@@ -13222,7 +13222,7 @@
     "moves": [
       "rockThrow",
       "powerGem",
-      "aerialAce",
+      "metalClaw",
       "rockSlide"
     ],
     "evolutions": [
@@ -13867,7 +13867,7 @@
     "moves": [
       "waterGun",
       "aquaTail",
-      "poisonTail",
+      "mudShot",
       "aquaJet"
     ],
     "evolutions": [
@@ -14020,7 +14020,7 @@
       "mudSlap",
       "mudShot",
       "earthPower",
-      "silverWind"
+      "psybeam"
     ],
     "passive": {
       "name": "Coraza de fango",
@@ -14144,7 +14144,7 @@
       "bugBite",
       "silverWind",
       "megahorn",
-      "bodySlam"
+      "rockThrow"
     ],
     "passive": {
       "name": "Roca firme",
@@ -14576,7 +14576,7 @@
       "waterGun",
       "aquaTail",
       "razorShell",
-      "snarl"
+      "iceBeam"
     ],
     "evolutions": [
       {
@@ -14703,7 +14703,7 @@
       "waterGun",
       "aquaTail",
       "surf",
-      "crossPoison"
+      "stoneEdge"
     ],
     "passive": {
       "name": "Torrente",
@@ -14978,7 +14978,7 @@
     "moves": [
       "scratch",
       "slash",
-      "energyBall",
+      "aerialAce",
       "tackle"
     ],
     "evolutions": [
@@ -15097,7 +15097,7 @@
       "tackle",
       "slash",
       "doubleEdge",
-      "bite"
+      "aquaJet"
     ],
     "passive": {
       "name": "Adaptable",
@@ -15441,7 +15441,7 @@
       "waterGun",
       "aquaTail",
       "muddyWater",
-      "flameCharge"
+      "mudSlap"
     ],
     "passive": {
       "name": "Torrente",
@@ -15714,7 +15714,7 @@
     "moves": [
       "tackle",
       "bodySlam",
-      "aquaTail",
+      "psybeam",
       "hyperFang"
     ],
     "evolutions": [
@@ -15868,7 +15868,7 @@
       "mudSlap",
       "mudShot",
       "earthPower",
-      "flameCharge"
+      "dragonPulse"
     ],
     "evolutions": [
       {
@@ -16391,7 +16391,7 @@
       "scratch",
       "slash",
       "slam",
-      "spark"
+      "aerialAce"
     ],
     "passive": {
       "name": "Viento a favor",
@@ -16942,7 +16942,7 @@
       "ember",
       "fireFang",
       "flamethrower",
-      "snarl"
+      "psybeam"
     ],
     "legendary": true
   },
@@ -17139,7 +17139,7 @@
       "gust",
       "aerialAce",
       "braveBird",
-      "flameCharge"
+      "psychic"
     ],
     "passive": {
       "name": "Mente clara",
@@ -17544,7 +17544,7 @@
       "bugBite",
       "silverWind",
       "xScissor",
-      "electroBall"
+      "powerGem"
     ],
     "passive": {
       "name": "Enjambre",
@@ -17577,7 +17577,7 @@
     "moves": [
       "tackle",
       "lowKick",
-      "electroBall",
+      "bite",
       "armThrust"
     ],
     "evolutions": [
@@ -17607,7 +17607,7 @@
       "tackle",
       "snarl",
       "nightSlash",
-      "crossPoison"
+      "hammerArm"
     ],
     "passive": {
       "name": "Astucia",
@@ -18063,7 +18063,7 @@
     "moves": [
       "scratch",
       "bodySlam",
-      "lowKick",
+      "razorLeaf",
       "tackle"
     ],
     "evolutions": [
@@ -18125,7 +18125,7 @@
       "gust",
       "aerialAce",
       "braveBird",
-      "armThrust"
+      "thunderShock"
     ],
     "passive": {
       "name": "Estática",
@@ -18186,7 +18186,7 @@
       "bugBite",
       "silverWind",
       "megahorn",
-      "aquaJet"
+      "bulletPunch"
     ],
     "passive": {
       "name": "Enjambre",
@@ -18859,7 +18859,7 @@
       "mudSlap",
       "mudShot",
       "earthPower",
-      "bubbleBeam"
+      "hex"
     ],
     "passive": {
       "name": "Coraza de fango",
@@ -18891,7 +18891,7 @@
     "moves": [
       "tackle",
       "snarl",
-      "flameCharge",
+      "bulletPunch",
       "bite"
     ],
     "evolutions": [
@@ -18952,7 +18952,7 @@
       "scratch",
       "bodySlam",
       "slam",
-      "ghostWind"
+      "gust"
     ],
     "evolutions": [
       {
@@ -19141,7 +19141,7 @@
     "moves": [
       "tackle",
       "snarl",
-      "powerGem",
+      "dragonBreath",
       "bite"
     ],
     "evolutions": [
@@ -19200,7 +19200,7 @@
       "tackle",
       "bite",
       "nightSlash",
-      "rockSlide"
+      "dragonPulse"
     ],
     "passive": {
       "name": "Astucia",
@@ -19283,7 +19283,7 @@
       "thunderShock",
       "spark",
       "thunderbolt",
-      "snarl"
+      "braveBird"
     ],
     "legendary": true
   },
@@ -19349,7 +19349,7 @@
       "waterGun",
       "aquaJet",
       "razorShell",
-      "bodySlam"
+      "auraSphere"
     ],
     "legendary": true
   },
@@ -19393,7 +19393,7 @@
       "bugBite",
       "silverWind",
       "megahorn",
-      "dragonBreath"
+      "meteorMash"
     ],
     "legendary": true
   }

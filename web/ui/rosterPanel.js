@@ -1,6 +1,6 @@
 // Panel lateral fuera de combate: party, caja, inventario y uso de ítems.
 import { isAlive } from "../../src/engine/index.js";
-import { setRow, swapPartyBox, useItem } from "../../src/run/index.js";
+import { deckStatus, setRow, swapPartyBox, useItem } from "../../src/run/index.js";
 import { h } from "./dom.js";
 import { errorText, statusInfo, typeColors, typeNames } from "./labels.js";
 import { icon } from "./pixelIcons.js";
@@ -64,7 +64,8 @@ export function renderRoster(ctx) {
   return h("aside", { class: "window roster" },
     h("div", { class: "stats" },
       h("span", {}, icon("coin", { scale: 2 }), ` ${run.gold}`),
-      h("span", {}, icon("cards", { scale: 2 }), ` ${run.deckCardIds.length}`),
+      h("button", { class: `btn mini deckBtn ${deckStatus(run).valid ? "" : "danger"}`, title: "Editar mazo", onClick: () => { ctx.deckOpen = true; sfx.play("select"); ctx.rerender(); } },
+        icon("cards", { scale: 2 }), ` ${deckStatus(run).size}/${deckStatus(run).max}`, run.chestCardIds.length ? ` +${run.chestCardIds.length}` : ""),
       h("span", {}, icon("medal", { scale: 2 }), ` ${run.badges.length}/8`)),
     h("h3", {}, "PARTY"),
     run.party.map((pokemon) => memberRow(ctx, pokemon, false)),

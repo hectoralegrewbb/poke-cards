@@ -52,6 +52,9 @@ export function validateGameData(data) {
     check(species.moves.some((moveId) => data.moves[moveId]?.cost === 0 && data.moves[moveId]?.power > 0 && data.moves[moveId]?.cooldown === 0),
       `species ${id}: falta ataque libre (costo y cooldown 0)`);
     species.moves.forEach((moveId) => check(Object.hasOwn(data.moves, moveId), `species ${id}: movimiento inexistente "${moveId}"`));
+    species.types.forEach((type) => check(
+      species.moves.some((moveId) => data.moves[moveId]?.type === type && data.moves[moveId]?.power > 0),
+      `species ${id}: falta un ataque de daño de tipo ${type}`));
     statNames.forEach((stat) => check(species.stats?.[stat] > 0, `species ${id}: stat "${stat}" inválido`));
     for (const evolution of species.evolutions ?? []) {
       check(Object.hasOwn(data.species, evolution.to), `species ${id}: evolución a especie inexistente "${evolution.to}"`);
