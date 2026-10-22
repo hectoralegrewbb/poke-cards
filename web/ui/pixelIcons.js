@@ -177,8 +177,26 @@ const icons = {
 
 const SVG_NS = "http://www.w3.org/2000/svg";
 
+// Íconos de 16×16 en PNG (assets/ui). Tienen prioridad sobre los dibujados a mano con el mismo nombre.
+const imageIcons = { star: "star.png", bolt: "energy.png", heart: "heart.png", sword: "sword.png", wild: "wild.png", potion: "potion.png", candy: "candy.png" };
+const imageScale = 0.62; // un ícono de 16 px ocupa lo que ocupaban ~9-10 celdas del ícono vectorial
+
+function imageIcon(name, scale) {
+  const size = Math.round(16 * scale * imageScale);
+  const img = document.createElement("img");
+  img.src = `../assets/ui/${imageIcons[name]}`;
+  img.alt = "";
+  img.width = size;
+  img.height = size;
+  img.className = `pixIcon ${name}`;
+  img.style.imageRendering = "pixelated";
+  img.decoding = "async";
+  return img;
+}
+
 // Devuelve un <svg> escalado en múltiplos de "scale" px por pixel del ícono.
 export function icon(name, { color, scale = 3 } = {}) {
+  if (imageIcons[name]) return imageIcon(name, scale);
   const spec = icons[name];
   const rows = spec.rows;
   const width = Math.max(...rows.map((row) => row.length));

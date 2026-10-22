@@ -24,6 +24,14 @@ function burst(element, kind) {
   }
 }
 
+// Sprites opcionales por tipo (assets/fx). Si un tipo no figura acá, se usa la forma dibujada en CSS.
+// aim: el sprite apunta hacia la izquierda y se gira hacia el blanco.
+const projectileSprites = {
+  fire: { file: "fire", size: 54, aim: true }, electric: { file: "electric", size: 44 }, water: { file: "swirl", size: 40 },
+  ice: { file: "ice", size: 40 }, rock: { file: "rock", size: 46 }, ground: { file: "rock", size: 46 }, poison: { file: "poison", size: 42 },
+  grass: { file: "vine", size: 46 }, bug: { file: "vine", size: 40 }, normal: { file: "spark", size: 46 }, fighting: { file: "spark", size: 46 }
+};
+
 // Efectos por tipo: viaje físico desde el atacante hasta cada blanco real.
 function launchProjectiles(root, fx) {
   const field = root.querySelector(".field");
@@ -39,7 +47,12 @@ function launchProjectiles(root, fx) {
     const y = origin.top + origin.height / 2 - bounds.top;
     const dx = finish.left + finish.width / 2 - bounds.left - x;
     const dy = finish.top + finish.height / 2 - bounds.top - y;
-    const projectile = h("span", { class: `attackProjectile type-${fx.attackType}`, style: `left:${x}px;top:${y}px;--travelX:${dx}px;--travelY:${dy}px`, "aria-hidden": "true" });
+    const sprite = projectileSprites[fx.attackType];
+    const angle = sprite?.aim ? Math.round((Math.atan2(dy, dx) * 180) / Math.PI + 180) : 0;
+    const projectile = h("span", {
+      class: `attackProjectile type-${fx.attackType} ${sprite ? "withSprite" : ""}`,
+      style: `left:${x}px;top:${y}px;--travelX:${dx}px;--travelY:${dy}px${sprite ? `;--fxImage:url(../assets/fx/${sprite.file}.png);--fxSize:${sprite.size}px;--fxAngle:${angle}deg` : ""}`, "aria-hidden": "true"
+    }, sprite ? h("i", { class: "fxSprite" }) : null);
     field.append(projectile);
     setTimeout(() => projectile.remove(), 570);
   }

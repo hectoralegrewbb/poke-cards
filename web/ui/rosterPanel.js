@@ -3,6 +3,7 @@ import { isAlive } from "../../src/engine/index.js";
 import { deckStatus, setRow, swapPartyBox, useItem } from "../../src/run/index.js";
 import { h } from "./dom.js";
 import { errorText, statusInfo, typeColors, typeNames } from "./labels.js";
+import { itemImage } from "./itemIcons.js";
 import { icon } from "./pixelIcons.js";
 import { sfx } from "./sfx.js";
 
@@ -73,6 +74,6 @@ export function renderRoster(ctx) {
     h("h3", {}, "ÍTEMS"),
     items.length === 0 ? h("small", {}, "Sin ítems.") : h("div", { class: "items" }, items.map(([itemId, count]) =>
       h("button", { class: `btn mini ${ui.itemId === itemId ? "on" : ""}`, title: data.items[itemId].description, onClick: () => { ui.itemId = ui.itemId === itemId ? null : itemId; sfx.play("select"); ctx.rerender(); } },
-        `${data.items[itemId].name} x${count}`))),
+        itemImage(itemId, 22), ` ${data.items[itemId].name} x${count}`))),
     ui.itemId ? h("small", {}, `${data.items[ui.itemId].description} Tocá un Pokémon.`) : null);
 }

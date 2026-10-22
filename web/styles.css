@@ -589,3 +589,10 @@ button, .option, .member, .card, .stockItem, .starterCard { touch-action: manipu
   .hud { padding: 3px 10px; }
 }
 @media (max-width: 800px) { .threatBadge { top: 0; left: 2px; font-size: 12px; padding: 1px 4px; } .reachNote { top: 4px; } }
+.itemIcon { vertical-align: middle; image-rendering: pixelated; }
+.btn .itemIcon { margin: -4px 2px -4px 0; }
+
+/* Proyectiles con sprite (assets/fx) */
+.attackProjectile.withSprite { width: 4px; height: 4px; margin: 0; border: 0; background: none; box-shadow: none; animation: typeFlight .52s linear forwards; }
+.attackProjectile.withSprite::after { display: none; }
+.attackProjectile.withSprite .fxSprite { position: absolute; left: calc(var(--fxSize) / -2); top: calc(var(--fxSize) / -2); width: var(--fxSize); height: var(--fxSize); background: var(--fxImage) center / contain no-repeat; image-rendering: pixelated; transform: rotate(var(--fxAngle, 0deg)); }

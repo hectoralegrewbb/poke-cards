@@ -35,3 +35,13 @@
 - Fuzz: se eliminó el invariante antiguo "máx. 1 legendario".
 - Balance bot (200 corridas): regional 21%, global 22%, Explorador 73%, Experto 2%.
 - Corregido: la tarjeta COMBATE del mapa ocupaba toda la pantalla en móvil (la clase `.combat` del nodo chocaba con la del combate); ahora los estilos de combate se aplican solo a `section.combat`.
+
+## v0.8.2 · sprites y pausa de resultado
+
+- **Iconos 16×16** (estrella, energía, caramelo, bola arcoíris, espada, corazón, poción) en `assets/ui/`, usados por `pixelIcons.js` (`imageIcons`).
+- **Ítems** recortados de la hoja de ítems en `assets/items/` (14 PNG), mostrados con `itemIcons.js` en mochila, tiendas y recompensas. Si falta un PNG, la imagen se oculta sola.
+- **Efectos de movimiento** (hoja RS) recortados en `assets/fx/` (10 PNG); los proyectiles usan sprite según tipo (`projectileSprites` en `effects.js`).
+- **Pausa de resultado**: el cartel de VICTORIA/DERROTA aparece 1,8 s después de resolverse el último golpe (`resultDelayMs` en `combatView.js`). Verificado con combate real: resultado a 72 ms, cartel a ~1,9 s.
+- **No aplicado**: hojas de íconos Gen3/Gen5 (grilla irregular, ya hay sprites completos), hoja UI BW2 (choca con el tema claro) y barras HP BW2 (se emulan con CSS si se quiere).
+- **Copyright**: los sprites son assets de Nintendo/Game Freak extraídos por terceros. Están aislados en `assets/ui`, `assets/items` y `assets/fx`; borrar esas carpetas deja el juego funcional (fallback a iconos pixel). Riesgo de repo público a cargo del autor.
+- **Créditos de las hojas**: Neslug (efectos RS), Ploaj, PikachuMazzinga, GameMaster12.

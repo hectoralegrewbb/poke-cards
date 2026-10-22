@@ -268,7 +268,7 @@ function pokemonTile(ctx, state, pokemon, validSet, threats) {
 
 function cardIcon(def) {
   if (def.kind === "energy") {
-    if (def.boostMultiplier > 1) return [icon("star", { scale: 4 })];
+    if (def.boostMultiplier > 1) return [icon("wild", { scale: 4 })];
     return Array.from({ length: def.energyValue }, () => icon("bolt", { scale: 4 }));
   }
   const first = def.effects[0]?.type;
@@ -550,6 +550,23 @@ function pile(label, amount) {
   return h("div", { class: "pile" }, h("div", { class: "pileBack" }, icon("cards", { scale: 3 })), h("small", {}, `${label} ${amount}`));
 }
 
+// Pausa antes del cartel de victoria/derrota para que terminen las animaciones del último golpe.
+const resultDelayMs = 1800;
+const resultSeen = { ref: null, at: 0, timer: null };
+
+function resultOverlayReady(ctx, state) {
+  if (!state.result) return false;
+  if (resultSeen.ref !== state) {
+    Object.assign(resultSeen, { ref: state, at: Date.now() });
+    clearTimeout(resultSeen.timer);
+    resultSeen.timer = null;
+  }
+  const remaining = resultDelayMs - (Date.now() - resultSeen.at);
+  if (remaining <= 0) return true;
+  if (!resultSeen.timer) resultSeen.timer = setTimeout(() => { resultSeen.timer = null; if (ctx.run?.combat === state) ctx.rerender(); }, remaining + 30);
+  return false;
+}
+
 export function renderCombat(ctx) {
   const { run } = ctx;
   const state = run.combat;
@@ -593,7 +610,7 @@ export function renderCombat(ctx) {
         h("button", { class: `btn ${sel.mode === "shield" ? "on" : ""}`, onClick: () => { sel.mode = sel.mode === "shield" ? "attack" : "shield"; clearChoice(); sfx.play("select"); ctx.rerender(); } }, "ESCUDO"),
         h("button", { class: "btn danger", disabled: finished, title: readyCount ? `${readyCount} Pokémon todavía pueden actuar` : "Resolver acciones enemigas", onClick: () => endTurnClicked(ctx, state, readyCount) },
           readyCount && endTurnArmed() ? "¿SEGURO? ▶" : readyCount ? `FIN TURNO (${readyCount}) ▶` : "FIN TURNO ▶"))),
-    finished ? h("div", { class: "overlay" }, h("div", { class: "window dialogBig" },
+    finished && resultOverlayReady(ctx, state) ? h("div", { class: "overlay" }, h("div", { class: "window dialogBig" },
       h("h2", { class: state.result === "victory" ? "win" : "lose" }, state.result === "victory" ? "¡VICTORIA!" : isOptionalEventKind(ctx.run) ? "¡TE RETIRAS!" : "DERROTA"),
       state.result !== "victory" && isOptionalEventKind(ctx.run) ? h("p", { class: "muted" }, "Es un evento: no pierdes la partida. Tu equipo vuelve como estaba, sin recompensas.") : null,
       h("button", { class: "btn primary", onClick: () => ctx.onCombatFinished() }, "CONTINUAR ▶"))) : null);
