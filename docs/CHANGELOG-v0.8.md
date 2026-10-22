@@ -45,3 +45,4 @@
 - **No aplicado**: hojas de íconos Gen3/Gen5 (grilla irregular, ya hay sprites completos), hoja UI BW2 (choca con el tema claro) y barras HP BW2 (se emulan con CSS si se quiere).
 - **Copyright**: los sprites son assets de Nintendo/Game Freak extraídos por terceros. Están aislados en `assets/ui`, `assets/items` y `assets/fx`; borrar esas carpetas deja el juego funcional (fallback a iconos pixel). Riesgo de repo público a cargo del autor.
 - **Créditos de las hojas**: Neslug (efectos RS), Ploaj, PikachuMazzinga, GameMaster12.
+- **Fix publicación**: `.gitignore` ignoraba toda la carpeta `assets/`, así que `git add -A` no subía los PNG (imágenes rotas en Pages). Ahora solo se ignora `assets/sprites/`. Además, si un PNG de ícono falla, vuelve al ícono vectorial.

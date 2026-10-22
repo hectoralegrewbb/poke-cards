@@ -191,12 +191,18 @@ function imageIcon(name, scale) {
   img.className = `pixIcon ${name}`;
   img.style.imageRendering = "pixelated";
   img.decoding = "async";
+  // Si el PNG no carga (assets sin publicar, 404), vuelve al ícono vectorial.
+  img.addEventListener("error", () => { if (icons[name]) img.replaceWith(vectorIcon(name, scale)); }, { once: true });
   return img;
 }
 
 // Devuelve un <svg> escalado en múltiplos de "scale" px por pixel del ícono.
 export function icon(name, { color, scale = 3 } = {}) {
   if (imageIcons[name]) return imageIcon(name, scale);
+  return vectorIcon(name, scale, color);
+}
+
+function vectorIcon(name, scale = 3, color) {
   const spec = icons[name];
   const rows = spec.rows;
   const width = Math.max(...rows.map((row) => row.length));
