@@ -340,17 +340,6 @@ button:focus-visible, [role="button"]:focus-visible, input:focus-visible, select
 .tile.afflicted-burn .spriteBox { animation: burnFlash .5s steps(3) 2; }
 .tile.afflicted-poison .spriteBox { animation: poisonFlash .5s steps(3) 2; }
 .tile.staggered .spriteBox { animation: shake .38s steps(4) 2; }
-.attackProjectile { position: absolute; z-index: 12; pointer-events: none; width: 17px; height: 17px; margin: -8px; border: 3px solid var(--c0); background: var(--c12); box-shadow: 0 0 0 5px rgba(255,255,255,.5), 0 0 18px currentColor; animation: typeFlight .52s steps(14) forwards; image-rendering: pixelated; }
-.attackProjectile::after { content: ""; position: absolute; inset: -6px; border: 2px dashed currentColor; transform: rotate(45deg); animation: spinFlight .18s steps(4) infinite; }
-.attackProjectile.type-fire { color: #ffcd75; background: #ee8130; }
-.attackProjectile.type-water, .attackProjectile.type-ice { color: #73eff7; background: #41a6f6; border-radius: 50%; }
-.attackProjectile.type-electric { color: #ffcd75; background: #f7d02c; clip-path: polygon(45% 0,100% 0,55% 45%,88% 45%,15% 100%,37% 55%,10% 55%); border: 0; }
-.attackProjectile.type-poison, .attackProjectile.type-ghost, .attackProjectile.type-psychic { color: #a98ff3; background: #735797; border-radius: 50%; }
-.attackProjectile.type-grass, .attackProjectile.type-bug { color: #a7f070; background: #38b764; }
-.attackProjectile.type-ground, .attackProjectile.type-rock, .attackProjectile.type-steel { color: #ffcd75; background: #b6a136; }
-.attackProjectile.type-fighting, .attackProjectile.type-dragon, .attackProjectile.type-dark { color: #ef7d57; background: #b13e53; }
-@keyframes typeFlight { 0% { transform: translate(0,0) scale(.3); opacity: 1; } 75% { opacity: 1; } 100% { transform: translate(var(--travelX),var(--travelY)) scale(1.45); opacity: 0; } }
-@keyframes spinFlight { to { transform: rotate(135deg); } }
 @keyframes burnFlash { 50% { filter: sepia(1) saturate(5) hue-rotate(-28deg) brightness(2); } }
 @keyframes poisonFlash { 50% { filter: sepia(1) saturate(6) hue-rotate(220deg) brightness(1.7); } }
 .options:has(> .option:only-child) { grid-template-columns: minmax(260px, 510px); }
@@ -521,8 +510,6 @@ button, .option, .member, .card, .stockItem, .starterCard { touch-action: manipu
 .float.passiveFx { color: var(--c11); font-size: 9px; top: 4px; }
 .fxBanner { position: absolute; left: 50%; top: 42%; z-index: 40; transform: translate(-50%, -50%); pointer-events: none; padding: 8px 14px; background: var(--c0); border: 4px solid var(--c4); color: var(--c4); font: 11px/1.4 var(--px); text-align: center; white-space: nowrap; animation: bannerPop 1.3s steps(13) forwards; }
 @keyframes bannerPop { 0% { transform: translate(-50%, -30%) scale(.6); opacity: 0; } 15% { transform: translate(-50%, -50%) scale(1.1); opacity: 1; } 80% { opacity: 1; } 100% { transform: translate(-50%, -70%) scale(1); opacity: 0; } }
-.attackProjectile.type-normal { color: #f4f4f4; background: #a8a878; }
-.attackProjectile.type-flying { color: #c8e8ff; background: #a890f0; border-radius: 50%; }
 @media (max-width: 800px) { .fxBanner { font-size: 9px; padding: 6px 10px; } .float.note { top: 30px; font-size: 7px; } }
 
 /* v0.8: lectura del combate: amenaza por aliado y alcance de técnicas cuerpo a cuerpo */
@@ -589,10 +576,44 @@ button, .option, .member, .card, .stockItem, .starterCard { touch-action: manipu
   .hud { padding: 3px 10px; }
 }
 @media (max-width: 800px) { .threatBadge { top: 0; left: 2px; font-size: 12px; padding: 1px 4px; } .reachNote { top: 4px; } }
-.itemIcon { vertical-align: middle; image-rendering: pixelated; }
+.itemIcon { vertical-align: middle; flex: none; }
 .btn .itemIcon { margin: -4px 2px -4px 0; }
+.flatArt { vertical-align: middle; }
 
-/* Proyectiles con sprite (assets/fx) */
-.attackProjectile.withSprite { width: 4px; height: 4px; margin: 0; border: 0; background: none; box-shadow: none; animation: typeFlight .52s linear forwards; }
-.attackProjectile.withSprite::after { display: none; }
-.attackProjectile.withSprite .fxSprite { position: absolute; left: calc(var(--fxSize) / -2); top: calc(var(--fxSize) / -2); width: var(--fxSize); height: var(--fxSize); background: var(--fxImage) center / contain no-repeat; image-rendering: pixelated; transform: rotate(var(--fxAngle, 0deg)); }
+/* Efectos de ataque propios (solo CSS). Estructura: .fxShot (viaja) > .fxBody (rota hacia el blanco) con ::before = estela y ::after = núcleo. */
+.fxShot { position: absolute; z-index: 12; width: 0; height: 0; pointer-events: none; animation: fxFly .5s cubic-bezier(.35,.05,.75,.6) forwards; }
+.fxBody { position: absolute; left: 0; top: 0; width: 0; height: 0; transform: rotate(var(--fxAngle, 0deg)); --s: 24px; --fxA: #f4f4f4; --fxB: #b8c0d8; }
+.fxBody::before { content: ""; position: absolute; right: 0; top: -5px; width: 52px; height: 10px; border-radius: 10px 0 0 10px; background: linear-gradient(to left, var(--fxA), transparent); filter: blur(2px); opacity: .85; }
+.fxBody::after { content: ""; position: absolute; left: calc(var(--s) / -2); top: calc(var(--s) / -2); width: var(--s); height: var(--s); background: radial-gradient(circle at 38% 38%, #fff, var(--fxA) 55%, var(--fxB)); border-radius: 50%; box-shadow: 0 0 14px var(--fxA); }
+@keyframes fxFly { 0% { transform: translate(0,0) scale(.4); opacity: 0; } 12% { opacity: 1; } 80% { opacity: 1; } 100% { transform: translate(var(--travelX), var(--travelY)) scale(1.15); opacity: 0; } }
+@keyframes fxSpin { to { transform: rotate(360deg); } }
+@keyframes fxFlicker { 0%, 100% { transform: scale(1); } 35% { transform: scale(1.18, .88); } 70% { transform: scale(.9, 1.12); } }
+@keyframes fxPulse { 0%, 100% { transform: scale(.85); } 50% { transform: scale(1.2); } }
+
+.fx-fire { --fxA: #ff8a2a; --fxB: #d9381e; --s: 32px; }
+.fx-fire::after { background: radial-gradient(circle at 40% 40%, #fff7c2, #ffcd3c 38%, #ee6b1e 72%, rgba(217,56,30,0) 100%); animation: fxFlicker .16s linear infinite; }
+.fx-water { --fxA: #5cc8ff; --fxB: #2a7de1; }
+.fx-water::after { border-radius: 50% 50% 50% 50% / 62% 62% 38% 38%; }
+.fx-electric { --fxA: #ffe45c; --fxB: #f2a31b; --s: 30px; }
+.fx-electric::before { height: 4px; top: -2px; filter: none; animation: fxFlicker .09s linear infinite; }
+.fx-electric::after { border-radius: 0; clip-path: polygon(45% 0, 100% 0, 58% 42%, 90% 42%, 18% 100%, 40% 56%, 8% 56%); background: linear-gradient(135deg, #fffbd0, #ffe45c 50%, #f2a31b); animation: fxFlicker .1s linear infinite; }
+.fx-ice { --fxA: #bdeeff; --fxB: #5cc8ff; --s: 26px; }
+.fx-ice::after { border-radius: 0; clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%); background: linear-gradient(135deg, #fff, #bdeeff 50%, #5cc8ff); animation: fxSpin .5s linear infinite; }
+.fx-rock, .fx-ground, .fx-steel { --fxA: #c2a45b; --fxB: #7a5a2a; --s: 26px; }
+.fx-rock::after, .fx-ground::after, .fx-steel::after { border-radius: 0; clip-path: polygon(20% 0, 78% 8%, 100% 46%, 82% 94%, 30% 100%, 0 56%); background: linear-gradient(135deg, #e6d29a, #c2a45b 50%, #7a5a2a); animation: fxSpin .45s linear infinite; }
+.fx-grass, .fx-bug { --fxA: #7be08a; --fxB: #2e9d4e; }
+.fx-grass::after, .fx-bug::after { border-radius: 0 100% 0 100%; background: linear-gradient(135deg, #c8f5a8, #5fc46b 55%, #2e9d4e); box-shadow: 0 0 8px var(--fxA); animation: fxSpin .5s linear infinite; }
+.fx-poison, .fx-ghost, .fx-psychic { --fxA: #b36bff; --fxB: #6a2fb0; }
+.fx-poison::after, .fx-ghost::after, .fx-psychic::after { animation: fxPulse .22s ease-in-out infinite; }
+.fx-fighting, .fx-dragon, .fx-dark { --fxA: #ff7a6a; --fxB: #b13e53; --s: 26px; }
+.fx-fighting::after, .fx-dragon::after, .fx-dark::after { border-radius: 0; clip-path: polygon(50% 0, 62% 34%, 100% 38%, 70% 60%, 80% 100%, 50% 76%, 20% 100%, 30% 60%, 0 38%, 38% 34%); animation: fxSpin .6s linear infinite; }
+.fx-normal, .fx-flying { --fxA: #f4f4f4; --fxB: #a8a8c0; }
+.fx-flying { --fxA: #c8d8ff; --fxB: #8f8ff0; }
+
+/* Impacto: anillo + destello en el blanco */
+.fxImpact { position: absolute; z-index: 12; width: 0; height: 0; pointer-events: none; --fxA: #f4f4f4; --fxB: #b8c0d8; }
+.fxImpact::before { content: ""; position: absolute; left: -9px; top: -9px; width: 18px; height: 18px; border-radius: 50%; border: 4px solid var(--fxA); box-shadow: 0 0 12px var(--fxA); animation: fxRing .42s ease-out forwards; }
+.fxImpact::after { content: ""; position: absolute; left: -16px; top: -16px; width: 32px; height: 32px; border-radius: 50%; background: radial-gradient(circle, #fff, var(--fxA) 45%, transparent 70%); animation: fxFlash .3s ease-out forwards; }
+@keyframes fxRing { from { transform: scale(.3); opacity: 1; } to { transform: scale(3.4); opacity: 0; } }
+@keyframes fxFlash { from { transform: scale(.4); opacity: 1; } to { transform: scale(1.6); opacity: 0; } }
+@media (prefers-reduced-motion: reduce) { .fxBody::after, .fxBody::before { animation: none !important; } }

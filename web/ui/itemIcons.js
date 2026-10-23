@@ -1,12 +1,8 @@
-// Sprites de ítems (assets/items/<id>.png, 32×32). Si falta el archivo, el ícono se oculta y queda solo el texto.
+// Arte de ítems: SVG flat propio (ver flatArt.js). Un ítem sin dibujo no muestra ícono y queda solo el texto.
+import { flatSvg, hasFlatArt } from "./flatArt.js";
+
 export function itemImage(itemId, size = 24) {
-  const img = document.createElement("img");
-  img.src = `../assets/items/${itemId}.png`;
-  img.alt = "";
-  img.width = size;
-  img.height = size;
-  img.className = "itemIcon";
-  img.style.imageRendering = "pixelated";
-  img.addEventListener("error", () => img.remove());
-  return img;
+  if (!hasFlatArt(itemId)) return null;
+  const svg = flatSvg(itemId, size, "itemIcon");
+  return svg;
 }
