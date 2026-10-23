@@ -1,3 +1,4 @@
+import { flatSvg, hasFlatArt } from "./flatArt.js";
 // Íconos de pixel art dibujados como grillas de texto -> SVG con rects (sin suavizado).
 // Convenciones: "o" contorno, "#" color principal, "a" tono secundario, "w" brillo, "." vacío.
 const outline = "#1a1c2c";
@@ -179,6 +180,7 @@ const SVG_NS = "http://www.w3.org/2000/svg";
 
 // Devuelve un <svg> escalado en múltiplos de "scale" px por pixel del ícono.
 export function icon(name, { color, scale = 3 } = {}) {
+  if (hasFlatArt(name)) return flatSvg(name, Math.round(6 * scale), `pixIcon ${name}`);
   const spec = icons[name];
   const rows = spec.rows;
   const width = Math.max(...rows.map((row) => row.length));

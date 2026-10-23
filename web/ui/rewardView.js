@@ -1,11 +1,12 @@
 import { decideCapture, pickCard } from "../../src/run/index.js";
 import { h } from "./dom.js";
 import { cardEffectIcons, describeCard, errorText } from "./labels.js";
+import { itemImage } from "./itemIcons.js";
 import { icon } from "./pixelIcons.js";
 import { sfx } from "./sfx.js";
 
 export function bigCard(def, onClick) {
-  const art = def.kind === "energy" ? (def.boostMultiplier > 1 ? [icon("star", { scale: 5 })] : Array.from({ length: def.energyValue }, () => icon("bolt", { scale: 5 }))) : [icon(cardEffectIcons[def.effects[0]?.type] ?? "star", { scale: 5 })];
+  const art = def.kind === "energy" ? (def.boostMultiplier > 1 ? [icon("wild", { scale: 5 })] : Array.from({ length: def.energyValue }, () => icon("bolt", { scale: 5 }))) : [icon(cardEffectIcons[def.effects[0]?.type] ?? "star", { scale: 5 })];
   const kind = def.kind === "utility" ? "utility" : def.boostMultiplier > 1 ? "wild" : "energy";
   return h("button", { class: `card big ${kind}`, onClick }, h("div", { class: "cardTop" }, def.name), h("div", { class: "cardArt" }, art), h("div", { class: "cardText" }, describeCard(def)));
 }
@@ -15,7 +16,7 @@ export function renderReward(ctx) {
   const pending = run.pending;
   const summary = ctx.lastEvents.map((event) => {
     if (event.type === "goldGained") return [icon("coin", { scale: 2 }), ` +${event.amount} de oro`];
-    if (event.type === "itemGained") return `Ítem: ${data.items[event.itemId].name}`;
+    if (event.type === "itemGained") return [itemImage(event.itemId, 24), ` ${data.items[event.itemId].name}`];
     if (event.type === "badgeEarned") return [icon("medal", { scale: 2 }), ` ${event.badge}`];
     if (event.type === "evolved") return [icon("star", { scale: 2 }), ` ${data.species[event.from].name} evolucionó a ${data.species[event.to].name}`];
     return null;

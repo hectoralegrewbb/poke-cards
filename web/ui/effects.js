@@ -39,9 +39,18 @@ function launchProjectiles(root, fx) {
     const y = origin.top + origin.height / 2 - bounds.top;
     const dx = finish.left + finish.width / 2 - bounds.left - x;
     const dy = finish.top + finish.height / 2 - bounds.top - y;
-    const projectile = h("span", { class: `attackProjectile type-${fx.attackType}`, style: `left:${x}px;top:${y}px;--travelX:${dx}px;--travelY:${dy}px`, "aria-hidden": "true" });
+    const angle = Math.round((Math.atan2(dy, dx) * 180) / Math.PI);
+    const kind = `fx-${fx.attackType}`;
+    const projectile = h("span", { class: "fxShot", style: `left:${x}px;top:${y}px;--travelX:${dx}px;--travelY:${dy}px`, "aria-hidden": "true" },
+      h("i", { class: `fxBody ${kind}`, style: `--fxAngle:${angle}deg` }));
     field.append(projectile);
-    setTimeout(() => projectile.remove(), 570);
+    setTimeout(() => projectile.remove(), 520);
+    // El impacto aparece justo cuando el proyectil llega al blanco.
+    setTimeout(() => {
+      const impact = h("span", { class: `fxImpact ${kind}`, style: `left:${x + dx}px;top:${y + dy}px`, "aria-hidden": "true" });
+      field.append(impact);
+      setTimeout(() => impact.remove(), 460);
+    }, 430);
   }
 }
 

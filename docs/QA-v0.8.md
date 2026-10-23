@@ -5,3 +5,9 @@
 - Bug hallado y corregido en esta pasada: `threats` fuera de alcance en `renderCombat` (rompía el combate en UI).
 - Pendiente de probar en tu dispositivo: audio real (el sandbox no tiene salida de sonido; se verificó contexto `running`, escenas y persistencia de ajustes).
 - Pendiente: logros (segunda etapa).
+
+## v0.8.2
+- Combate real con enemigo a 1 PS: `result` a ~72 ms, `.overlay` a ~1,9 s.
+- Sin 404 ni errores de página en desktop 1000×760 y móvil 390×780 (título, mapa, combate).
+- `node --test` 143/143, fuzz 291 chequeos sin problemas, determinismo 0/80, balance regional 21%.
+- v0.8.2b: galería de ítems SVG revisada a 64 y 28 px; proyectil de fuego e impacto verificados en combate real; 143/143.

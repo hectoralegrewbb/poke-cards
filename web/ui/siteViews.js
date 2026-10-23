@@ -3,6 +3,7 @@ import { isAlive } from "../../src/engine/index.js";
 import { buyFromShop, leaveShop, playCamp } from "../../src/run/index.js";
 import { h } from "./dom.js";
 import { describeCard, errorText } from "./labels.js";
+import { itemImage } from "./itemIcons.js";
 import { icon } from "./pixelIcons.js";
 import { sfx } from "./sfx.js";
 
@@ -43,7 +44,7 @@ export function renderShop(ctx) {
     h("div", { class: "stock" }, run.shop.stock.map((entry, index) => {
       const def = entry.kind === "item" ? data.items[entry.id] : data.cards[entry.id];
       return h("button", { class: `stockItem ${entry.sold ? "sold" : ""}`, disabled: entry.sold, onClick: () => check(ctx, buyFromShop(run, index), "card") },
-        h("strong", {}, def.name), h("small", {}, entry.kind === "item" ? def.description : describeCard(def)),
+        h("strong", {}, entry.kind === "item" ? itemImage(entry.id, 28) : null, entry.kind === "item" ? " " : "", def.name), h("small", {}, entry.kind === "item" ? def.description : describeCard(def)),
         h("span", { class: "price" }, entry.sold ? "VENDIDO" : [icon("coin", { scale: 2 }), ` ${entry.price}`]));
     })),
     h("button", { class: "btn primary", onClick: () => { leaveShop(run); sfx.play("select"); ctx.rerender(); } }, "SALIR ▶"));

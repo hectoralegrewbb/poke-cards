@@ -18,7 +18,7 @@ const logLines = [];
 const hpMemory = new Map();
 let loggedCount = 0;
 // En pantallas chicas la guía arranca plegada: el espacio vertical es lo más escaso.
-let helpExpanded = !(typeof matchMedia === "function" && matchMedia("(max-width: 640px)").matches);
+let helpExpanded = !(typeof matchMedia === "function" && matchMedia("(max-width: 800px)").matches);
 
 function resetSelection(state) {
   Object.assign(sel, { ref: state, actorUid: null, moveIndex: null, targetUid: null, cardUids: [], mode: "attack", utilityUid: null });
@@ -158,6 +158,7 @@ function runAction(ctx, state, result) {
   }
   pushEvents(ctx, state, result.events);
   clearChoice();
+  sel.mode = "attack"; // tras cualquier acción se vuelve al menú de técnicas (antes quedaba el modo escudo/utilidad pegado)
   ctx.rerender();
   return true;
 }
@@ -267,7 +268,7 @@ function pokemonTile(ctx, state, pokemon, validSet, threats) {
 
 function cardIcon(def) {
   if (def.kind === "energy") {
-    if (def.boostMultiplier > 1) return [icon("star", { scale: 4 })];
+    if (def.boostMultiplier > 1) return [icon("wild", { scale: 4 })];
     return Array.from({ length: def.energyValue }, () => icon("bolt", { scale: 4 }));
   }
   const first = def.effects[0]?.type;
@@ -310,6 +311,8 @@ function onTileClick(ctx, state, pokemon) {
     clearChoice();
     sfx.play("select");
     ctx.rerender();
+    // En pantallas chicas el menú de técnicas puede quedar fuera de vista: se trae a la vista al elegir.
+    requestAnimationFrame(() => document.querySelector(".window.menu")?.scrollIntoView({ block: "nearest", behavior: "smooth" }));
   }
 }
 
@@ -323,7 +326,11 @@ function selectMove(ctx, state, actor, index) {
 
 function movesMenu(ctx, state) {
   const actor = findPokemon(state, sel.actorUid);
-  if (!actor || sel.mode !== "attack") return h("div", { class: "menuHint" }, sel.mode === "shield" ? "Elegí un aliado y cartas de energía." : sel.mode === "utility" ? "Elegí a qué aliado aplicarla." : "Elegí uno de tus Pokémon.");
+  if (!actor || sel.mode !== "attack") {
+    const hint = sel.mode === "shield" ? "Elegí un aliado y cartas de energía." : sel.mode === "utility" ? "Elegí a qué aliado aplicarla." : "Elegí uno de tus Pokémon.";
+    const cancel = sel.mode === "attack" ? null : h("button", { class: "btn mini", onClick: () => { sel.mode = "attack"; sel.utilityUid = null; sel.cardUids = []; sfx.play("deny"); ctx.rerender(); } }, "◀ VOLVER A TÉCNICAS");
+    return h("div", { class: "menuHint" }, hint, cancel ? h("div", {}, cancel) : null);
+  }
   const passive = actor.passive;
   return h("div", { class: "movesWrap" }, h("div", { class: "moves" }, actor.moves.map((moveId, index) => {
     const move = state.data.moves[moveId];
@@ -428,6 +435,12 @@ function handView(ctx, state) {
 
     const onCardClick = () => {
       if (def.kind === "utility") {
+        if (def.target === "ally" && sel.mode === "utility" && sel.utilityUid === card.uid) {
+          sel.mode = "attack"; // tocar de nuevo la carta armada la cancela
+          sel.utilityUid = null;
+          sfx.play("deny");
+          return ctx.rerender();
+        }
         if (def.target === "ally") {
           sel.mode = "utility";
           sel.utilityUid = card.uid;
@@ -537,6 +550,23 @@ function pile(label, amount) {
   return h("div", { class: "pile" }, h("div", { class: "pileBack" }, icon("cards", { scale: 3 })), h("small", {}, `${label} ${amount}`));
 }
 
+// Pausa antes del cartel de victoria/derrota para que terminen las animaciones del último golpe.
+const resultDelayMs = 1800;
+const resultSeen = { ref: null, at: 0, timer: null };
+
+function resultOverlayReady(ctx, state) {
+  if (!state.result) return false;
+  if (resultSeen.ref !== state) {
+    Object.assign(resultSeen, { ref: state, at: Date.now() });
+    clearTimeout(resultSeen.timer);
+    resultSeen.timer = null;
+  }
+  const remaining = resultDelayMs - (Date.now() - resultSeen.at);
+  if (remaining <= 0) return true;
+  if (!resultSeen.timer) resultSeen.timer = setTimeout(() => { resultSeen.timer = null; if (ctx.run?.combat === state) ctx.rerender(); }, remaining + 30);
+  return false;
+}
+
 export function renderCombat(ctx) {
   const { run } = ctx;
   const state = run.combat;
@@ -567,8 +597,8 @@ export function renderCombat(ctx) {
       h("span", { class: `modChip ${modifier.kind}`, title: `${modifier.label}: quedan ${modifier.turnsLeft} turno(s)` },
         `${modifier.label} ${modifier.kind === "cost" ? modifier.amount : `+${modifier.amount} POD`} · ${modifier.turnsLeft}T`))) : null,
     h("div", { class: "field", "data-drop": "field" },
-      h("div", { class: "side playerSide" }, row("player", "front"), row("player", "back")),
-      h("div", { class: "side enemySide" }, row("enemy", "front"), row("enemy", "back"))),
+      h("div", { class: "side enemySide" }, row("enemy", "front"), row("enemy", "back")),
+      h("div", { class: "side playerSide" }, row("player", "front"), row("player", "back"))),
     h("div", { class: "bottom" },
       dialogBox(ctx, state),
       h("div", { class: "window menu" }, h("div", { class: "menuTitle" }, "TÉCNICAS"), movesMenu(ctx, state))),
@@ -580,7 +610,7 @@ export function renderCombat(ctx) {
         h("button", { class: `btn ${sel.mode === "shield" ? "on" : ""}`, onClick: () => { sel.mode = sel.mode === "shield" ? "attack" : "shield"; clearChoice(); sfx.play("select"); ctx.rerender(); } }, "ESCUDO"),
         h("button", { class: "btn danger", disabled: finished, title: readyCount ? `${readyCount} Pokémon todavía pueden actuar` : "Resolver acciones enemigas", onClick: () => endTurnClicked(ctx, state, readyCount) },
           readyCount && endTurnArmed() ? "¿SEGURO? ▶" : readyCount ? `FIN TURNO (${readyCount}) ▶` : "FIN TURNO ▶"))),
-    finished ? h("div", { class: "overlay" }, h("div", { class: "window dialogBig" },
+    finished && resultOverlayReady(ctx, state) ? h("div", { class: "overlay" }, h("div", { class: "window dialogBig" },
       h("h2", { class: state.result === "victory" ? "win" : "lose" }, state.result === "victory" ? "¡VICTORIA!" : isOptionalEventKind(ctx.run) ? "¡TE RETIRAS!" : "DERROTA"),
       state.result !== "victory" && isOptionalEventKind(ctx.run) ? h("p", { class: "muted" }, "Es un evento: no pierdes la partida. Tu equipo vuelve como estaba, sin recompensas.") : null,
       h("button", { class: "btn primary", onClick: () => ctx.onCombatFinished() }, "CONTINUAR ▶"))) : null);

@@ -54,14 +54,13 @@ export const errorText = {
   noItem: "No tenés ese ítem.",
   noEffect: "No tendría ningún efecto.",
   notEnoughGold: "No te alcanza el oro.",
-  legendaryLimit: "Solo podés tener un legendario activo. Enviá el otro a la caja.",
   invalidStock: "Ya no está disponible."
 };
 
 // Ícono de arte para cada tipo de efecto de carta (compartido por la mano y la pantalla de recompensas).
 export const cardEffectIcons = Object.freeze({
   drawCards: "cards", heal: "heart", shield: "shield", reduceCooldown: "clock", luckyCoin: "clover",
-  addCards: "bolt", powerModifier: "sword", costModifier: "star", cureStatus: "leaf"
+  addCards: "bolt", powerModifier: "sword", costModifier: "star", cureStatus: "potion"
 });
 
 export function describeCard(card) {
