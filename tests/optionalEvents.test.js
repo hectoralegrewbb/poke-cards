@@ -43,7 +43,7 @@ test("perder contra el legendario no termina la corrida y el legendario huye", (
   loseCombat(run);
   assert.equal(run.phase, "map");
   assert.ok(run.completedLegendaryMilestones.includes(3));
-  assert.ok(!run.options.some((option) => option.type === "legendary" && option.milestone), "el legendario de hito no se vuelve a ofrecer en bucle");
+  assert.ok(!run.options.some((option) => option.type === "legendary"), "no se vuelve a ofrecer en bucle");
   assert.equal(run.party.every((pokemon) => pokemon.hp > 0), true);
 });
 
@@ -73,42 +73,4 @@ test("sin copia (guardado viejo) el equipo vuelve en pie con la mitad de PS", ()
   loseCombat(run);
   assert.equal(run.phase, "map");
   assert.ok(run.party.every((pokemon) => pokemon.hp >= Math.ceil(pokemon.maxHp / 2) && !pokemon.fainted));
-});
-
-test("legendarios extra: aparecen como ruta opcional, sin reemplazar el paso y sin tope de uso", async () => {
-  const { generateOptions } = await import("../src/run/mapGenerator.js");
-  const { chooseNode, createRun } = await import("../src/run/index.js");
-  const { data } = await import("./helpers.js");
-  let offered = null;
-  for (let seed = 1; seed <= 60 && !offered; seed += 1) {
-    const run = createRun({ data, seed, mode: "global" });
-    run.badges.push("a");
-    for (let i = 0; i < 40 && !offered; i += 1) {
-      const options = generateOptions(run);
-      offered = options.find((node) => node.type === "legendary" && node.milestone === false) ? { run, options } : null;
-    }
-  }
-  assert.ok(offered, "debería ofrecerse algún legendario extra");
-  const { run, options } = offered;
-  assert.equal(options.length, 2);
-  run.options = options;
-  const stepBefore = run.step;
-  const index = options.findIndex((node) => node.type === "legendary");
-  assert.equal(chooseNode(run, index).ok, true);
-  assert.ok(run.legendariesSeen.includes(options[index].speciesId));
-  run.combat.result = "defeat";
-  finishCombat(run);
-  assert.equal(run.phase, "map");
-  assert.equal(run.step, stepBefore); // huir no consume el paso
-});
-
-test("la party y la caja aceptan cualquier cantidad de legendarios", async () => {
-  const { createRun } = await import("../src/run/index.js");
-  const { addToRoster, newPokemon } = await import("../src/run/runState.js");
-  const { data } = await import("./helpers.js");
-  const run = createRun({ data, seed: 5 });
-  const legendaries = Object.keys(data.species).filter((id) => data.species[id].legendary).slice(0, 8);
-  for (const id of legendaries) addToRoster(run, newPokemon(run, id));
-  const count = [...run.party, ...run.box].filter((pokemon) => data.species[pokemon.speciesId].legendary).length;
-  assert.equal(count, 8);
 });

@@ -41,7 +41,6 @@ export function createRun({ data, seed = 1, starterIds = [data.region.start.star
     box: [],
     deckCardIds: buildDeckList(data.startingDeck),
     chestCardIds: [],
-    legendariesSeen: [],
     nextUid: 1,
     log: []
   };
@@ -50,10 +49,7 @@ export function createRun({ data, seed = 1, starterIds = [data.region.start.star
   return run;
 }
 
-// Solo el legendario de hito (3 y 6 medallas) reemplaza el paso; los extra son rutas opcionales.
-const isMilestoneLegendary = (node) => node?.type === "legendary" && node.milestone !== false;
-
-function returnToMap(run, { advance = !isMilestoneLegendary(run.node) } = {}) {
+function returnToMap(run, { advance = run.node?.type !== "legendary" } = {}) {
   if (advance) advanceStep(run);
   run.options = generateOptions(run);
   run.node = null;
@@ -70,7 +66,7 @@ function retreatFromEvent(run) {
   const node = run.node;
   restoreParty(run, run.eventSnapshot ?? null);
   const events = [emitRun(run, { type: "eventFailed", nodeType: node.type, speciesId: node.speciesId ?? null })];
-  if (isMilestoneLegendary(node)) run.completedLegendaryMilestones.push(run.badges.length);
+  if (node.type === "legendary") run.completedLegendaryMilestones.push(run.badges.length);
   returnToMap(run, { advance: false });
   return { ok: true, events };
 }
@@ -91,7 +87,6 @@ export function chooseNode(run, optionIndex) {
     run.phase = "shop";
   } else {
     run.eventSnapshot = isOptionalEvent(node) ? snapshotParty(run) : null;
-    if (node.type === "legendary" && !(run.legendariesSeen ??= []).includes(node.speciesId)) run.legendariesSeen.push(node.speciesId);
     const encounter = buildEncounter(run, node);
     run.combat = createCombat({
       data: run.data,

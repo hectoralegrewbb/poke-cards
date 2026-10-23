@@ -86,9 +86,11 @@ test("tercera y sexta medalla activan encuentros legendarios y no saltean el map
       assert.ok(!run.options.some((node) => node.type === "legendary"));
     }
   }
-  // Sin límite de legendarios: ambos entran a la party (hay lugar) y el canje con la caja siempre es válido.
-  assert.equal(run.party.filter((pokemon) => data.species[pokemon.speciesId].legendary).length, 2);
-  assert.equal(run.box.length, 0);
+  assert.equal(run.party.filter((pokemon) => data.species[pokemon.speciesId].legendary).length, 1);
+  assert.equal(run.box.filter((pokemon) => data.species[pokemon.speciesId].legendary).length, 1);
+  const partyRegular = run.party.find((pokemon) => !data.species[pokemon.speciesId].legendary);
+  const boxedLegend = run.box.find((pokemon) => data.species[pokemon.speciesId].legendary);
+  assert.equal(swapPartyBox(run, partyRegular.uid, boxedLegend.uid).error, "legendaryLimit");
 });
 
 test("eventos: el rival usa un inicial de ventaja y Team Rocket su equipo temático", () => {

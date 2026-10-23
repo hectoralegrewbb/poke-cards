@@ -37,7 +37,7 @@ export function grantVictoryRewards(run, node, defeatedEnemies) {
 
   let itemId = null;
   if (node.type === "legendary") {
-    if (node.milestone !== false) run.completedLegendaryMilestones.push(run.badges.length);
+    run.completedLegendaryMilestones.push(run.badges.length);
     events.push(emitRun(run, { type: "legendaryDefeated", speciesId: node.speciesId }));
   }
   if (node.type === "gym") {

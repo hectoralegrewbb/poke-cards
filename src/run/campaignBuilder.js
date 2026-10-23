@@ -121,7 +121,7 @@ export function buildCampaign(data, rng, { mode = "regional", regionId = "unova"
     villain: chosen ? data.campaigns.regions[chosen].villain : "Organización rival",
     stages: gyms.map((gym, index) => stageOf(data, rng, gym, gym.regionId, index)),
     league: leagueOf(data, rng, leagueMembers, champion, championRegion),
-    legendaryOrder: rng.shuffle(pool),
+    legendaries: rng.shuffle(pool).slice(0, 2),
     nodeRules: {
       ...data.region.nodeRules,
       legendary: { goldPerExp: 2, cardChoices: 3, captureChance: 1 },
@@ -129,10 +129,6 @@ export function buildCampaign(data, rng, { mode = "regional", regionId = "unova"
       villain: { goldPerExp: 2.2, cardChoices: 3, captureChance: 0.25, itemDropChance: 0.6 }
     }
   };
-  // Dos legendarios son eventos garantizados (3 y 6 medallas); el resto del pool puede aparecer como ruta opcional.
-  campaign.legendaries = campaign.legendaryOrder.slice(0, 2);
-  campaign.legendaryPool = campaign.legendaryOrder.slice(2);
-  delete campaign.legendaryOrder;
   return campaign;
 }
 
