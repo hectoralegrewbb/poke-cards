@@ -181,7 +181,7 @@ const SVG_NS = "http://www.w3.org/2000/svg";
 // Devuelve un <svg> escalado en múltiplos de "scale" px por pixel del ícono.
 export function icon(name, { color, scale = 3 } = {}) {
   if (hasFlatArt(name)) return flatSvg(name, Math.round(6 * scale), `pixIcon ${name}`);
-  const spec = icons[name];
+  const spec = icons[name] ?? icons.star;
   const rows = spec.rows;
   const width = Math.max(...rows.map((row) => row.length));
   const svg = document.createElementNS(SVG_NS, "svg");

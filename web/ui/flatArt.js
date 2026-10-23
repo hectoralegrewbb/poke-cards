@@ -74,6 +74,7 @@ const items = {
     shape("rect", { x: 5.5, y: 3, width: 7, height: 8, rx: 1.8, fill: "#ffcd3c" }),
     shape("rect", { x: 19.5, y: 3, width: 7, height: 8, rx: 1.8, fill: "#ffcd3c" })
   ],
+  potion: () => bottle("#c79bff", "#ef7d57", dots(1)),
   superPotion: () => bottle("#ff9ec1", "#ef7d57", dots(2)),
   maxPotion: () => bottle("#6fa8ff", "#ffcd3c", dots(3), true),
   antidote: () => bottle("#c79bff", "#8b4fe0", [drop]),

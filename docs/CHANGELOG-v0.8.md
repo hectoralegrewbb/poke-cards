@@ -44,3 +44,4 @@
 - **Pausa de resultado**: el cartel de VICTORIA/DERROTA aparece 1,8 s después del último golpe (`resultDelayMs`). Verificado: resultado a 72 ms, cartel a ~1,9 s.
 - **Fix publicación**: `.gitignore` ignoraba toda `assets/`; ahora solo `assets/sprites/`.
 - **Diagnóstico**: `web/errorBanner.js` muestra en pantalla cualquier error de carga o ejecución (con botón para borrar el guardado).
+- **Fix**: faltaba el ícono `potion` (usado por cartas de curar estado) al quitar los PNG → `TypeError ... 'rows'` al terminar un combate. Se agregó el arte y un fallback a `star`; test `uiIcons` verifica que todo ícono referenciado exista.
