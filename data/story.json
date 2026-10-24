@@ -1033,7 +1033,7 @@
     "Si buscas un Centro Pokémon, hay uno más adelante en esta ruta."
    ],
    "oncePer": "stage",
-   "chance": 0.6,
+   "chance": 0.85,
    "name": "OFICIAL JENNY"
   },
   {
@@ -1067,7 +1067,7 @@
     "La ruta está despejada. Cuidado con los entrenadores más adelante."
    ],
    "oncePer": "stage",
-   "chance": 0.4,
+   "chance": 0.65,
    "name": "OFICIAL JENNY"
   },
   {

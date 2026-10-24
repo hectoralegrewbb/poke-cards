@@ -6,10 +6,11 @@ function pickDistinct(rng, pool, count) {
 }
 
 // Legendarios extra: aparecen como ruta opcional (no reemplazan el paso) hasta agotar el pool; no hay tope de uso.
-const extraLegendaryChance = 0.2;
+const extraLegendaryChance = 0.12;
+const extraLegendaryMinBadges = 3;
 function pickExtraLegendary(run) {
   const pool = run.campaign.legendaryPool ?? [];
-  if (run.badges.length < 1 || pool.length === 0) return null;
+  if (run.badges.length < extraLegendaryMinBadges || pool.length === 0) return null;
   const owned = new Set([...run.party, ...run.box].map((pokemon) => pokemon.speciesId));
   const seen = new Set(run.legendariesSeen ?? []);
   const available = pool.filter((id) => !owned.has(id) && !seen.has(id));

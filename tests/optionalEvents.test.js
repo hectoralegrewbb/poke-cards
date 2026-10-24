@@ -82,7 +82,8 @@ test("legendarios extra: aparecen como ruta opcional, sin reemplazar el paso y s
   let offered = null;
   for (let seed = 1; seed <= 60 && !offered; seed += 1) {
     const run = createRun({ data, seed, mode: "global" });
-    run.badges.push("a");
+    run.badges.push("a", "b", "c");
+    run.completedLegendaryMilestones.push(3);
     for (let i = 0; i < 40 && !offered; i += 1) {
       const options = generateOptions(run);
       offered = options.find((node) => node.type === "legendary" && node.milestone === false) ? { run, options } : null;
@@ -111,4 +112,15 @@ test("la party y la caja aceptan cualquier cantidad de legendarios", async () =>
   for (const id of legendaries) addToRoster(run, newPokemon(run, id));
   const count = [...run.party, ...run.box].filter((pokemon) => data.species[pokemon.speciesId].legendary).length;
   assert.equal(count, 8);
+});
+
+test("los legendarios extra no aparecen antes de la 3.ª medalla", async () => {
+  const { generateOptions } = await import("../src/run/mapGenerator.js");
+  const { createRun } = await import("../src/run/index.js");
+  const { data } = await import("./helpers.js");
+  for (let seed = 1; seed <= 40; seed += 1) {
+    const run = createRun({ data, seed, mode: "global" });
+    run.badges.push("a", "b");
+    for (let i = 0; i < 20; i += 1) assert.ok(!generateOptions(run).some((node) => node.type === "legendary"));
+  }
 });

@@ -39,3 +39,8 @@ Regional/entrenador 25 % (antes 21 %), global 23 %, explorador 79 % (antes 73 %)
 - Correcciones: anagrama de Aslo, `tipRows` (solo cuerpo a cuerpo), línea del Centro de Jenny solo si hay un Centro por delante.
 - Legendarios de hito (medallas 3 y 6) sin cambios.
 - Tests 164/164, fuzz 294 sin problemas, determinismo 0/80.
+
+## v0.9.3
+
+- Los legendarios opcionales ya no aparecen antes de la 3.ª medalla y su probabilidad baja de 20 % a 12 %. Los legendarios de hito (3.ª y 6.ª medalla) no cambian.
+- La Oficial Jenny aparece con más frecuencia en el mapa (consejos de ruta y de Centro).
