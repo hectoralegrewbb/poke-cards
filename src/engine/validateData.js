@@ -112,6 +112,7 @@ export function validateGameData(data) {
 
   if (data.region) validateRegion(data, check);
   if (data.campaigns) validateCampaigns(data, check);
+  if (data.story) validateStory(data, check);
   return errors;
 }
 
@@ -178,5 +179,24 @@ function validateCampaigns(data, check) {
     checkLeader(campaign.champion, `${regionId} campeón`);
     for (const id of campaign.legendaries) check(Boolean(data.species[id]?.legendary), `${regionId}: legendario inválido ${id}`);
     check(campaign.legendaries.length >= 2, `${regionId}: requiere al menos 2 legendarios`);
+  }
+}
+
+function validateStory(data, check) {
+  const { story } = data;
+  const expressions = ["neutral", "smile", "worried", "glitch", "dark"];
+  const ids = new Set();
+  for (const line of story.lines) {
+    check(!ids.has(line.id), `story: línea repetida ${line.id}`);
+    ids.add(line.id);
+    check(expressions.includes(line.expression), `story ${line.id}: expresión inválida`);
+    check(typeof line.text === "string" && line.text.length > 0, `story ${line.id}: falta texto`);
+  }
+  for (const step of story.final.intro) check(expressions.includes(step.expression), "story.final: expresión inválida");
+  check(Boolean(story.final.endings?.escape && story.final.endings?.stay), "story.final: faltan finales");
+  check(story.boss.enemies.length >= 1, "story.boss: sin enemigos");
+  for (const enemy of story.boss.enemies) {
+    check(Boolean(data.species[enemy.speciesId]), `story.boss: especie inválida ${enemy.speciesId}`);
+    check(Boolean(data.enemyProfiles[enemy.profileId]), `story.boss: perfil inválido ${enemy.profileId}`);
   }
 }

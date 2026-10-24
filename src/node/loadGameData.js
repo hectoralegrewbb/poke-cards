@@ -16,7 +16,8 @@ const fileNames = [
   "encounters",
   "items",
   "region",
-  "campaigns"
+  "campaigns",
+  "story"
 ];
 
 export function loadGameData(directory = defaultDirectory) {

@@ -652,3 +652,47 @@ button, .option, .member, .card, .stockItem, .starterCard { touch-action: manipu
 .faqItem summary { cursor: pointer; font-weight: 700; font-size: 16px; }
 .faqItem p { margin: 8px 0 0; line-height: 1.45; font-size: 15px; }
 @media (max-width: 620px) { .adventureCards { grid-template-columns: 1fr; } .adventureCard { min-height: 0; } }
+
+/* ---------- v0.9.1 · Profesora Amelie ---------- */
+.amelieFace { display: inline-block; flex: none; height: var(--amSize, 96px); aspect-ratio: 120 / 140; }
+.amelieFace svg, .amelieFace .amelieImg { display: block; width: 100%; height: 100%; object-fit: contain; image-rendering: auto; }
+.amelieBust .amEyes { transform-box: fill-box; transform-origin: center; animation: amBlink 5s infinite; }
+.amelieBust.ex-glitch .amLayers { animation: amGlitch 1.3s steps(2, end) infinite; }
+.amelieBust.ex-dark { filter: drop-shadow(0 0 6px #b13e53); }
+.amelieBust.ex-worried .amLayers { animation: amSway 3s ease-in-out infinite; }
+@keyframes amBlink { 0%, 94%, 100% { transform: scaleY(1); } 97% { transform: scaleY(0.1); } }
+@keyframes amGlitch { 0%, 70%, 100% { transform: translate(0, 0); } 75% { transform: translate(-3px, 1px); } 85% { transform: translate(3px, -1px); } }
+@keyframes amSway { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(1.5px); } }
+
+.storyToast { position: fixed; top: 10px; left: 50%; transform: translateX(-50%); z-index: 240; display: flex; align-items: center; gap: 10px; width: min(560px, calc(100vw - 20px)); padding: 8px 12px 8px 8px; background: var(--c15); border: 4px solid var(--c0); box-shadow: 0 4px 0 rgba(0, 0, 0, .35); clip-path: var(--notch); }
+.storyToast.enter { animation: storyIn .28s ease-out; }
+.storyToast.ex-glitch { border-color: var(--c10); }
+.storyToast.ex-dark { border-color: var(--c2); }
+.storyBody { flex: 1; min-width: 0; text-align: left; }
+.storyBody strong { display: block; font: 8px/1.4 var(--px); color: var(--c4); margin-bottom: 4px; }
+.storyBody p { margin: 0; font: 20px/1.1 var(--body); }
+.storyClose { flex: none; align-self: flex-start; background: none; border: 0; color: var(--c13); font: 12px var(--px); cursor: pointer; padding: 4px; }
+@keyframes storyIn { from { opacity: 0; transform: translate(-50%, -14px); } to { opacity: 1; transform: translate(-50%, 0); } }
+
+.storyOffer { display: flex; align-items: center; gap: 12px; width: min(640px, 100%); margin: 0 auto 10px; padding: 8px 12px; background: var(--c15); border: 4px solid var(--c0); }
+
+.amelieScene { display: grid; gap: 12px; justify-items: center; text-align: center; padding: 16px; max-width: 760px; margin: 4vh auto; }
+.amelieScene.ex-dark { box-shadow: 0 0 0 4px var(--c2); }
+.amelieScene.ex-glitch { box-shadow: 0 0 0 4px var(--c10); }
+.sceneBox { display: grid; gap: 10px; width: 100%; justify-items: center; }
+.sceneBox strong { font: 10px var(--px); color: var(--c4); }
+.sceneText { margin: 0; font: 26px/1.15 var(--body); max-width: 56ch; }
+.sceneChoices { display: grid; gap: 8px; width: min(420px, 100%); }
+.endingScreen .endingLine { margin: 0; font: 24px/1.15 var(--body); max-width: 52ch; }
+.ending-stay { filter: saturate(.8); }
+
+@media (max-width: 800px) {
+  .storyToast { top: 54px; gap: 8px; }
+  .storyToast .amelieFace { --amSize: 52px !important; }
+  .storyBody p { font-size: 18px; }
+  .sceneText { font-size: 22px; }
+  .amelieScene .amelieFace { --amSize: 170px !important; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .amelieBust .amEyes, .amelieBust .amLayers, .storyToast.enter { animation: none !important; }
+}

@@ -2,7 +2,7 @@
 // atenta: cuida la party, cambia caja/party, arma el mazo con energía fuerte y gasta oro con criterio.
 import { isAlive } from "../engine/index.js";
 import {
-  buyFromShop, chooseNode, decideCapture, finishCombat, leaveCenter, leaveShop, moveCardToChest, moveCardToDeck, pickCard, playCamp, setRow, swapPartyBox, useItem
+  buyFromShop, chooseAmelieEnding, chooseNode, decideCapture, finishCombat, leaveCenter, leaveShop, moveCardToChest, moveCardToDeck, pickCard, playCamp, setRow, swapPartyBox, useItem
 } from "../run/index.js";
 import { playSmartTurn } from "./smartPlayer.js";
 
@@ -142,6 +142,7 @@ export function playSmartRun(run, { maxSteps = 600, onFight = null } = {}) {
       finishCombat(run);
     } else if (run.phase === "reward") handleReward(run);
     else if (run.phase === "center") leaveCenter(run);
+    else if (run.phase === "amelieIntro") chooseAmelieEnding(run, "escape");
     else if (run.phase === "camp") handleCamp(run);
     else if (run.phase === "shop") handleShop(run);
     else break;

@@ -1,5 +1,5 @@
 // Arranque: carga los JSON, crea la corrida y dibuja la pantalla según run.phase.
-import { createRun, difficultyPresets, gameModes, finishCombat, restoreRun, serializeRun } from "../../src/run/index.js";
+import { createRun, difficultyPresets, gameModes, finishCombat, markStorySeen, pickStoryLine, restoreRun, serializeRun } from "../../src/run/index.js";
 import { renderCombat } from "./combatView.js";
 import { animateBars, playEffects } from "./effects.js";
 import { icon } from "./pixelIcons.js";
@@ -15,9 +15,11 @@ import { renderRoster } from "./rosterPanel.js";
 import { adventureScreen, faqScreen, setupScreen, titleScreen } from "./titleScreens.js";
 import { runLoadingScreen } from "./loadingScreen.js";
 import { renderCamp, renderCenter, renderShop } from "./siteViews.js";
+import { amelieFace, loadAmelieAssets } from "./amelieArt.js";
+import { amelieScene, starterOffer, storyToast } from "./storyView.js";
 import { createAnimatedSpriteProvider } from "./spriteProvider.js";
 
-const dataFiles = ["balance", "cards", "moves", "species", "typeChart", "enemyProfiles", "startingDeck", "encounters", "items", "region", "campaigns"];
+const dataFiles = ["balance", "cards", "moves", "species", "typeChart", "enemyProfiles", "startingDeck", "encounters", "items", "region", "campaigns", "story"];
 
 async function loadData() {
   const entries = await Promise.all(dataFiles.map(async (name) => {
@@ -31,7 +33,7 @@ async function loadData() {
 const root = document.getElementById("app");
 const setup = { seed: "", difficulty: "trainer", mode: "regional", regionId: "random", confirmStart: false };
 const saveKey = "pokecards-dungeon-v2";
-const ctx = { screen: "title", data: null, run: null, sprites: null, savedRun: null, fx: [], lastEvents: [], toast: "", rerender, notify, onCombatFinished };
+const ctx = { storyLine: null, finalStep: 0, screen: "title", data: null, run: null, sprites: null, savedRun: null, fx: [], lastEvents: [], toast: "", rerender, notify, onCombatFinished };
 if (location.search.includes("debug")) window.__ctx = ctx;
 
 function readSave() {
@@ -53,6 +55,7 @@ function persistRun(run) {
 function continueRun() {
   try {
     ctx.run = restoreRun(ctx.data, ctx.savedRun);
+    ctx.storyLine = null;
     ctx.starterPick = null;
     sfx.play("start");
     rerender();
@@ -80,6 +83,8 @@ function onCombatFinished() {
 function startRun(seed, starterId, difficulty, mode, regionId) {
   ctx.run = createRun({ data: ctx.data, seed, starterIds: [starterId], difficulty, mode, regionId });
   ctx.starterPick = null;
+  ctx.storyLine = null;
+  ctx.finalStep = 0;
   ctx.lastEvents = [];
   rerender();
 }
@@ -101,6 +106,7 @@ function starterScreen() {
   };
   return h("section", { class: "window starter" },
     h("h2", {}, "ELEGÍ TU INICIAL"),
+    pick.mode === "global" && ctx.data.story ? starterOffer(ctx.data.story) : null,
     h("p", { class: "muted" }, `Modo ${gameModes[pick.mode].label} · Dificultad ${difficultyPresets[pick.difficulty].label} · Elegí tu inicial. Los demás se capturan.`),
     h("div", { class: "regionTabs" }, choices.map((entry, index) =>
       h("button", { class: `btn mini ${index === pick.region ? "on" : ""}`, onClick: () => { sfx.play("select"); pick.region = index; rerender(); } }, entry.region.toUpperCase()))),
@@ -135,11 +141,19 @@ function menuScreen() {
 }
 
 function endScreen() {
-  const won = ctx.run.result === "victory";
-  return h("section", { class: "window title" },
-    h("h2", { class: won ? "win" : "lose" }, won ? "¡CAMPEÓN DE LA LIGA!" : "FIN DE LA CORRIDA"),
-    h("p", {}, icon("medal", { scale: 3 }), ` Medallas: ${ctx.run.badges.length}/8 · ${ctx.run.campaign.name} · ${gameModes[ctx.run.mode]?.label ?? "CLÁSICO"} · ${difficultyPresets[ctx.run.difficulty ?? "trainer"].label} · Semilla ${ctx.run.seed}`),
-    h("button", { class: "btn primary", onClick: () => { ctx.run = null; ctx.screen = "title"; rerender(); } }, "VOLVER AL INICIO"));
+  const { run } = ctx;
+  const won = run.result === "victory";
+  const ending = run.ending ? ctx.data.story?.final.endings[run.ending] : null;
+  const summary = h("p", {}, icon("medal", { scale: 3 }), ` Medallas: ${run.badges.length}/8 · ${run.campaign.name} · ${gameModes[run.mode]?.label ?? "CLÁSICO"} · ${difficultyPresets[run.difficulty ?? "trainer"].label} · Semilla ${run.seed}`);
+  const back = h("button", { class: "btn primary", onClick: () => { ctx.run = null; ctx.storyLine = null; ctx.screen = "title"; rerender(); } }, "VOLVER AL INICIO");
+  if (ending) {
+    return h("section", { class: `window title endingScreen ending-${run.ending}` },
+      amelieFace(run.ending === "escape" ? "smile" : "dark", 150),
+      h("h2", { class: "win" }, ending.title),
+      ending.lines.map((line) => h("p", { class: "endingLine" }, line)),
+      summary, back);
+  }
+  return h("section", { class: "window title" }, h("h2", { class: won ? "win" : "lose" }, won ? "¡CAMPEÓN DE LA LIGA!" : "FIN DE LA CORRIDA"), summary, back);
 }
 
 function screenFor(run) {
@@ -149,6 +163,7 @@ function screenFor(run) {
     case "camp": return renderCamp(ctx);
     case "center": return renderCenter(ctx);
     case "shop": return renderShop(ctx);
+    case "amelieIntro": return amelieScene(ctx);
     case "ended": return endScreen();
     default: return renderMap(ctx);
   }
@@ -173,10 +188,29 @@ function audioLayer() {
 function sceneFor(run) {
   if (!run) return "title";
   if (run.phase === "ended") return null;
+  if (run.phase === "amelieIntro") return "boss";
   if (run.phase !== "combat") return "map";
-  const bossKinds = ["gym", "eliteFour", "champion"];
+  const bossKinds = ["gym", "eliteFour", "champion", "amelie"];
   const bossNodes = ["legendary", "rival", "villain"];
   return bossKinds.includes(run.combat?.kind) || bossNodes.includes(run.node?.type) ? "boss" : "combat";
+}
+
+const storyPhases = ["map", "combat", "reward", "center"];
+const storyDurationMs = 9000;
+
+function closeStoryLine() {
+  ctx.storyLine = null;
+  rerender();
+}
+
+// Elige (una sola vez por partida) el diálogo de Amelie que corresponde al momento actual.
+function refreshStoryLine(run) {
+  if (ctx.storyLine || !storyPhases.includes(run.phase)) return;
+  const line = pickStoryLine(run);
+  if (!line) return;
+  markStorySeen(run, line.id);
+  ctx.storyLine = { line, fresh: true };
+  setTimeout(() => { if (ctx.storyLine?.line === line) closeStoryLine(); }, storyDurationMs);
 }
 
 function rerender() {
@@ -187,12 +221,14 @@ function rerender() {
     music.setScene("title");
     return;
   }
+  refreshStoryLine(run);
   persistRun(run);
-  const inCombat = run.phase === "combat" || run.phase === "ended";
+  const inCombat = ["combat", "ended", "amelieIntro"].includes(run.phase);
   const children = [
     h("div", { class: inCombat ? "layout single" : "layout" }, screenFor(run), inCombat ? null : renderRoster(ctx)),
     ctx.deckOpen && !inCombat && run.phase !== "ended" ? renderDeckEditor(ctx) : null,
     ctx.toast ? h("div", { class: "toast", role: "status", "aria-live": "polite" }, ctx.toast) : null,
+    storyToast(ctx, closeStoryLine),
     soundButton(),
     audioLayer()
   ];
@@ -207,6 +243,7 @@ async function boot() {
   const localManifest = await fetch("../assets/sprites/manifest.json").then((response) => response.ok).catch(() => false);
   ctx.sprites = createAnimatedSpriteProvider({ data: ctx.data, preferLocal: localManifest || !navigator.onLine });
   ctx.savedRun = readSave();
+  await loadAmelieAssets();
 }
 
 try {

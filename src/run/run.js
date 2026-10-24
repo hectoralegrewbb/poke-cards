@@ -9,6 +9,7 @@ import { openShop, useCamp, usePokeCenter } from "./siteNodes.js";
 import { getDifficulty } from "./difficulty.js";
 import { buildCampaign } from "./campaignBuilder.js";
 import { isDeckPlayable } from "./deckManager.js";
+import { storyActive } from "./story.js";
 
 // starterIds: un único inicial (de cualquier región). El resto del equipo se arma capturando.
 export function createRun({ data, seed = 1, starterIds = [data.region.start.starterChoices[0].species[0]], difficulty = "trainer", mode = "regional", regionId = "unova" }) {
@@ -42,6 +43,8 @@ export function createRun({ data, seed = 1, starterIds = [data.region.start.star
     deckCardIds: buildDeckList(data.startingDeck),
     chestCardIds: [],
     legendariesSeen: [],
+    storySeen: [],
+    ending: null,
     nextUid: 1,
     log: []
   };
@@ -75,6 +78,27 @@ function retreatFromEvent(run) {
   return { ok: true, events };
 }
 
+function startCombat(run, node) {
+  const encounter = buildEncounter(run, node);
+  run.combat = createCombat({
+    data: run.data,
+    party: run.party,
+    enemies: encounter.enemies,
+    deckCardIds: run.deckCardIds,
+    seed: run.rng.int(1, 2147483646),
+    kind: encounter.kind
+  });
+  run.phase = "combat";
+}
+
+function endRun(run, result, ending = null) {
+  run.phase = "ended";
+  run.result = result;
+  run.ending = ending;
+  run.combat = null;
+  return [emitRun(run, { type: "runEnded", result, ending })];
+}
+
 export function chooseNode(run, optionIndex) {
   if (run.phase !== "map") return { ok: false, error: "notOnMap" };
   const node = run.options[optionIndex];
@@ -95,16 +119,7 @@ export function chooseNode(run, optionIndex) {
   } else {
     run.eventSnapshot = isOptionalEvent(node) ? snapshotParty(run) : null;
     if (node.type === "legendary" && !(run.legendariesSeen ??= []).includes(node.speciesId)) run.legendariesSeen.push(node.speciesId);
-    const encounter = buildEncounter(run, node);
-    run.combat = createCombat({
-      data: run.data,
-      party: run.party,
-      enemies: encounter.enemies,
-      deckCardIds: run.deckCardIds,
-      seed: run.rng.int(1, 2147483646),
-      kind: encounter.kind
-    });
-    run.phase = "combat";
+    startCombat(run, node);
   }
   return { ok: true, events };
 }
@@ -121,7 +136,13 @@ export function finishCombat(run) {
     return { ok: true, events: [emitRun(run, { type: "runEnded", result: "defeat" })] };
   }
 
+  if (run.node.type === "amelie") return { ok: true, events: endRun(run, "victory", "escape") };
   const events = grantVictoryRewards(run, run.node, run.combat.teams.enemy);
+  if (run.node.type === "champion" && storyActive(run)) {
+    run.phase = "amelieIntro";
+    events.push(emitRun(run, { type: "amelieAppears" }));
+    return { ok: true, events };
+  }
   if (run.node.type === "champion") {
     run.phase = "ended";
     run.result = "victory";
@@ -164,4 +185,15 @@ export function leaveCenter(run) {
   if (run.phase !== "center") return { ok: false, error: "notInCenter" };
   returnToMap(run);
   return { ok: true, events: [] };
+}
+
+// Tras vencer al campeón en Poké World: quedarse termina la corrida; escapar lleva al combate contra Amelie.
+export function chooseAmelieEnding(run, choice) {
+  if (run.phase !== "amelieIntro") return { ok: false, error: "notInAmelieIntro" };
+  if (choice === "stay") return { ok: true, events: endRun(run, "victory", "stay") };
+  if (choice !== "escape") return { ok: false, error: "invalidChoice" };
+  run.node = { type: "amelie" };
+  run.eventSnapshot = null;
+  startCombat(run, run.node);
+  return { ok: true, events: [emitRun(run, { type: "nodeEntered", node: run.node })] };
 }

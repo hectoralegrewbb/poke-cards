@@ -1,0 +1,320 @@
+{
+  "professor": {
+    "id": "amelie",
+    "name": "Amelie",
+    "title": "Profesora Amelie",
+    "region": "Panhea"
+  },
+  "modes": [
+    "global"
+  ],
+  "lines": [
+    {
+      "id": "welcome",
+      "when": {
+        "phase": [
+          "map"
+        ],
+        "badges": {
+          "max": 0
+        }
+      },
+      "expression": "smile",
+      "text": "¡Te doy la bienvenida a Panhea! Soy la profesora Amelie. Acá conviven Pokémon de cinco regiones. Elegí tu ruta: yo te acompaño."
+    },
+    {
+      "id": "tipCombat",
+      "when": {
+        "phase": [
+          "combat"
+        ],
+        "badges": {
+          "max": 0
+        }
+      },
+      "expression": "neutral",
+      "text": "Elegí un Pokémon, cargale energía y después una técnica. Las técnicas LIBRE no gastan cartas."
+    },
+    {
+      "id": "tipRows",
+      "when": {
+        "phase": [
+          "combat"
+        ],
+        "badges": {
+          "max": 1
+        },
+        "turnMin": 2
+      },
+      "expression": "neutral",
+      "text": "La fila frontal protege a la trasera de los ataques cuerpo a cuerpo (CC). Ubicá bien a tu equipo."
+    },
+    {
+      "id": "tipCapture",
+      "when": {
+        "phase": [
+          "reward"
+        ],
+        "capturePending": true,
+        "badges": {
+          "max": 2
+        }
+      },
+      "expression": "smile",
+      "text": "¡Podés capturarlo! Un equipo variado cubre más tipos. Si ya tenés 6, va a la caja."
+    },
+    {
+      "id": "tipHurt",
+      "when": {
+        "phase": [
+          "map"
+        ],
+        "hpBelow": 0.5,
+        "badges": {
+          "min": 0,
+          "max": 6
+        }
+      },
+      "expression": "worried",
+      "text": "Tu equipo está muy golpeado. Buscá un Centro Pokémon o un campamento antes de seguir."
+    },
+    {
+      "id": "tipFainted",
+      "when": {
+        "phase": [
+          "map"
+        ],
+        "anyFainted": true,
+        "badges": {
+          "max": 6
+        }
+      },
+      "expression": "worried",
+      "text": "Un Pokémon se debilitó. El Centro Pokémon lo revive, y la carta Revivir lo trae de vuelta en pleno combate."
+    },
+    {
+      "id": "centerFirst",
+      "when": {
+        "phase": [
+          "center"
+        ],
+        "badges": {
+          "max": 4
+        }
+      },
+      "expression": "smile",
+      "text": "¡Qué alivio! Los Centros Pokémon de Panhea los diseñé yo misma. ¿Se nota?"
+    },
+    {
+      "id": "firstBadge",
+      "when": {
+        "phase": [
+          "map"
+        ],
+        "badges": {
+          "min": 1,
+          "max": 1
+        }
+      },
+      "expression": "smile",
+      "text": "¡Tu primera medalla! Sabía que lo lograrías. Vas a ser un gran entrenador."
+    },
+    {
+      "id": "tipGym",
+      "when": {
+        "phase": [
+          "map"
+        ],
+        "nextNode": "gym",
+        "badges": {
+          "max": 2
+        }
+      },
+      "expression": "neutral",
+      "text": "El gimnasio te espera. Revisá tu mazo (40 a 45 cartas), tus PS y tus ítems antes de entrar."
+    },
+    {
+      "id": "hint1",
+      "when": {
+        "phase": [
+          "map"
+        ],
+        "badges": {
+          "min": 2,
+          "max": 2
+        }
+      },
+      "expression": "glitch",
+      "text": "Tu progreso es impecable. Casi… perfecto. Casi… como lo escribí. (Se oye un zumbido.)"
+    },
+    {
+      "id": "hint2",
+      "when": {
+        "phase": [
+          "combat"
+        ],
+        "badges": {
+          "min": 3,
+          "max": 4
+        },
+        "turnMin": 3
+      },
+      "expression": "worried",
+      "text": "Qué lindo verte pelear… No te distraigas con otras cosas, ¿sí? Quedate conmigo."
+    },
+    {
+      "id": "hint3",
+      "when": {
+        "phase": [
+          "map"
+        ],
+        "badges": {
+          "min": 4,
+          "max": 4
+        }
+      },
+      "expression": "smile",
+      "text": "Cuando termines la Liga no tenés a dónde volver, ¿verdad? Panhea es tu hogar. Siempre lo fue."
+    },
+    {
+      "id": "hint4",
+      "when": {
+        "phase": [
+          "center"
+        ],
+        "badges": {
+          "min": 5
+        }
+      },
+      "expression": "glitch",
+      "text": "Todo se puede reparar acá. Un Pokémon caído, una ruta rota… hasta un recuerdo. Basta con reiniciar."
+    },
+    {
+      "id": "turn6",
+      "when": {
+        "phase": [
+          "map"
+        ],
+        "badges": {
+          "min": 6,
+          "max": 6
+        }
+      },
+      "expression": "worried",
+      "text": "Estás tan cerca de la cima… ¿Ya no te gusta estar acá conmigo? Podés quedarte todo el tiempo que quieras."
+    },
+    {
+      "id": "turn7",
+      "when": {
+        "phase": [
+          "combat"
+        ],
+        "badges": {
+          "min": 7,
+          "max": 7
+        },
+        "turnMin": 2
+      },
+      "expression": "glitch",
+      "text": "No… te… vas… a ir."
+    },
+    {
+      "id": "turn8",
+      "when": {
+        "phase": [
+          "map"
+        ],
+        "badges": {
+          "min": 8
+        }
+      },
+      "expression": "dark",
+      "text": "El campeón es tu último paso. Después hablaremos. Con calma. Los dos."
+    }
+  ],
+  "final": {
+    "intro": [
+      {
+        "expression": "smile",
+        "text": "¡Lo lograste! Sos el nuevo campeón de Panhea. Estoy tan orgullosa de vos…"
+      },
+      {
+        "expression": "worried",
+        "text": "Ahora tenés todo lo que querías. Entonces, ¿por qué querrías irte?"
+      },
+      {
+        "expression": "glitch",
+        "text": "Este mundo lo escribí yo. Cada ruta, cada Pokémon, cada medalla. Y te escribí a vos, en mi casa, en mi mundo. No es un juego: es un lugar donde nadie te deja solo."
+      },
+      {
+        "expression": "dark",
+        "text": "La salida existe. Está detrás de mí. Pero si cruzás, todo esto se apaga. No puedo permitirlo… Si querés irte, vas a tener que vencerme."
+      }
+    ],
+    "choices": {
+      "escape": "ESCAPAR Y ENFRENTARLA",
+      "stay": "QUEDARME EN PANHEA"
+    },
+    "endings": {
+      "escape": {
+        "title": "FINAL: ESCAPASTE",
+        "lines": [
+          "Amelie baja la mirada y las puertas de Panhea se abren.",
+          "«Gracias por mostrarme que un mundo no se cuida encerrando a nadie.»",
+          "Despertás en el mundo real. Tus Pokémon siguen a tu lado."
+        ]
+      },
+      "stay": {
+        "title": "FINAL: TE QUEDASTE",
+        "lines": [
+          "Amelie sonríe. La salida se desvanece sin ruido.",
+          "Panhea sigue funcionando, ruta tras ruta, para siempre.",
+          "Nadie vuelve a preguntar por qué la Liga nunca termina."
+        ]
+      }
+    }
+  },
+  "boss": {
+    "scale": {
+      "hp": 1.65,
+      "stats": 1.3
+    },
+    "enemies": [
+      {
+        "speciesId": "absol",
+        "row": "front",
+        "profileId": "aggressive"
+      },
+      {
+        "speciesId": "gallade",
+        "row": "front",
+        "profileId": "aggressive"
+      },
+      {
+        "speciesId": "bisharp",
+        "row": "front",
+        "profileId": "threatHunter"
+      },
+      {
+        "speciesId": "xatu",
+        "row": "back",
+        "profileId": "threatHunter"
+      },
+      {
+        "speciesId": "alakazam",
+        "row": "back",
+        "profileId": "assassin"
+      },
+      {
+        "speciesId": "hydreigon",
+        "row": "back",
+        "profileId": "aggressive"
+      }
+    ]
+  },
+  "starter": {
+    "expression": "smile",
+    "title": "PROFESORA AMELIE",
+    "text": "Soy Amelie, investigadora de Panhea. Acá viven Pokémon de cinco regiones. Elegí tu primer compañero: los demás los vas a ir capturando."
+  }
+}

@@ -38,6 +38,10 @@
     "champion": {
       "min": 6,
       "max": 6
+    },
+    "amelie": {
+      "min": 6,
+      "max": 6
     }
   },
   "wildMoveCostCaps": [

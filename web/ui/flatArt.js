@@ -128,3 +128,4 @@ export function flatSvg(id, size = 24, className = "flatArt") {
   for (const [tag, attrs] of items[id]()) svg.append(node(tag, attrs));
   return svg;
 }
+export { node as svgNode, ink as flatInk };

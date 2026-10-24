@@ -20,3 +20,11 @@
 
 ## Balance (proxy, 200 corridas)
 Regional/entrenador 25 % (antes 21 %), global 23 %, explorador 79 % (antes 73 %). El bot usa Revivir y Baya Zidra pero no el Buscador.
+
+## v0.9.1 · Profesora Amelie (solo Poké World)
+
+- **Historia híbrida**: Amelie, investigadora de Panhea, ofrece el primer Pokémon, da consejos en mapa/combate/captura/Centro y aparece una sola vez por cada diálogo (`data/story.json`, `run.storySeen`). Tres capas según medallas: cálida (0–1), pistas sutiles con glitch (2–5) y posesiva (6–8).
+- **Final**: al vencer al campeón en Poké World se abre la escena de Amelie con dos elecciones: *ESCAPAR Y ENFRENTARLA* (combate contra su equipo psíquico/siniestro: Absol, Gallade, Bisharp, Xatu, Alakazam, Hydreigon; escala 1.65/1.3) o *QUEDARME EN PANHEA* (final alternativo). Modo Región queda clásico, sin historia.
+- **Retrato**: busto flat en capas SVG con 5 expresiones (neutral, sonrisa, preocupada, glitch, oscura) y parpadeo/glitch en CSS. Para usar tu arte: `assets/story/manifest.json` (ver `assets/story/README.md`); sin archivos se usa el SVG.
+- Guardado: `storySeen`, `ending` y fase `amelieIntro` (compatibles con guardados anteriores). Bots resuelven la escena eligiendo escapar.
+- Balance (bot, entrenador/global): Amelie ≈ campeón en dificultad. Tests 158/158, fuzz 294 sin problemas, determinismo 0/80.
