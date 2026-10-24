@@ -1,6 +1,6 @@
 {
   "name": "pokecards-dungeon",
-  "version": "0.9.1",
+  "version": "0.9.2",
   "private": true,
   "type": "module",
   "description": "Motor de combate y datos de un fan game roguelike de cartas. Uso privado, sin fines de lucro.",

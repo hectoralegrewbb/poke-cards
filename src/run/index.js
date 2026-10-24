@@ -6,4 +6,4 @@ export { addToRoster, setRow, swapPartyBox } from "./runState.js";
 export { difficultyPresets, getDifficulty } from "./difficulty.js";
 export { buildCampaign, gameModes } from "./campaignBuilder.js";
 export { restoreRun, saveVersion, serializeRun } from "./saveGame.js";
-export { finalScene, markStorySeen, pickStoryLine, storyActive } from "./story.js";
+export { consumeStoryLine, finalScene, markStorySeen, pickStoryLine, seenKey, storyActive } from "./story.js";

@@ -28,3 +28,14 @@ Regional/entrenador 25 % (antes 21 %), global 23 %, explorador 79 % (antes 73 %)
 - **Retrato**: busto flat en capas SVG con 5 expresiones (neutral, sonrisa, preocupada, glitch, oscura) y parpadeo/glitch en CSS. Para usar tu arte: `assets/story/manifest.json` (ver `assets/story/README.md`); sin archivos se usa el SVG.
 - Guardado: `storySeen`, `ending` y fase `amelieIntro` (compatibles con guardados anteriores). Bots resuelven la escena eligiendo escapar.
 - Balance (bot, entrenador/global): Amelie ≈ campeón en dificultad. Tests 158/158, fuzz 294 sin problemas, determinismo 0/80.
+
+## v0.9.2 · Elenco de Panhea (Poké World)
+
+- **Tuteo neutro** en todos los diálogos de la historia; cada línea tiene 1–3 variantes elegidas por hash de la semilla (no usan el RNG de la corrida: no alteran combates ni mapas).
+- **Nuevos hablantes**: Lina (asistente de Amelie, campamentos/tiendas, consejos y regalos), Enfermera Joy (Centros), Oficial Jenny (mapa), Aslo (rival, anagrama de "sola"), líderes de gimnasio (comentan la medalla recién ganada, con plantillas `{leader}`/`{badge}`) y villanos por región (Rocket, Aqua/Magma, Galaxia, Plasma).
+- **Pistas del mundo artificial**: sutiles de la medalla 4 a la 5, nombran a Amelie de la 6 a la 7 y son casi explícitas en la 8. Cada NPC tiene su escalera de pistas.
+- **Regalos de Lina**: al azar determinista (50 %) una vez por ruta, por niveles `early/mid/late` (`story.gifts`): bayas, antídotos, Revivir, Poción súper, Restaurar todo, cartas Baya Zidra/Buscador. Los textos de los regalos cambian de tono con las medallas.
+- **Control de frecuencia**: separación mínima entre globos según prioridad (`story.gaps`), y las líneas pueden repetirse por ruta (`oncePer: stage`) o por nodo.
+- Correcciones: anagrama de Aslo, `tipRows` (solo cuerpo a cuerpo), línea del Centro de Jenny solo si hay un Centro por delante.
+- Legendarios de hito (medallas 3 y 6) sin cambios.
+- Tests 164/164, fuzz 294 sin problemas, determinismo 0/80.

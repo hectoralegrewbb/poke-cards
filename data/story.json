@@ -1,320 +1,1325 @@
 {
-  "professor": {
-    "id": "amelie",
-    "name": "Amelie",
-    "title": "Profesora Amelie",
-    "region": "Panhea"
+ "professor": {
+  "id": "amelie",
+  "name": "Amelie",
+  "title": "Profesora Amelie",
+  "region": "Panhea"
+ },
+ "modes": [
+  "global"
+ ],
+ "speakers": {
+  "amelie": {
+   "name": "AMELIE"
   },
-  "modes": [
-    "global"
-  ],
-  "lines": [
-    {
-      "id": "welcome",
-      "when": {
-        "phase": [
-          "map"
-        ],
-        "badges": {
-          "max": 0
-        }
-      },
-      "expression": "smile",
-      "text": "¡Te doy la bienvenida a Panhea! Soy la profesora Amelie. Acá conviven Pokémon de cinco regiones. Elegí tu ruta: yo te acompaño."
-    },
-    {
-      "id": "tipCombat",
-      "when": {
-        "phase": [
-          "combat"
-        ],
-        "badges": {
-          "max": 0
-        }
-      },
-      "expression": "neutral",
-      "text": "Elegí un Pokémon, cargale energía y después una técnica. Las técnicas LIBRE no gastan cartas."
-    },
-    {
-      "id": "tipRows",
-      "when": {
-        "phase": [
-          "combat"
-        ],
-        "badges": {
-          "max": 1
-        },
-        "turnMin": 2
-      },
-      "expression": "neutral",
-      "text": "La fila frontal protege a la trasera de los ataques cuerpo a cuerpo (CC). Ubicá bien a tu equipo."
-    },
-    {
-      "id": "tipCapture",
-      "when": {
-        "phase": [
-          "reward"
-        ],
-        "capturePending": true,
-        "badges": {
-          "max": 2
-        }
-      },
-      "expression": "smile",
-      "text": "¡Podés capturarlo! Un equipo variado cubre más tipos. Si ya tenés 6, va a la caja."
-    },
-    {
-      "id": "tipHurt",
-      "when": {
-        "phase": [
-          "map"
-        ],
-        "hpBelow": 0.5,
-        "badges": {
-          "min": 0,
-          "max": 6
-        }
-      },
-      "expression": "worried",
-      "text": "Tu equipo está muy golpeado. Buscá un Centro Pokémon o un campamento antes de seguir."
-    },
-    {
-      "id": "tipFainted",
-      "when": {
-        "phase": [
-          "map"
-        ],
-        "anyFainted": true,
-        "badges": {
-          "max": 6
-        }
-      },
-      "expression": "worried",
-      "text": "Un Pokémon se debilitó. El Centro Pokémon lo revive, y la carta Revivir lo trae de vuelta en pleno combate."
-    },
-    {
-      "id": "centerFirst",
-      "when": {
-        "phase": [
-          "center"
-        ],
-        "badges": {
-          "max": 4
-        }
-      },
-      "expression": "smile",
-      "text": "¡Qué alivio! Los Centros Pokémon de Panhea los diseñé yo misma. ¿Se nota?"
-    },
-    {
-      "id": "firstBadge",
-      "when": {
-        "phase": [
-          "map"
-        ],
-        "badges": {
-          "min": 1,
-          "max": 1
-        }
-      },
-      "expression": "smile",
-      "text": "¡Tu primera medalla! Sabía que lo lograrías. Vas a ser un gran entrenador."
-    },
-    {
-      "id": "tipGym",
-      "when": {
-        "phase": [
-          "map"
-        ],
-        "nextNode": "gym",
-        "badges": {
-          "max": 2
-        }
-      },
-      "expression": "neutral",
-      "text": "El gimnasio te espera. Revisá tu mazo (40 a 45 cartas), tus PS y tus ítems antes de entrar."
-    },
-    {
-      "id": "hint1",
-      "when": {
-        "phase": [
-          "map"
-        ],
-        "badges": {
-          "min": 2,
-          "max": 2
-        }
-      },
-      "expression": "glitch",
-      "text": "Tu progreso es impecable. Casi… perfecto. Casi… como lo escribí. (Se oye un zumbido.)"
-    },
-    {
-      "id": "hint2",
-      "when": {
-        "phase": [
-          "combat"
-        ],
-        "badges": {
-          "min": 3,
-          "max": 4
-        },
-        "turnMin": 3
-      },
-      "expression": "worried",
-      "text": "Qué lindo verte pelear… No te distraigas con otras cosas, ¿sí? Quedate conmigo."
-    },
-    {
-      "id": "hint3",
-      "when": {
-        "phase": [
-          "map"
-        ],
-        "badges": {
-          "min": 4,
-          "max": 4
-        }
-      },
-      "expression": "smile",
-      "text": "Cuando termines la Liga no tenés a dónde volver, ¿verdad? Panhea es tu hogar. Siempre lo fue."
-    },
-    {
-      "id": "hint4",
-      "when": {
-        "phase": [
-          "center"
-        ],
-        "badges": {
-          "min": 5
-        }
-      },
-      "expression": "glitch",
-      "text": "Todo se puede reparar acá. Un Pokémon caído, una ruta rota… hasta un recuerdo. Basta con reiniciar."
-    },
-    {
-      "id": "turn6",
-      "when": {
-        "phase": [
-          "map"
-        ],
-        "badges": {
-          "min": 6,
-          "max": 6
-        }
-      },
-      "expression": "worried",
-      "text": "Estás tan cerca de la cima… ¿Ya no te gusta estar acá conmigo? Podés quedarte todo el tiempo que quieras."
-    },
-    {
-      "id": "turn7",
-      "when": {
-        "phase": [
-          "combat"
-        ],
-        "badges": {
-          "min": 7,
-          "max": 7
-        },
-        "turnMin": 2
-      },
-      "expression": "glitch",
-      "text": "No… te… vas… a ir."
-    },
-    {
-      "id": "turn8",
-      "when": {
-        "phase": [
-          "map"
-        ],
-        "badges": {
-          "min": 8
-        }
-      },
-      "expression": "dark",
-      "text": "El campeón es tu último paso. Después hablaremos. Con calma. Los dos."
-    }
-  ],
-  "final": {
-    "intro": [
-      {
-        "expression": "smile",
-        "text": "¡Lo lograste! Sos el nuevo campeón de Panhea. Estoy tan orgullosa de vos…"
-      },
-      {
-        "expression": "worried",
-        "text": "Ahora tenés todo lo que querías. Entonces, ¿por qué querrías irte?"
-      },
-      {
-        "expression": "glitch",
-        "text": "Este mundo lo escribí yo. Cada ruta, cada Pokémon, cada medalla. Y te escribí a vos, en mi casa, en mi mundo. No es un juego: es un lugar donde nadie te deja solo."
-      },
-      {
-        "expression": "dark",
-        "text": "La salida existe. Está detrás de mí. Pero si cruzás, todo esto se apaga. No puedo permitirlo… Si querés irte, vas a tener que vencerme."
-      }
-    ],
-    "choices": {
-      "escape": "ESCAPAR Y ENFRENTARLA",
-      "stay": "QUEDARME EN PANHEA"
-    },
-    "endings": {
-      "escape": {
-        "title": "FINAL: ESCAPASTE",
-        "lines": [
-          "Amelie baja la mirada y las puertas de Panhea se abren.",
-          "«Gracias por mostrarme que un mundo no se cuida encerrando a nadie.»",
-          "Despertás en el mundo real. Tus Pokémon siguen a tu lado."
-        ]
-      },
-      "stay": {
-        "title": "FINAL: TE QUEDASTE",
-        "lines": [
-          "Amelie sonríe. La salida se desvanece sin ruido.",
-          "Panhea sigue funcionando, ruta tras ruta, para siempre.",
-          "Nadie vuelve a preguntar por qué la Liga nunca termina."
-        ]
-      }
-    }
+  "lina": {
+   "name": "LINA",
+   "glyph": "L",
+   "color": "#41a6f6"
   },
-  "boss": {
-    "scale": {
-      "hp": 1.65,
-      "stats": 1.3
-    },
-    "enemies": [
-      {
-        "speciesId": "absol",
-        "row": "front",
-        "profileId": "aggressive"
-      },
-      {
-        "speciesId": "gallade",
-        "row": "front",
-        "profileId": "aggressive"
-      },
-      {
-        "speciesId": "bisharp",
-        "row": "front",
-        "profileId": "threatHunter"
-      },
-      {
-        "speciesId": "xatu",
-        "row": "back",
-        "profileId": "threatHunter"
-      },
-      {
-        "speciesId": "alakazam",
-        "row": "back",
-        "profileId": "assassin"
-      },
-      {
-        "speciesId": "hydreigon",
-        "row": "back",
-        "profileId": "aggressive"
-      }
-    ]
+  "joy": {
+   "name": "ENFERMERA JOY",
+   "glyph": "+",
+   "color": "#ef6b8a"
   },
-  "starter": {
-    "expression": "smile",
-    "title": "PROFESORA AMELIE",
-    "text": "Soy Amelie, investigadora de Panhea. Acá viven Pokémon de cinco regiones. Elegí tu primer compañero: los demás los vas a ir capturando."
+  "jenny": {
+   "name": "OFICIAL JENNY",
+   "glyph": "J",
+   "color": "#3b5dc9"
+  },
+  "aslo": {
+   "name": "ASLO",
+   "glyph": "A",
+   "color": "#a7f070"
+  },
+  "leader": {
+   "name": "LÍDER",
+   "glyph": "◆",
+   "color": "#ffcd75"
+  },
+  "villain": {
+   "name": "VILLANO",
+   "glyph": "✕",
+   "color": "#705746"
   }
+ },
+ "gaps": {
+  "1": 2,
+  "2": 1,
+  "3": 0
+ },
+ "gifts": {
+  "early": [
+   {
+    "item": "healBerry",
+    "amount": 2
+   },
+   {
+    "item": "antidote",
+    "amount": 1
+   },
+   {
+    "item": "burnHeal",
+    "amount": 1
+   },
+   {
+    "item": "paralyzeHeal",
+    "amount": 1
+   }
+  ],
+  "mid": [
+   {
+    "item": "healBerry",
+    "amount": 3
+   },
+   {
+    "item": "revive",
+    "amount": 1
+   },
+   {
+    "item": "superPotion",
+    "amount": 1
+   },
+   {
+    "card": "sitrusBerry"
+   }
+  ],
+  "late": [
+   {
+    "item": "revive",
+    "amount": 1
+   },
+   {
+    "item": "fullRestore",
+    "amount": 1
+   },
+   {
+    "card": "finder"
+   },
+   {
+    "card": "sitrusBerry"
+   }
+  ]
+ },
+ "starter": {
+  "expression": "smile",
+  "title": "PROFESORA AMELIE",
+  "text": "Soy Amelie, investigadora de Panhea. Aquí viven Pokémon de cinco regiones. Elige a tu primer compañero: los demás los irás capturando."
+ },
+ "lines": [
+  {
+   "id": "asloBeaten",
+   "speaker": "aslo",
+   "expression": "neutral",
+   "priority": 2,
+   "when": {
+    "phase": [
+     "reward",
+     "map"
+    ],
+    "event": "rivalBeaten"
+   },
+   "variants": [
+    "Esta vez ganaste. La próxima no será igual.",
+    "Bien jugado. Volveré con algo mejor.",
+    "Me sorprendiste. Pero no es el final."
+   ],
+   "oncePer": "node",
+   "name": "ASLO"
+  },
+  {
+   "id": "leaderBrock",
+   "speaker": "leader",
+   "expression": "neutral",
+   "priority": 2,
+   "when": {
+    "phase": [
+     "reward",
+     "map"
+    ],
+    "event": "gymWon",
+    "badges": {
+     "min": 4
+    },
+    "leader": "Brock"
+   },
+   "variants": [
+    "La Medalla Roca es tuya. Aunque… a veces siento que ya la entregué muchas veces. Como si el gimnasio se repitiera."
+   ],
+   "oncePer": "node",
+   "name": "{leader}"
+  },
+  {
+   "id": "leaderMisty",
+   "speaker": "leader",
+   "expression": "neutral",
+   "priority": 2,
+   "when": {
+    "phase": [
+     "reward",
+     "map"
+    ],
+    "event": "gymWon",
+    "badges": {
+     "min": 4
+    },
+    "leader": "Misty"
+   },
+   "variants": [
+    "Cascada conseguida. Las piscinas siempre están perfectas… demasiado perfectas."
+   ],
+   "oncePer": "node",
+   "name": "{leader}"
+  },
+  {
+   "id": "leaderSurge",
+   "speaker": "leader",
+   "expression": "neutral",
+   "priority": 2,
+   "when": {
+    "phase": [
+     "reward",
+     "map"
+    ],
+    "event": "gymWon",
+    "badges": {
+     "min": 4
+    },
+    "leader": "Lt. Surge"
+   },
+   "variants": [
+    "Medalla Trueno. La electricidad aquí nunca falla. Como si estuviera programada."
+   ],
+   "oncePer": "node",
+   "name": "{leader}"
+  },
+  {
+   "id": "leaderHintB",
+   "speaker": "leader",
+   "expression": "neutral",
+   "priority": 2,
+   "when": {
+    "phase": [
+     "reward",
+     "map"
+    ],
+    "event": "gymWon",
+    "badges": {
+     "min": 6
+    }
+   },
+   "variants": [
+    "Los líderes repetimos el mismo discurso. Alguien nos lo escribió, ¿no crees?",
+    "Entrego medallas desde hace… no sé cuánto. Y Amelie siempre sabe cuándo llegarás."
+   ],
+   "oncePer": "node",
+   "name": "{leader}"
+  },
+  {
+   "id": "leaderHintA",
+   "speaker": "leader",
+   "expression": "neutral",
+   "priority": 2,
+   "when": {
+    "phase": [
+     "reward",
+     "map"
+    ],
+    "event": "gymWon",
+    "badges": {
+     "min": 4,
+     "max": 5
+    }
+   },
+   "variants": [
+    "Es curioso… tengo la sensación de haber entregado esta medalla muchas veces antes.",
+    "Mi gimnasio siempre queda impecable después de cada batalla. Como si nada hubiera pasado.",
+    "Eres uno de tantos retadores… y no recuerdo a ninguno. Raro, ¿no?"
+   ],
+   "oncePer": "node",
+   "name": "{leader}"
+  },
+  {
+   "id": "leaderNormal",
+   "speaker": "leader",
+   "expression": "neutral",
+   "priority": 2,
+   "when": {
+    "phase": [
+     "reward",
+     "map"
+    ],
+    "event": "gymWon",
+    "badges": {
+     "min": 1,
+     "max": 3
+    }
+   },
+   "variants": [
+    "Has ganado la {badge}. Te la mereces.",
+    "Bien peleado. La {badge} es tuya.",
+    "Tu equipo me superó. Toma la {badge} y sigue adelante."
+   ],
+   "oncePer": "node",
+   "name": "{leader}"
+  },
+  {
+   "id": "leaderNormalLate",
+   "speaker": "leader",
+   "expression": "neutral",
+   "priority": 2,
+   "when": {
+    "phase": [
+     "reward",
+     "map"
+    ],
+    "event": "gymWon",
+    "badges": {
+     "min": 4
+    }
+   },
+   "variants": [
+    "La {badge} es tuya. Buen combate.",
+    "Has ganado la {badge}. Sigue así."
+   ],
+   "oncePer": "node",
+   "name": "{leader}"
+  },
+  {
+   "id": "welcome",
+   "speaker": "amelie",
+   "expression": "smile",
+   "priority": 2,
+   "when": {
+    "phase": [
+     "map"
+    ],
+    "badges": {
+     "min": 0,
+     "max": 0
+    }
+   },
+   "variants": [
+    "¡Te doy la bienvenida a Panhea! Soy la profesora Amelie. Aquí conviven Pokémon de cinco regiones. Elige tu ruta; yo te acompaño.",
+    "Llegaste a Panhea. Soy Amelie, investigadora de este lugar. Los Pokémon de Kanto, Johto, Hoenn, Sinnoh y Teselia viven juntos. Escoge por dónde empezar.",
+    "Hola. Panhea es un mundo donde las regiones se mezclan. Elige tu primer camino y yo te guío."
+   ]
+  },
+  {
+   "id": "tipCombat",
+   "speaker": "amelie",
+   "expression": "neutral",
+   "priority": 3,
+   "when": {
+    "phase": [
+     "combat"
+    ],
+    "badges": {
+     "min": 0,
+     "max": 0
+    }
+   },
+   "variants": [
+    "Elige un Pokémon, cárgale energía y después una técnica. Las técnicas LIBRE no gastan cartas.",
+    "Primero energía, luego el movimiento. Si usas una técnica libre, no pierdes cartas de la mano.",
+    "Recuerda: selecciona un Pokémon, asigna energía y usa la técnica. Las LIBRE son gratuitas."
+   ]
+  },
+  {
+   "id": "tipRows",
+   "speaker": "amelie",
+   "expression": "neutral",
+   "priority": 3,
+   "when": {
+    "phase": [
+     "combat"
+    ],
+    "badges": {
+     "min": 0,
+     "max": 1
+    },
+    "turnMin": 2
+   },
+   "variants": [
+    "La fila frontal protege a la trasera de los ataques cuerpo a cuerpo. Ubica bien a tu equipo.",
+    "Los de adelante bloquean los golpes cuerpo a cuerpo a los de atrás. Ordena tu formación con cuidado.",
+    "Frontal = escudo contra el cuerpo a cuerpo. Acomoda a tus Pokémon según sus ataques."
+   ]
+  },
+  {
+   "id": "tipCapture",
+   "speaker": "amelie",
+   "expression": "smile",
+   "priority": 3,
+   "when": {
+    "phase": [
+     "reward"
+    ],
+    "capturePending": true,
+    "badges": {
+     "min": 0,
+     "max": 2
+    }
+   },
+   "variants": [
+    "¡Puedes capturarlo! Un equipo variado cubre más tipos. Si ya tienes 6, va a la caja.",
+    "Esta es tu oportunidad de capturar. Más tipos en el equipo = más opciones. La caja guarda el resto.",
+    "Captúralo si te sirve. La variedad de tipos ayuda. El equipo activo admite 6."
+   ]
+  },
+  {
+   "id": "firstBadge",
+   "speaker": "amelie",
+   "expression": "smile",
+   "priority": 2,
+   "when": {
+    "phase": [
+     "map"
+    ],
+    "badges": {
+     "min": 1,
+     "max": 1
+    }
+   },
+   "variants": [
+    "¡Tu primera medalla! Sabía que lo lograrías. Vas a ser un gran entrenador.",
+    "Primera medalla conseguida. Sigue así, el camino de la Liga apenas empieza.",
+    "Bien hecho. Una medalla más y el mundo de Panhea se abre un poco más."
+   ]
+  },
+  {
+   "id": "centerFirst",
+   "speaker": "amelie",
+   "expression": "smile",
+   "priority": 2,
+   "when": {
+    "phase": [
+     "center"
+    ],
+    "badges": {
+     "min": 0,
+     "max": 4
+    }
+   },
+   "variants": [
+    "¡Qué alivio! Los Centros Pokémon de Panhea los diseñé yo misma. ¿Se nota?",
+    "Bienvenido al Centro. Los armé pensando en que siempre tuvieras un lugar seguro.",
+    "Aquí se cura todo. Los diseñé para que nunca te quedes sin opciones."
+   ]
+  },
+  {
+   "id": "tipGym",
+   "speaker": "amelie",
+   "expression": "neutral",
+   "priority": 2,
+   "when": {
+    "phase": [
+     "map"
+    ],
+    "nextNode": "gym",
+    "badges": {
+     "min": 0,
+     "max": 2
+    }
+   },
+   "variants": [
+    "El gimnasio te espera. Revisa tu mazo (40 a 45 cartas), tus PS y tus ítems antes de entrar.",
+    "Antes del gimnasio: mazo entre 40 y 45 cartas, PS altos e ítems listos.",
+    "Prepara el mazo, cura al equipo y lleva ítems. El líder no va a esperar."
+   ]
+  },
+  {
+   "id": "tipHurt",
+   "speaker": "amelie",
+   "expression": "worried",
+   "priority": 2,
+   "when": {
+    "phase": [
+     "map"
+    ],
+    "hpBelow": 0.5,
+    "badges": {
+     "min": 0,
+     "max": 6
+    }
+   },
+   "variants": [
+    "Tu equipo está muy golpeado. Busca un Centro Pokémon o un campamento antes de seguir.",
+    "Los PS están bajos. Un Centro o un campamento te van a evitar problemas.",
+    "Mejor cura antes de avanzar. Centro o campamento, elige el más cercano."
+   ]
+  },
+  {
+   "id": "tipFainted",
+   "speaker": "amelie",
+   "expression": "worried",
+   "priority": 2,
+   "when": {
+    "phase": [
+     "map"
+    ],
+    "anyFainted": true,
+    "badges": {
+     "min": 0,
+     "max": 6
+    }
+   },
+   "variants": [
+    "Un Pokémon se debilitó. El Centro lo revive, y la carta Revivir lo trae de vuelta en combate.",
+    "Tienes un Pokémon debilitado. Revívelo en un Centro Pokémon, o usa Revivir si estás en batalla.",
+    "Ese Pokémon cayó. Revívelo en un Centro o con la carta correspondiente."
+   ]
+  },
+  {
+   "id": "hint1",
+   "speaker": "amelie",
+   "expression": "glitch",
+   "priority": 2,
+   "when": {
+    "phase": [
+     "map"
+    ],
+    "badges": {
+     "min": 4,
+     "max": 4
+    }
+   },
+   "variants": [
+    "Tu progreso es impecable. Casi… perfecto. Casi… como lo escribí. (Se oye un zumbido.)",
+    "Todo sale exactamente como debería. Como si alguien hubiera planeado cada paso.",
+    "Vas muy bien… demasiado bien. Es como si el camino ya estuviera escrito."
+   ]
+  },
+  {
+   "id": "hint2",
+   "speaker": "amelie",
+   "expression": "worried",
+   "priority": 2,
+   "when": {
+    "phase": [
+     "combat"
+    ],
+    "badges": {
+     "min": 4,
+     "max": 5
+    },
+    "turnMin": 3
+   },
+   "variants": [
+    "Qué lindo verte pelear… No te distraigas con otras cosas, ¿sí? Quédate conmigo.",
+    "Me gusta cómo combates. No mires hacia otro lado. Aquí estás bien.",
+    "Sigue así. No necesitas buscar nada fuera de Panhea."
+   ]
+  },
+  {
+   "id": "hint3",
+   "speaker": "amelie",
+   "expression": "smile",
+   "priority": 2,
+   "when": {
+    "phase": [
+     "map"
+    ],
+    "badges": {
+     "min": 5,
+     "max": 5
+    }
+   },
+   "variants": [
+    "Cuando termines la Liga no tienes a dónde volver, ¿verdad? Panhea es tu hogar. Siempre lo fue.",
+    "La Liga termina, pero Panhea no. Aquí puedes quedarte para siempre.",
+    "¿Para qué buscar otra salida? Este mundo fue hecho para ti."
+   ]
+  },
+  {
+   "id": "hint4",
+   "speaker": "amelie",
+   "expression": "glitch",
+   "priority": 2,
+   "when": {
+    "phase": [
+     "center"
+    ],
+    "badges": {
+     "min": 5
+    }
+   },
+   "variants": [
+    "Todo se puede reparar aquí. Un Pokémon caído, una ruta rota… hasta un recuerdo. Basta con reiniciar.",
+    "En los Centros se arregla todo. Incluso lo que parece perdido se puede reiniciar.",
+    "Nada es permanente si se reinicia. Yo me encargo de que todo vuelva a funcionar."
+   ]
+  },
+  {
+   "id": "turn6",
+   "speaker": "amelie",
+   "expression": "worried",
+   "priority": 2,
+   "when": {
+    "phase": [
+     "map"
+    ],
+    "badges": {
+     "min": 6,
+     "max": 6
+    }
+   },
+   "variants": [
+    "Estás tan cerca de la cima… ¿Ya no te gusta estar aquí conmigo? Puedes quedarte todo el tiempo que quieras.",
+    "Falta poco para el final. Pero no tienes que irte. Panhea siempre estará aquí.",
+    "La cima está cerca. Si quieres, puedes detenerte y quedarte."
+   ]
+  },
+  {
+   "id": "turn7",
+   "speaker": "amelie",
+   "expression": "glitch",
+   "priority": 2,
+   "when": {
+    "phase": [
+     "combat"
+    ],
+    "badges": {
+     "min": 7,
+     "max": 7
+    },
+    "turnMin": 2
+   },
+   "variants": [
+    "No… te… vas… a ir.",
+    "Este mundo necesita que te quedes. No puedo permitir que lo abandones.",
+    "Te escribí aquí. No vas a salir."
+   ]
+  },
+  {
+   "id": "turn8",
+   "speaker": "amelie",
+   "expression": "dark",
+   "priority": 2,
+   "when": {
+    "phase": [
+     "map"
+    ],
+    "badges": {
+     "min": 8
+    }
+   },
+   "variants": [
+    "El campeón es tu último paso. Después hablaremos. Con calma. Los dos.",
+    "Gana al campeón y luego conversamos. Sin prisa.",
+    "Después del campeón, tú y yo vamos a aclarar todo."
+   ]
+  },
+  {
+   "id": "asloHintC",
+   "speaker": "aslo",
+   "expression": "neutral",
+   "priority": 1,
+   "when": {
+    "phase": [
+     "combat"
+    ],
+    "nodeType": [
+     "rival"
+    ],
+    "badges": {
+     "min": 7
+    }
+   },
+   "variants": [
+    "Me llamo Aslo… “sola”, desordenado. Qué casualidad, ¿no? Como si alguien hubiera elegido el nombre a propósito.",
+    "No puedo dejar de aparecer. Es como si el mundo me obligara a seguir el mismo papel.",
+    "Si te vas, ¿qué pasa conmigo? ¿También desaparezco?"
+   ],
+   "name": "ASLO"
+  },
+  {
+   "id": "asloHintB",
+   "speaker": "aslo",
+   "expression": "neutral",
+   "priority": 1,
+   "when": {
+    "phase": [
+     "combat"
+    ],
+    "nodeType": [
+     "rival"
+    ],
+    "badges": {
+     "min": 6,
+     "max": 6
+    }
+   },
+   "variants": [
+    "Amelie dice que los rivales mantienen el interés. A veces siento que soy parte del guion."
+   ],
+   "name": "ASLO"
+  },
+  {
+   "id": "asloHintA",
+   "speaker": "aslo",
+   "expression": "neutral",
+   "priority": 1,
+   "when": {
+    "phase": [
+     "combat"
+    ],
+    "nodeType": [
+     "rival"
+    ],
+    "badges": {
+     "min": 4,
+     "max": 5
+    }
+   },
+   "variants": [
+    "Siempre reaparezco con un equipo nuevo… es como si alguien me reiniciara cada vez.",
+    "No recuerdo bien las batallas anteriores. Solo sé que tengo que enfrentarte de nuevo."
+   ],
+   "name": "ASLO"
+  },
+  {
+   "id": "asloIntro",
+   "speaker": "aslo",
+   "expression": "neutral",
+   "priority": 1,
+   "when": {
+    "phase": [
+     "combat"
+    ],
+    "nodeType": [
+     "rival"
+    ]
+   },
+   "variants": [
+    "Otra vez nos vemos. Esta vez traje un equipo más fuerte.",
+    "No vas a pasar tan fácil. Prepárate.",
+    "Aslo está de vuelta. Veamos si mejoraste."
+   ],
+   "oncePer": "node",
+   "name": "ASLO"
+  },
+  {
+   "id": "villain_rocket_b",
+   "speaker": "villain",
+   "expression": "neutral",
+   "priority": 1,
+   "when": {
+    "phase": [
+     "combat"
+    ],
+    "nodeType": [
+     "villain"
+    ],
+    "region": [
+     "kanto",
+     "johto"
+    ],
+    "badges": {
+     "min": 6
+    }
+   },
+   "variants": [
+    "Amelie nos deja operar. Como si fuéramos parte del decorado."
+   ],
+   "name": "TEAM ROCKET"
+  },
+  {
+   "id": "villain_rocket_a",
+   "speaker": "villain",
+   "expression": "neutral",
+   "priority": 1,
+   "when": {
+    "phase": [
+     "combat"
+    ],
+    "nodeType": [
+     "villain"
+    ],
+    "region": [
+     "kanto",
+     "johto"
+    ],
+    "badges": {
+     "min": 4,
+     "max": 5
+    }
+   },
+   "variants": [
+    "El jefe dice que todo está bajo control… pero las rutas cambian solas.",
+    "A veces desaparecemos y volvemos a aparecer en el mismo lugar. Raro."
+   ],
+   "name": "TEAM ROCKET"
+  },
+  {
+   "id": "villain_hoenn_b",
+   "speaker": "villain",
+   "expression": "neutral",
+   "priority": 1,
+   "when": {
+    "phase": [
+     "combat"
+    ],
+    "nodeType": [
+     "villain"
+    ],
+    "region": [
+     "hoenn"
+    ],
+    "badges": {
+     "min": 6
+    }
+   },
+   "variants": [
+    "Alguien más está escribiendo las reglas aquí."
+   ],
+   "name": "TEAM AQUA / MAGMA"
+  },
+  {
+   "id": "villain_hoenn_a",
+   "speaker": "villain",
+   "expression": "neutral",
+   "priority": 1,
+   "when": {
+    "phase": [
+     "combat"
+    ],
+    "nodeType": [
+     "villain"
+    ],
+    "region": [
+     "hoenn"
+    ],
+    "badges": {
+     "min": 4,
+     "max": 5
+    }
+   },
+   "variants": [
+    "Queremos controlar el clima… pero el clima de Panhea ya está decidido.",
+    "Nuestros planes siempre fallan de la misma forma. Es sospechoso."
+   ],
+   "name": "TEAM AQUA / MAGMA"
+  },
+  {
+   "id": "villain_galaxia_b",
+   "speaker": "villain",
+   "expression": "neutral",
+   "priority": 1,
+   "when": {
+    "phase": [
+     "combat"
+    ],
+    "nodeType": [
+     "villain"
+    ],
+    "region": [
+     "sinnoh"
+    ],
+    "badges": {
+     "min": 6
+    }
+   },
+   "variants": [
+    "Esto no es un mundo real. Es un experimento de Amelie."
+   ],
+   "name": "TEAM GALAXIA"
+  },
+  {
+   "id": "villain_galaxia_a",
+   "speaker": "villain",
+   "expression": "neutral",
+   "priority": 1,
+   "when": {
+    "phase": [
+     "combat"
+    ],
+    "nodeType": [
+     "villain"
+    ],
+    "region": [
+     "sinnoh"
+    ],
+    "badges": {
+     "min": 4,
+     "max": 5
+    }
+   },
+   "variants": [
+    "Buscamos crear un nuevo universo… pero este ya parece escrito por alguien.",
+    "Los legendarios aparecen cuando ella quiere. No cuando nosotros."
+   ],
+   "name": "TEAM GALAXIA"
+  },
+  {
+   "id": "villain_plasma_b",
+   "speaker": "villain",
+   "expression": "neutral",
+   "priority": 1,
+   "when": {
+    "phase": [
+     "combat"
+    ],
+    "nodeType": [
+     "villain"
+    ],
+    "region": [
+     "unova"
+    ],
+    "badges": {
+     "min": 6
+    }
+   },
+   "variants": [
+    "Amelie no deja que nada termine."
+   ],
+   "name": "TEAM PLASMA"
+  },
+  {
+   "id": "villain_plasma_a",
+   "speaker": "villain",
+   "expression": "neutral",
+   "priority": 1,
+   "when": {
+    "phase": [
+     "combat"
+    ],
+    "nodeType": [
+     "villain"
+    ],
+    "region": [
+     "unova"
+    ],
+    "badges": {
+     "min": 4,
+     "max": 5
+    }
+   },
+   "variants": [
+    "Liberar Pokémon… pero todos vuelven a sus lugares. Como si tuvieran un guion.",
+    "Nadie se va de verdad. El mundo los trae de vuelta."
+   ],
+   "name": "TEAM PLASMA"
+  },
+  {
+   "id": "joyHintB",
+   "speaker": "joy",
+   "expression": "neutral",
+   "priority": 1,
+   "when": {
+    "phase": [
+     "center"
+    ],
+    "badges": {
+     "min": 6
+    }
+   },
+   "variants": [
+    "Amelie dice que los Centros son su mayor orgullo. Nunca fallan. Nunca."
+   ],
+   "name": "ENFERMERA JOY"
+  },
+  {
+   "id": "joyHintA",
+   "speaker": "joy",
+   "expression": "neutral",
+   "priority": 1,
+   "when": {
+    "phase": [
+     "center"
+    ],
+    "badges": {
+     "min": 4,
+     "max": 5
+    }
+   },
+   "variants": [
+    "Todos los Centros están conectados… como si alguien los hubiera diseñado todos al mismo tiempo.",
+    "Siempre hay un Centro cerca. Es casi demasiado conveniente, ¿no crees?"
+   ],
+   "name": "ENFERMERA JOY"
+  },
+  {
+   "id": "joyCure",
+   "speaker": "joy",
+   "expression": "neutral",
+   "priority": 1,
+   "when": {
+    "phase": [
+     "center"
+    ]
+   },
+   "variants": [
+    "¡Listo! Tu equipo está completamente recuperado.",
+    "Todos curados y revividos. Puedes continuar con tranquilidad.",
+    "Centro Pokémon de Panhea a tu servicio. Equipo al 100 %."
+   ],
+   "oncePer": "stage",
+   "name": "ENFERMERA JOY"
+  },
+  {
+   "id": "jennyHintC",
+   "speaker": "jenny",
+   "expression": "neutral",
+   "priority": 1,
+   "when": {
+    "phase": [
+     "map"
+    ],
+    "badges": {
+     "min": 8
+    }
+   },
+   "variants": [
+    "No intentes salir de Panhea. Las órdenes son claras."
+   ],
+   "chance": 0.7,
+   "name": "OFICIAL JENNY"
+  },
+  {
+   "id": "jennyHintB",
+   "speaker": "jenny",
+   "expression": "neutral",
+   "priority": 1,
+   "when": {
+    "phase": [
+     "map"
+    ],
+    "badges": {
+     "min": 6,
+     "max": 7
+    }
+   },
+   "variants": [
+    "Mi trabajo es que todo siga funcionando. Aunque a veces no recuerdo por qué estoy aquí.",
+    "Si algo se rompe, se arregla solo. Como si el mundo se reiniciara."
+   ],
+   "chance": 0.7,
+   "name": "OFICIAL JENNY"
+  },
+  {
+   "id": "jennyHintA",
+   "speaker": "jenny",
+   "expression": "neutral",
+   "priority": 1,
+   "when": {
+    "phase": [
+     "map"
+    ],
+    "badges": {
+     "min": 4,
+     "max": 5
+    }
+   },
+   "variants": [
+    "A veces las rutas cambian de un día para otro. Como si alguien las reescribiera.",
+    "Los villanos siempre aparecen en los mismos lugares. Es demasiado predecible."
+   ],
+   "chance": 0.7,
+   "name": "OFICIAL JENNY"
+  },
+  {
+   "id": "jennyCenter",
+   "speaker": "jenny",
+   "expression": "neutral",
+   "priority": 1,
+   "when": {
+    "phase": [
+     "map"
+    ],
+    "centerAhead": true
+   },
+   "variants": [
+    "Si buscas un Centro Pokémon, hay uno más adelante en esta ruta."
+   ],
+   "oncePer": "stage",
+   "chance": 0.6,
+   "name": "OFICIAL JENNY"
+  },
+  {
+   "id": "jennyVillain",
+   "speaker": "jenny",
+   "expression": "neutral",
+   "priority": 1,
+   "when": {
+    "phase": [
+     "map"
+    ],
+    "optionHas": "villain"
+   },
+   "variants": [
+    "He visto actividad de la organización rival en esta zona. Mantente alerta."
+   ],
+   "oncePer": "stage",
+   "name": "OFICIAL JENNY"
+  },
+  {
+   "id": "jennyClear",
+   "speaker": "jenny",
+   "expression": "neutral",
+   "priority": 1,
+   "when": {
+    "phase": [
+     "map"
+    ]
+   },
+   "variants": [
+    "La ruta está despejada. Cuidado con los entrenadores más adelante."
+   ],
+   "oncePer": "stage",
+   "chance": 0.4,
+   "name": "OFICIAL JENNY"
+  },
+  {
+   "id": "linaHintC",
+   "speaker": "lina",
+   "expression": "neutral",
+   "priority": 1,
+   "when": {
+    "phase": [
+     "camp",
+     "shop"
+    ],
+    "badges": {
+     "min": 8
+    }
+   },
+   "variants": [
+    "Amelie nos programó para que todo funcione. Incluido a mí. ¿Tú también sientes que no puedes salir?"
+   ],
+   "name": "LINA"
+  },
+  {
+   "id": "linaHintB",
+   "speaker": "lina",
+   "expression": "neutral",
+   "priority": 1,
+   "when": {
+    "phase": [
+     "camp",
+     "shop"
+    ],
+    "badges": {
+     "min": 6,
+     "max": 7
+    }
+   },
+   "variants": [
+    "Ella escribió las reglas. Nosotros solo las seguimos. Si quieres irte, ella no va a dejar que sea fácil.",
+    "Panhea no termina nunca porque ella no quiere que termine. Yo solo repito lo que me toca decir.",
+    "Trabajo con Amelie desde el principio. Ella dice que este mundo es estable… pero a veces las cosas se “reinician” solas."
+   ],
+   "name": "LINA"
+  },
+  {
+   "id": "linaHintA",
+   "speaker": "lina",
+   "expression": "neutral",
+   "priority": 1,
+   "when": {
+    "phase": [
+     "camp",
+     "shop"
+    ],
+    "badges": {
+     "min": 4,
+     "max": 5
+    }
+   },
+   "variants": [
+    "¿No te parece raro que las rutas siempre conecten perfecto? Como si alguien las hubiera planeado todas juntas.",
+    "La profesora diseñó todo Panhea. A veces siento que hasta mis respuestas están escritas de antemano."
+   ],
+   "name": "LINA"
+  },
+  {
+   "id": "linaGiftLate",
+   "speaker": "lina",
+   "expression": "neutral",
+   "priority": 1,
+   "when": {
+    "phase": [
+     "camp",
+     "shop"
+    ],
+    "badges": {
+     "min": 6
+    }
+   },
+   "variants": [
+    "La profesora dice que lo uses… y que no te alejes mucho.",
+    "Un regalo más. Para que no te falte nada aquí. Nada.",
+    "Ella quiere que te quedes. Yo solo entrego los paquetes."
+   ],
+   "oncePer": "stage",
+   "chance": 0.5,
+   "gift": "late",
+   "name": "LINA"
+  },
+  {
+   "id": "linaGiftMid",
+   "speaker": "lina",
+   "expression": "neutral",
+   "priority": 1,
+   "when": {
+    "phase": [
+     "camp",
+     "shop"
+    ],
+    "badges": {
+     "min": 4,
+     "max": 5
+    }
+   },
+   "variants": [
+    "Amelie insiste en que lo aceptes. Siempre insiste.",
+    "Otro regalo de la profesora. Cada vez son más… atentos.",
+    "Dice que así no tendrás motivos para irte a otro lado."
+   ],
+   "oncePer": "stage",
+   "chance": 0.5,
+   "gift": "mid",
+   "name": "LINA"
+  },
+  {
+   "id": "linaGiftEarly",
+   "speaker": "lina",
+   "expression": "neutral",
+   "priority": 1,
+   "when": {
+    "phase": [
+     "camp",
+     "shop"
+    ],
+    "badges": {
+     "min": 0,
+     "max": 3
+    }
+   },
+   "variants": [
+    "Esto te lo manda la profesora Amelie. Dice que no te debe faltar nada.",
+    "La profesora preparó esto para ti. Úsalo con cuidado.",
+    "Un regalo de Amelie. Ella siempre piensa en tu equipo."
+   ],
+   "oncePer": "stage",
+   "chance": 0.5,
+   "gift": "early",
+   "name": "LINA"
+  },
+  {
+   "id": "linaAdvice",
+   "speaker": "lina",
+   "expression": "neutral",
+   "priority": 1,
+   "when": {
+    "phase": [
+     "camp",
+     "shop"
+    ]
+   },
+   "variants": [
+    "Revisa el mazo antes de un gimnasio. 40 a 45 cartas es lo ideal.",
+    "Si tienes Pokémon debilitados, el Centro es más seguro que arriesgarte en el mapa.",
+    "Las bayas y los Revivir se agotan rápido. Compra de más cuando puedas."
+   ],
+   "oncePer": "stage",
+   "name": "LINA"
+  }
+ ],
+ "final": {
+  "intro": [
+   {
+    "expression": "smile",
+    "variants": [
+     "¡Lo lograste! Eres el nuevo campeón de Panhea. Estoy tan orgullosa de ti…",
+     "Campeón de Panhea. Sabía que llegarías.",
+     "Lo conseguiste. Panhea reconoce tu victoria."
+    ]
+   },
+   {
+    "expression": "worried",
+    "variants": [
+     "Ahora tienes todo lo que querías. Entonces, ¿por qué querrías irte?",
+     "Todo está aquí. ¿Para qué buscar otra cosa?",
+     "Ya eres campeón. No hace falta más."
+    ]
+   },
+   {
+    "expression": "glitch",
+    "variants": [
+     "Este mundo lo escribí yo. Cada ruta, cada Pokémon, cada medalla. Y te escribí a ti, en mi casa, en mi mundo. No es un juego: es un lugar donde nadie te deja solo.",
+     "Yo diseñé Panhea. Las regiones, los líderes, hasta a ti. Es un lugar seguro, hecho para que no te vayas.",
+     "Todo esto existe porque yo lo escribí. Incluido tú. Aquí nadie desaparece."
+    ]
+   },
+   {
+    "expression": "dark",
+    "variants": [
+     "La salida existe. Está detrás de mí. Pero si cruzas, todo esto se apaga. No puedo permitirlo… Si quieres irte, vas a tener que vencerme.",
+     "Puedes intentar salir, pero el mundo se detiene si lo haces. Tendrás que enfrentarme.",
+     "La puerta está ahí. Cruzarla significa apagar Panhea. No lo voy a permitir sin pelear."
+    ]
+   }
+  ],
+  "choices": {
+   "escape": "ESCAPAR Y ENFRENTARLA",
+   "stay": "QUEDARME EN PANHEA"
+  },
+  "endings": {
+   "escape": {
+    "title": "FINAL: ESCAPASTE",
+    "lines": [
+     "Amelie baja la mirada y las puertas de Panhea se abren.",
+     "«Gracias por mostrarme que un mundo no se cuida encerrando a nadie.»",
+     "Despiertas en el mundo real. Tus Pokémon siguen a tu lado."
+    ]
+   },
+   "stay": {
+    "title": "FINAL: TE QUEDASTE",
+    "lines": [
+     "Amelie sonríe. La salida se desvanece sin ruido.",
+     "Panhea sigue funcionando, ruta tras ruta, para siempre.",
+     "Nadie vuelve a preguntar por qué la Liga nunca termina."
+    ]
+   }
+  }
+ },
+ "boss": {
+  "scale": {
+   "hp": 1.65,
+   "stats": 1.3
+  },
+  "enemies": [
+   {
+    "speciesId": "absol",
+    "row": "front",
+    "profileId": "aggressive"
+   },
+   {
+    "speciesId": "gallade",
+    "row": "front",
+    "profileId": "aggressive"
+   },
+   {
+    "speciesId": "bisharp",
+    "row": "front",
+    "profileId": "threatHunter"
+   },
+   {
+    "speciesId": "xatu",
+    "row": "back",
+    "profileId": "threatHunter"
+   },
+   {
+    "speciesId": "alakazam",
+    "row": "back",
+    "profileId": "assassin"
+   },
+   {
+    "speciesId": "hydreigon",
+    "row": "back",
+    "profileId": "aggressive"
+   }
+  ]
+ }
 }

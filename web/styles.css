@@ -696,3 +696,9 @@ button, .option, .member, .card, .stockItem, .starterCard { touch-action: manipu
 @media (prefers-reduced-motion: reduce) {
   .amelieBust .amEyes, .amelieBust .amLayers, .storyToast.enter { animation: none !important; }
 }
+
+/* ---------- v0.9.2 · NPC de la historia ---------- */
+.speakerBadge { flex: none; display: grid; place-items: center; width: 52px; height: 52px; border-radius: 50%; background: var(--badgeColor, #94b0c2); border: 3px solid var(--c0); font: 16px var(--px); color: var(--c0); text-shadow: 0 1px 0 rgba(255, 255, 255, .5); }
+.giftTag { display: inline-block; margin-top: 6px; padding: 2px 8px; background: var(--c4); color: var(--c0); border: 2px solid var(--c0); font: 8px/1.5 var(--px); }
+.storyToast.speaker-lina { border-color: var(--c10); }
+@media (max-width: 800px) { .speakerBadge { width: 44px; height: 44px; font-size: 13px; } }

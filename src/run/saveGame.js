@@ -31,6 +31,9 @@ export function restoreRun(data, saved) {
     chestCardIds: fields.chestCardIds ?? [],
     legendariesSeen: fields.legendariesSeen ?? [],
     storySeen: fields.storySeen ?? [],
+    storyLastAt: fields.storyLastAt ?? null,
+    storyEvent: fields.storyEvent ?? null,
+    nodesEntered: fields.nodesEntered ?? 0,
     ending: fields.ending ?? null };
   if (combatSnapshot) {
     const { rngState: combatRngState, ...combatFields } = combatSnapshot;

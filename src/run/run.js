@@ -2,7 +2,7 @@
 // Todas las acciones devuelven { ok, events } o { ok: false, error } y nunca lanzan.
 import { buildDeckList, createCombat, createRng } from "../engine/index.js";
 import { buildEncounter } from "./encounterBuilder.js";
-import { advanceStep, generateOptions } from "./mapGenerator.js";
+import { advanceStep, generateOptions, getStage } from "./mapGenerator.js";
 import { anyAlive, grantVictoryRewards, isRewardSettled, resolveCapture, takeCardReward } from "./rewards.js";
 import { addToRoster, emitRun, isOptionalEvent, newPokemon, restoreParty, snapshotParty } from "./runState.js";
 import { openShop, useCamp, usePokeCenter } from "./siteNodes.js";
@@ -44,6 +44,9 @@ export function createRun({ data, seed = 1, starterIds = [data.region.start.star
     chestCardIds: [],
     legendariesSeen: [],
     storySeen: [],
+    storyLastAt: null,
+    storyEvent: null,
+    nodesEntered: 0,
     ending: null,
     nextUid: 1,
     log: []
@@ -105,6 +108,8 @@ export function chooseNode(run, optionIndex) {
   if (!node) return { ok: false, error: "invalidOption" };
   if (!isDeckPlayable(run)) return { ok: false, error: "deckInvalid" };
   run.node = node;
+  run.nodesEntered = (run.nodesEntered ?? 0) + 1;
+  run.storyEvent = null;
   if (["rival", "villain"].includes(node.type)) run.eventHistory.push(node.type);
   const events = [emitRun(run, { type: "nodeEntered", node })];
 
@@ -138,6 +143,7 @@ export function finishCombat(run) {
 
   if (run.node.type === "amelie") return { ok: true, events: endRun(run, "victory", "escape") };
   const events = grantVictoryRewards(run, run.node, run.combat.teams.enemy);
+  if (storyActive(run)) rememberStoryEvent(run);
   if (run.node.type === "champion" && storyActive(run)) {
     run.phase = "amelieIntro";
     events.push(emitRun(run, { type: "amelieAppears" }));
@@ -152,6 +158,13 @@ export function finishCombat(run) {
   run.phase = "reward";
   if (isRewardSettled(run)) returnToMap(run);
   return { ok: true, events };
+}
+
+// Recuerda qué victoria acaba de ocurrir para que los NPC puedan comentarla en la pantalla siguiente.
+function rememberStoryEvent(run) {
+  const stage = getStage(run);
+  if (run.node.type === "gym") run.storyEvent = { type: "gymWon", leader: stage.leader, badge: stage.badge, regionId: stage.regionId };
+  else if (run.node.type === "rival") run.storyEvent = { type: "rivalBeaten" };
 }
 
 // Tras decidir carta/captura: si no queda nada pendiente, vuelve al mapa.

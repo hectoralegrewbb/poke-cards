@@ -2,7 +2,7 @@
 // atenta: cuida la party, cambia caja/party, arma el mazo con energía fuerte y gasta oro con criterio.
 import { isAlive } from "../engine/index.js";
 import {
-  buyFromShop, chooseAmelieEnding, chooseNode, decideCapture, finishCombat, leaveCenter, leaveShop, moveCardToChest, moveCardToDeck, pickCard, playCamp, setRow, swapPartyBox, useItem
+  buyFromShop, chooseAmelieEnding, consumeStoryLine, chooseNode, decideCapture, finishCombat, leaveCenter, leaveShop, moveCardToChest, moveCardToDeck, pickCard, playCamp, setRow, swapPartyBox, useItem
 } from "../run/index.js";
 import { playSmartTurn } from "./smartPlayer.js";
 
@@ -130,6 +130,7 @@ export function playSmartRun(run, { maxSteps = 600, onFight = null } = {}) {
   let steps = 0;
   while (run.phase !== "ended" && steps < maxSteps) {
     steps += 1;
+    consumeStoryLine(run); // acepta los regalos de Lina como lo haría un jugador
     if (run.phase === "map") {
       manageRoster(run);
       useItems(run);

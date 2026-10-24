@@ -1,5 +1,5 @@
 // Arranque: carga los JSON, crea la corrida y dibuja la pantalla según run.phase.
-import { createRun, difficultyPresets, gameModes, finishCombat, markStorySeen, pickStoryLine, restoreRun, serializeRun } from "../../src/run/index.js";
+import { consumeStoryLine, createRun, difficultyPresets, gameModes, finishCombat, restoreRun, serializeRun } from "../../src/run/index.js";
 import { renderCombat } from "./combatView.js";
 import { animateBars, playEffects } from "./effects.js";
 import { icon } from "./pixelIcons.js";
@@ -195,7 +195,7 @@ function sceneFor(run) {
   return bossKinds.includes(run.combat?.kind) || bossNodes.includes(run.node?.type) ? "boss" : "combat";
 }
 
-const storyPhases = ["map", "combat", "reward", "center"];
+const storyPhases = ["map", "combat", "reward", "center", "camp", "shop"];
 const storyDurationMs = 9000;
 
 function closeStoryLine() {
@@ -206,9 +206,8 @@ function closeStoryLine() {
 // Elige (una sola vez por partida) el diálogo de Amelie que corresponde al momento actual.
 function refreshStoryLine(run) {
   if (ctx.storyLine || !storyPhases.includes(run.phase)) return;
-  const line = pickStoryLine(run);
+  const line = consumeStoryLine(run);
   if (!line) return;
-  markStorySeen(run, line.id);
   ctx.storyLine = { line, fresh: true };
   setTimeout(() => { if (ctx.storyLine?.line === line) closeStoryLine(); }, storyDurationMs);
 }

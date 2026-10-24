@@ -189,10 +189,18 @@ function validateStory(data, check) {
   for (const line of story.lines) {
     check(!ids.has(line.id), `story: línea repetida ${line.id}`);
     ids.add(line.id);
+    check(Boolean(story.speakers[line.speaker]), `story ${line.id}: hablante inexistente ${line.speaker}`);
     check(expressions.includes(line.expression), `story ${line.id}: expresión inválida`);
-    check(typeof line.text === "string" && line.text.length > 0, `story ${line.id}: falta texto`);
+    check(Array.isArray(line.variants) && line.variants.length > 0 && line.variants.every((text) => typeof text === "string" && text.length > 0), `story ${line.id}: faltan variantes`);
+    check(!line.gift || Boolean(story.gifts[line.gift]), `story ${line.id}: regalo inexistente ${line.gift}`);
   }
-  for (const step of story.final.intro) check(expressions.includes(step.expression), "story.final: expresión inválida");
+  for (const [tier, pool] of Object.entries(story.gifts)) {
+    for (const gift of pool) check(Boolean(gift.item ? data.items[gift.item] : data.cards[gift.card]), `story.gifts.${tier}: id inválido`);
+  }
+  for (const step of story.final.intro) {
+    check(expressions.includes(step.expression), "story.final: expresión inválida");
+    check(step.variants?.length > 0, "story.final: faltan variantes");
+  }
   check(Boolean(story.final.endings?.escape && story.final.endings?.stay), "story.final: faltan finales");
   check(story.boss.enemies.length >= 1, "story.boss: sin enemigos");
   for (const enemy of story.boss.enemies) {
