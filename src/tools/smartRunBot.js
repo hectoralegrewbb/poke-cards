@@ -2,11 +2,11 @@
 // atenta: cuida la party, cambia caja/party, arma el mazo con energía fuerte y gasta oro con criterio.
 import { isAlive } from "../engine/index.js";
 import {
-  buyFromShop, chooseNode, decideCapture, finishCombat, leaveShop, moveCardToChest, moveCardToDeck, pickCard, playCamp, setRow, swapPartyBox, useItem
+  buyFromShop, chooseNode, decideCapture, finishCombat, leaveCenter, leaveShop, moveCardToChest, moveCardToDeck, pickCard, playCamp, setRow, swapPartyBox, useItem
 } from "../run/index.js";
 import { playSmartTurn } from "./smartPlayer.js";
 
-const cardPriority = ["wildcard", "energyDouble", "insight", "recharge", "barrier", "focus", "remedy", "energyBasic", "potion", "haste", "quickStep", "luckyCoin"];
+const cardPriority = ["wildcard", "energyDouble", "insight", "recharge", "barrier", "sitrusBerry", "revive", "focus", "remedy", "energyBasic", "potion", "haste", "quickStep", "luckyCoin"];
 const statusCure = { poison: "antidote", burn: "burnHeal", paralysis: "paralyzeHeal" };
 
 const power = (run, pokemon) => Object.values(run.data.species[pokemon.speciesId].stats).reduce((sum, value) => sum + value, 0);
@@ -60,6 +60,7 @@ function pickOption(run) {
   const score = (type) => {
     switch (type) {
       case "camp": return health < 0.7 || fainted ? 10 : 2;
+      case "pokeCenter": return health < 0.85 || fainted ? 11 : 3;
       case "shop": return run.gold >= 60 ? 6 : 1;
       case "wild": return run.party.length < 4 ? 8 : 5;
       case "combat": return 5;
@@ -140,6 +141,7 @@ export function playSmartRun(run, { maxSteps = 600, onFight = null } = {}) {
       onFight?.(describeFight(run));
       finishCombat(run);
     } else if (run.phase === "reward") handleReward(run);
+    else if (run.phase === "center") leaveCenter(run);
     else if (run.phase === "camp") handleCamp(run);
     else if (run.phase === "shop") handleShop(run);
     else break;

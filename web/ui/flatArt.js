@@ -82,6 +82,27 @@ const items = {
   paralyzeHeal: () => bottle("#ffe27a", "#f2a31b", [bolt]),
   fullHeal: () => bottle("#8ee3d6", "#2fb3a3", [cross]),
   fullRestore: () => bottle("#8fe38f", "#ffcd3c", [heart], true),
+  sitrusBerry: () => [
+    path("M16 9 C16 5 20 3 25 4 C24 8.5 20.5 10.5 16 9 Z", "#4fc46b"),
+    shape("circle", { cx: 16, cy: 19, r: 9, fill: "#ffb43a" }),
+    path("M16 10.5 V13", "none"),
+    path("M11 20 C12 23 14 24.5 16 24.7", "none", { stroke: "#ef7d57", "stroke-width": 2 }),
+    gloss("M10.5 17 C11 14.5 12.5 13.5 14 13")
+  ],
+  lupa: () => [
+    shape("circle", { cx: 13, cy: 13, r: 8.5, fill: "#cfeaff" }),
+    path("M19.5 19.5 L28 28", "none", { stroke: ink, "stroke-width": 6.5 }),
+    path("M19.5 19.5 L28 28", "none", { stroke: "#ef7d57", "stroke-width": 3 }),
+    shape("circle", { cx: 13, cy: 13, r: 8.5, fill: "none" }),
+    gloss("M8.5 11.5 C9 9.5 10.5 8.3 12.5 7.9")
+  ],
+  pokeBall: () => [
+    shape("circle", { cx: 16, cy: 16, r: 12, fill: "#f4f4f4" }),
+    path("M4 16 A12 12 0 0 1 28 16 Z", "#e0405e"),
+    shape("path", { d: "M4 16 H28", fill: "none" }),
+    shape("circle", { cx: 16, cy: 16, r: 4.2, fill: "#f4f4f4" }),
+    gloss("M8.5 11 C10 8.5 12 7.2 14.5 6.6")
+  ],
   wild: () => [
     shape("circle", { cx: 16, cy: 16, r: 12, fill: "url(#flatRainbow)" }),
     shape("circle", { cx: 16, cy: 16, r: 5, fill: shine, "stroke-width": 1.5, opacity: 0.9 }),

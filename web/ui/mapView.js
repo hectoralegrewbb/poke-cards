@@ -5,12 +5,13 @@ import { nodeLabels } from "./labels.js";
 import { icon } from "./pixelIcons.js";
 import { sfx } from "./sfx.js";
 
-const nodeIcons = { combat: "sword", wild: "leaf", elite: "skull", camp: "tent", shop: "coin", gym: "medal", eliteFour: "crown", champion: "crown", legendary: "star", rival: "sword", villain: "skull" };
+const nodeIcons = { combat: "sword", wild: "leaf", elite: "skull", camp: "tent", shop: "coin", gym: "medal", eliteFour: "crown", champion: "crown", legendary: "star", rival: "sword", villain: "skull", pokeCenter: "pokeBall" };
 const nodeMeta = {
   combat: { risk: "RIESGO MEDIO", reward: "Oro + carta" },
   wild: { risk: "RIESGO BAJO", reward: "Oportunidad de captura" },
   elite: { risk: "RIESGO ALTO", reward: "Oro + ítem" },
   camp: { risk: "SIN COMBATE", reward: "Curar / revivir / entrenar" },
+  pokeCenter: { risk: "SIN COMBATE · UNA VEZ POR RUTA", reward: "Cura y revive a todo el equipo" },
   shop: { risk: "SIN COMBATE", reward: "Comprar mejoras" },
   gym: { risk: "JEFE", reward: "Medalla + recompensa" },
   eliteFour: { risk: "JEFE DE LIGA", reward: "Sin descanso entre combates" },

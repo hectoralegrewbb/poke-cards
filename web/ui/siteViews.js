@@ -1,6 +1,6 @@
-// Campamento y tienda.
+// Campamento, tienda y Centro Pokémon.
 import { isAlive } from "../../src/engine/index.js";
-import { buyFromShop, leaveShop, playCamp } from "../../src/run/index.js";
+import { buyFromShop, leaveCenter, leaveShop, playCamp } from "../../src/run/index.js";
 import { h } from "./dom.js";
 import { describeCard, errorText } from "./labels.js";
 import { itemImage } from "./itemIcons.js";
@@ -48,4 +48,20 @@ export function renderShop(ctx) {
         h("span", { class: "price" }, entry.sold ? "VENDIDO" : [icon("coin", { scale: 2 }), ` ${entry.price}`]));
     })),
     h("button", { class: "btn primary", onClick: () => { leaveShop(run); sfx.play("select"); ctx.rerender(); } }, "SALIR ▶"));
+}
+
+// Centro Pokémon: la cura ya se aplicó al entrar (usePokeCenter); acá se muestra el resultado.
+export function renderCenter(ctx) {
+  const { run } = ctx;
+  const event = [...run.log].reverse().find((entry) => entry.type === "centerHealed");
+  const lines = event ? [
+    event.revived ? (event.revived === 1 ? "1 Pokémon revivió." : `${event.revived} Pokémon revivieron.`) : null,
+    event.healed ? (event.healed === 1 ? "1 Pokémon recuperó sus PS y se curó de estados." : `${event.healed} Pokémon recuperaron sus PS y se curaron de estados.`) : null,
+    !event.revived && !event.healed ? "Tu equipo ya estaba en perfecto estado." : null
+  ].filter(Boolean) : [];
+  return h("section", { class: "window center" },
+    h("h2", {}, icon("pokeBall", { scale: 3 }), " CENTRO POKÉMON"),
+    h("p", {}, "«¡Bienvenido al Centro Pokémon! Dejaremos a tus Pokémon como nuevos. …¡Listo! Esperamos verte pronto.»"),
+    h("ul", { class: "centerLines" }, lines.map((line) => h("li", {}, line))),
+    h("button", { class: "btn primary", onClick: () => { sfx.play("start"); check(ctx, leaveCenter(run)); } }, "CONTINUAR ▶"));
 }

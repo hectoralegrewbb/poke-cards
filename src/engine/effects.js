@@ -115,3 +115,37 @@ registerEffect("cureStatus", (state, effect, { targets }) => {
 registerEffect("status", (state, effect, { targets }) => {
   for (const pokemon of targets) inflictStatus(state, pokemon, effect.status, effect.chance ?? 1);
 });
+
+// Revive a un Pokémon debilitado durante el combate con una fracción de sus PS. Actúa desde el próximo turno.
+registerEffect("revive", (state, effect, { targets }) => {
+  for (const pokemon of targets) {
+    if (isAlive(pokemon)) continue;
+    pokemon.fainted = false;
+    pokemon.hp = Math.min(pokemon.maxHp, Math.max(1, Math.ceil(pokemon.maxHp * (effect.hpFraction ?? 0.5))));
+    pokemon.status = null;
+    pokemon.shield = 0;
+    pokemon.staggered = false;
+    pokemon.intent = null;
+    pokemon.actionsLeft = 0;
+    emit(state, { type: "revivedInCombat", targetId: pokemon.uid, hp: pokemon.hp });
+  }
+});
+
+// Baya Zidra: el próximo golpe letal de este combate deja al Pokémon con 1 PS.
+registerEffect("berryGuard", (state, effect, { targets }) => {
+  for (const pokemon of targets) {
+    if (!isAlive(pokemon)) continue;
+    pokemon.berryGuard = true;
+    emit(state, { type: "berryReady", targetId: pokemon.uid });
+  }
+});
+
+// Buscador: lleva a la mano una carta elegida del mazo (pila de robo). La elección llega en context.choice.cardUid.
+registerEffect("searchDeck", (state, effect, { side, choice }) => {
+  if (side !== "player") return;
+  const index = state.deck.drawPile.findIndex((card) => card.uid === choice?.cardUid);
+  if (index === -1) return;
+  const [card] = state.deck.drawPile.splice(index, 1);
+  state.deck.hand.push(card);
+  emit(state, { type: "cardSearched", cardUid: card.uid, cardId: card.cardId });
+});

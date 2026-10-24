@@ -1,9 +1,9 @@
 // Bot que juega una corrida completa (solo simulación/tests): elige nodos, cartas y usa ítems con reglas simples.
 import { isAlive } from "../engine/index.js";
-import { buyFromShop, chooseNode, decideCapture, finishCombat, leaveShop, pickCard, playCamp, useItem } from "../run/index.js";
+import { buyFromShop, chooseNode, decideCapture, finishCombat, leaveCenter, leaveShop, pickCard, playCamp, useItem } from "../run/index.js";
 import { playGreedyTurn } from "./greedyPlayer.js";
 
-const nodePriority = ["camp", "shop", "combat", "wild", "elite"];
+const nodePriority = ["pokeCenter", "camp", "shop", "combat", "wild", "elite"];
 
 function healWithItems(run) {
   for (const pokemon of run.party) {
@@ -50,6 +50,7 @@ function resolveReward(run) {
 }
 
 function playSite(run) {
+  if (run.phase === "center") { leaveCenter(run); return; }
   if (run.phase === "camp") {
     const fainted = run.party.find((pokemon) => !isAlive(pokemon));
     if (fainted) playCamp(run, "revive", fainted.uid);

@@ -158,7 +158,10 @@
       "recharge": 25,
       "focus": 25,
       "haste": 30,
-      "remedy": 20
+      "remedy": 20,
+      "revive": 45,
+      "sitrusBerry": 30,
+      "finder": 35
     }
   },
   "cardRewards": {
@@ -173,7 +176,10 @@
     "recharge": 2,
     "focus": 2,
     "haste": 2,
-    "remedy": 2
+    "remedy": 2,
+    "revive": 1,
+    "sitrusBerry": 2,
+    "finder": 1
   },
   "stages": [
     {

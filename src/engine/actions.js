@@ -85,8 +85,9 @@ export function playShield(state, { targetUid, cardUids }) {
   return { ok: true, events: state.log.slice(startIndex) };
 }
 
-// Cartas de utilidad (robar, curar, bajar cooldown, moneda de la suerte, barrera).
-export function playUtility(state, { cardUid, targetUid }) {
+// Cartas de utilidad (robar, curar, revivir, buscar en el mazo, bayas, etc.).
+// target: "ally" (aliado en pie), "fallenAlly" (aliado debilitado), "drawPile" (searchCardUid de la pila de robo) o ninguno.
+export function playUtility(state, { cardUid, targetUid, searchCardUid = null }) {
   if (!isPlayerTurn(state)) return fail("notPlayerTurn");
 
   const cards = findInHand(state.deck, [cardUid]);
@@ -99,12 +100,18 @@ export function playUtility(state, { cardUid, targetUid }) {
   if (cardDef.target === "ally") {
     target = findLivingAlly(state, targetUid);
     if (!target) return fail("invalidTarget");
+  } else if (cardDef.target === "fallenAlly") {
+    target = state.teams.player.find((pokemon) => pokemon.uid === targetUid && !isAlive(pokemon)) ?? null;
+    if (!target) return fail("invalidTarget");
+  } else if (cardDef.target === "drawPile") {
+    if (state.deck.drawPile.length === 0) return fail("emptyDrawPile");
+    if (!state.deck.drawPile.some((entry) => entry.uid === searchCardUid)) return fail("invalidSearchTarget");
   }
 
   const startIndex = state.log.length;
   discardFromHand(state.deck, [cardUid]);
   emit(state, { type: "cardPlayed", cardId: card.cardId, targetId: target?.uid ?? null });
-  applyEffects(state, cardDef.effects, { side: "player", source: null, target });
+  applyEffects(state, cardDef.effects, { side: "player", source: null, target, choice: { cardUid: searchCardUid } });
   return { ok: true, events: state.log.slice(startIndex) };
 }
 
@@ -128,10 +135,11 @@ export function choosePayCards(cardDefs, cards, cost) {
 }
 
 // Reparte las cartas cargadas en un Pokémon entre "pagan" y "refuerzan" (solo si la técnica daña).
+// Una técnica LIBRE (costo 0) no gasta ni refuerza con las cartas cargadas: quedan en la mano.
 export function splitCharge(cardDefs, cards, { cost, power, maxBoostCards }) {
   const { pay, energy } = choosePayCards(cardDefs, cards, cost);
   const rest = cards.filter((card) => !pay.includes(card));
-  const boost = power > 0
+  const boost = power > 0 && cost > 0
     ? rest.filter((card) => cardDefs[card.cardId].playModes.includes("boostAttack"))
         .sort((a, b) => cardDefs[b.cardId].boostMultiplier - cardDefs[a.cardId].boostMultiplier)
         .slice(0, maxBoostCards)

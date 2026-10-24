@@ -39,7 +39,13 @@ export function calculateMoveDamage({ targetCount = 1, ...options }) {
 export function applyDamage(target, amount) {
   const absorbed = Math.min(target.shield, amount);
   target.shield -= absorbed;
-  const hpLost = Math.min(target.hp, amount - absorbed);
+  let hpLost = Math.min(target.hp, amount - absorbed);
+  // Baya Zidra: un golpe letal deja al Pokémon con 1 PS y consume la baya.
+  const saved = hpLost > 0 && hpLost >= target.hp && Boolean(target.berryGuard);
+  if (saved) {
+    hpLost = target.hp - 1;
+    target.berryGuard = false;
+  }
   target.hp -= hpLost;
   if (target.hp <= 0) {
     target.hp = 0;
@@ -47,5 +53,5 @@ export function applyDamage(target, amount) {
     target.status = null;
     target.staggered = false;
   }
-  return { absorbed, hpLost, fainted: target.fainted };
+  return { absorbed, hpLost, fainted: target.fainted, saved };
 }

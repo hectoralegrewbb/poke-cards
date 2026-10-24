@@ -20,7 +20,7 @@ export function restoreRun(data, saved) {
   if (!record || record.version !== saveVersion || !record.run) throw new Error("Guardado incompatible");
   const { rngState, combat: combatSnapshot, ...fields } = record.run;
   if (!Number.isInteger(rngState) || !Array.isArray(fields.party) || !Array.isArray(fields.options) ||
-      !["map", "combat", "reward", "shop", "camp"].includes(fields.phase) || !Number.isInteger(fields.seed)) {
+      !["map", "combat", "reward", "shop", "camp", "center"].includes(fields.phase) || !Number.isInteger(fields.seed)) {
     throw new Error("Guardado inválido");
   }
   const run = { ...fields, data, rng: createRng(fields.seed, rngState), combat: null,

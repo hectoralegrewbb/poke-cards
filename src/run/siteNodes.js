@@ -70,3 +70,15 @@ export function useCamp(run, action, pokemonUid = null) {
   }
   return { ok: false, error: "unknownCampAction" };
 }
+
+// Centro Pokémon: cura y revive a todo el equipo (party y caja) y quita los estados. Sin costo ni elección.
+export function usePokeCenter(run) {
+  let healed = 0;
+  let revived = 0;
+  for (const pokemon of [...run.party, ...run.box]) {
+    if (!isAlive(pokemon)) revived += 1;
+    else if (pokemon.hp < pokemon.maxHp || pokemon.status) healed += 1;
+    Object.assign(pokemon, { hp: pokemon.maxHp, fainted: false, status: null, shield: 0, staggered: false, intent: null });
+  }
+  return { ok: true, events: [emitRun(run, { type: "centerHealed", healed, revived })] };
+}

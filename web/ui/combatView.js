@@ -11,6 +11,7 @@ import { icon } from "./pixelIcons.js";
 import { cardEffectIcons, describeCard, describeEffects, errorText, formatEvent, statusInfo, typeColors, typeNames } from "./labels.js";
 import { sfx } from "./sfx.js";
 
+let searchCardUid = null; // carta Buscador abierta (modal con la pila de robo)
 const sel = { ref: null, actorUid: null, moveIndex: null, targetUid: null, cardUids: [], mode: "attack", utilityUid: null };
 // uid de Pokémon -> uids de cartas de energía cargadas en él
 let staged = {};
@@ -56,6 +57,7 @@ function sanitizeSelection(state) {
     staged[uid] = usable ? staged[uid].filter((cardUid) => state.deck.hand.some((card) => card.uid === cardUid)) : [];
     if (staged[uid].length === 0) delete staged[uid];
   }
+  if (searchCardUid && !state.deck.hand.some((card) => card.uid === searchCardUid)) searchCardUid = null;
   if (sel.utilityUid && !state.deck.hand.some((card) => card.uid === sel.utilityUid)) {
     sel.utilityUid = null;
     if (sel.mode === "utility") sel.mode = "attack";
@@ -145,6 +147,10 @@ function pushEvents(ctx, state, events) {
     if (event.type === "luckyCoinGained") ctx.fx.push({ banner: "¡MONEDA DE LA SUERTE!", sound: "passive", delay: time });
     if (event.type === "statusCured") ctx.fx.push({ uid: event.targetId, cls: "healed", text: "CURADO", floatCls: "heal", burst: "heal", sound: "cure", delay: time });
     if (event.type === "passiveTriggered") ctx.fx.push({ uid: event.pokemonId, cls: "charge", text: `✦ ${event.name}`, floatCls: "passiveFx", burst: "card", sound: "passive", delay: time });
+    if (event.type === "revivedInCombat") ctx.fx.push({ uid: event.targetId, cls: "healed", text: "¡REVIVE!", floatCls: "heal", burst: "heal", sound: "cure", delay: time });
+    if (event.type === "berryReady") ctx.fx.push({ uid: event.targetId, cls: "shielded", text: "BAYA", floatCls: "shieldFx", burst: "card", sound: "shield", delay: time });
+    if (event.type === "berrySaved") ctx.fx.push({ uid: event.targetId, cls: "shielded", text: "¡AGUANTÓ!", floatCls: "shieldFx", burst: "shield", sound: "passive", delay: time, banner: null });
+    if (event.type === "cardSearched") ctx.fx.push({ cardUid: event.cardUid, cls: "dealt", delay: time });
     if (event.type === "combatEnded") ctx.fx.push({ sound: event.result === "victory" ? "victory" : "defeat", delay: time + 200 });
   }
   while (logLines.length > 60) logLines.shift();
@@ -235,15 +241,17 @@ function pokemonTile(ctx, state, pokemon, validSet, threats) {
   const classes = ["tile", pokemon.side, alive ? "" : "dead", validSet.has(pokemon.uid) ? "valid" : "", pokemon.uid === sel.actorUid ? "actor" : "", pokemon.uid === sel.targetUid ? "targeted" : "", alive && isPlayer && pokemon.actionsLeft <= 0 ? "acted" : "", alive && isOutOfReach(state, pokemon) ? "outOfReach" : "", alive && isPlayer && threats.has(pokemon.uid) ? "threatened" : ""];
   const loaded = stagedOf(pokemon.uid);
   const canCharge = alive && isPlayer && pokemon.actionsLeft > 0;
+  const reviveTarget = !alive && isPlayer && validSet.has(pokemon.uid); // carta Revivir armada
+  const clickable = alive || reviveTarget;
   const tile = h("div", {
-    class: classes.join(" "), "data-uid": pokemon.uid, "data-drop": alive ? `${isPlayer ? "ally" : "enemy"}:${pokemon.uid}` : null,
+    class: classes.join(" "), "data-uid": pokemon.uid, "data-drop": alive ? `${isPlayer ? "ally" : "enemy"}:${pokemon.uid}` : isPlayer ? `fallen:${pokemon.uid}` : null,
     title: pokemon.passive ? `${pokemon.passive.name}: ${pokemon.passive.description}` : null,
-    role: alive ? "button" : null, tabindex: alive ? "0" : null,
+    role: clickable ? "button" : null, tabindex: clickable ? "0" : null,
     "aria-label": `${pokemon.name}, ${pokemon.hp} de ${pokemon.maxHp} PS`,
-    onKeyDown: alive ? (event) => {
+    onKeyDown: clickable ? (event) => {
       if (event.target === event.currentTarget && (event.key === "Enter" || event.key === " ")) { event.preventDefault(); onTileClick(ctx, state, pokemon); }
     } : null,
-    onClick: alive ? () => onTileClick(ctx, state, pokemon) : null
+    onClick: clickable ? () => onTileClick(ctx, state, pokemon) : null
   },
     isPlayer && alive ? h("div", { class: "zones" },
       h("div", { class: "zone zCharge", "data-drop": canCharge ? `charge:${pokemon.uid}` : null }, icon("bolt", { scale: 3 }), "CARGAR"),
@@ -259,6 +267,7 @@ function pokemonTile(ctx, state, pokemon, validSet, threats) {
     h("div", { class: "spriteBox" }, h("div", { class: "platform" }), ctx.sprites.element(pokemon.speciesId, { facing: isPlayer ? "back" : "front", spriteKey: `${state.seed}:${pokemon.side}:${pokemon.uid}`, shiny: Boolean(pokemon.shiny) }), pokemon.shiny ? h("span", { class: "shinyMark", title: "Variocolor" }, "✦") : null),
     h("div", { class: "plate" },
       h("div", { class: "pname" }, pokemon.shiny ? "✦ " : "", pokemon.name, h("small", {}, pokemon.row === "front" ? "F" : "B")),
+      pokemon.berryGuard ? h("span", { class: "statusTag berry", title: "Baya Zidra: aguanta un golpe letal con 1 PS" }, "BAYA") : null,
       pokemon.status ? h("span", { class: `statusTag ${pokemon.status}`, title: statusInfo[pokemon.status].hint }, statusInfo[pokemon.status].short) : null,
       h("div", { class: "types" }, pokemon.types.map(typeChip)),
       hpBar(pokemon),
@@ -290,7 +299,11 @@ function validTargetUids(state) {
   if (sel.mode === "attack" && actor && sel.moveIndex !== null) {
     return new Set(getValidTargets(state, actor, selectedMove(state)).map((pokemon) => pokemon.uid));
   }
-  if (sel.mode === "shield" || sel.mode === "utility") return new Set(state.teams.player.filter(isAlive).map((pokemon) => pokemon.uid));
+  if (sel.mode === "utility") {
+    const wantsFallen = state.data.cards[state.deck.hand.find((card) => card.uid === sel.utilityUid)?.cardId]?.target === "fallenAlly";
+    return new Set(state.teams.player.filter((pokemon) => isAlive(pokemon) !== wantsFallen).map((pokemon) => pokemon.uid));
+  }
+  if (sel.mode === "shield") return new Set(state.teams.player.filter(isAlive).map((pokemon) => pokemon.uid));
   return new Set();
 }
 
@@ -392,7 +405,7 @@ function dialogBox(ctx, state) {
       return total + (card ? state.data.cards[card.cardId].boostMultiplier * state.data.balance.combat.defenseBoostPerCard : 0);
     }, 0);
     prompt = sel.targetUid ? `Escudo +${amount} a ${findPokemon(state, sel.targetUid).name}.` : "Modo escudo: elegí aliado y cartas.";
-  } else if (sel.mode === "utility") prompt = "¿A quién aplicás la carta?";
+  } else if (sel.mode === "utility") prompt = state.data.cards[state.deck.hand.find((card) => card.uid === sel.utilityUid)?.cardId]?.target === "fallenAlly" ? "¿A quién revivís? Tocá un Pokémon debilitado." : "¿A quién aplicás la carta?";
   else if (actor && !move) prompt = `${actor.name} está listo. Elegí una técnica; las de costo LIBRE no necesitan cartas.`;
   else if (actor && move) {
     const load = loadFor(state, actor, move);
@@ -400,7 +413,7 @@ function dialogBox(ctx, state) {
     const effect = describeEffects(move.effects) ? ` (${describeEffects(move.effects)})` : "";
     const targetsInfo = move.targetMode ? ` · ${move.targetMode === "allEnemies" ? "TODOS LOS RIVALES" : "FILA COMPLETA"}` : "";
     const shortfall = load.energy < load.cost ? ` · FALTAN ${load.cost - load.energy} ENERGÍA` : "";
-    prompt = `${actor.name}: ${move.name}${effect}${targetsInfo} · ${load.energy}/${load.cost} EN${shortfall}${load.boost.length ? ` · +${load.boostPower} POD` : ""}${target ? ` → ${target.name}` : " · ELEGÍ OBJETIVO"}`;
+    prompt = `${actor.name}: ${move.name}${effect}${targetsInfo} · ${load.energy}/${load.cost} EN${shortfall}${load.boost.length ? ` · +${load.boostPower} POD` : ""}${load.cost === 0 && stagedOf(actor.uid).length ? " · LIBRE: no gasta las cartas cargadas" : ""}${target ? ` → ${target.name}` : " · ELEGÍ OBJETIVO"}`;
   }
 
   const fresh = logLines.length - loggedCount;
@@ -435,13 +448,24 @@ function handView(ctx, state) {
 
     const onCardClick = () => {
       if (def.kind === "utility") {
-        if (def.target === "ally" && sel.mode === "utility" && sel.utilityUid === card.uid) {
+        const needsTarget = def.target === "ally" || def.target === "fallenAlly";
+        if (def.target === "fallenAlly" && state.teams.player.every(isAlive)) {
+          sfx.play("deny");
+          return ctx.notify("Ningún Pokémon está debilitado.");
+        }
+        if (def.target === "drawPile") {
+          if (state.deck.drawPile.length === 0) { sfx.play("deny"); return ctx.notify(errorText.emptyDrawPile); }
+          searchCardUid = card.uid;
+          sfx.play("pick");
+          return ctx.rerender();
+        }
+        if (needsTarget && sel.mode === "utility" && sel.utilityUid === card.uid) {
           sel.mode = "attack"; // tocar de nuevo la carta armada la cancela
           sel.utilityUid = null;
           sfx.play("deny");
           return ctx.rerender();
         }
-        if (def.target === "ally") {
+        if (needsTarget) {
           sel.mode = "utility";
           sel.utilityUid = card.uid;
           sfx.play("pick");
@@ -486,7 +510,7 @@ function handView(ctx, state) {
       kind: def.kind === "utility" ? "utility" : "energy",
       isValid: (drop) => {
         const [kind] = drop.dataset.drop.split(":");
-        if (def.kind === "utility") return def.target === "ally" ? kind === "ally" : kind === "field";
+        if (def.kind === "utility") return def.target === "ally" ? kind === "ally" : def.target === "fallenAlly" ? kind === "fallen" : def.target === "drawPile" ? false : kind === "field";
         if (kind === "guard" || kind === "charge") return true;
         return kind === "move" && Boolean(findPokemon(state, sel.actorUid));
       },
@@ -501,7 +525,7 @@ function handView(ctx, state) {
         const [kind, uid] = drop.dataset.drop.split(":");
         if (def.kind === "utility") {
           sfx.play("card");
-          return runAction(ctx, state, playUtility(state, { cardUid: card.uid, targetUid: def.target === "ally" ? uid : null }));
+          return runAction(ctx, state, playUtility(state, { cardUid: card.uid, targetUid: def.target === "ally" || def.target === "fallenAlly" ? uid : null }));
         }
         if (kind === "guard") return runAction(ctx, state, playShield(state, { targetUid: uid, cardUids: [card.uid] }));
         const actor = kind === "charge" ? findPokemon(state, uid) : findPokemon(state, sel.actorUid);
@@ -525,6 +549,32 @@ function handView(ctx, state) {
     });
     return element;
   }));
+}
+
+// Buscador: lista la pila de robo (agrupada por carta) y lleva la elegida a la mano.
+function searchModal(ctx, state) {
+  const groups = new Map();
+  for (const card of state.deck.drawPile) {
+    const entry = groups.get(card.cardId) ?? { cardId: card.cardId, uid: card.uid, count: 0 };
+    entry.count += 1;
+    groups.set(card.cardId, entry);
+  }
+  const close = () => { searchCardUid = null; sfx.play("deny"); ctx.rerender(); };
+  return h("div", { class: "overlay searchOverlay", onClick: (event) => { if (event.target === event.currentTarget) close(); } },
+    h("div", { class: "window dialogBig searchWindow", role: "dialog", "aria-label": "Buscar una carta en el mazo" },
+      h("h2", {}, icon("lupa", { scale: 4 }), " BUSCADOR"),
+      h("p", { class: "muted" }, `Elegí una carta del mazo (${state.deck.drawPile.length} restantes) y pasa a tu mano.`),
+      h("div", { class: "searchList" }, [...groups.values()].sort((a, b) => state.data.cards[a.cardId].name.localeCompare(state.data.cards[b.cardId].name)).map((entry) => {
+        const def = state.data.cards[entry.cardId];
+        return h("button", { class: "searchItem", onClick: () => {
+          const cardUid = searchCardUid;
+          searchCardUid = null;
+          sfx.play("card");
+          runAction(ctx, state, playUtility(state, { cardUid, targetUid: null, searchCardUid: entry.uid }));
+          ctx.rerender();
+        } }, h("span", { class: "searchArt" }, cardIcon(def).slice(0, 1)), h("strong", {}, `${def.name} ×${entry.count}`), h("small", {}, describeCard(def)));
+      })),
+      h("button", { class: "btn", onClick: close }, "CANCELAR")));
 }
 
 // Terminar el turno con Pokémon sin actuar pide una segunda pulsación (evita un toque accidental, sobre todo en móvil).
@@ -610,6 +660,7 @@ export function renderCombat(ctx) {
         h("button", { class: `btn ${sel.mode === "shield" ? "on" : ""}`, onClick: () => { sel.mode = sel.mode === "shield" ? "attack" : "shield"; clearChoice(); sfx.play("select"); ctx.rerender(); } }, "ESCUDO"),
         h("button", { class: "btn danger", disabled: finished, title: readyCount ? `${readyCount} Pokémon todavía pueden actuar` : "Resolver acciones enemigas", onClick: () => endTurnClicked(ctx, state, readyCount) },
           readyCount && endTurnArmed() ? "¿SEGURO? ▶" : readyCount ? `FIN TURNO (${readyCount}) ▶` : "FIN TURNO ▶"))),
+    searchCardUid && !finished ? searchModal(ctx, state) : null,
     finished && resultOverlayReady(ctx, state) ? h("div", { class: "overlay" }, h("div", { class: "window dialogBig" },
       h("h2", { class: state.result === "victory" ? "win" : "lose" }, state.result === "victory" ? "¡VICTORIA!" : isOptionalEventKind(ctx.run) ? "¡TE RETIRAS!" : "DERROTA"),
       state.result !== "victory" && isOptionalEventKind(ctx.run) ? h("p", { class: "muted" }, "Es un evento: no pierdes la partida. Tu equipo vuelve como estaba, sin recompensas.") : null,

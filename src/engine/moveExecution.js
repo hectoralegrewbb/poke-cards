@@ -35,6 +35,7 @@ export function executeMove(state, actor, moveIndex, target, options = {}) {
         absorbed: applied.absorbed, hpLost: applied.hpLost, typeMultiplier: result.typeMultiplier,
         stab: result.stab, boostPower, isCrit: result.isCrit, spread: targets.length > 1
       });
+      if (applied.saved) emit(state, { type: "berrySaved", targetId: defender.uid });
       if (applied.fainted) emit(state, { type: "fainted", pokemonId: defender.uid });
       else if (result.typeMultiplier > 0) applyEffects(state, move.effects, { side: actor.side, source: actor, target: defender });
     }

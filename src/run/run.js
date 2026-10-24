@@ -5,7 +5,7 @@ import { buildEncounter } from "./encounterBuilder.js";
 import { advanceStep, generateOptions } from "./mapGenerator.js";
 import { anyAlive, grantVictoryRewards, isRewardSettled, resolveCapture, takeCardReward } from "./rewards.js";
 import { addToRoster, emitRun, isOptionalEvent, newPokemon, restoreParty, snapshotParty } from "./runState.js";
-import { openShop, useCamp } from "./siteNodes.js";
+import { openShop, useCamp, usePokeCenter } from "./siteNodes.js";
 import { getDifficulty } from "./difficulty.js";
 import { buildCampaign } from "./campaignBuilder.js";
 import { isDeckPlayable } from "./deckManager.js";
@@ -86,6 +86,9 @@ export function chooseNode(run, optionIndex) {
 
   if (node.type === "camp") {
     run.phase = "camp";
+  } else if (node.type === "pokeCenter") {
+    events.push(...usePokeCenter(run).events);
+    run.phase = "center";
   } else if (node.type === "shop") {
     openShop(run);
     run.phase = "shop";
@@ -153,6 +156,12 @@ export function playCamp(run, action, pokemonUid = null) {
 
 export function leaveShop(run) {
   if (run.phase !== "shop") return { ok: false, error: "notInShop" };
+  returnToMap(run);
+  return { ok: true, events: [] };
+}
+
+export function leaveCenter(run) {
+  if (run.phase !== "center") return { ok: false, error: "notInCenter" };
   returnToMap(run);
   return { ok: true, events: [] };
 }

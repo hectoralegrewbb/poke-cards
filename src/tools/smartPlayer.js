@@ -3,7 +3,7 @@
 // protege con escudos a quien está por caer, juega utilidades y evita tirar cartas útiles.
 import {
   calculateMoveDamage, choosePayCards, endPlayerTurn, getIncomingThreats, getLiving, getMoveCost, getMoveTargets, getPowerBonus,
-  getValidTargets, playMove, playShield, playUtility
+  getValidTargets, isAlive, playMove, playShield, playUtility
 } from "../engine/index.js";
 
 const RESERVE_CARDS = 2; // energía que prefiere guardar para el turno siguiente
@@ -88,6 +88,12 @@ function playUtilityCards(state) {
     else if (id === "remedy") {
       const target = allies().find((p) => p.status);
       if (target) play(card, target.uid);
+    } else if (id === "revive") {
+      const fallen = state.teams.player.find((p) => !isAlive(p));
+      if (fallen) play(card, fallen.uid);
+    } else if (id === "sitrusBerry") {
+      const target = allies().filter((p) => !p.berryGuard).sort((a, b) => (incoming.get(b.uid) ?? 0) - (incoming.get(a.uid) ?? 0))[0];
+      if (target && (incoming.get(target.uid) ?? 0) > 0) play(card, target.uid);
     } else if (id === "quickStep") {
       const target = allies().find((p) => p.actionsLeft > 0 && p.cooldowns.some((c, i) => c > 0 && state.data.moves[p.moves[i]].power >= 7));
       if (target) play(card, target.uid);

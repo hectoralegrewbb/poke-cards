@@ -25,7 +25,12 @@ export function tickStatusForSide(state, side) {
     if (!pokemon.status || pokemon.status === "paralysis") continue;
     const amount = Math.max(1, Math.ceil(pokemon.maxHp * (pokemon.status === "poison" ? 0.06 : 0.04)));
     // El daño de estado ignora escudos y afecta PS directamente.
-    const lost = Math.min(pokemon.hp, amount);
+    let lost = Math.min(pokemon.hp, amount);
+    if (lost >= pokemon.hp && pokemon.berryGuard) {
+      lost = pokemon.hp - 1;
+      pokemon.berryGuard = false;
+      emit(state, { type: "berrySaved", targetId: pokemon.uid });
+    }
     pokemon.hp -= lost;
     emit(state, { type: "statusDamage", targetId: pokemon.uid, status: pokemon.status, amount: lost });
     if (pokemon.hp === 0) {

@@ -23,7 +23,8 @@ export const nodeLabels = {
   champion: { title: "Campeón", text: "6 rivales. El combate final." },
   legendary: { title: "Encuentro legendario", text: "Derrotalo para tener una captura garantizada." },
   rival: { title: "Duelo con el rival", text: "Tu rival reaparece con un nuevo equipo." },
-  villain: { title: "Conflicto regional", text: "Enfrentate a la organización rival de esta región." }
+  villain: { title: "Conflicto regional", text: "Enfrentate a la organización rival de esta región." },
+  pokeCenter: { title: "Centro Pokémon", text: "La enfermera Joy cura y revive a todo tu equipo." }
 };
 
 // Estados alterados: etiqueta corta (casillero y panel de equipo) y explicación (tooltip).
@@ -54,13 +55,17 @@ export const errorText = {
   noItem: "No tenés ese ítem.",
   noEffect: "No tendría ningún efecto.",
   notEnoughGold: "No te alcanza el oro.",
-  invalidStock: "Ya no está disponible."
+  invalidStock: "Ya no está disponible.",
+  copyLimit: "Ya tenés el máximo de copias de esa carta en el mazo activo (2).",
+  emptyDrawPile: "No quedan cartas en el mazo para buscar.",
+  invalidSearchTarget: "Elegí una carta de tu mazo."
 };
 
 // Ícono de arte para cada tipo de efecto de carta (compartido por la mano y la pantalla de recompensas).
 export const cardEffectIcons = Object.freeze({
   drawCards: "cards", heal: "heart", shield: "shield", reduceCooldown: "clock", luckyCoin: "clover",
-  addCards: "bolt", powerModifier: "sword", costModifier: "star", cureStatus: "potion"
+  addCards: "bolt", powerModifier: "sword", costModifier: "star", cureStatus: "potion",
+  revive: "revive", berryGuard: "sitrusBerry", searchDeck: "lupa"
 });
 
 export function describeCard(card) {
@@ -80,7 +85,10 @@ export function describeCard(card) {
         addCards: `Recibís ${effect.amount} energía`,
         powerModifier: `POD +${effect.amount} este turno`,
         costModifier: `Costos ${effect.amount} este turno`,
-        cureStatus: "Cura el estado"
+        cureStatus: "Cura el estado",
+        revive: `Revive a un aliado con ${Math.round((effect.hpFraction ?? 0.5) * 100)}% de PS`,
+        berryGuard: "Si recibe un golpe letal, queda con 1 PS (una vez por combate)",
+        searchDeck: "Buscás 1 carta de tu mazo y la tomás. Máx. 2 en el mazo"
       };
       return labels[effect.type] ?? effect.type;
     })
@@ -145,6 +153,10 @@ export function formatEvent(event, { names, data }) {
     case "cooldownReduced": return `${name(event.targetId)}: -${event.amount} de cooldown.`;
     case "luckyCoinGained": return "Ganás una moneda de la suerte: tu próximo ataque crítica con más chance.";
     case "statusCured": return `${name(event.targetId)} se curó del estado.`;
+    case "revivedInCombat": return `¡${name(event.targetId)} volvió a la batalla con ${event.hp} PS!`;
+    case "berryReady": return `${name(event.targetId)} se aferra a una Baya Zidra.`;
+    case "berrySaved": return `¡${name(event.targetId)} aguantó con la Baya Zidra y quedó con 1 PS!`;
+    case "cardSearched": return `Buscás en tu mazo: ${data.cards[event.cardId]?.name ?? event.cardId} a la mano.`;
     case "passiveTriggered": return `${name(event.pokemonId)}: ${event.name}.`;
     case "enemySkipped": return `${name(event.actorId)} no puede actuar.`;
     case "expAwarded": return `Tu equipo gana ${event.amount} EXP.`;

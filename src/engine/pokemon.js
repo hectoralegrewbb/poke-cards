@@ -46,6 +46,7 @@ export function resetForCombat(pokemon) {
   pokemon.actionsLeft = 0;
   pokemon.intent = null;
   pokemon.staggered = false; // El retroceso no queda pendiente entre combates.
+  pokemon.berryGuard = false; // La Baya Zidra solo dura un combate.
   pokemon.cooldowns = pokemon.moves.map(() => 0);
 }
 

@@ -17,6 +17,12 @@ function pickExtraLegendary(run) {
   return available[0];
 }
 
+// Centro Pokémon: una vez por ruta (desde el inicio hasta el gimnasio), siempre en el 3.º o el 4.º evento.
+// Determinista a partir de la semilla y la etapa, sin consumir el RNG de la corrida.
+export function pokeCenterStep(run) {
+  return 2 + ((Math.abs(Number(run.seed) || 0) + run.stageIndex * 3) % 2);
+}
+
 export function generateOptions(run) {
   const region = run.campaign;
   if ([3, 6].includes(run.badges.length) && !run.completedLegendaryMilestones.includes(run.badges.length)) {
@@ -33,6 +39,7 @@ export function generateOptions(run) {
         const options = ["rival", "villain"].filter((type) => !recent.includes(type));
         if (options.length) nodes[1] = { type: run.rng.pick(options) };
       }
+      if (run.step === pokeCenterStep(run)) nodes[1] = { type: "pokeCenter" };
       return nodes;
     }
     return [{ type: "gym" }];

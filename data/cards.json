@@ -195,5 +195,54 @@
         "target": "target"
       }
     ]
+  },
+  "revive": {
+    "name": "Revivir",
+    "kind": "utility",
+    "energyValue": 0,
+    "boostMultiplier": 0,
+    "playModes": [
+      "utility"
+    ],
+    "target": "fallenAlly",
+    "effects": [
+      {
+        "type": "revive",
+        "hpFraction": 0.5,
+        "target": "target"
+      }
+    ]
+  },
+  "sitrusBerry": {
+    "name": "Baya Zidra",
+    "kind": "utility",
+    "energyValue": 0,
+    "boostMultiplier": 0,
+    "playModes": [
+      "utility"
+    ],
+    "target": "ally",
+    "effects": [
+      {
+        "type": "berryGuard",
+        "target": "target"
+      }
+    ]
+  },
+  "finder": {
+    "name": "Buscador",
+    "kind": "utility",
+    "energyValue": 0,
+    "boostMultiplier": 0,
+    "playModes": [
+      "utility"
+    ],
+    "target": "drawPile",
+    "maxInDeck": 2,
+    "effects": [
+      {
+        "type": "searchDeck"
+      }
+    ]
   }
 }

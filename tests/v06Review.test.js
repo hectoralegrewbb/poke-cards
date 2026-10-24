@@ -36,6 +36,13 @@ test("splitCharge no refuerza movimientos sin poder", () => {
   assert.equal(boost.length, 0);
 });
 
+test("splitCharge: una técnica libre no gasta ni refuerza con cartas cargadas", () => {
+  const hand = [card("a", "energyBasic"), card("b", "wildcard")];
+  const { pay, boost } = splitCharge(data.cards, hand, { cost: 0, power: 7, maxBoostCards: 3 });
+  assert.equal(pay.length, 0);
+  assert.equal(boost.length, 0);
+});
+
 test("crear una corrida no altera el catálogo: misma semilla, misma campaña", () => {
   const shared = loadGameData();
   const snapshot = JSON.stringify(shared.campaigns);
