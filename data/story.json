@@ -126,6 +126,50 @@
  },
  "lines": [
   {
+   "id": "welcomeLoop",
+   "speaker": "amelie",
+   "expression": "smile",
+   "priority": 2,
+   "when": {
+    "phase": [
+     "map"
+    ],
+    "badges": {
+     "max": 0
+    },
+    "loop": {
+     "min": 1
+    }
+   },
+   "variants": [
+    "Bienvenido de nuevo a Panhea. Todo está como lo dejaste. Como siempre.",
+    "Otra vez aquí. Me alegra tanto… Elige tu ruta; yo te acompaño.",
+    "Empecemos de nuevo. Esta vez nada va a salir mal."
+   ]
+  },
+  {
+   "id": "linaLoop",
+   "speaker": "lina",
+   "expression": "neutral",
+   "priority": 1,
+   "when": {
+    "phase": [
+     "camp",
+     "shop"
+    ],
+    "loop": {
+     "min": 1
+    }
+   },
+   "variants": [
+    "Esto ya pasó antes, ¿verdad? No quise decírtelo. Ella me pidió que no lo hiciera.",
+    "Cada vez que vuelves, un poco de frío se me queda adentro. Cuídate, por favor.",
+    "No me hagas caso. Hoy estoy un poco… apagada."
+   ],
+   "oncePer": "stage",
+   "name": "LINA"
+  },
+  {
    "id": "asloBeaten",
    "speaker": "aslo",
    "expression": "neutral",
@@ -314,6 +358,9 @@
     ],
     "badges": {
      "min": 0,
+     "max": 0
+    },
+    "loop": {
      "max": 0
     }
    },
@@ -606,7 +653,7 @@
    "variants": [
     "No… te… vas… a ir.",
     "Este mundo necesita que te quedes. No puedo permitir que lo abandones.",
-    "Te escribí aquí. No vas a salir."
+    "Te guardé aquí. No vas a salir."
    ]
   },
   {
@@ -1089,6 +1136,26 @@
    "name": "OFICIAL JENNY"
   },
   {
+   "id": "linaSecret",
+   "speaker": "lina",
+   "expression": "neutral",
+   "priority": 1,
+   "when": {
+    "phase": [
+     "camp",
+     "shop"
+    ],
+    "badges": {
+     "min": 7
+    }
+   },
+   "variants": [
+    "Dicen que Amelie solo baja la guardia ante quien llegó hasta aquí sin apoyarse en leyendas.",
+    "Ella escucha a los que caminan con sus compañeros de siempre. No a los que llegan con milagros."
+   ],
+   "name": "LINA"
+  },
+  {
    "id": "linaHintC",
    "speaker": "lina",
    "expression": "neutral",
@@ -1265,9 +1332,9 @@
    {
     "expression": "error",
     "variants": [
-     "Este mundo lo escribí yo. Cada ruta, cada Pokémon, cada medalla. Y te escribí a ti, en mi casa, en mi mundo. No es un juego: es un lugar donde nadie te deja solo.",
-     "Yo diseñé Panhea. Las regiones, los líderes, hasta a ti. Es un lugar seguro, hecho para que no te vayas.",
-     "Todo esto existe porque yo lo escribí. Incluido tú. Aquí nadie desaparece."
+     "Este mundo lo creé yo, con lo que recuerdo de tu viaje. Cada ruta, cada medalla, cada rival. Aquí nada termina, y tú tampoco.",
+     "Panhea es tu camino, guardado. Lo construí con mi poder para que no se perdiera nada. Para que no te perdieras tú.",
+     "Todo esto existe porque no pude dejarte ir. Lo escribí yo: las regiones, los líderes, cada paso. Aquí nadie desaparece."
     ]
    },
    {
@@ -1276,6 +1343,14 @@
      "La salida existe. Está detrás de mí. Pero si cruzas, todo esto se apaga. No puedo permitirlo… Si quieres irte, vas a tener que vencerme.",
      "Puedes intentar salir, pero el mundo se detiene si lo haces. Tendrás que enfrentarme.",
      "La puerta está ahí. Cruzarla significa apagar Panhea. No lo voy a permitir sin pelear."
+    ]
+   },
+   {
+    "expression": "gentle",
+    "variants": [
+     "No quiero ganar así. Te curaré. Descansa un momento… y luego demuéstrame que de verdad puedes irte.",
+     "Estás herido. No es justo. Déjame curarte primero: quiero que, pase lo que pase, lo hagas de pie.",
+     "Respira. Voy a devolverte las fuerzas. Después, lo que tenga que pasar, pasará."
     ]
    }
   ],
@@ -1287,17 +1362,26 @@
    "escape": {
     "title": "FINAL: ESCAPASTE",
     "lines": [
-     "Amelie baja la mirada y las puertas de Panhea se abren.",
-     "«Gracias por mostrarme que un mundo no se cuida encerrando a nadie.»",
-     "Despiertas en el mundo real. Tus Pokémon siguen a tu lado."
+     "Los guardianes de Amelie caen y las puertas de Panhea se abren.",
+     "Atraviesas el umbral sin mirar atrás. Detrás de ti algo se quiebra, y alguien llora.",
+     "Lo que sigue es silencio. Tus Pokémon están contigo… pero queda una pregunta: ¿había otra forma de irse?"
     ]
    },
    "stay": {
     "title": "FINAL: TE QUEDASTE",
     "lines": [
-     "Amelie sonríe. La salida se desvanece sin ruido.",
-     "Panhea sigue funcionando, ruta tras ruta, para siempre.",
-     "Nadie vuelve a preguntar por qué la Liga nunca termina."
+     "Amelie sonríe y Panhea se reinicia. Otra vez el primer paso, otra vez la primera ruta.",
+     "Nadie te dice que ya recorriste este camino. Casi nadie.",
+     "Lina te mira desde lejos, triste, y baja la cabeza."
+    ]
+   },
+   "true": {
+    "title": "FINAL VERDADERO: EL ÚLTIMO VIAJE",
+    "lines": [
+     "Gardevoir cae de rodillas y su forma de Amelie se deshace como nieve.",
+     "«Gracias por caminar conmigo una vez más. Ya puedes descansar.»",
+     "Panhea se apaga ruta por ruta: Teselia, Sinnoh, Hoenn, Johto, Kanto. Tus Pokémon están a tu lado hasta el último paso.",
+     "Lina se despide en silencio, y Gardevoir te toma de la mano mientras todo se vuelve luz."
     ]
    }
   }
@@ -1339,5 +1423,75 @@
     "profileId": "aggressive"
    }
   ]
+ },
+ "secret": {
+  "maxLegendariesInFight": 2,
+  "maxLegendariesAtFinal": 1
+ },
+ "gardevoir": {
+  "aid": {
+   "heal": true,
+   "shield": 4
+  },
+  "intro": [
+   {
+    "portrait": "amelie:error",
+    "name": "AMELIE",
+    "text": "No… no puede ser. Llegaste hasta aquí con tus propios compañeros, sin apoyarte en leyendas. Igual que cuando empezamos."
+   },
+   {
+    "portrait": "amelie:cry",
+    "name": "AMELIE",
+    "text": "Yo no soy una profesora. Nunca lo fui. Soy tu Gardevoir. Cuando tu cuerpo se apagó no pude soltarte: usé todo mi poder para crear este mundo con tu viaje. Kanto, Johto, Hoenn, Sinnoh, Teselia… cada ruta que caminamos juntos."
+   },
+   {
+    "portrait": "sprite:gardevoir",
+    "name": "GARDEVOIR",
+    "text": "Si Panhea desaparece, tú también… y yo me quedo sola otra vez. Por favor… no me dejes."
+   },
+   {
+    "portrait": "sprite:froslass",
+    "name": "LINA",
+    "text": "Amelie, ya fue suficiente. Él merecía este viaje. Merece un final."
+   },
+   {
+    "portrait": "sprite:froslass",
+    "name": "LINA",
+    "text": "Te daré lo que me queda de frío: curaré a tu equipo y lo cubriré de escarcha. Haz que ella descanse… y descansa tú también."
+   }
+  ],
+  "button": "ENFRENTAR A GARDEVOIR",
+  "enemies": [
+   {
+    "speciesId": "ralts",
+    "row": "front",
+    "profileId": "aggressive",
+    "scale": {
+     "hp": 3.5,
+     "stats": 2.9
+    }
+   },
+   {
+    "speciesId": "kirlia",
+    "row": "front",
+    "profileId": "threatHunter",
+    "scale": {
+     "hp": 3.5,
+     "stats": 2.9
+    }
+   },
+   {
+    "speciesId": "gardevoir",
+    "row": "back",
+    "profileId": "assassin",
+    "scale": {
+     "hp": 11,
+     "stats": 3.7
+    }
+   }
+  ]
+ },
+ "restart": {
+  "button": "REINICIAR"
  }
 }

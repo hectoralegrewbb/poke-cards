@@ -20,7 +20,7 @@ export function restoreRun(data, saved) {
   if (!record || record.version !== saveVersion || !record.run) throw new Error("Guardado incompatible");
   const { rngState, combat: combatSnapshot, ...fields } = record.run;
   if (!Number.isInteger(rngState) || !Array.isArray(fields.party) || !Array.isArray(fields.options) ||
-      !["map", "combat", "reward", "shop", "camp", "center", "amelieIntro"].includes(fields.phase) || !Number.isInteger(fields.seed)) {
+      !["map", "combat", "reward", "shop", "camp", "center", "amelieIntro", "gardevoirIntro"].includes(fields.phase) || !Number.isInteger(fields.seed)) {
     throw new Error("Guardado inválido");
   }
   const run = { ...fields, data, rng: createRng(fields.seed, rngState), combat: null,
@@ -31,6 +31,8 @@ export function restoreRun(data, saved) {
     chestCardIds: fields.chestCardIds ?? [],
     legendariesSeen: fields.legendariesSeen ?? [],
     storySeen: fields.storySeen ?? [],
+    loop: fields.loop ?? 0,
+    legendaryPeak: fields.legendaryPeak ?? 0,
     storyLastAt: fields.storyLastAt ?? null,
     storyEvent: fields.storyEvent ?? null,
     nodesEntered: fields.nodesEntered ?? 0,

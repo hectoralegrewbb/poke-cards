@@ -9,10 +9,10 @@ import { openShop, useCamp, usePokeCenter } from "./siteNodes.js";
 import { getDifficulty } from "./difficulty.js";
 import { buildCampaign } from "./campaignBuilder.js";
 import { isDeckPlayable } from "./deckManager.js";
-import { storyActive } from "./story.js";
+import { legendaryCount, secretEligible, storyActive } from "./story.js";
 
 // starterIds: un único inicial (de cualquier región). El resto del equipo se arma capturando.
-export function createRun({ data, seed = 1, starterIds = [data.region.start.starterChoices[0].species[0]], difficulty = "trainer", mode = "regional", regionId = "unova" }) {
+export function createRun({ data, seed = 1, starterIds = [data.region.start.starterChoices[0].species[0]], difficulty = "trainer", mode = "regional", regionId = "unova", loop = 0 }) {
   const preset = getDifficulty(difficulty);
   const rng = createRng(seed);
   const campaign = buildCampaign(data, rng, { mode, regionId });
@@ -44,6 +44,8 @@ export function createRun({ data, seed = 1, starterIds = [data.region.start.star
     chestCardIds: [],
     legendariesSeen: [],
     storySeen: [],
+    loop,
+    legendaryPeak: 0,
     storyLastAt: null,
     storyEvent: null,
     nodesEntered: 0,
@@ -81,7 +83,11 @@ function retreatFromEvent(run) {
   return { ok: true, events };
 }
 
+const storyBossNodes = ["amelie", "gardevoir"];
+
 function startCombat(run, node) {
+  // Para el final secreto cuenta cuántos legendarios llevas a cada pelea (las de Amelie no cuentan).
+  if (!storyBossNodes.includes(node.type)) run.legendaryPeak = Math.max(run.legendaryPeak ?? 0, legendaryCount(run));
   const encounter = buildEncounter(run, node);
   run.combat = createCombat({
     data: run.data,
@@ -92,6 +98,10 @@ function startCombat(run, node) {
     kind: encounter.kind
   });
   run.phase = "combat";
+}
+
+function healParty(run) {
+  for (const pokemon of run.party) Object.assign(pokemon, { hp: pokemon.maxHp, fainted: false, status: null, shield: 0, intent: null, staggered: false });
 }
 
 function endRun(run, result, ending = null) {
@@ -141,7 +151,14 @@ export function finishCombat(run) {
     return { ok: true, events: [emitRun(run, { type: "runEnded", result: "defeat" })] };
   }
 
-  if (run.node.type === "amelie") return { ok: true, events: endRun(run, "victory", "escape") };
+  if (run.node.type === "gardevoir") return { ok: true, events: endRun(run, "victory", "true") };
+  if (run.node.type === "amelie") {
+    // Final secreto: solo si llegaste con pocos legendarios; si no, el final de escape normal.
+    if (!secretEligible(run)) return { ok: true, events: endRun(run, "victory", "escape") };
+    run.phase = "gardevoirIntro";
+    run.combat = null;
+    return { ok: true, events: [emitRun(run, { type: "gardevoirAppears" })] };
+  }
   const events = grantVictoryRewards(run, run.node, run.combat.teams.enemy);
   if (storyActive(run)) rememberStoryEvent(run);
   if (run.node.type === "champion" && storyActive(run)) {
@@ -205,8 +222,21 @@ export function chooseAmelieEnding(run, choice) {
   if (run.phase !== "amelieIntro") return { ok: false, error: "notInAmelieIntro" };
   if (choice === "stay") return { ok: true, events: endRun(run, "victory", "stay") };
   if (choice !== "escape") return { ok: false, error: "invalidChoice" };
+  healParty(run); // Amelie no quiere ganar con ventaja: te devuelve a pleno antes de pelear.
   run.node = { type: "amelie" };
   run.eventSnapshot = null;
   startCombat(run, run.node);
+  return { ok: true, events: [emitRun(run, { type: "nodeEntered", node: run.node })] };
+}
+
+// Lina ayuda: cura y revive al equipo y le da escarcha; después empieza el combate contra Gardevoir.
+export function chooseGardevoirFight(run) {
+  if (run.phase !== "gardevoirIntro") return { ok: false, error: "notInGardevoirIntro" };
+  const aid = run.data.story.gardevoir.aid ?? {};
+  if (aid.heal) healParty(run);
+  run.node = { type: "gardevoir" };
+  run.eventSnapshot = null;
+  startCombat(run, run.node);
+  for (const pokemon of run.combat.teams.player) pokemon.shield = (pokemon.shield ?? 0) + (aid.shield ?? 0);
   return { ok: true, events: [emitRun(run, { type: "nodeEntered", node: run.node })] };
 }

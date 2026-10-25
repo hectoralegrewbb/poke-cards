@@ -2,7 +2,7 @@
 // atenta: cuida la party, cambia caja/party, arma el mazo con energía fuerte y gasta oro con criterio.
 import { isAlive } from "../engine/index.js";
 import {
-  buyFromShop, chooseAmelieEnding, consumeStoryLine, chooseNode, decideCapture, finishCombat, leaveCenter, leaveShop, moveCardToChest, moveCardToDeck, pickCard, playCamp, setRow, swapPartyBox, useItem
+  buyFromShop, chooseAmelieEnding, chooseGardevoirFight, consumeStoryLine, chooseNode, decideCapture, finishCombat, leaveCenter, leaveShop, moveCardToChest, moveCardToDeck, pickCard, playCamp, setRow, swapPartyBox, useItem
 } from "../run/index.js";
 import { playSmartTurn } from "./smartPlayer.js";
 
@@ -126,7 +126,17 @@ function describeFight(run) {
   };
 }
 
-export function playSmartRun(run, { maxSteps = 600, onFight = null } = {}) {
+// Para medir el final secreto: simula a quien dejó sus legendarios sobrantes en la caja.
+function qualifyForSecret(run) {
+  run.legendaryPeak = 0;
+  const isLegendary = (pokemon) => run.data.species[pokemon.speciesId]?.legendary;
+  while (run.party.filter(isLegendary).length > 1 && run.party.length > 1) {
+    const index = run.party.findLastIndex(isLegendary);
+    run.box.push(...run.party.splice(index, 1));
+  }
+}
+
+export function playSmartRun(run, { maxSteps = 600, onFight = null, qualifySecret = false } = {}) {
   let steps = 0;
   while (run.phase !== "ended" && steps < maxSteps) {
     steps += 1;
@@ -143,7 +153,8 @@ export function playSmartRun(run, { maxSteps = 600, onFight = null } = {}) {
       finishCombat(run);
     } else if (run.phase === "reward") handleReward(run);
     else if (run.phase === "center") leaveCenter(run);
-    else if (run.phase === "amelieIntro") chooseAmelieEnding(run, "escape");
+    else if (run.phase === "amelieIntro") { if (qualifySecret) qualifyForSecret(run); chooseAmelieEnding(run, "escape"); }
+    else if (run.phase === "gardevoirIntro") chooseGardevoirFight(run);
     else if (run.phase === "camp") handleCamp(run);
     else if (run.phase === "shop") handleShop(run);
     else break;

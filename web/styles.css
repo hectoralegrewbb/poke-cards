@@ -713,3 +713,13 @@ button, .option, .member, .card, .stockItem, .starterCard { touch-action: manipu
 .amelieFace.photo.ex-dark { filter: drop-shadow(0 0 6px #b13e53); }
 @keyframes amPhotoGlitch { 0%, 70%, 100% { transform: translate(0, 0); } 75% { transform: translate(-3px, 1px); filter: hue-rotate(40deg); } 85% { transform: translate(3px, -1px); } }
 @media (prefers-reduced-motion: reduce) { .amelieFace.photo { animation: none !important; } }
+
+/* ---------- v0.10 · Gardevoir y Lina ---------- */
+.spritePortrait { display: grid; place-items: end center; height: 210px; min-width: 200px; }
+.spritePortrait > * { transform: scale(2.6); transform-origin: bottom center; image-rendering: pixelated; }
+.endingPair { display: flex; gap: 12px; align-items: flex-end; justify-content: center; }
+.endingPair .spritePortrait { min-width: 130px; height: 150px; }
+.endingPair .spritePortrait > * { transform: scale(1.8); }
+.gardevoirScene.portrait-amelie-error, .gardevoirScene.portrait-sprite-gardevoir { box-shadow: 0 0 0 4px var(--c1); }
+.gardevoirScene.portrait-sprite-froslass { box-shadow: 0 0 0 4px var(--c10); }
+.endingScreen.ending-true { box-shadow: 0 0 0 4px var(--c11); }

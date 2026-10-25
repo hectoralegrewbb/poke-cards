@@ -23,6 +23,7 @@ function bucket(map, key) { return (map[key] ??= { fights: 0, wins: 0, hpLeft: 0
 for (let seed = 1; seed <= runs; seed += 1) {
   const run = createRun({ data, seed, difficulty, mode, regionId: mode === "regional" ? (process.argv[5] ?? "random") : undefined, starterIds: [starters[seed % starters.length]] });
   playSmartRun(run, {
+    qualifySecret: process.env.SECRET === "1",
     onFight(fight) {
       const inGyms = fight.kind !== "eliteFour" && fight.kind !== "champion";
       const label = fight.node === "gym" ? `gimnasio ${fight.stage + 1}` : `rutas ${fight.stage + 1}`;

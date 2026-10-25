@@ -48,9 +48,11 @@ export function buildEncounter(run, node) {
   // Evita Terremoto/Lanzallamas repetidos a máxima potencia en rutas iniciales.
   const maxWildMoveCost = run.data.balance.wildMoveCostCaps?.[Math.min(run.stageIndex, 7)] ?? 3;
   const rule = region.nodeRules[node.type];
-  if (node.type === "amelie") {
-    const boss = run.data.story.boss;
-    return { kind: "amelie", enemies: withScale(boss.enemies, applyDifficulty(boss.scale)) };
+  if (node.type === "amelie" || node.type === "gardevoir") {
+    const boss = node.type === "amelie" ? run.data.story.boss : run.data.story.gardevoir;
+    const base = boss.scale ?? { hp: 1, stats: 1 };
+    // Cada enemigo puede traer su propia escala; la de la dificultad se aplica siempre encima.
+    return { kind: node.type, enemies: boss.enemies.map((enemy) => ({ ...enemy, scale: applyDifficulty(enemy.scale ?? base) })) };
   }
   // Guardados anteriores pueden contener pools generados por la versión sin control de amenaza.
   const safeWild = eligiblePool(run.data, stage.wildPool, run.stageIndex);

@@ -1,6 +1,6 @@
 // Bot que juega una corrida completa (solo simulación/tests): elige nodos, cartas y usa ítems con reglas simples.
 import { isAlive } from "../engine/index.js";
-import { buyFromShop, chooseAmelieEnding, chooseNode, decideCapture, finishCombat, leaveCenter, leaveShop, pickCard, playCamp, useItem } from "../run/index.js";
+import { buyFromShop, chooseAmelieEnding, chooseGardevoirFight, chooseNode, decideCapture, finishCombat, leaveCenter, leaveShop, pickCard, playCamp, useItem } from "../run/index.js";
 import { playGreedyTurn } from "./greedyPlayer.js";
 
 const nodePriority = ["pokeCenter", "camp", "shop", "combat", "wild", "elite"];
@@ -73,6 +73,7 @@ export function playFullRun(run, { maxSteps = 400 } = {}) {
     else if (run.phase === "combat") playCombat(run);
     else if (run.phase === "reward") resolveReward(run);
     else if (run.phase === "amelieIntro") chooseAmelieEnding(run, "escape");
+    else if (run.phase === "gardevoirIntro") chooseGardevoirFight(run);
     else playSite(run);
   }
   return run;

@@ -45,7 +45,8 @@ export function storyContext(run) {
     leader: run.storyEvent?.leader ?? stage?.leader ?? null,
     badge: run.storyEvent?.badge ?? stage?.badge ?? null,
     regionId: stage?.regionId ?? null,
-    centerAhead: inGyms && (run.step ?? 0) < pokeCenterStep(run)
+    centerAhead: inGyms && (run.step ?? 0) < pokeCenterStep(run),
+    loop: run.loop ?? 0
   };
 }
 
@@ -64,6 +65,7 @@ export function lineMatches(line, context) {
   if (when.leader && context.leader !== when.leader) return false;
   if (when.optionHas && !context.optionTypes.includes(when.optionHas)) return false;
   if (when.centerAhead && !context.centerAhead) return false;
+  if (when.loop && !inRange(context.loop, when.loop)) return false;
   return true;
 }
 
@@ -138,4 +140,14 @@ export function finalScene(run) {
       text: step.variants[pickIndex(run, `final|${index}`, step.variants.length)]
     }))
   };
+}
+
+// Cantidad de legendarios en el equipo activo.
+export const legendaryCount = (run) => run.party.filter((pokemon) => run.data.species[pokemon.speciesId]?.legendary).length;
+
+// Final secreto: nunca más de 2 legendarios en una pelea previa y como máximo 1 al llegar a Amelie.
+export function secretEligible(run) {
+  const rule = run.data.story?.secret;
+  if (!storyActive(run) || !rule || !run.data.story.gardevoir) return false;
+  return (run.legendaryPeak ?? 0) <= rule.maxLegendariesInFight && legendaryCount(run) <= rule.maxLegendariesAtFinal;
 }

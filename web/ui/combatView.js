@@ -627,7 +627,7 @@ export function renderCombat(ctx) {
   const threats = getIncomingThreats(state);
   const row = (side, rowName) => h("div", { class: `row ${side}` }, state.teams[side].filter((pokemon) => pokemon.row === rowName).map((pokemon) => pokemonTile(ctx, state, pokemon, valid, threats)));
   const finished = Boolean(state.result);
-  const kindNames = { normal: "RUTA", gym: "GIMNASIO", eliteFour: "ALTO MANDO", champion: "CAMPEÓN", amelie: "AMELIE" };
+  const kindNames = { normal: "RUTA", gym: "GIMNASIO", eliteFour: "ALTO MANDO", champion: "CAMPEÓN", amelie: "AMELIE", gardevoir: "GARDEVOIR" };
 
   const readyCount = state.teams.player.filter((pokemon) => isAlive(pokemon) && pokemon.actionsLeft > 0).length;
   return h("section", { class: "combat" },

@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { chooseAmelieEnding, consumeStoryLine, createRun, finalScene, finishCombat, pickStoryLine, restoreRun, serializeRun, storyActive } from "../src/run/index.js";
+import { chooseAmelieEnding, chooseGardevoirFight, chooseNode, consumeStoryLine, legendaryCount, secretEligible, createRun, finalScene, finishCombat, pickStoryLine, restoreRun, serializeRun, storyActive } from "../src/run/index.js";
 import { data } from "./helpers.js";
 
 const globalRun = (mode = "global") => createRun({ data, seed: 7, mode });
@@ -89,7 +89,7 @@ test("todo el texto de la historia está en tuteo (sin voseo)", () => {
 
 test("la escena final elige una variante por paso", () => {
   const scene = finalScene(globalRun());
-  assert.equal(scene.intro.length, 4);
+  assert.equal(scene.intro.length, 5);
   assert.ok(scene.intro.every((step) => typeof step.text === "string" && step.text.length > 0));
 });
 
@@ -119,8 +119,9 @@ test("vencer al campeón abre la escena de Amelie; quedarse termina la corrida",
   assert.equal(run.ending, "stay");
 });
 
-test("escapar lleva a combatir con Amelie y vencerla da el final de escape", () => {
+test("escapar lleva a combatir con Amelie y vencerla da el final de escape (sin requisitos del secreto)", () => {
   const run = globalRun();
+  run.legendaryPeak = 3; // llevó 3 legendarios a una pelea: no cumple el final secreto
   atChampion(run);
   finishCombat(run);
   assert.equal(chooseAmelieEnding(run, "escape").ok, true);
@@ -144,4 +145,82 @@ test("perder contra Amelie es derrota y en modo regional el campeón termina nor
   finishCombat(regional);
   assert.equal(regional.phase, "ended");
   assert.equal(regional.result, "victory");
+});
+
+function reachAmelieDefeated(run) {
+  atChampion(run);
+  finishCombat(run);
+  chooseAmelieEnding(run, "escape");
+  run.combat.result = "victory";
+  finishCombat(run);
+}
+
+test("final secreto: con pocos legendarios, vencer a Amelie abre a Gardevoir y vencerla da el final verdadero", () => {
+  const run = globalRun();
+  reachAmelieDefeated(run);
+  assert.equal(run.phase, "gardevoirIntro");
+  run.party[0].hp = 1;
+  assert.equal(chooseGardevoirFight(run).ok, true);
+  assert.equal(run.combat.kind, "gardevoir");
+  assert.deepEqual(run.combat.teams.enemy.map((enemy) => enemy.speciesId), ["ralts", "kirlia", "gardevoir"]);
+  assert.equal(run.party[0].hp, run.party[0].maxHp, "Lina cura al equipo");
+  assert.ok(run.combat.teams.player.every((pokemon) => pokemon.shield >= 4), "Lina da escarcha");
+  run.combat.result = "victory";
+  finishCombat(run);
+  assert.equal(run.phase, "ended");
+  assert.equal(run.ending, "true");
+});
+
+test("perder contra Gardevoir es derrota", () => {
+  const run = globalRun();
+  reachAmelieDefeated(run);
+  chooseGardevoirFight(run);
+  run.combat.result = "defeat";
+  finishCombat(run);
+  assert.equal(run.result, "defeat");
+});
+
+test("el final secreto exige ≤2 legendarios por pelea y ≤1 al llegar", () => {
+  const run = globalRun();
+  assert.equal(secretEligible(run), true);
+  run.legendaryPeak = 3;
+  assert.equal(secretEligible(run), false);
+  run.legendaryPeak = 2;
+  assert.equal(secretEligible(run), true);
+  const legendaryId = Object.keys(data.species).find((id) => data.species[id].legendary);
+  for (let i = 0; i < 2; i += 1) run.party.push({ ...run.party[0], uid: 900 + i, speciesId: legendaryId });
+  assert.equal(legendaryCount(run), 2);
+  assert.equal(secretEligible(run), false);
+  assert.equal(secretEligible(globalRun("regional")), false);
+});
+
+test("se registra el máximo de legendarios llevados a las peleas normales", () => {
+  const run = globalRun();
+  const legendaryId = Object.keys(data.species).find((id) => data.species[id].legendary);
+  run.party.push({ ...run.party[0], uid: 950, speciesId: legendaryId });
+  run.party.push({ ...run.party[0], uid: 951, speciesId: legendaryId });
+  run.party.push({ ...run.party[0], uid: 952, speciesId: legendaryId });
+  chooseNode(run, 0);
+  assert.equal(run.legendaryPeak, 3);
+  assert.equal(secretEligible(run), false);
+});
+
+test("el bucle: tras reiniciar, Amelie y Lina lo recuerdan", () => {
+  const first = createRun({ data, seed: 7, mode: "global", loop: 1 });
+  assert.equal(consumeStoryLine(first).id, "welcomeLoop");
+  assert.equal(consumeStoryLine(globalRun()).id, "welcome");
+  const saved = restoreRun(data, serializeRun(first));
+  assert.equal(saved.loop, 1);
+});
+
+test("atajo ?finale: arma el final listo y cumple (o no) el requisito secreto", async () => {
+  const { createFinaleRun } = await import("../src/run/debugFinale.js");
+  const secret = createFinaleRun({ data });
+  assert.equal(secret.phase, "amelieIntro");
+  assert.equal(secret.party.length, 6);
+  assert.equal(secretEligible(secret), true);
+  assert.equal(secretEligible(createFinaleRun({ data, mode: "normal" })), false);
+  const jump = createFinaleRun({ data, mode: "gardevoir" });
+  finishCombat(jump);
+  assert.equal(jump.phase, "gardevoirIntro");
 });

@@ -16,7 +16,8 @@ import { adventureScreen, faqScreen, setupScreen, titleScreen } from "./titleScr
 import { runLoadingScreen } from "./loadingScreen.js";
 import { renderCamp, renderCenter, renderShop } from "./siteViews.js";
 import { amelieFace, loadAmelieAssets } from "./amelieArt.js";
-import { amelieScene, starterOffer, storyToast } from "./storyView.js";
+import { amelieScene, gardevoirScene, scenePortrait, starterOffer, storyToast } from "./storyView.js";
+import { createFinaleRun } from "../../src/run/debugFinale.js";
 import { createAnimatedSpriteProvider } from "./spriteProvider.js";
 
 const dataFiles = ["balance", "cards", "moves", "species", "typeChart", "enemyProfiles", "startingDeck", "encounters", "items", "region", "campaigns", "story"];
@@ -41,6 +42,7 @@ function readSave() {
 }
 
 function persistRun(run) {
+  if (ctx.noSave) return; // partida de prueba (?finale): no toca tu guardado
   try {
     if (run.phase === "ended") {
       localStorage.removeItem(saveKey);
@@ -80,8 +82,8 @@ function onCombatFinished() {
   rerender();
 }
 
-function startRun(seed, starterId, difficulty, mode, regionId) {
-  ctx.run = createRun({ data: ctx.data, seed, starterIds: [starterId], difficulty, mode, regionId });
+function startRun(seed, starterId, difficulty, mode, regionId, loop = 0) {
+  ctx.run = createRun({ data: ctx.data, seed, starterIds: [starterId], difficulty, mode, regionId, loop });
   ctx.starterPick = null;
   ctx.storyLine = null;
   ctx.finalStep = 0;
@@ -113,7 +115,7 @@ function starterScreen() {
     h("div", { class: "starterRow" }, group.species.map(card)),
     h("div", { class: "starterButtons" },
       h("button", { class: "btn", onClick: () => { ctx.starterPick = null; ctx.screen = "setup"; rerender(); } }, "◀ VOLVER"),
-      h("button", { class: "btn primary", disabled: !pick.speciesId, onClick: () => { sfx.play("start"); startRun(pick.seed, pick.speciesId, pick.difficulty, pick.mode, pick.regionId); } },
+      h("button", { class: "btn primary", disabled: !pick.speciesId, onClick: () => { sfx.play("start"); startRun(pick.seed, pick.speciesId, pick.difficulty, pick.mode, pick.regionId, pick.loop); } },
         pick.speciesId ? `¡VAMOS, ${ctx.data.species[pick.speciesId].name.toUpperCase()}! ▶` : "ELEGÍ UNO")));
 }
 
@@ -123,8 +125,9 @@ function openStarterPick() {
   ctx.starterPick = {
     seed: Number(setup.seed) || Date.now() % 2147483646,
     region: Math.max(0, selectedRegion), speciesId: null, difficulty: setup.difficulty,
-    mode: setup.mode, regionId: setup.regionId
+    mode: setup.mode, regionId: setup.regionId, loop: ctx.pendingLoop ?? 0
   };
+  ctx.pendingLoop = 0;
   rerender();
 }
 
@@ -147,11 +150,20 @@ function endScreen() {
   const summary = h("p", {}, icon("medal", { scale: 3 }), ` Medallas: ${run.badges.length}/8 · ${run.campaign.name} · ${gameModes[run.mode]?.label ?? "CLÁSICO"} · ${difficultyPresets[run.difficulty ?? "trainer"].label} · Semilla ${run.seed}`);
   const back = h("button", { class: "btn primary", onClick: () => { ctx.run = null; ctx.storyLine = null; ctx.screen = "title"; rerender(); } }, "VOLVER AL INICIO");
   if (ending) {
+    const portraits = { escape: () => amelieFace("cry", 190), stay: () => scenePortrait(ctx, "sprite:froslass"), true: () => h("div", { class: "endingPair" }, scenePortrait(ctx, "sprite:gardevoir"), scenePortrait(ctx, "sprite:froslass")) };
+    const restart = run.ending === "stay"
+      ? h("button", { class: "btn primary", onClick: () => {
+          setup.mode = "global"; setup.difficulty = run.difficulty; setup.seed = String(run.seed);
+          ctx.pendingLoop = (run.loop ?? 0) + 1;
+          ctx.run = null; ctx.storyLine = null; ctx.screen = "title";
+          openStarterPick();
+        } }, ctx.data.story.restart.button)
+      : null;
     return h("section", { class: `window title endingScreen ending-${run.ending}` },
-      amelieFace(run.ending === "escape" ? "cry" : "gentle", 190),
-      h("h2", { class: "win" }, ending.title),
+      portraits[run.ending]?.(),
+      h("h2", { class: run.ending === "stay" ? "lose" : "win" }, ending.title),
       ending.lines.map((line) => h("p", { class: "endingLine" }, line)),
-      summary, back);
+      summary, restart, back);
   }
   return h("section", { class: "window title" }, h("h2", { class: won ? "win" : "lose" }, won ? "¡CAMPEÓN DE LA LIGA!" : "FIN DE LA CORRIDA"), summary, back);
 }
@@ -164,6 +176,7 @@ function screenFor(run) {
     case "center": return renderCenter(ctx);
     case "shop": return renderShop(ctx);
     case "amelieIntro": return amelieScene(ctx);
+    case "gardevoirIntro": return gardevoirScene(ctx);
     case "ended": return endScreen();
     default: return renderMap(ctx);
   }
@@ -188,9 +201,9 @@ function audioLayer() {
 function sceneFor(run) {
   if (!run) return "title";
   if (run.phase === "ended") return null;
-  if (run.phase === "amelieIntro") return "boss";
+  if (run.phase === "amelieIntro" || run.phase === "gardevoirIntro") return "boss";
   if (run.phase !== "combat") return "map";
-  const bossKinds = ["gym", "eliteFour", "champion", "amelie"];
+  const bossKinds = ["gym", "eliteFour", "champion", "amelie", "gardevoir"];
   const bossNodes = ["legendary", "rival", "villain"];
   return bossKinds.includes(run.combat?.kind) || bossNodes.includes(run.node?.type) ? "boss" : "combat";
 }
@@ -222,7 +235,7 @@ function rerender() {
   }
   refreshStoryLine(run);
   persistRun(run);
-  const inCombat = ["combat", "ended", "amelieIntro"].includes(run.phase);
+  const inCombat = ["combat", "ended", "amelieIntro", "gardevoirIntro"].includes(run.phase);
   const children = [
     h("div", { class: inCombat ? "layout single" : "layout" }, screenFor(run), inCombat ? null : renderRoster(ctx)),
     ctx.deckOpen && !inCombat && run.phase !== "ended" ? renderDeckEditor(ctx) : null,
@@ -243,6 +256,13 @@ async function boot() {
   ctx.sprites = createAnimatedSpriteProvider({ data: ctx.data, preferLocal: localManifest || !navigator.onLine });
   ctx.savedRun = readSave();
   await loadAmelieAssets();
+  const finale = new URLSearchParams(location.search).get("finale");
+  if (finale !== null) {
+    ctx.noSave = true;
+    ctx.run = createFinaleRun({ data: ctx.data, mode: finale });
+    // Con "gardevoir" se salta a la escena del final secreto: se resuelve como si ya hubieras vencido a Amelie.
+    if (finale === "gardevoir") finishCombat(ctx.run);
+  }
 }
 
 try {

@@ -203,6 +203,13 @@ function validateStory(data, check) {
   }
   check(Boolean(story.final.endings?.escape && story.final.endings?.stay), "story.final: faltan finales");
   check(story.boss.enemies.length >= 1, "story.boss: sin enemigos");
+  check(Number.isInteger(story.secret?.maxLegendariesInFight) && Number.isInteger(story.secret?.maxLegendariesAtFinal), "story.secret: reglas inválidas");
+  check(story.gardevoir.enemies.length >= 1 && story.gardevoir.intro.length >= 1, "story.gardevoir: incompleto");
+  for (const enemy of story.gardevoir.enemies) {
+    check(Boolean(data.species[enemy.speciesId]), `story.gardevoir: especie inválida ${enemy.speciesId}`);
+    check(Boolean(data.enemyProfiles[enemy.profileId]), `story.gardevoir: perfil inválido ${enemy.profileId}`);
+  }
+  check(Boolean(story.final.endings.true), "story.final: falta el final verdadero");
   for (const enemy of story.boss.enemies) {
     check(Boolean(data.species[enemy.speciesId]), `story.boss: especie inválida ${enemy.speciesId}`);
     check(Boolean(data.enemyProfiles[enemy.profileId]), `story.boss: perfil inválido ${enemy.profileId}`);

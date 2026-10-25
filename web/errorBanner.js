@@ -8,7 +8,7 @@
     box.setAttribute("role", "alert");
     box.style.cssText = "position:fixed;left:8px;right:8px;bottom:8px;z-index:99999;background:#b13e53;color:#fff;font:13px/1.35 monospace;padding:10px;border:3px solid #1a1c2c;border-radius:10px;max-height:40vh;overflow:auto;box-shadow:0 4px 0 rgba(0,0,0,.3)";
     var message = document.createElement("div");
-    message.textContent = "v0.9.4 · Error: " + text;
+    message.textContent = "v0.10.1 · Error: " + text;
     var reset = document.createElement("button");
     reset.textContent = "BORRAR GUARDADO Y RECARGAR";
     reset.style.cssText = "margin:8px 6px 0 0;padding:6px 10px;font:bold 12px monospace";

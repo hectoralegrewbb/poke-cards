@@ -42,6 +42,10 @@
     "amelie": {
       "min": 6,
       "max": 6
+    },
+    "gardevoir": {
+      "min": 3,
+      "max": 3
     }
   },
   "wildMoveCostCaps": [
