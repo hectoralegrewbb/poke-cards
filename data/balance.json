@@ -103,5 +103,129 @@
       "eliteFour": 3
     },
     "strongPower": 11
+  },
+  "tutor": {
+    "coverageCap": 4,
+    "coverage": {
+      "normal": [
+        "fighting",
+        "electric",
+        "ice",
+        "fire",
+        "ground"
+      ],
+      "fire": [
+        "fighting",
+        "electric",
+        "ground",
+        "rock",
+        "dark"
+      ],
+      "water": [
+        "ice",
+        "electric",
+        "fighting",
+        "dark",
+        "ground"
+      ],
+      "grass": [
+        "dark",
+        "poison",
+        "ground",
+        "fighting",
+        "ice"
+      ],
+      "electric": [
+        "ice",
+        "fighting",
+        "grass",
+        "steel",
+        "dark"
+      ],
+      "ice": [
+        "fighting",
+        "ground",
+        "electric",
+        "dark",
+        "water"
+      ],
+      "fighting": [
+        "fire",
+        "electric",
+        "ice",
+        "rock",
+        "dark"
+      ],
+      "poison": [
+        "dark",
+        "ground",
+        "fire",
+        "grass",
+        "electric"
+      ],
+      "ground": [
+        "fire",
+        "ice",
+        "fighting",
+        "rock",
+        "water"
+      ],
+      "flying": [
+        "fighting",
+        "electric",
+        "ice",
+        "steel",
+        "fire"
+      ],
+      "psychic": [
+        "fire",
+        "electric",
+        "ice",
+        "fighting",
+        "dark"
+      ],
+      "bug": [
+        "fighting",
+        "flying",
+        "fire",
+        "ground",
+        "grass"
+      ],
+      "rock": [
+        "fighting",
+        "ground",
+        "steel",
+        "fire",
+        "ice"
+      ],
+      "ghost": [
+        "dark",
+        "psychic",
+        "fire",
+        "electric",
+        "fighting"
+      ],
+      "dragon": [
+        "fire",
+        "electric",
+        "ice",
+        "fighting",
+        "flying"
+      ],
+      "dark": [
+        "fighting",
+        "fire",
+        "ice",
+        "electric",
+        "poison"
+      ],
+      "steel": [
+        "fire",
+        "fighting",
+        "electric",
+        "ice",
+        "ground"
+      ]
+    }
   }
 }

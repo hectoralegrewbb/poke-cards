@@ -22,6 +22,7 @@ export function markStoryRead(run, seq = null) {
 }
 
 // Tiempo de lectura de una llamada: proporcional al texto, con mínimo y máximo.
-export function readingTimeMs(text) {
-  return Math.min(14000, Math.max(4500, 2500 + text.length * 55));
+// typingMs es lo que tarda en escribirse el texto (velocidad del jugador): se suma para que dé tiempo a leerlo.
+export function readingTimeMs(text, typingMs = 0) {
+  return Math.min(14000, Math.max(4500, 2500 + text.length * 55)) + typingMs;
 }

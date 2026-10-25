@@ -114,6 +114,7 @@ export function validateGameData(data) {
   if (data.campaigns) validateCampaigns(data, check);
   if (data.story) validateStory(data, check);
   if (data.heldItems) validateHeldItems(data, check);
+  if (data.balance.tutor) validateTutor(data, check);
   return errors;
 }
 
@@ -219,6 +220,15 @@ function validateStory(data, check) {
 
 const heldTriggerNames = ["combatStart", "turnStart", "onHit", "onDamaged", "onKO"];
 const heldModifierKinds = ["damageDealt", "damageTaken", "flatReduction", "critCoins", "expMult", "goldMult"];
+
+function validateTutor(data, check) {
+  const { coverage, coverageCap } = data.balance.tutor;
+  check(Number.isInteger(coverageCap) && coverageCap >= 1, "balance.tutor: coverageCap inválido");
+  for (const type of Object.keys(data.typeChart)) {
+    check(Array.isArray(coverage[type]) && coverage[type].length >= coverageCap, `balance.tutor.coverage: faltan tipos de cobertura para ${type}`);
+    for (const covered of coverage[type] ?? []) check(Boolean(data.typeChart[covered]) && covered !== type, `balance.tutor.coverage.${type}: tipo inválido ${covered}`);
+  }
+}
 
 function validateHeldItems(data, check) {
   const entries = Object.entries(data.heldItems);

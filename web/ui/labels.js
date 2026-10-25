@@ -1,3 +1,4 @@
+import { t } from "../../src/shared/i18n.js";
 // Textos y colores de la interfaz. Todo lo visible en español vive acá.
 export const typeColors = {
   normal: "#a8a77a", fire: "#ee8130", water: "#6390f0", electric: "#f7d02c", grass: "#7ac74c",
@@ -7,63 +8,63 @@ export const typeColors = {
 };
 
 export const typeNames = {
-  normal: "Normal", fire: "Fuego", water: "Agua", electric: "Eléctrico", grass: "Planta", ice: "Hielo",
-  fighting: "Lucha", poison: "Veneno", ground: "Tierra", flying: "Volador", psychic: "Psíquico", bug: "Bicho",
-  rock: "Roca", ghost: "Fantasma", dragon: "Dragón", dark: "Siniestro", steel: "Acero"
+  normal: t("Normal"), fire: t("Fuego"), water: t("Agua"), electric: t("Eléctrico"), grass: t("Planta"), ice: t("Hielo"),
+  fighting: t("Lucha"), poison: t("Veneno"), ground: t("Tierra"), flying: t("Volador"), psychic: t("Psíquico"), bug: t("Bicho"),
+  rock: t("Roca"), ghost: t("Fantasma"), dragon: t("Dragón"), dark: t("Siniestro"), steel: t("Acero")
 };
 
 export const nodeLabels = {
-  combat: { title: "Combate", text: "1-3 rivales. Oro y una carta." },
-  wild: { title: "Zona salvaje", text: "1-2 salvajes. Podés capturar uno." },
-  elite: { title: "Élite", text: "3 rivales fuertes. Más oro y un ítem." },
-  camp: { title: "Campamento", text: "Descansar, revivir o entrenar." },
-  shop: { title: "Tienda", text: "Gastá tu oro en ítems y cartas." },
-  gym: { title: "Gimnasio", text: "Equipo del líder. Medalla, evolución desbloqueable e ítem raro." },
-  eliteFour: { title: "Alto Mando", text: "5 rivales. Sin descanso." },
-  champion: { title: "Campeón", text: "6 rivales. El combate final." },
-  legendary: { title: "Encuentro legendario", text: "Derrotalo para tener una captura garantizada." },
-  rival: { title: "Duelo con el rival", text: "Tu rival reaparece con un nuevo equipo." },
-  villain: { title: "Conflicto regional", text: "Enfrentate a la organización rival de esta región." },
-  pokeCenter: { title: "Centro Pokémon", text: "La enfermera Joy cura y revive a todo tu equipo." }
+  combat: { title: t("Combate"), text: t("1-3 rivales. Oro y una carta.") },
+  wild: { title: t("Zona salvaje"), text: t("1-2 salvajes. Podés capturar uno.") },
+  elite: { title: t("Élite"), text: t("3 rivales fuertes. Más oro y un ítem.") },
+  camp: { title: t("Campamento"), text: t("Descansar, revivir o entrenar.") },
+  shop: { title: t("Tienda"), text: t("Gastá tu oro en ítems y cartas.") },
+  gym: { title: t("Gimnasio"), text: t("Equipo del líder. Medalla, evolución desbloqueable e ítem raro.") },
+  eliteFour: { title: t("Alto Mando"), text: t("5 rivales. Sin descanso.") },
+  champion: { title: t("Campeón"), text: t("6 rivales. El combate final.") },
+  legendary: { title: t("Encuentro legendario"), text: t("Derrotalo para tener una captura garantizada.") },
+  rival: { title: t("Duelo con el rival"), text: t("Tu rival reaparece con un nuevo equipo.") },
+  villain: { title: t("Conflicto regional"), text: t("Enfrentate a la organización rival de esta región.") },
+  pokeCenter: { title: t("Centro Pokémon"), text: t("La enfermera Joy cura y revive a todo tu equipo.") }
 };
 
 // Estados alterados: etiqueta corta (casillero y panel de equipo) y explicación (tooltip).
 export const statusInfo = {
-  poison: { short: "VEN", hint: "Envenenado: pierde PS cada turno" },
-  burn: { short: "QUE", hint: "Quemado: pierde PS y baja su ataque físico" },
-  paralysis: { short: "PAR", hint: "Parálisis: 25% de perder la acción por turno" }
+  poison: { short: t("VEN"), hint: t("Envenenado: pierde PS cada turno") },
+  burn: { short: t("QUE"), hint: t("Quemado: pierde PS y baja su ataque físico") },
+  paralysis: { short: t("PAR"), hint: t("Parálisis: 25% de perder la acción por turno") }
 };
 
 export const errorText = {
-  notPlayerTurn: "No es tu turno.",
-  unknownPokemon: "Pokémon desconocido.",
-  pokemonFainted: "Ese Pokémon está debilitado.",
-  noActionsLeft: "Ese Pokémon ya actuó este turno.",
-  invalidMoveIndex: "Movimiento inválido.",
-  moveOnCooldown: "Ese movimiento está en cooldown.",
-  invalidTarget: "Objetivo inválido para ese movimiento.",
-  cardsNotInHand: "Esas cartas no están en tu mano.",
-  cardNotAllowed: "Esa carta no se puede usar así.",
-  tooManyBoostCards: "Demasiadas cartas de refuerzo.",
-  boostNotApplicable: "Ese movimiento no se puede reforzar.",
-  insufficientEnergy: "Falta energía para pagar el movimiento.",
-  deckFull: "El mazo activo está lleno (máx. 45). Mové una carta al cofre primero.",
-  deckInvalid: "Tu mazo activo debe tener entre 40 y 45 cartas para salir. Abrí MAZO y ajustalo.",
-  cardNotInDeck: "Esa carta no está en el mazo.",
-  cardNotInChest: "Esa carta no está en el cofre.",
-  notDuringCombat: "No se puede editar el mazo en combate.",
-  noItem: "No tenés ese ítem.",
-  noEffect: "No tendría ningún efecto.",
-  notEnoughGold: "No te alcanza el oro.",
-  invalidStock: "Ya no está disponible.",
-  copyLimit: "Ya tenés el máximo de copias de esa carta en el mazo activo (2).",
-  emptyDrawPile: "No quedan cartas en el mazo para buscar.",
-  invalidSearchTarget: "Elegí una carta de tu mazo.",
-  notOwned: "Todavía no tenés ese objeto.",
-  alreadyOwned: "Ya tenés ese objeto: cada uno es único.",
-  notLearnable: "Ese Pokémon no puede aprender esa técnica.",
-  notEnoughStars: "Te faltan Piezas de estrella.",
-  notInCamp: "El tutor solo está en los campamentos."
+  notPlayerTurn: t("No es tu turno."),
+  unknownPokemon: t("Pokémon desconocido."),
+  pokemonFainted: t("Ese Pokémon está debilitado."),
+  noActionsLeft: t("Ese Pokémon ya actuó este turno."),
+  invalidMoveIndex: t("Movimiento inválido."),
+  moveOnCooldown: t("Ese movimiento está en cooldown."),
+  invalidTarget: t("Objetivo inválido para ese movimiento."),
+  cardsNotInHand: t("Esas cartas no están en tu mano."),
+  cardNotAllowed: t("Esa carta no se puede usar así."),
+  tooManyBoostCards: t("Demasiadas cartas de refuerzo."),
+  boostNotApplicable: t("Ese movimiento no se puede reforzar."),
+  insufficientEnergy: t("Falta energía para pagar el movimiento."),
+  deckFull: t("El mazo activo está lleno (máx. 45). Mové una carta al cofre primero."),
+  deckInvalid: t("Tu mazo activo debe tener entre 40 y 45 cartas para salir. Abrí MAZO y ajustalo."),
+  cardNotInDeck: t("Esa carta no está en el mazo."),
+  cardNotInChest: t("Esa carta no está en el cofre."),
+  notDuringCombat: t("No se puede editar el mazo en combate."),
+  noItem: t("No tenés ese ítem."),
+  noEffect: t("No tendría ningún efecto."),
+  notEnoughGold: t("No te alcanza el oro."),
+  invalidStock: t("Ya no está disponible."),
+  copyLimit: t("Ya tenés el máximo de copias de esa carta en el mazo activo (2)."),
+  emptyDrawPile: t("No quedan cartas en el mazo para buscar."),
+  invalidSearchTarget: t("Elegí una carta de tu mazo."),
+  notOwned: t("Todavía no tenés ese objeto."),
+  alreadyOwned: t("Ya tenés ese objeto: cada uno es único."),
+  notLearnable: t("Ese Pokémon no puede aprender esa técnica."),
+  notEnoughStars: t("Te faltan Piezas de estrella."),
+  notInCamp: t("El tutor solo está en los campamentos.")
 };
 
 // Ícono de arte para cada tipo de efecto de carta (compartido por la mano y la pantalla de recompensas).
@@ -75,48 +76,48 @@ export const cardEffectIcons = Object.freeze({
 
 export function describeCard(card) {
   if (card.kind === "energy") {
-    const parts = [card.fillsAnyCost ? "Paga cualquier técnica" : `Energía ${card.energyValue}`];
-    if (card.boostMultiplier > 1) parts.push(`refuerzo x${card.boostMultiplier}`);
-    if (card.maxInDeck) parts.push(`Máx. ${card.maxInDeck} en el mazo`);
+    const parts = [card.fillsAnyCost ? t("Paga cualquier técnica") : t("Energía {energyValue}", { energyValue: card.energyValue })];
+    if (card.boostMultiplier > 1) parts.push(t("refuerzo x{boostMultiplier}", { boostMultiplier: card.boostMultiplier }));
+    if (card.maxInDeck) parts.push(t("Máx. {maxInDeck} en el mazo", { maxInDeck: card.maxInDeck }));
     return parts.join(" · ");
   }
   return card.effects
     .map((effect) => {
       const labels = {
-        drawCards: `Robás ${effect.amount}`,
-        heal: `Curás ${effect.amount} PS`,
-        shield: `Escudo ${effect.amount}`,
-        reduceCooldown: `-${effect.amount} cooldown`,
-        luckyCoin: "Próx. ataque: más chance de crítico",
-        addCards: `Recibís ${effect.amount} energía`,
-        powerModifier: `POD +${effect.amount} este turno`,
-        costModifier: `Costos ${effect.amount} este turno`,
-        cureStatus: "Cura el estado",
-        revive: `Revive a un aliado con ${Math.round((effect.hpFraction ?? 0.5) * 100)}% de PS`,
-        berryGuard: "Si recibe un golpe letal, queda con 1 PS (una vez por combate)",
-        searchDeck: "Buscás 1 carta de tu mazo y la tomás. Máx. 2 en el mazo"
+        drawCards: t("Robás {amount}", { amount: effect.amount }),
+        heal: t("Curás {amount} PS", { amount: effect.amount }),
+        shield: t("Escudo {amount}", { amount: effect.amount }),
+        reduceCooldown: t("-{amount} cooldown", { amount: effect.amount }),
+        luckyCoin: t("Próx. ataque: más chance de crítico"),
+        addCards: t("Recibís {amount} energía", { amount: effect.amount }),
+        powerModifier: t("POD +{amount} este turno", { amount: effect.amount }),
+        costModifier: t("Costos {amount} este turno", { amount: effect.amount }),
+        cureStatus: t("Cura el estado"),
+        revive: t("Revive a un aliado con {hpFraction}% de PS", { hpFraction: Math.round((effect.hpFraction ?? 0.5) * 100) }),
+        berryGuard: t("Si recibe un golpe letal, queda con 1 PS (una vez por combate)"),
+        searchDeck: t("Buscás 1 carta de tu mazo y la tomás. Máx. 2 en el mazo")
       };
       return labels[effect.type] ?? effect.type;
     })
     .join(" · ");
 }
 
-const categoryNames = { physical: "físico", special: "especial" };
+const categoryNames = { physical: t("físico"), special: "especial" };
 
 // Texto corto de lo que hace una lista de efectos (movimientos de apoyo, pasivas).
 export function describeEffects(effects = []) {
   return effects.map((effect) => {
-    const who = effect.target === "allAllies" ? " al equipo" : "";
+    const who = effect.target === "allAllies" ? t(" al equipo") : "";
     switch (effect.type) {
       case "status": return `${effect.status === "poison" ? "Envenena" : effect.status === "burn" ? "Quema" : effect.status === "paralysis" ? "Paraliza" : "Retrocede"} ${Math.round((effect.chance ?? 1) * 100)}%`;
-      case "heal": return `Cura ${effect.amount} PS${who}`;
-      case "shield": return `Escudo ${effect.amount}${who}`;
-      case "reduceCooldown": return `-${effect.amount} cooldown${effect.target === "allAllies" ? " a todo el equipo" : ""}`;
-      case "drawCards": return `Robás ${effect.amount}`;
-      case "luckyCoin": return "Tu próximo ataque tiene el doble de chance de crítico";
-      case "addCards": return `+${effect.amount} energías a la mano`;
-      case "costModifier": return `Técnicas ${effect.amount < 0 ? "-" : "+"}${Math.abs(effect.amount)} costo · ${effect.turns} turnos`;
-      case "powerModifier": return `+${effect.amount} poder ${categoryNames[effect.category] ?? ""} · ${effect.turns} turnos`.replace("  ", " ");
+      case "heal": return t("Cura {amount} PS{who}", { amount: effect.amount, who });
+      case "shield": return t("Escudo {amount}{who}", { amount: effect.amount, who });
+      case "reduceCooldown": return t("-{amount} cooldown", { amount: effect.amount }) + (effect.target === "allAllies" ? t(" a todo el equipo") : "");
+      case "drawCards": return t("Robás {amount}", { amount: effect.amount });
+      case "luckyCoin": return t("Tu próximo ataque tiene el doble de chance de crítico");
+      case "addCards": return t("+{amount} energías a la mano", { amount: effect.amount });
+      case "costModifier": return t("Técnicas {sign}{amount} costo · {turns} turnos", { sign: effect.amount < 0 ? "-" : "+", amount: Math.abs(effect.amount), turns: effect.turns });
+      case "powerModifier": return t("+{amount} poder {category} · {turns} turnos", { amount: effect.amount, category: categoryNames[effect.category] ?? "", turns: effect.turns }).replace("  ", " ");
       default: return effect.type;
     }
   }).join(" + ");
@@ -124,7 +125,7 @@ export function describeEffects(effects = []) {
 
 export function describeStatic(modifiers = []) {
   return modifiers.map((modifier) => {
-    const scope = [modifier.category ? categoryNames[modifier.category] : null, modifier.maxCost === 0 ? "sin costo" : null, modifier.minCost ? `costo ${modifier.minCost}+` : null].filter(Boolean).join(" ");
+    const scope = [modifier.category ? categoryNames[modifier.category] : null, modifier.maxCost === 0 ? t("sin costo") : null, modifier.minCost ? t("costo {minCost}+", { minCost: modifier.minCost }) : null].filter(Boolean).join(" ");
     return `${modifier.kind === "cost" ? "Costo" : "Poder"} ${modifier.amount > 0 ? "+" : ""}${modifier.amount}${scope ? ` (${scope})` : ""}`;
   }).join(", ");
 }
@@ -135,40 +136,40 @@ export function formatEvent(event, { names, data }) {
   const move = (id) => data.moves[id]?.name ?? id;
   switch (event.type) {
     case "turnStarted": return null;
-    case "moveUsed": return `${name(event.actorId)} usó ${move(event.moveId)}.`;
+    case "moveUsed": return t("{actorId} usó {moveId}.", { actorId: name(event.actorId), moveId: move(event.moveId) });
     case "damage": {
       const notes = [];
-      if (event.isCrit) notes.push("¡crítico!");
-      if (event.typeMultiplier === 0) notes.push("no afecta");
-      else if (event.typeMultiplier !== 1) notes.push(`${event.typeMultiplier > 1 ? "muy eficaz" : "poco eficaz"} x${event.typeMultiplier}`);
-      if (event.stab) notes.push("STAB");
-      if (event.boostPower > 0) notes.push(`+${event.boostPower} refuerzo`);
-      return `${name(event.targetId)} recibe ${event.amount} de daño${notes.length ? ` (${notes.join(", ")})` : ""}.`;
+      if (event.isCrit) notes.push(t("¡crítico!"));
+      if (event.typeMultiplier === 0) notes.push(t("no afecta"));
+      else if (event.typeMultiplier !== 1) notes.push((event.typeMultiplier > 1 ? t("muy eficaz x{mult}", { mult: event.typeMultiplier }) : t("poco eficaz x{mult}", { mult: event.typeMultiplier })));
+      if (event.stab) notes.push(t("STAB"));
+      if (event.boostPower > 0) notes.push(t("+{boostPower} refuerzo", { boostPower: event.boostPower }));
+      return (notes.length ? t("{target} recibe {amount} de daño ({notes}).", { target: name(event.targetId), amount: event.amount, notes: notes.join(", ") }) : t("{target} recibe {amount} de daño.", { target: name(event.targetId), amount: event.amount }));
     }
-    case "statusApplied": return `${name(event.targetId)}: ${event.status === "burn" ? "¡quemado!" : event.status === "poison" ? "¡envenenado!" : event.status === "paralysis" ? "¡paralizado!" : "¡puede retroceder!"}`;
-    case "statusDamage": return `${name(event.targetId)} pierde ${event.amount} PS por ${event.status === "poison" ? "veneno" : "quemadura"}.`;
-    case "moveImmune": return `${name(event.targetId)} es inmune a ${move(event.moveId)}.`;
-    case "flinched": return `¡${name(event.targetId)} retrocedió y no pudo actuar!`;
-    case "paralyzed": return `¡${name(event.targetId)} está paralizado y no puede moverse!`;
-    case "fainted": return `${name(event.pokemonId)} se debilitó.`;
-    case "healed": return `${name(event.targetId)} recupera ${event.amount} PS.`;
-    case "shieldGained": return `${name(event.targetId)} gana ${event.amount} de escudo.`;
-    case "cardsDrawn": return event.count > 0 ? (event.source === "effect" ? `Recibís ${event.count} carta(s).` : `Robás ${event.count} carta(s).`) : null;
-    case "modifierAdded": return `${event.label}: ${event.kind === "cost" ? `costos ${event.amount}` : `poder +${event.amount}`} por ${event.turns} turnos.`;
-    case "modifierExpired": return `${event.label} terminó.`;
-    case "cooldownReduced": return `${name(event.targetId)}: -${event.amount} de cooldown.`;
-    case "luckyCoinGained": return "Ganás una moneda de la suerte: tu próximo ataque crítica con más chance.";
-    case "statusCured": return `${name(event.targetId)} se curó del estado.`;
-    case "revivedInCombat": return `¡${name(event.targetId)} volvió a la batalla con ${event.hp} PS!`;
-    case "berryReady": return `${name(event.targetId)} se aferra a una Baya Zidra.`;
-    case "berrySaved": return `¡${name(event.targetId)} aguantó con ${event.by === "sash" ? "la Banda Focus" : "la Baya Zidra"} y quedó con 1 PS!`;
+    case "statusApplied": return t("{target}: {state}", { target: name(event.targetId), state: event.status === "burn" ? t("¡quemado!") : event.status === "poison" ? t("¡envenenado!") : event.status === "paralysis" ? t("¡paralizado!") : t("¡puede retroceder!") });
+    case "statusDamage": return t("{target} pierde {amount} PS por {cause}.", { target: name(event.targetId), amount: event.amount, cause: event.status === "poison" ? t("veneno") : t("quemadura") });
+    case "moveImmune": return t("{targetId} es inmune a {moveId}.", { targetId: name(event.targetId), moveId: move(event.moveId) });
+    case "flinched": return t("¡{targetId} retrocedió y no pudo actuar!", { targetId: name(event.targetId) });
+    case "paralyzed": return t("¡{targetId} está paralizado y no puede moverse!", { targetId: name(event.targetId) });
+    case "fainted": return t("{pokemonId} se debilitó.", { pokemonId: name(event.pokemonId) });
+    case "healed": return t("{targetId} recupera {amount} PS.", { targetId: name(event.targetId), amount: event.amount });
+    case "shieldGained": return t("{targetId} gana {amount} de escudo.", { targetId: name(event.targetId), amount: event.amount });
+    case "cardsDrawn": return event.count > 0 ? (event.source === "effect" ? t("Recibís {count} carta(s).", { count: event.count }) : t("Robás {count} carta(s).", { count: event.count })) : null;
+    case "modifierAdded": return (event.kind === "cost" ? t("{label}: costos {amount} por {turns} turnos.", { label: event.label, amount: event.amount, turns: event.turns }) : t("{label}: poder +{amount} por {turns} turnos.", { label: event.label, amount: event.amount, turns: event.turns }));
+    case "modifierExpired": return t("{label} terminó.", { label: event.label });
+    case "cooldownReduced": return t("{targetId}: -{amount} de cooldown.", { targetId: name(event.targetId), amount: event.amount });
+    case "luckyCoinGained": return t("Ganás una moneda de la suerte: tu próximo ataque crítica con más chance.");
+    case "statusCured": return t("{targetId} se curó del estado.", { targetId: name(event.targetId) });
+    case "revivedInCombat": return t("¡{targetId} volvió a la batalla con {hp} PS!", { targetId: name(event.targetId), hp: event.hp });
+    case "berryReady": return t("{targetId} se aferra a una Baya Zidra.", { targetId: name(event.targetId) });
+    case "berrySaved": return (event.by === "sash" ? t("¡{target} aguantó con la Banda Focus y quedó con 1 PS!", { target: name(event.targetId) }) : t("¡{target} aguantó con la Baya Zidra y quedó con 1 PS!", { target: name(event.targetId) }));
     case "heldTriggered": return `${name(event.pokemonId)}: ${event.name}.`;
-    case "recoil": return `${name(event.targetId)} pierde ${event.amount} PS.`;
-    case "cardSearched": return `Buscás en tu mazo: ${data.cards[event.cardId]?.name ?? event.cardId} a la mano.`;
+    case "recoil": return t("{targetId} pierde {amount} PS.", { targetId: name(event.targetId), amount: event.amount });
+    case "cardSearched": return t("Buscás en tu mazo: {cardId} a la mano.", { cardId: data.cards[event.cardId]?.name ?? event.cardId });
     case "passiveTriggered": return `${name(event.pokemonId)}: ${event.name}.`;
-    case "enemySkipped": return `${name(event.actorId)} no puede actuar.`;
-    case "expAwarded": return `Tu equipo gana ${event.amount} EXP.`;
-    case "combatEnded": return event.result === "victory" ? "¡Victoria!" : "Derrota...";
+    case "enemySkipped": return t("{actorId} no puede actuar.", { actorId: name(event.actorId) });
+    case "expAwarded": return t("Tu equipo gana {amount} EXP.", { amount: event.amount });
+    case "combatEnded": return event.result === "victory" ? t("¡Victoria!") : t("Derrota...");
     default: return null;
   }
 }

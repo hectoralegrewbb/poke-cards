@@ -4,6 +4,7 @@
 // Las expresiones sin archivo usan "neutral" del manifest; si no hay manifest se dibuja el SVG de este módulo.
 import { svgNode, flatInk } from "./flatArt.js";
 import { h } from "./dom.js";
+import { t } from "../../src/shared/i18n.js";
 
 export const expressions = ["neutral", "smile", "worried", "glitch", "dark"];
 // Expresiones del arte definitivo que el busto SVG de respaldo no dibuja: se aproximan con la más cercana.
@@ -98,7 +99,7 @@ const faceByExpression = {
 
 function drawBust(expression) {
   const face = (faceByExpression[expression] ?? faceByExpression.neutral)();
-  const svg = svgNode("svg", { viewBox: "0 0 120 140", class: `amelieBust ex-${expression}`, role: "img", "aria-label": `Profesora Amelie, expresión ${expression}` });
+  const svg = svgNode("svg", { viewBox: "0 0 120 140", class: `amelieBust ex-${expression}`, role: "img", "aria-label": t("Profesora Amelie, expresión {expression}", { expression }) });
   const eyeGroup = svgNode("g", { class: "amEyes" });
   face.eyes.forEach((node) => eyeGroup.append(node));
   const layers = svgNode("g", { class: "amLayers" });
@@ -111,7 +112,7 @@ function drawBust(expression) {
 export function amelieFace(expression = "neutral", size = 96, { avatar = false } = {}) {
   const file = customAssets?.[expression] ?? customAssets?.neutral;
   const holder = h("span", { class: `amelieFace ex-${expression} ${file ? "photo" : ""} ${avatar ? "avatar" : ""}`, style: `--amSize:${size}px` });
-  if (file) holder.append(h("img", { src: `${storyPath}${file}`, alt: "Profesora Amelie", class: "amelieImg", draggable: "false" }));
+  if (file) holder.append(h("img", { src: `${storyPath}${file}`, alt: t("Profesora Amelie"), class: "amelieImg", draggable: "false" }));
   else holder.append(drawBust(svgFallback[expression] ?? expression));
   return holder;
 }

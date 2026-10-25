@@ -11,6 +11,7 @@ import { h } from "./dom.js";
 import { icon } from "./pixelIcons.js";
 import { cardEffectIcons, describeCard, describeEffects, errorText, formatEvent, statusInfo, typeColors, typeNames } from "./labels.js";
 import { sfx } from "./sfx.js";
+import { t } from "../../src/shared/i18n.js";
 
 // Nivel de referencia para colorear a los rivales: el promedio de tu equipo.
 const referenceLevel = (state) => averageLevel(state.teams.player.filter(isAlive));
@@ -35,7 +36,7 @@ function resetSelection(state) {
   const ready = state.teams.player.find((pokemon) => isAlive(pokemon) && pokemon.actionsLeft > 0);
   sel.actorUid = ready?.uid ?? null;
   const names = state.teams.enemy.map((enemy) => enemy.name).join(", ");
-  logLines.push(state.kind === "normal" ? `¡Aparecen: ${names}!` : `¡Te desafían: ${names}!`);
+  logLines.push(state.kind === "normal" ? t("¡Aparecen: {names}!", { names }) : t("¡Te desafían: {names}!", { names }));
 }
 
 function clearChoice() {
@@ -91,9 +92,9 @@ function stageCap(state, actor) {
 
 // Devuelve un mensaje si no se puede cargar la carta en ese Pokémon (null = ok).
 function stageRejection(state, actor) {
-  if (!actor || !isAlive(actor)) return "Ese Pokémon está debilitado.";
-  if (actor.actionsLeft <= 0) return "Ese Pokémon ya actuó este turno.";
-  if (stagedOf(actor.uid).length >= stageCap(state, actor)) return `${actor.name} ya tiene el máximo de cartas cargadas.`;
+  if (!actor || !isAlive(actor)) return t("Ese Pokémon está debilitado.");
+  if (actor.actionsLeft <= 0) return t("Ese Pokémon ya actuó este turno.");
+  if (stagedOf(actor.uid).length >= stageCap(state, actor)) return t("{name} ya tiene el máximo de cartas cargadas.", { name: actor.name });
   return null;
 }
 
@@ -132,28 +133,28 @@ function pushEvents(ctx, state, events) {
     if (event.type === "damage") {
       const resisted = event.typeMultiplier > 0 && event.typeMultiplier < 1;
       const effective = event.typeMultiplier > 1;
-      const note = effective ? "¡MUY EFICAZ!" : resisted ? "POCO EFICAZ" : event.typeMultiplier === 0 ? "NO AFECTA" : null;
+      const note = effective ? t("¡MUY EFICAZ!") : resisted ? t("POCO EFICAZ") : event.typeMultiplier === 0 ? t("NO AFECTA") : null;
       ctx.fx.push({
         uid: event.targetId, cls: "hit", text: event.amount > 0 ? `-${event.amount}` : "0", floatCls: "dmg", crit: event.isCrit,
         note, noteCls: effective ? "good" : "weak",
         burst: event.isCrit ? "crit" : "hit", sound: event.isCrit ? "crit" : effective ? "super" : resisted || event.amount === 0 ? "resist" : "hit", delay: time - 250, shake: event.isCrit || effective
       });
     }
-    if (event.type === "statusApplied") ctx.fx.push({ uid: event.targetId, cls: `afflicted-${event.status}`, text: event.status === "poison" ? "VENENO" : event.status === "burn" ? "QUEMA" : event.status === "paralysis" ? "PARÁLISIS" : "RETROCESO", floatCls: "statusFx", burst: event.status === "poison" ? "poison" : event.status === "paralysis" ? "electric" : "fire", delay: time });
+    if (event.type === "statusApplied") ctx.fx.push({ uid: event.targetId, cls: `afflicted-${event.status}`, text: event.status === "poison" ? t("VENENO") : event.status === "burn" ? t("QUEMA") : event.status === "paralysis" ? t("PARÁLISIS") : t("RETROCESO"), floatCls: "statusFx", burst: event.status === "poison" ? "poison" : event.status === "paralysis" ? "electric" : "fire", delay: time });
     if (event.type === "statusDamage") ctx.fx.push({ uid: event.targetId, cls: "hit", text: `-${event.amount}`, floatCls: "statusFx", delay: time });
-    if (event.type === "flinched") ctx.fx.push({ uid: event.targetId, cls: "staggered", text: "¡RETROCESO!", floatCls: "statusFx", delay: time });
-    if (event.type === "paralyzed") ctx.fx.push({ uid: event.targetId, cls: "afflicted-paralysis", text: "¡PARALIZADO!", floatCls: "statusFx", burst: "electric", delay: time });
+    if (event.type === "flinched") ctx.fx.push({ uid: event.targetId, cls: "staggered", text: t("¡RETROCESO!"), floatCls: "statusFx", delay: time });
+    if (event.type === "paralyzed") ctx.fx.push({ uid: event.targetId, cls: "afflicted-paralysis", text: t("¡PARALIZADO!"), floatCls: "statusFx", burst: "electric", delay: time });
     if (event.type === "fainted") ctx.fx.push({ uid: event.pokemonId, cls: "faint", sound: "faint", delay: time - 100 });
     if (event.type === "healed") ctx.fx.push({ uid: event.targetId, cls: "healed", text: `+${event.amount}`, floatCls: "heal", burst: "heal", sound: "heal", delay: time });
     if (event.type === "shieldGained") ctx.fx.push({ uid: event.targetId, cls: "shielded", text: `+${event.amount}`, floatCls: "shieldFx", burst: "shield", sound: "shield", delay: time });
     if (event.type === "cardsDrawn") event.cardUids.forEach((uid, index) => ctx.fx.push({ cardUid: uid, cls: "dealt", delay: 120 * index + time }));
     if (event.type === "modifierAdded") ctx.fx.push({ banner: `${event.label} · ${event.kind === "cost" ? `COSTOS ${event.amount}` : `POD +${event.amount}`}`, sound: "shield", delay: time });
-    if (event.type === "luckyCoinGained") ctx.fx.push({ banner: "¡MONEDA DE LA SUERTE!", sound: "passive", delay: time });
-    if (event.type === "statusCured") ctx.fx.push({ uid: event.targetId, cls: "healed", text: "CURADO", floatCls: "heal", burst: "heal", sound: "cure", delay: time });
+    if (event.type === "luckyCoinGained") ctx.fx.push({ banner: t("¡MONEDA DE LA SUERTE!"), sound: "passive", delay: time });
+    if (event.type === "statusCured") ctx.fx.push({ uid: event.targetId, cls: "healed", text: t("CURADO"), floatCls: "heal", burst: "heal", sound: "cure", delay: time });
     if (event.type === "passiveTriggered") ctx.fx.push({ uid: event.pokemonId, cls: "charge", text: `✦ ${event.name}`, floatCls: "passiveFx", burst: "card", sound: "passive", delay: time });
-    if (event.type === "revivedInCombat") ctx.fx.push({ uid: event.targetId, cls: "healed", text: "¡REVIVE!", floatCls: "heal", burst: "heal", sound: "cure", delay: time });
-    if (event.type === "berryReady") ctx.fx.push({ uid: event.targetId, cls: "shielded", text: "BAYA", floatCls: "shieldFx", burst: "card", sound: "shield", delay: time });
-    if (event.type === "berrySaved") ctx.fx.push({ uid: event.targetId, cls: "shielded", text: "¡AGUANTÓ!", floatCls: "shieldFx", burst: "shield", sound: "passive", delay: time, banner: null });
+    if (event.type === "revivedInCombat") ctx.fx.push({ uid: event.targetId, cls: "healed", text: t("¡REVIVE!"), floatCls: "heal", burst: "heal", sound: "cure", delay: time });
+    if (event.type === "berryReady") ctx.fx.push({ uid: event.targetId, cls: "shielded", text: t("BAYA"), floatCls: "shieldFx", burst: "card", sound: "shield", delay: time });
+    if (event.type === "berrySaved") ctx.fx.push({ uid: event.targetId, cls: "shielded", text: t("¡AGUANTÓ!"), floatCls: "shieldFx", burst: "shield", sound: "passive", delay: time, banner: null });
     if (event.type === "cardSearched") ctx.fx.push({ cardUid: event.cardUid, cls: "dealt", delay: time });
     if (event.type === "combatEnded") ctx.fx.push({ sound: event.result === "victory" ? "victory" : "defeat", delay: time + 200 });
   }
@@ -195,7 +196,7 @@ function hpBar(pokemon) {
   hpMemory.set(pokemon.uid, percent);
   const tone = percent > 50 ? "good" : percent > 25 ? "warn" : "low";
   return h("div", { class: "hp" },
-    h("span", { class: "hpLabel" }, "PS"),
+    h("span", { class: "hpLabel" }, t("PS")),
     h("div", { class: "hpTrack" }, h("div", { class: `hpFill ${tone}`, style: `width:${before}%`, "data-to": percent })),
     h("span", { class: "hpNum" }, `${pokemon.hp}/${pokemon.maxHp}`),
     pokemon.shield ? h("span", { class: "shieldTag" }, icon("shield", { scale: 2 }), pokemon.shield) : null);
@@ -205,9 +206,9 @@ function intentLine(state, enemy) {
   if (!enemy.intent || !isAlive(enemy)) return null;
   const move = state.data.moves[enemy.intent.moveId];
   const target = findPokemon(state, enemy.intent.targetId);
-  const area = move.targetMode === "allEnemies" ? "ÁREA" : move.targetMode === "targetRow" ? "FILA" : "";
-  const where = area ? `${area} (${target?.row === "front" ? "frente" : "fondo"})` : (target?.name ?? "?");
-  return h("div", { class: `intent ${area ? "areaIntent" : ""}`, title: area ? `${move.name}: golpea a ${move.targetMode === "allEnemies" ? "todo tu equipo" : "toda una fila"}` : move.name },
+  const area = move.targetMode === "allEnemies" ? t("ÁREA") : move.targetMode === "targetRow" ? t("FILA") : "";
+  const where = area ? `${area} (${target?.row === "front" ? t("frente") : t("fondo")})` : (target?.name ?? "?");
+  return h("div", { class: `intent ${area ? "areaIntent" : ""}`, title: area ? t("{name}: golpea a {target}", { name: move.name, target: move.targetMode === "allEnemies" ? t("todo tu equipo") : t("toda una fila") }) : move.name },
     icon("sword", { scale: 2 }),
     h("span", {}, `${move.power > 0 ? `≈${enemy.intent.damagePreview}` : move.name} › ${where}`));
 }
@@ -215,7 +216,7 @@ function intentLine(state, enemy) {
 // Aliado que recibirá daño este turno según las intenciones enemigas (incluye área y fila).
 function threatBadge(threat) {
   if (!threat) return null;
-  return h("div", { class: "threatBadge", title: threat.hits > 1 ? `Recibe ${threat.hits} golpes anunciados` : "Golpe anunciado" },
+  return h("div", { class: "threatBadge", title: threat.hits > 1 ? t("Recibe {hits} golpes anunciados", { hits: threat.hits }) : t("Golpe anunciado") },
     `⚠ ${threat.damage}`, threat.hits > 1 ? h("small", {}, `x${threat.hits}`) : null);
 }
 
@@ -227,7 +228,7 @@ function previewBadge(state, target) {
   const result = previewDamage(state, actor, move, target, boostPower);
   if (!result) return null;
   const mult = result.typeMultiplier;
-  const label = mult === 0 ? "INMUNE" : mult > 1 ? `x${mult} ¡EFICAZ!` : mult < 1 ? `x${mult} POCO` : "x1";
+  const label = mult === 0 ? t("INMUNE") : mult > 1 ? t("x{mult} ¡EFICAZ!", { mult }) : mult < 1 ? t("x{mult} POCO", { mult }) : "x1";
   return h("div", { class: `preview m${mult === 0 ? "0" : mult > 1 ? "up" : mult < 1 ? "down" : "1"}` }, `≈${result.damage}`, h("small", {}, `${label}${result.isSpread ? " · ÁREA" : ""}${target.shield ? ` · ESC ${target.shield}` : ""}`));
 }
 
@@ -251,28 +252,28 @@ function pokemonTile(ctx, state, pokemon, validSet, threats) {
     class: classes.join(" "), "data-uid": pokemon.uid, "data-drop": alive ? `${isPlayer ? "ally" : "enemy"}:${pokemon.uid}` : isPlayer ? `fallen:${pokemon.uid}` : null,
     title: pokemon.passive ? `${pokemon.passive.name}: ${pokemon.passive.description}` : null,
     role: clickable ? "button" : null, tabindex: clickable ? "0" : null,
-    "aria-label": `${pokemon.name}, ${pokemon.hp} de ${pokemon.maxHp} PS`,
+    "aria-label": t("{name}, {hp} de {maxHp} PS", { name: pokemon.name, hp: pokemon.hp, maxHp: pokemon.maxHp }),
     onKeyDown: clickable ? (event) => {
       if (event.target === event.currentTarget && (event.key === "Enter" || event.key === " ")) { event.preventDefault(); onTileClick(ctx, state, pokemon); }
     } : null,
     onClick: clickable ? () => onTileClick(ctx, state, pokemon) : null
   },
     isPlayer && alive ? h("div", { class: "zones" },
-      h("div", { class: "zone zCharge", "data-drop": canCharge ? `charge:${pokemon.uid}` : null }, icon("bolt", { scale: 3 }), "CARGAR"),
-      h("div", { class: "zone zGuard", "data-drop": `guard:${pokemon.uid}` }, icon("shield", { scale: 3 }), "ESCUDO")) : null,
+      h("div", { class: "zone zCharge", "data-drop": canCharge ? `charge:${pokemon.uid}` : null }, icon("bolt", { scale: 3 }), t("CARGAR")),
+      h("div", { class: "zone zGuard", "data-drop": `guard:${pokemon.uid}` }, icon("shield", { scale: 3 }), t("ESCUDO"))) : null,
     loaded.length ? h("button", {
-      class: "stagedTag", title: "Quitar la carga",
+      class: "stagedTag", title: t("Quitar la carga"),
       onClick: (event) => { event.stopPropagation(); delete staged[pokemon.uid]; sfx.play("deny"); ctx.rerender(); }
     }, loaded.map(() => icon("bolt", { scale: 2 }))) : null,
     isPlayer && alive && pokemon.actionsLeft > 0 ? h("div", { class: "readyMark" }, "▼") : null,
     previewBadge(state, pokemon),
     isPlayer && alive ? threatBadge(threats.get(pokemon.uid)) : null,
-    alive && isOutOfReach(state, pokemon) ? h("div", { class: "reachNote" }, "FUERA DE ALCANCE") : null,
-    h("div", { class: "spriteBox" }, h("div", { class: "platform" }), ctx.sprites.element(pokemon.speciesId, { facing: isPlayer ? "back" : "front", spriteKey: `${state.seed}:${pokemon.side}:${pokemon.uid}`, shiny: Boolean(pokemon.shiny) }), pokemon.shiny ? h("span", { class: "shinyMark", title: "Variocolor" }, "✦") : null),
+    alive && isOutOfReach(state, pokemon) ? h("div", { class: "reachNote" }, t("FUERA DE ALCANCE")) : null,
+    h("div", { class: "spriteBox" }, h("div", { class: "platform" }), ctx.sprites.element(pokemon.speciesId, { facing: isPlayer ? "back" : "front", spriteKey: `${state.seed}:${pokemon.side}:${pokemon.uid}`, shiny: Boolean(pokemon.shiny) }), pokemon.shiny ? h("span", { class: "shinyMark", title: t("Variocolor") }, "✦") : null),
     h("div", { class: "plate" },
       h("div", { class: "pname" }, pokemon.shiny ? "✦ " : "", pokemon.name, h("small", {}, pokemon.row === "front" ? "F" : "B"), levelTag(pokemonLevel(pokemon), isPlayer ? 0 : referenceLevel(state))),
       pokemon.heldItem ? h("span", { class: "statusTag held", title: `${state.data.heldItems[pokemon.heldItem].name}: ${state.data.heldItems[pokemon.heldItem].description}` }, `◆ ${state.data.heldItems[pokemon.heldItem].name}`) : null,
-      pokemon.berryGuard ? h("span", { class: "statusTag berry", title: "Baya Zidra: aguanta un golpe letal con 1 PS" }, "BAYA") : null,
+      pokemon.berryGuard ? h("span", { class: "statusTag berry", title: t("Baya Zidra: aguanta un golpe letal con 1 PS") }, t("BAYA")) : null,
       pokemon.status ? h("span", { class: `statusTag ${pokemon.status}`, title: statusInfo[pokemon.status].hint }, statusInfo[pokemon.status].short) : null,
       h("div", { class: "types" }, pokemon.types.map(typeChip)),
       hpBar(pokemon),
@@ -345,8 +346,8 @@ function selectMove(ctx, state, actor, index) {
 function movesMenu(ctx, state) {
   const actor = findPokemon(state, sel.actorUid);
   if (!actor || sel.mode !== "attack") {
-    const hint = sel.mode === "shield" ? "Elegí un aliado y cartas de energía." : sel.mode === "utility" ? "Elegí a qué aliado aplicarla." : "Elegí uno de tus Pokémon.";
-    const cancel = sel.mode === "attack" ? null : h("button", { class: "btn mini", onClick: () => { sel.mode = "attack"; sel.utilityUid = null; sel.cardUids = []; sfx.play("deny"); ctx.rerender(); } }, "◀ VOLVER A TÉCNICAS");
+    const hint = sel.mode === "shield" ? t("Elegí un aliado y cartas de energía.") : sel.mode === "utility" ? t("Elegí a qué aliado aplicarla.") : t("Elegí uno de tus Pokémon.");
+    const cancel = sel.mode === "attack" ? null : h("button", { class: "btn mini", onClick: () => { sel.mode = "attack"; sel.utilityUid = null; sel.cardUids = []; sfx.play("deny"); ctx.rerender(); } }, t("◀ VOLVER A TÉCNICAS"));
     return h("div", { class: "menuHint" }, hint, cancel ? h("div", {}, cancel) : null);
   }
   const passive = actor.passive;
@@ -365,13 +366,13 @@ function movesMenu(ctx, state) {
       onClick: () => { selectMove(ctx, state, actor, index); ctx.rerender(); }
     },
       h("span", { class: "cursor" }, isSelected ? "▶" : ""),
-      h("span", { class: "mname" }, move.name, move.targetMode ? h("small", { class: "areaLabel" }, move.targetMode === "allEnemies" ? " · ÁREA" : " · FILA") : null,
-        move.range === "melee" ? h("small", { class: "areaLabel meleeLabel", title: "Cuerpo a cuerpo: solo llega a la fila frontal rival mientras quede alguien en ella" }, " · CC") : null),
+      h("span", { class: "mname" }, move.name, move.targetMode ? h("small", { class: "areaLabel" }, move.targetMode === "allEnemies" ? t(" · ÁREA") : t(" · FILA")) : null,
+        move.range === "melee" ? h("small", { class: "areaLabel meleeLabel", title: t("Cuerpo a cuerpo: solo llega a la fila frontal rival mientras quede alguien en ella") }, t(" · CC")) : null),
       h("span", { class: "chipSlot" }, typeChip(move.type)),
-      h("span", { class: `mstat ${bonus ? "buffed" : ""}` }, move.category === "status" ? "APOYO" : `POD ${move.power + bonus}`),
-      h("span", { class: `pips ${cost < move.cost ? "cut" : cost > move.cost ? "up" : ""}`, title: cost !== move.cost ? `Costo base ${move.cost}` : null },
-        cost === 0 ? h("small", {}, "LIBRE") : Array.from({ length: cost }, (_, i) => h("i", { class: i < load.energy ? "on" : "" }))),
-      h("span", { class: "mcd" }, cooldown > 0 ? `ESPERA ${cooldown}` : `CD ${move.cooldown}`));
+      h("span", { class: `mstat ${bonus ? "buffed" : ""}` }, move.category === "status" ? t("APOYO") : t("POD {bonus}", { bonus: move.power + bonus })),
+      h("span", { class: `pips ${cost < move.cost ? "cut" : cost > move.cost ? "up" : ""}`, title: cost !== move.cost ? t("Costo base {cost}", { cost: move.cost }) : null },
+        cost === 0 ? h("small", {}, t("LIBRE")) : Array.from({ length: cost }, (_, i) => h("i", { class: i < load.energy ? "on" : "" }))),
+      h("span", { class: "mcd" }, cooldown > 0 ? t("ESPERA {cooldown}", { cooldown }) : t("CD {cooldown}", { cooldown: move.cooldown })));
     if (!disabled) attachDrag(row, {
       isValid: (drop) => {
         const [kind, uid] = drop.dataset.drop.split(":");
@@ -382,7 +383,7 @@ function movesMenu(ctx, state) {
       hint: (drop) => {
         const target = findPokemon(state, drop.dataset.drop.split(":")[1]);
         const shown = previewDamage(state, actor, move, target, load.boostPower);
-        const missing = load.energy < cost ? ` · falta energía ${load.energy}/${cost}` : "";
+        const missing = load.energy < cost ? t(" · falta energía {energy}/{cost}", { energy: load.energy, cost }) : "";
         return (shown ? `${move.name} ≈${shown.damage} x${shown.typeMultiplier}` : move.name) + missing;
       },
       onDrop: (drop) => {
@@ -390,7 +391,7 @@ function movesMenu(ctx, state) {
         sel.targetUid = drop.dataset.drop.split(":")[1];
         if (loadFor(state, actor, move).energy < cost) {
           sfx.play("deny");
-          ctx.notify(`Falta energía: cargá ${cost} en ${actor.name} (arrastrá cartas sobre él).`);
+          ctx.notify(t("Falta energía: cargá {cost} en {name} (arrastrá cartas sobre él).", { cost, name: actor.name }));
           return ctx.rerender();
         }
         fireMove(ctx, state);
@@ -403,22 +404,25 @@ function movesMenu(ctx, state) {
 function dialogBox(ctx, state) {
   const actor = findPokemon(state, sel.actorUid);
   const move = selectedMove(state);
-  let prompt = "1. Elegí tu Pokémon · 2. Cargá energía · 3. Técnica y objetivo.";
+  let prompt = t("1. Elegí tu Pokémon · 2. Cargá energía · 3. Técnica y objetivo.");
   if (sel.mode === "shield") {
     const amount = sel.cardUids.reduce((total, uid) => {
       const card = state.deck.hand.find((item) => item.uid === uid);
       return total + (card ? state.data.cards[card.cardId].boostMultiplier * state.data.balance.combat.defenseBoostPerCard : 0);
     }, 0);
-    prompt = sel.targetUid ? `Escudo +${amount} a ${findPokemon(state, sel.targetUid).name}.` : "Modo escudo: elegí aliado y cartas.";
-  } else if (sel.mode === "utility") prompt = state.data.cards[state.deck.hand.find((card) => card.uid === sel.utilityUid)?.cardId]?.target === "fallenAlly" ? "¿A quién revivís? Tocá un Pokémon debilitado." : "¿A quién aplicás la carta?";
-  else if (actor && !move) prompt = `${actor.name} está listo. Elegí una técnica; las de costo LIBRE no necesitan cartas.`;
+    prompt = sel.targetUid ? t("Escudo +{amount} a {name}.", { amount, name: findPokemon(state, sel.targetUid).name }) : t("Modo escudo: elegí aliado y cartas.");
+  } else if (sel.mode === "utility") prompt = state.data.cards[state.deck.hand.find((card) => card.uid === sel.utilityUid)?.cardId]?.target === "fallenAlly" ? t("¿A quién revivís? Tocá un Pokémon debilitado.") : t("¿A quién aplicás la carta?");
+  else if (actor && !move) prompt = t("{name} está listo. Elegí una técnica; las de costo LIBRE no necesitan cartas.", { name: actor.name });
   else if (actor && move) {
     const load = loadFor(state, actor, move);
     const target = sel.targetUid ? findPokemon(state, sel.targetUid) : null;
     const effect = describeEffects(move.effects) ? ` (${describeEffects(move.effects)})` : "";
     const targetsInfo = move.targetMode ? ` · ${move.targetMode === "allEnemies" ? "TODOS LOS RIVALES" : "FILA COMPLETA"}` : "";
-    const shortfall = load.energy < load.cost ? ` · FALTAN ${load.cost - load.energy} ENERGÍA` : "";
-    prompt = `${actor.name}: ${move.name}${effect}${targetsInfo} · ${load.energy}/${load.cost} EN${shortfall}${load.boost.length ? ` · +${load.boostPower} POD` : ""}${load.cost === 0 && stagedOf(actor.uid).length ? " · LIBRE: no gasta las cartas cargadas" : ""}${target ? ` → ${target.name}` : " · ELEGÍ OBJETIVO"}`;
+    const shortfall = load.energy < load.cost ? t(" · FALTAN {energy} ENERGÍA", { energy: load.cost - load.energy }) : "";
+    prompt = [t("{actor}: {move}{effect}{targets} · {energy}/{cost} EN", { actor: actor.name, move: move.name, effect, targets: targetsInfo, energy: load.energy, cost: load.cost }), shortfall,
+      load.boost.length ? t(" · +{boostPower} POD", { boostPower: load.boostPower }) : "",
+      load.cost === 0 && stagedOf(actor.uid).length ? t(" · LIBRE: no gasta las cartas cargadas") : "",
+      target ? ` → ${target.name}` : t(" · ELEGÍ OBJETIVO")].join("");
   }
 
   const fresh = logLines.length - loggedCount;
@@ -432,8 +436,8 @@ function dialogBox(ctx, state) {
     h("div", { class: "lines" }, lines),
     h("div", { class: "prompt" }, prompt, h("span", { class: "blink" }, "▼")),
     h("div", { class: "dialogButtons" },
-      canShield ? h("button", { class: "btn primary", onClick: () => runAction(ctx, state, playShield(state, { targetUid: sel.targetUid, cardUids: sel.cardUids })) }, "APLICAR ESCUDO") : null,
-      canFire && sel.mode === "attack" ? h("button", { class: "btn primary", onClick: () => fireMove(ctx, state) }, "¡USAR!") : null));
+      canShield ? h("button", { class: "btn primary", onClick: () => runAction(ctx, state, playShield(state, { targetUid: sel.targetUid, cardUids: sel.cardUids })) }, t("APLICAR ESCUDO")) : null,
+      canFire && sel.mode === "attack" ? h("button", { class: "btn primary", onClick: () => fireMove(ctx, state) }, t("¡USAR!")) : null));
 }
 
 function handView(ctx, state) {
@@ -444,7 +448,7 @@ function handView(ctx, state) {
     const def = state.data.cards[card.cardId];
     const picked = sel.cardUids.includes(card.uid);
     const owner = stagedOwner(card.uid);
-    const role = owner ? findPokemon(state, owner).name.slice(0, 8).toUpperCase() : picked ? "ESCUDO" : "";
+    const role = owner ? findPokemon(state, owner).name.slice(0, 8).toUpperCase() : picked ? t("ESCUDO") : "";
     const element = cardView(card, def, { role, picked: picked || Boolean(owner), armed: sel.utilityUid === card.uid });
     const offset = index - (count - 1) / 2;
     element.style.setProperty("--rot", `${(offset * Math.min(3, 18 / Math.max(count, 1))).toFixed(1)}deg`);
@@ -456,7 +460,7 @@ function handView(ctx, state) {
         const needsTarget = def.target === "ally" || def.target === "fallenAlly";
         if (def.target === "fallenAlly" && state.teams.player.every(isAlive)) {
           sfx.play("deny");
-          return ctx.notify("Ningún Pokémon está debilitado.");
+          return ctx.notify(t("Ningún Pokémon está debilitado."));
         }
         if (def.target === "drawPile") {
           if (state.deck.drawPile.length === 0) { sfx.play("deny"); return ctx.notify(errorText.emptyDrawPile); }
@@ -492,7 +496,7 @@ function handView(ctx, state) {
       }
       if (!actor) {
         sfx.play("deny");
-        return ctx.notify("Elegí un Pokémon (o arrastrá la carta sobre él) para cargarla.");
+        return ctx.notify(t("Elegí un Pokémon (o arrastrá la carta sobre él) para cargarla."));
       }
       const rejection = stageRejection(state, actor);
       if (rejection) {
@@ -522,9 +526,9 @@ function handView(ctx, state) {
       hint: (drop) => {
         const [kind, uid] = drop.dataset.drop.split(":");
         if (def.kind === "utility") return def.name;
-        if (kind === "guard") return `Escudo +${def.boostMultiplier * state.data.balance.combat.defenseBoostPerCard} a ${findPokemon(state, uid).name}`;
+        if (kind === "guard") return t("Escudo +{defenseBoostPerCard} a {name}", { defenseBoostPerCard: def.boostMultiplier * state.data.balance.combat.defenseBoostPerCard, name: findPokemon(state, uid).name });
         const actor = kind === "charge" ? findPokemon(state, uid) : findPokemon(state, sel.actorUid);
-        return `Cargar en ${actor.name} (${stagedOf(actor.uid).length + 1}/${stageCap(state, actor)})`;
+        return t("Cargar en {name} ({uid}/{actor})", { name: actor.name, uid: stagedOf(actor.uid).length + 1, actor: stageCap(state, actor) });
       },
       onDrop: (drop) => {
         const [kind, uid] = drop.dataset.drop.split(":");
@@ -566,9 +570,9 @@ function searchModal(ctx, state) {
   }
   const close = () => { searchCardUid = null; sfx.play("deny"); ctx.rerender(); };
   return h("div", { class: "overlay searchOverlay", onClick: (event) => { if (event.target === event.currentTarget) close(); } },
-    h("div", { class: "window dialogBig searchWindow", role: "dialog", "aria-label": "Buscar una carta en el mazo" },
-      h("h2", {}, icon("lupa", { scale: 4 }), " BUSCADOR"),
-      h("p", { class: "muted" }, `Elegí una carta del mazo (${state.deck.drawPile.length} restantes) y pasa a tu mano.`),
+    h("div", { class: "window dialogBig searchWindow", role: "dialog", "aria-label": t("Buscar una carta en el mazo") },
+      h("h2", {}, icon("lupa", { scale: 4 }), t(" BUSCADOR")),
+      h("p", { class: "muted" }, t("Elegí una carta del mazo ({length} restantes) y pasa a tu mano.", { length: state.deck.drawPile.length })),
       h("div", { class: "searchList" }, [...groups.values()].sort((a, b) => state.data.cards[a.cardId].name.localeCompare(state.data.cards[b.cardId].name)).map((entry) => {
         const def = state.data.cards[entry.cardId];
         return h("button", { class: "searchItem", onClick: () => {
@@ -579,7 +583,7 @@ function searchModal(ctx, state) {
           ctx.rerender();
         } }, h("span", { class: "searchArt" }, cardIcon(def).slice(0, 1)), h("strong", {}, `${def.name} ×${entry.count}`), h("small", {}, describeCard(def)));
       })),
-      h("button", { class: "btn", onClick: close }, "CANCELAR")));
+      h("button", { class: "btn", onClick: close }, t("CANCELAR"))));
 }
 
 // Terminar el turno con Pokémon sin actuar pide una segunda pulsación (evita un toque accidental, sobre todo en móvil).
@@ -591,7 +595,7 @@ function endTurnClicked(ctx, state, readyCount) {
   if (readyCount > 0 && !endTurnArmed()) {
     endTurnArmedAt = Date.now();
     sfx.play("deny");
-    ctx.notify(`Todavía ${readyCount === 1 ? "hay 1 Pokémon" : `hay ${readyCount} Pokémon`} sin actuar. Tocá de nuevo para terminar el turno.`);
+    ctx.notify(readyCount === 1 ? t("Todavía hay 1 Pokémon sin actuar. Tocá de nuevo para terminar el turno.") : t("Todavía hay {readyCount} Pokémon sin actuar. Tocá de nuevo para terminar el turno.", { readyCount }));
     return ctx.rerender();
   }
   endTurnArmedAt = 0;
@@ -632,42 +636,42 @@ export function renderCombat(ctx) {
   const threats = getIncomingThreats(state);
   const row = (side, rowName) => h("div", { class: `row ${side}` }, state.teams[side].filter((pokemon) => pokemon.row === rowName).map((pokemon) => pokemonTile(ctx, state, pokemon, valid, threats)));
   const finished = Boolean(state.result);
-  const kindNames = { normal: "RUTA", gym: "GIMNASIO", eliteFour: "ALTO MANDO", champion: "CAMPEÓN", amelie: "AMELIE", gardevoir: "GARDEVOIR" };
+  const kindNames = { normal: t("RUTA"), gym: t("GIMNASIO"), eliteFour: t("ALTO MANDO"), champion: t("CAMPEÓN"), amelie: t("AMELIE"), gardevoir: t("GARDEVOIR") };
 
   const readyCount = state.teams.player.filter((pokemon) => isAlive(pokemon) && pokemon.actionsLeft > 0).length;
   return h("section", { class: "combat" },
     h("div", { class: "combatCoach" },
       h("div", { class: "coachHeader" },
-        h("span", {}, icon("star", { scale: 2 }), " TURNO TÁCTICO", h("small", {}, ` · ${readyCount} Pokémon por actuar`)),
-        h("button", { class: "btn mini", "aria-expanded": helpExpanded, onClick: () => { helpExpanded = !helpExpanded; ctx.rerender(); } }, helpExpanded ? "OCULTAR GUÍA −" : "¿CÓMO JUGAR? +")),
+        h("span", {}, icon("star", { scale: 2 }), t(" TURNO TÁCTICO"), h("small", {}, t(" · {readyCount} Pokémon por actuar", { readyCount }))),
+        h("button", { class: "btn mini", "aria-expanded": helpExpanded, onClick: () => { helpExpanded = !helpExpanded; ctx.rerender(); } }, helpExpanded ? t("OCULTAR GUÍA −") : t("¿CÓMO JUGAR? +"))),
       helpExpanded ? h("div", { class: "coachSteps" },
-        h("span", {}, h("b", {}, "1"), " Seleccioná un aliado"),
-        h("span", {}, h("b", {}, "2"), " Cargá energía (solo si cuesta)"),
-        h("span", {}, h("b", {}, "3"), " Técnica → objetivo → ¡USAR!"),
-        h("small", {}, "LIBRE no gasta cartas · ÁREA alcanza a todos · FILA golpea a una fila · CC (cuerpo a cuerpo) solo llega a la fila frontal rival · ⚠ marca el daño que recibirá un aliado · VEN y QUE hacen daño por turno, PAR puede anular una acción; se curan con ítems.")) : null),
+        h("span", {}, h("b", {}, "1"), t(" Seleccioná un aliado")),
+        h("span", {}, h("b", {}, "2"), t(" Cargá energía (solo si cuesta)")),
+        h("span", {}, h("b", {}, "3"), t(" Técnica → objetivo → ¡USAR!")),
+        h("small", {}, t("LIBRE no gasta cartas · ÁREA alcanza a todos · FILA golpea a una fila · CC (cuerpo a cuerpo) solo llega a la fila frontal rival · ⚠ marca el daño que recibirá un aliado · VEN y QUE hacen daño por turno, PAR puede anular una acción; se curan con ítems."))) : null),
     h("header", { class: "hud" },
-      h("span", {}, `TURNO ${state.turn}`), h("span", { class: "kind" }, kindNames[state.kind] ?? state.kind),
-      h("span", {}, state.luckyCoins ? h("span", { class: "luckyHud", title: "Cada moneda quita una moneda al próximo tiro de crítico (más chance). Se gasta al atacar." }, icon("clover", { scale: 2 }), ` SUERTE x${state.luckyCoins}`) : "")),
+      h("span", {}, t("TURNO {turn}", { turn: state.turn })), h("span", { class: "kind" }, kindNames[state.kind] ?? state.kind),
+      h("span", {}, state.luckyCoins ? h("span", { class: "luckyHud", title: t("Cada moneda quita una moneda al próximo tiro de crítico (más chance). Se gasta al atacar.") }, icon("clover", { scale: 2 }), t(" SUERTE x{luckyCoins}", { luckyCoins: state.luckyCoins })) : "")),
     state.modifiers.length ? h("div", { class: "modifiers" }, state.modifiers.map((modifier) =>
-      h("span", { class: `modChip ${modifier.kind}`, title: `${modifier.label}: quedan ${modifier.turnsLeft} turno(s)` },
+      h("span", { class: `modChip ${modifier.kind}`, title: t("{label}: quedan {turnsLeft} turno(s)", { label: modifier.label, turnsLeft: modifier.turnsLeft }) },
         `${modifier.label} ${modifier.kind === "cost" ? modifier.amount : `+${modifier.amount} POD`} · ${modifier.turnsLeft}T`))) : null,
     h("div", { class: "field", "data-drop": "field" },
       h("div", { class: "side enemySide" }, row("enemy", "front"), row("enemy", "back")),
       h("div", { class: "side playerSide" }, row("player", "front"), row("player", "back"))),
     h("div", { class: "bottom" },
       dialogBox(ctx, state),
-      h("div", { class: "window menu" }, h("div", { class: "menuTitle" }, "TÉCNICAS"), movesMenu(ctx, state))),
+      h("div", { class: "window menu" }, h("div", { class: "menuTitle" }, t("TÉCNICAS")), movesMenu(ctx, state))),
     h("div", { class: "handRow" },
-      pile("MAZO", state.deck.drawPile.length),
+      pile(t("MAZO"), state.deck.drawPile.length),
       handView(ctx, state),
       h("div", { class: "handSide" },
-        pile("DESC.", state.deck.discardPile.length),
-        h("button", { class: `btn ${sel.mode === "shield" ? "on" : ""}`, onClick: () => { sel.mode = sel.mode === "shield" ? "attack" : "shield"; clearChoice(); sfx.play("select"); ctx.rerender(); } }, "ESCUDO"),
-        h("button", { class: "btn danger", disabled: finished, title: readyCount ? `${readyCount} Pokémon todavía pueden actuar` : "Resolver acciones enemigas", onClick: () => endTurnClicked(ctx, state, readyCount) },
-          readyCount && endTurnArmed() ? "¿SEGURO? ▶" : readyCount ? `FIN TURNO (${readyCount}) ▶` : "FIN TURNO ▶"))),
+        pile(t("DESC."), state.deck.discardPile.length),
+        h("button", { class: `btn ${sel.mode === "shield" ? "on" : ""}`, onClick: () => { sel.mode = sel.mode === "shield" ? "attack" : "shield"; clearChoice(); sfx.play("select"); ctx.rerender(); } }, t("ESCUDO")),
+        h("button", { class: "btn danger", disabled: finished, title: readyCount ? t("{readyCount} Pokémon todavía pueden actuar", { readyCount }) : t("Resolver acciones enemigas"), onClick: () => endTurnClicked(ctx, state, readyCount) },
+          readyCount && endTurnArmed() ? t("¿SEGURO? ▶") : readyCount ? t("FIN TURNO ({readyCount}) ▶", { readyCount }) : t("FIN TURNO ▶")))),
     searchCardUid && !finished ? searchModal(ctx, state) : null,
     finished && resultOverlayReady(ctx, state) ? h("div", { class: "overlay" }, h("div", { class: "window dialogBig" },
-      h("h2", { class: state.result === "victory" ? "win" : "lose" }, state.result === "victory" ? "¡VICTORIA!" : isOptionalEventKind(ctx.run) ? "¡TE RETIRAS!" : "DERROTA"),
-      state.result !== "victory" && isOptionalEventKind(ctx.run) ? h("p", { class: "muted" }, "Es un evento: no pierdes la partida. Tu equipo vuelve como estaba, sin recompensas.") : null,
-      h("button", { class: "btn primary", onClick: () => ctx.onCombatFinished() }, "CONTINUAR ▶"))) : null);
+      h("h2", { class: state.result === "victory" ? "win" : "lose" }, state.result === "victory" ? t("¡VICTORIA!") : isOptionalEventKind(ctx.run) ? t("¡TE RETIRAS!") : t("DERROTA")),
+      state.result !== "victory" && isOptionalEventKind(ctx.run) ? h("p", { class: "muted" }, t("Es un evento: no pierdes la partida. Tu equipo vuelve como estaba, sin recompensas.")) : null,
+      h("button", { class: "btn primary", onClick: () => ctx.onCombatFinished() }, t("CONTINUAR ▶")))) : null);
 }

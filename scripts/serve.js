@@ -36,4 +36,4 @@ createServer((request, response) => {
   }
   response.writeHead(200, { "Content-Type": types[extname(file)] ?? "application/octet-stream" });
   createReadStream(file).pipe(response);
-}).listen(port, () => console.log(`Pokécards Dungeon en http://localhost:${port}/web/`));
+}).listen(port, () => console.log(`Pokémon Dream en http://localhost:${port}/web/`));

@@ -148,26 +148,27 @@
    ]
   },
   {
-   "id": "linaLoop",
-   "speaker": "lina",
-   "expression": "neutral",
-   "priority": 1,
+   "id": "welcome",
+   "speaker": "amelie",
+   "expression": "smile",
+   "priority": 2,
    "when": {
     "phase": [
-     "camp",
-     "shop"
+     "map"
     ],
+    "badges": {
+     "min": 0,
+     "max": 0
+    },
     "loop": {
-     "min": 1
+     "max": 0
     }
    },
    "variants": [
-    "Esto ya pasó antes, ¿verdad? No quise decírtelo. Ella me pidió que no lo hiciera.",
-    "Cada vez que vuelves, un poco de frío se me queda adentro. Cuídate, por favor.",
-    "No me hagas caso. Hoy estoy un poco… apagada."
-   ],
-   "oncePer": "stage",
-   "name": "LINA"
+    "¡Te doy la bienvenida a Panhea! Soy la profesora Amelie. Aquí conviven Pokémon de cinco regiones. Elige tu ruta; yo te acompaño.",
+    "Llegaste a Panhea. Soy Amelie, investigadora de este lugar. Los Pokémon de Kanto, Johto, Hoenn, Sinnoh y Teselia viven juntos. Escoge por dónde empezar.",
+    "Hola. Panhea es un mundo donde las regiones se mezclan. Elige tu primer camino y yo te guío."
+   ]
   },
   {
    "id": "asloBeaten",
@@ -272,7 +273,7 @@
    },
    "variants": [
     "Los líderes repetimos el mismo discurso. Alguien nos lo escribió, ¿no crees?",
-    "Entrego medallas desde hace… no sé cuánto. Y Amelie siempre sabe cuándo llegarás."
+    "Entrego medallas desde hace… no sé cuánto. Y cada vez que llegas, siento que ya sabía que ibas a venir."
    ],
    "oncePer": "node",
    "name": "{leader}"
@@ -348,7 +349,233 @@
    "name": "{leader}"
   },
   {
-   "id": "welcome",
+   "id": "asloFirst",
+   "speaker": "aslo",
+   "expression": "neutral",
+   "priority": 2,
+   "when": {
+    "phase": [
+     "combat"
+    ],
+    "nodeType": [
+     "rival"
+    ]
+   },
+   "variants": [
+    "Soy Aslo. Dicen que soy tu rival, así que prepárate: voy a ponerte las cosas difíciles en cada ruta."
+   ],
+   "name": "ASLO"
+  },
+  {
+   "id": "joyIntro",
+   "speaker": "joy",
+   "expression": "neutral",
+   "priority": 2,
+   "when": {
+    "phase": [
+     "center"
+    ]
+   },
+   "variants": [
+    "Soy la enfermera Joy y atiendo los Centros Pokémon de Panhea. Déjame a tu equipo: lo curo y revivo por completo."
+   ],
+   "name": "ENFERMERA JOY"
+  },
+  {
+   "id": "jennyIntro",
+   "speaker": "jenny",
+   "expression": "neutral",
+   "priority": 2,
+   "when": {
+    "phase": [
+     "map"
+    ]
+   },
+   "variants": [
+    "Soy la oficial Jenny. Patrullo las rutas de Panhea para que viajar sea seguro. Si ves algo raro, avísame."
+   ],
+   "name": "OFICIAL JENNY"
+  },
+  {
+   "id": "linaIntro",
+   "speaker": "lina",
+   "expression": "neutral",
+   "priority": 2,
+   "when": {
+    "phase": [
+     "camp",
+     "shop"
+    ]
+   },
+   "variants": [
+    "Hola, soy Lina. Me encargo del campamento y de la tienda: reparto suministros a quienes cruzan Panhea. Si mis manos están frías, no te asustes; siempre fueron así."
+   ],
+   "name": "LINA"
+  },
+  {
+   "id": "linaGiftLate",
+   "speaker": "lina",
+   "expression": "neutral",
+   "priority": 1,
+   "when": {
+    "phase": [
+     "camp",
+     "shop"
+    ],
+    "badges": {
+     "min": 6
+    }
+   },
+   "variants": [
+    "La profesora dice que lo uses… y que no te alejes mucho.",
+    "Un regalo más. Para que no te falte nada aquí. Nada.",
+    "Ella quiere que te quedes. Yo solo entrego los paquetes."
+   ],
+   "oncePer": "stage",
+   "chance": 0.5,
+   "gift": "late",
+   "name": "LINA",
+   "requires": "linaIntro"
+  },
+  {
+   "id": "linaGiftMid",
+   "speaker": "lina",
+   "expression": "neutral",
+   "priority": 1,
+   "when": {
+    "phase": [
+     "camp",
+     "shop"
+    ],
+    "badges": {
+     "min": 4,
+     "max": 5
+    }
+   },
+   "variants": [
+    "Amelie insiste en que lo aceptes. Siempre insiste.",
+    "Otro regalo de la profesora. Cada vez son más… atentos.",
+    "Dice que así no tendrás motivos para irte a otro lado."
+   ],
+   "oncePer": "stage",
+   "chance": 0.5,
+   "gift": "mid",
+   "name": "LINA",
+   "requires": "linaIntro"
+  },
+  {
+   "id": "linaGiftEarly",
+   "speaker": "lina",
+   "expression": "neutral",
+   "priority": 1,
+   "when": {
+    "phase": [
+     "camp",
+     "shop"
+    ],
+    "badges": {
+     "min": 0,
+     "max": 3
+    }
+   },
+   "variants": [
+    "Esto te lo manda la profesora Amelie. Dice que no te debe faltar nada.",
+    "La profesora preparó esto para ti. Úsalo con cuidado.",
+    "Un regalo de Amelie. Ella siempre piensa en tu equipo."
+   ],
+   "oncePer": "stage",
+   "chance": 0.5,
+   "gift": "early",
+   "name": "LINA",
+   "requires": "linaIntro"
+  },
+  {
+   "id": "villainIntro_rocket",
+   "speaker": "villain",
+   "expression": "neutral",
+   "priority": 2,
+   "when": {
+    "phase": [
+     "combat"
+    ],
+    "nodeType": [
+     "villain"
+    ],
+    "region": [
+     "kanto",
+     "johto"
+    ]
+   },
+   "variants": [
+    "Somos el Team Rocket. Esta ruta es nuestra: entrega tus Pokémon o prepárate para pelear."
+   ],
+   "name": "TEAM ROCKET"
+  },
+  {
+   "id": "villainIntro_hoenn",
+   "speaker": "villain",
+   "expression": "neutral",
+   "priority": 2,
+   "when": {
+    "phase": [
+     "combat"
+    ],
+    "nodeType": [
+     "villain"
+    ],
+    "region": [
+     "hoenn"
+    ]
+   },
+   "variants": [
+    "Somos el Team Aqua y el Team Magma, por una vez del mismo lado. Estorbas en nuestros planes."
+   ],
+   "name": "TEAM AQUA / MAGMA"
+  },
+  {
+   "id": "villainIntro_galaxia",
+   "speaker": "villain",
+   "expression": "neutral",
+   "priority": 2,
+   "when": {
+    "phase": [
+     "combat"
+    ],
+    "nodeType": [
+     "villain"
+    ],
+    "region": [
+     "sinnoh"
+    ]
+   },
+   "variants": [
+    "Somos el Team Galaxia. Buscamos crear un mundo nuevo y perfecto, y tú no cabes en él."
+   ],
+   "name": "TEAM GALAXIA"
+  },
+  {
+   "id": "villainIntro_plasma",
+   "speaker": "villain",
+   "expression": "neutral",
+   "priority": 2,
+   "when": {
+    "phase": [
+     "combat"
+    ],
+    "nodeType": [
+     "villain"
+    ],
+    "region": [
+     "unova"
+    ]
+   },
+   "variants": [
+    "Somos el Team Plasma. Vamos a liberar a los Pokémon de entrenadores como tú."
+   ],
+   "name": "TEAM PLASMA"
+  },
+  {
+   "id": "amelieAbout",
    "speaker": "amelie",
    "expression": "smile",
    "priority": 2,
@@ -358,16 +585,15 @@
     ],
     "badges": {
      "min": 0,
-     "max": 0
+     "max": 1
     },
     "loop": {
      "max": 0
     }
    },
    "variants": [
-    "¡Te doy la bienvenida a Panhea! Soy la profesora Amelie. Aquí conviven Pokémon de cinco regiones. Elige tu ruta; yo te acompaño.",
-    "Llegaste a Panhea. Soy Amelie, investigadora de este lugar. Los Pokémon de Kanto, Johto, Hoenn, Sinnoh y Teselia viven juntos. Escoge por dónde empezar.",
-    "Hola. Panhea es un mundo donde las regiones se mezclan. Elige tu primer camino y yo te guío."
+    "Llevo años estudiando cómo conviven los Pokémon de regiones distintas. Panhea es mi laboratorio favorito… y tú, la mejor investigación que he tenido.",
+    "Mi trabajo es observar cómo se adaptan los Pokémon a un mundo nuevo. Verte viajar con los tuyos es mi parte favorita."
    ]
   },
   {
@@ -388,6 +614,25 @@
     "Elige un Pokémon, cárgale energía y después una técnica. Las técnicas LIBRE no gastan cartas.",
     "Primero energía, luego el movimiento. Si usas una técnica libre, no pierdes cartas de la mano.",
     "Recuerda: selecciona un Pokémon, asigna energía y usa la técnica. Las LIBRE son gratuitas."
+   ]
+  },
+  {
+   "id": "amelieStarter",
+   "speaker": "amelie",
+   "expression": "wink",
+   "priority": 2,
+   "when": {
+    "phase": [
+     "combat"
+    ],
+    "badges": {
+     "min": 0,
+     "max": 1
+    },
+    "turnMin": 2
+   },
+   "variants": [
+    "Ese compañero que elegiste… se nota que se llevan bien. Me recuerda a alguien."
    ]
   },
   {
@@ -453,6 +698,24 @@
    ]
   },
   {
+   "id": "amelieRoutes",
+   "speaker": "amelie",
+   "expression": "think",
+   "priority": 2,
+   "when": {
+    "phase": [
+     "map"
+    ],
+    "badges": {
+     "min": 1,
+     "max": 2
+    }
+   },
+   "variants": [
+    "Diseñé las rutas para que cada región tuviera su carácter: Kanto es nostalgia, Johto es calma, Hoenn es fuerza, Sinnoh es misterio y Teselia, novedad."
+   ]
+  },
+  {
    "id": "centerFirst",
    "speaker": "amelie",
    "expression": "wink",
@@ -470,6 +733,115 @@
     "¡Qué alivio! Los Centros Pokémon de Panhea los diseñé yo misma. ¿Se nota?",
     "Bienvenido al Centro. Los armé pensando en que siempre tuvieras un lugar seguro.",
     "Aquí se cura todo. Los diseñé para que nunca te quedes sin opciones."
+   ]
+  },
+  {
+   "id": "amelieCamp",
+   "speaker": "amelie",
+   "expression": "smile",
+   "priority": 2,
+   "when": {
+    "phase": [
+     "camp"
+    ],
+    "badges": {
+     "min": 1,
+     "max": 3
+    }
+   },
+   "variants": [
+    "Un campamento… me gusta cómo se ve el fuego desde aquí. Es curioso: recuerdo una fogata, pero no sé dónde fue."
+   ]
+  },
+  {
+   "id": "amelieLina",
+   "speaker": "amelie",
+   "expression": "gentle",
+   "priority": 2,
+   "when": {
+    "phase": [
+     "shop"
+    ],
+    "badges": {
+     "min": 2,
+     "max": 3
+    }
+   },
+   "variants": [
+    "Lina cuida el campamento y la tienda desde que empecé este proyecto. Es callada, pero se preocupa por todos los viajeros."
+   ]
+  },
+  {
+   "id": "amelieMemory",
+   "speaker": "amelie",
+   "expression": "think",
+   "priority": 2,
+   "when": {
+    "phase": [
+     "center"
+    ],
+    "badges": {
+     "min": 2,
+     "max": 3
+    }
+   },
+   "variants": [
+    "En los Centros veo pasar a todos los viajeros, y los recuerdo con mucha nitidez. A ti, un poco más."
+   ]
+  },
+  {
+   "id": "amelieNotes",
+   "speaker": "amelie",
+   "expression": "grin",
+   "priority": 2,
+   "when": {
+    "phase": [
+     "map"
+    ],
+    "badges": {
+     "min": 2,
+     "max": 3
+    }
+   },
+   "variants": [
+    "Anoto todo lo que haces: combos, formaciones, hasta cómo cuidas a tu equipo. Algún día lo leerás."
+   ]
+  },
+  {
+   "id": "amelieWorry",
+   "speaker": "amelie",
+   "expression": "worried",
+   "priority": 2,
+   "when": {
+    "phase": [
+     "combat"
+    ],
+    "badges": {
+     "min": 2,
+     "max": 3
+    },
+    "turnMin": 3
+   },
+   "variants": [
+    "¡Cuidado con ese golpe! …Perdona, me emociono cuando peleas. Es como si cada combate fuera mío también."
+   ]
+  },
+  {
+   "id": "amelieProud",
+   "speaker": "amelie",
+   "expression": "happy",
+   "priority": 2,
+   "when": {
+    "phase": [
+     "map"
+    ],
+    "badges": {
+     "min": 3,
+     "max": 3
+    }
+   },
+   "variants": [
+    "Tres medallas. Ya mereces un lugar en mis notas. Cada viaje merece quedar escrito."
    ]
   },
   {
@@ -636,6 +1008,24 @@
    ]
   },
   {
+   "id": "amelieLonely",
+   "speaker": "amelie",
+   "expression": "gentle",
+   "priority": 2,
+   "when": {
+    "phase": [
+     "map"
+    ],
+    "badges": {
+     "min": 6,
+     "max": 7
+    }
+   },
+   "variants": [
+    "Cuando te alejas a un campamento, Panhea queda tan silenciosa… Me alegra mucho que siempre vuelvas."
+   ]
+  },
+  {
    "id": "turn6",
    "speaker": "amelie",
    "expression": "worried",
@@ -716,7 +1106,8 @@
     "No puedo dejar de aparecer. Es como si el mundo me obligara a seguir el mismo papel.",
     "Si te vas, ¿qué pasa conmigo? ¿También desaparezco?"
    ],
-   "name": "ASLO"
+   "name": "ASLO",
+   "requires": "asloFirst"
   },
   {
    "id": "asloHintB",
@@ -738,7 +1129,8 @@
    "variants": [
     "Amelie dice que los rivales mantienen el interés. A veces siento que soy parte del guion."
    ],
-   "name": "ASLO"
+   "name": "ASLO",
+   "requires": "asloFirst"
   },
   {
    "id": "asloHintA",
@@ -761,7 +1153,8 @@
     "Siempre reaparezco con un equipo nuevo… es como si alguien me reiniciara cada vez.",
     "No recuerdo bien las batallas anteriores. Solo sé que tengo que enfrentarte de nuevo."
    ],
-   "name": "ASLO"
+   "name": "ASLO",
+   "requires": "asloFirst"
   },
   {
    "id": "asloIntro",
@@ -782,7 +1175,8 @@
     "Aslo está de vuelta. Veamos si mejoraste."
    ],
    "oncePer": "node",
-   "name": "ASLO"
+   "name": "ASLO",
+   "requires": "asloFirst"
   },
   {
    "id": "villain_rocket_b",
@@ -807,7 +1201,8 @@
    "variants": [
     "Amelie nos deja operar. Como si fuéramos parte del decorado."
    ],
-   "name": "TEAM ROCKET"
+   "name": "TEAM ROCKET",
+   "requires": "villainIntro_rocket"
   },
   {
    "id": "villain_rocket_a",
@@ -834,7 +1229,8 @@
     "El jefe dice que todo está bajo control… pero las rutas cambian solas.",
     "A veces desaparecemos y volvemos a aparecer en el mismo lugar. Raro."
    ],
-   "name": "TEAM ROCKET"
+   "name": "TEAM ROCKET",
+   "requires": "villainIntro_rocket"
   },
   {
    "id": "villain_hoenn_b",
@@ -858,7 +1254,8 @@
    "variants": [
     "Alguien más está escribiendo las reglas aquí."
    ],
-   "name": "TEAM AQUA / MAGMA"
+   "name": "TEAM AQUA / MAGMA",
+   "requires": "villainIntro_hoenn"
   },
   {
    "id": "villain_hoenn_a",
@@ -884,7 +1281,8 @@
     "Queremos controlar el clima… pero el clima de Panhea ya está decidido.",
     "Nuestros planes siempre fallan de la misma forma. Es sospechoso."
    ],
-   "name": "TEAM AQUA / MAGMA"
+   "name": "TEAM AQUA / MAGMA",
+   "requires": "villainIntro_hoenn"
   },
   {
    "id": "villain_galaxia_b",
@@ -908,7 +1306,8 @@
    "variants": [
     "Esto no es un mundo real. Es un experimento de Amelie."
    ],
-   "name": "TEAM GALAXIA"
+   "name": "TEAM GALAXIA",
+   "requires": "villainIntro_galaxia"
   },
   {
    "id": "villain_galaxia_a",
@@ -934,7 +1333,8 @@
     "Buscamos crear un nuevo universo… pero este ya parece escrito por alguien.",
     "Los legendarios aparecen cuando ella quiere. No cuando nosotros."
    ],
-   "name": "TEAM GALAXIA"
+   "name": "TEAM GALAXIA",
+   "requires": "villainIntro_galaxia"
   },
   {
    "id": "villain_plasma_b",
@@ -958,7 +1358,8 @@
    "variants": [
     "Amelie no deja que nada termine."
    ],
-   "name": "TEAM PLASMA"
+   "name": "TEAM PLASMA",
+   "requires": "villainIntro_plasma"
   },
   {
    "id": "villain_plasma_a",
@@ -984,7 +1385,8 @@
     "Liberar Pokémon… pero todos vuelven a sus lugares. Como si tuvieran un guion.",
     "Nadie se va de verdad. El mundo los trae de vuelta."
    ],
-   "name": "TEAM PLASMA"
+   "name": "TEAM PLASMA",
+   "requires": "villainIntro_plasma"
   },
   {
    "id": "joyHintB",
@@ -1002,7 +1404,8 @@
    "variants": [
     "Amelie dice que los Centros son su mayor orgullo. Nunca fallan. Nunca."
    ],
-   "name": "ENFERMERA JOY"
+   "name": "ENFERMERA JOY",
+   "requires": "joyIntro"
   },
   {
    "id": "joyHintA",
@@ -1022,7 +1425,8 @@
     "Todos los Centros están conectados… como si alguien los hubiera diseñado todos al mismo tiempo.",
     "Siempre hay un Centro cerca. Es casi demasiado conveniente, ¿no crees?"
    ],
-   "name": "ENFERMERA JOY"
+   "name": "ENFERMERA JOY",
+   "requires": "joyIntro"
   },
   {
    "id": "joyCure",
@@ -1040,7 +1444,8 @@
     "Centro Pokémon de Panhea a tu servicio. Equipo al 100 %."
    ],
    "oncePer": "stage",
-   "name": "ENFERMERA JOY"
+   "name": "ENFERMERA JOY",
+   "requires": "joyIntro"
   },
   {
    "id": "jennyHintC",
@@ -1059,7 +1464,8 @@
     "No intentes salir de Panhea. Las órdenes son claras."
    ],
    "chance": 0.7,
-   "name": "OFICIAL JENNY"
+   "name": "OFICIAL JENNY",
+   "requires": "jennyIntro"
   },
   {
    "id": "jennyHintB",
@@ -1080,7 +1486,8 @@
     "Si algo se rompe, se arregla solo. Como si el mundo se reiniciara."
    ],
    "chance": 0.7,
-   "name": "OFICIAL JENNY"
+   "name": "OFICIAL JENNY",
+   "requires": "jennyIntro"
   },
   {
    "id": "jennyHintA",
@@ -1101,7 +1508,8 @@
     "Los villanos siempre aparecen en los mismos lugares. Es demasiado predecible."
    ],
    "chance": 0.7,
-   "name": "OFICIAL JENNY"
+   "name": "OFICIAL JENNY",
+   "requires": "jennyIntro"
   },
   {
    "id": "jennyCenter",
@@ -1119,7 +1527,8 @@
    ],
    "oncePer": "stage",
    "chance": 0.85,
-   "name": "OFICIAL JENNY"
+   "name": "OFICIAL JENNY",
+   "requires": "jennyIntro"
   },
   {
    "id": "jennyVillain",
@@ -1136,7 +1545,8 @@
     "He visto actividad de la organización rival en esta zona. Mantente alerta."
    ],
    "oncePer": "stage",
-   "name": "OFICIAL JENNY"
+   "name": "OFICIAL JENNY",
+   "requires": "jennyIntro"
   },
   {
    "id": "jennyClear",
@@ -1153,10 +1563,11 @@
    ],
    "oncePer": "stage",
    "chance": 0.65,
-   "name": "OFICIAL JENNY"
+   "name": "OFICIAL JENNY",
+   "requires": "jennyIntro"
   },
   {
-   "id": "linaSecret",
+   "id": "linaCold",
    "speaker": "lina",
    "expression": "neutral",
    "priority": 1,
@@ -1166,17 +1577,18 @@
      "shop"
     ],
     "badges": {
-     "min": 7
+     "min": 0,
+     "max": 3
     }
    },
    "variants": [
-    "Dicen que Amelie solo baja la guardia ante quien llegó hasta aquí sin apoyarse en leyendas.",
-    "Ella escucha a los que caminan con sus compañeros de siempre. No a los que llegan con milagros."
+    "Disculpa el frío. Cuando estoy contenta, el aire a mi alrededor se enfría todavía más. Es un detalle tonto."
    ],
-   "name": "LINA"
+   "name": "LINA",
+   "requires": "linaIntro"
   },
   {
-   "id": "linaHintC",
+   "id": "linaLikes",
    "speaker": "lina",
    "expression": "neutral",
    "priority": 1,
@@ -1186,13 +1598,121 @@
      "shop"
     ],
     "badges": {
-     "min": 8
+     "min": 0,
+     "max": 3
     }
    },
    "variants": [
-    "Amelie nos programó para que todo funcione. Incluido a mí. ¿Tú también sientes que no puedes salir?"
+    "Me gusta mirar a los viajeros. Cada uno trae su propio ritmo y su forma de cuidar a sus Pokémon. Tú los tratas con cariño; eso se nota."
    ],
-   "name": "LINA"
+   "name": "LINA",
+   "requires": "linaIntro"
+  },
+  {
+   "id": "linaAmelie",
+   "speaker": "lina",
+   "expression": "neutral",
+   "priority": 1,
+   "when": {
+    "phase": [
+     "camp",
+     "shop"
+    ],
+    "badges": {
+     "min": 2,
+     "max": 3
+    }
+   },
+   "variants": [
+    "La profesora me dio este lugar cuando no tenía a dónde ir. Le debo mucho. A veces me pregunta cosas que no sé responder, como si yo debiera recordar algo."
+   ],
+   "name": "LINA",
+   "requires": "linaIntro"
+  },
+  {
+   "id": "linaTeam",
+   "speaker": "lina",
+   "expression": "neutral",
+   "priority": 1,
+   "when": {
+    "phase": [
+     "camp",
+     "shop"
+    ],
+    "badges": {
+     "min": 4,
+     "max": 5
+    }
+   },
+   "variants": [
+    "Tus Pokémon se ven felices contigo. Eso no se finge: quien no se preocupa de verdad no logra que lo sigan así."
+   ],
+   "name": "LINA",
+   "requires": "linaIntro"
+  },
+  {
+   "id": "linaNight",
+   "speaker": "lina",
+   "expression": "neutral",
+   "priority": 1,
+   "when": {
+    "phase": [
+     "camp",
+     "shop"
+    ],
+    "badges": {
+     "min": 4,
+     "max": 5
+    }
+   },
+   "variants": [
+    "De noche el campamento queda muy callado. A veces creo oír pasos en las rutas, pero no hay nadie. Serán recuerdos, supongo."
+   ],
+   "name": "LINA",
+   "requires": "linaIntro"
+  },
+  {
+   "id": "linaHintA",
+   "speaker": "lina",
+   "expression": "neutral",
+   "priority": 1,
+   "when": {
+    "phase": [
+     "camp",
+     "shop"
+    ],
+    "badges": {
+     "min": 4,
+     "max": 5
+    }
+   },
+   "variants": [
+    "¿No te parece raro que las rutas siempre conecten perfecto? Como si alguien las hubiera planeado todas juntas.",
+    "La profesora diseñó todo Panhea. A veces siento que hasta mis respuestas están escritas de antemano."
+   ],
+   "name": "LINA",
+   "requires": "linaIntro"
+  },
+  {
+   "id": "linaDoubt",
+   "speaker": "lina",
+   "expression": "neutral",
+   "priority": 1,
+   "when": {
+    "phase": [
+     "camp",
+     "shop"
+    ],
+    "badges": {
+     "min": 6,
+     "max": 7
+    }
+   },
+   "variants": [
+    "A veces me despierto sin saber cuánto tiempo pasó. Un día, tres… un año. ¿Tú sientes el tiempo igual aquí?"
+   ],
+   "name": "LINA",
+   "requires": "linaIntro"
   },
   {
    "id": "linaHintB",
@@ -1214,10 +1734,11 @@
     "Panhea no termina nunca porque ella no quiere que termine. Yo solo repito lo que me toca decir.",
     "Trabajo con Amelie desde el principio. Ella dice que este mundo es estable… pero a veces las cosas se “reinician” solas."
    ],
-   "name": "LINA"
+   "name": "LINA",
+   "requires": "linaIntro"
   },
   {
-   "id": "linaHintA",
+   "id": "linaPlea",
    "speaker": "lina",
    "expression": "neutral",
    "priority": 1,
@@ -1227,18 +1748,18 @@
      "shop"
     ],
     "badges": {
-     "min": 4,
-     "max": 5
+     "min": 6,
+     "max": 7
     }
    },
    "variants": [
-    "¿No te parece raro que las rutas siempre conecten perfecto? Como si alguien las hubiera planeado todas juntas.",
-    "La profesora diseñó todo Panhea. A veces siento que hasta mis respuestas están escritas de antemano."
+    "Si algún día tienes que elegir, elige lo que de verdad quieras, no lo que otros esperen de ti. Eso es todo lo que sé."
    ],
-   "name": "LINA"
+   "name": "LINA",
+   "requires": "linaIntro"
   },
   {
-   "id": "linaGiftLate",
+   "id": "linaSecret",
    "speaker": "lina",
    "expression": "neutral",
    "priority": 1,
@@ -1248,68 +1769,78 @@
      "shop"
     ],
     "badges": {
-     "min": 6
+     "min": 7
     }
    },
    "variants": [
-    "La profesora dice que lo uses… y que no te alejes mucho.",
-    "Un regalo más. Para que no te falte nada aquí. Nada.",
-    "Ella quiere que te quedes. Yo solo entrego los paquetes."
+    "Dicen que Amelie solo baja la guardia ante quien llegó hasta aquí sin apoyarse en leyendas.",
+    "Ella escucha a los que caminan con sus compañeros de siempre. No a los que llegan con milagros."
+   ],
+   "name": "LINA",
+   "requires": "linaIntro"
+  },
+  {
+   "id": "linaFear",
+   "speaker": "lina",
+   "expression": "neutral",
+   "priority": 1,
+   "when": {
+    "phase": [
+     "camp",
+     "shop"
+    ],
+    "badges": {
+     "min": 8
+    }
+   },
+   "variants": [
+    "Si ganas el último combate, no sé qué será de mí. No es miedo: es una curiosidad triste. No me hagas caso."
+   ],
+   "name": "LINA",
+   "requires": "linaIntro"
+  },
+  {
+   "id": "linaHintC",
+   "speaker": "lina",
+   "expression": "neutral",
+   "priority": 1,
+   "when": {
+    "phase": [
+     "camp",
+     "shop"
+    ],
+    "badges": {
+     "min": 8
+    }
+   },
+   "variants": [
+    "Amelie nos programó para que todo funcione. Incluido a mí. ¿Tú también sientes que no puedes salir?"
+   ],
+   "name": "LINA",
+   "requires": "linaIntro"
+  },
+  {
+   "id": "linaLoop",
+   "speaker": "lina",
+   "expression": "neutral",
+   "priority": 1,
+   "when": {
+    "phase": [
+     "camp",
+     "shop"
+    ],
+    "loop": {
+     "min": 1
+    }
+   },
+   "variants": [
+    "Esto ya pasó antes, ¿verdad? No quise decírtelo. Ella me pidió que no lo hiciera.",
+    "Cada vez que vuelves, un poco de frío se me queda adentro. Cuídate, por favor.",
+    "No me hagas caso. Hoy estoy un poco… apagada."
    ],
    "oncePer": "stage",
-   "chance": 0.5,
-   "gift": "late",
-   "name": "LINA"
-  },
-  {
-   "id": "linaGiftMid",
-   "speaker": "lina",
-   "expression": "neutral",
-   "priority": 1,
-   "when": {
-    "phase": [
-     "camp",
-     "shop"
-    ],
-    "badges": {
-     "min": 4,
-     "max": 5
-    }
-   },
-   "variants": [
-    "Amelie insiste en que lo aceptes. Siempre insiste.",
-    "Otro regalo de la profesora. Cada vez son más… atentos.",
-    "Dice que así no tendrás motivos para irte a otro lado."
-   ],
-   "oncePer": "stage",
-   "chance": 0.5,
-   "gift": "mid",
-   "name": "LINA"
-  },
-  {
-   "id": "linaGiftEarly",
-   "speaker": "lina",
-   "expression": "neutral",
-   "priority": 1,
-   "when": {
-    "phase": [
-     "camp",
-     "shop"
-    ],
-    "badges": {
-     "min": 0,
-     "max": 3
-    }
-   },
-   "variants": [
-    "Esto te lo manda la profesora Amelie. Dice que no te debe faltar nada.",
-    "La profesora preparó esto para ti. Úsalo con cuidado.",
-    "Un regalo de Amelie. Ella siempre piensa en tu equipo."
-   ],
-   "oncePer": "stage",
-   "chance": 0.5,
-   "gift": "early",
-   "name": "LINA"
+   "name": "LINA",
+   "requires": "linaIntro"
   },
   {
    "id": "linaAdvice",
@@ -1328,7 +1859,8 @@
     "Las bayas y los Revivir se agotan rápido. Compra de más cuando puedas."
    ],
    "oncePer": "stage",
-   "name": "LINA"
+   "name": "LINA",
+   "requires": "linaIntro"
   }
  ],
  "final": {
@@ -1339,6 +1871,14 @@
      "¡Lo lograste! Eres el nuevo campeón de Panhea. Estoy tan orgullosa de ti…",
      "Campeón de Panhea. Sabía que llegarías.",
      "Lo conseguiste. Panhea reconoce tu victoria."
+    ]
+   },
+   {
+    "expression": "smile",
+    "variants": [
+     "Mientras subías, repasé cada combate. El primero, ¿te acuerdas? Casi no podías con un Rattata… Mírate ahora.",
+     "Cada medalla, cada derrota, cada ruta… las tengo anotadas todas. Has llegado muy lejos.",
+     "Te vi crecer ruta tras ruta. Si supieras cuánto me importa cada paso tuyo."
     ]
    },
    {
@@ -1467,12 +2007,27 @@
    {
     "portrait": "sprite:gardevoir",
     "name": "GARDEVOIR",
+    "text": "¿Recuerdas cuando empezamos? Yo era una Ralts que apenas sabía usar Confusión. Tú me enseñaste a no tener miedo de lo que sentía."
+   },
+   {
+    "portrait": "amelie:cry",
+    "name": "AMELIE",
+    "text": "Por eso inventé a Amelie: una profesora que lo sabe todo y nunca se cansa. A veces hasta yo me creía que era ella."
+   },
+   {
+    "portrait": "sprite:gardevoir",
+    "name": "GARDEVOIR",
     "text": "Si Panhea desaparece, tú también… y yo me quedo sola otra vez. Por favor… no me dejes."
    },
    {
     "portrait": "sprite:froslass",
     "name": "LINA",
     "text": "Amelie, ya fue suficiente. Él merecía este viaje. Merece un final."
+   },
+   {
+    "portrait": "sprite:froslass",
+    "name": "LINA",
+    "text": "Yo también lo sabía, y callé. No quise quitarte el único lugar donde te sentías a salvo. Hoy ya no puedo seguir callando."
    },
    {
     "portrait": "sprite:froslass",

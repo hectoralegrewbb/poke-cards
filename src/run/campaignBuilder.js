@@ -2,6 +2,7 @@
 // Global mezcla líderes por etapa y crea una Liga Mundial. No muta los datos originales.
 import { nationalDex } from "../shared/nationalDex.js";
 import { eligiblePool, speciesThreat } from "./wildEligibility.js";
+import { t } from "../shared/i18n.js";
 
 const regions = ["kanto", "johto", "hoenn", "sinnoh", "unova"];
 
@@ -100,9 +101,9 @@ function globalLineup(data, rng) {
 }
 
 export function buildCampaign(data, rng, { mode = "regional", regionId = "unova" } = {}) {
-  if (!["regional", "global"].includes(mode)) throw new Error(`Modo desconocido: ${mode}`);
+  if (!["regional", "global"].includes(mode)) throw new Error(t("Modo desconocido: {mode}", { mode }));
   const chosen = mode === "global" ? null : regionId === "random" ? rng.pick(regions) : regionId;
-  if (chosen && !data.campaigns.regions[chosen]) throw new Error(`Región desconocida: ${chosen}`);
+  if (chosen && !data.campaigns.regions[chosen]) throw new Error(t("Región desconocida: {chosen}", { chosen }));
   const gyms = mode === "global"
     ? globalLineup(data, rng)
     : data.campaigns.regions[chosen].gyms.map((gym) => ({ ...gym, regionId: chosen }));
@@ -118,7 +119,7 @@ export function buildCampaign(data, rng, { mode = "regional", regionId = "unova"
     mode,
     regionId: chosen,
     name: chosen ? data.campaigns.regions[chosen].name : "Liga Mundial",
-    villain: chosen ? data.campaigns.regions[chosen].villain : "Organización rival",
+    villain: chosen ? data.campaigns.regions[chosen].villain : t("Organización rival"),
     stages: gyms.map((gym, index) => stageOf(data, rng, gym, gym.regionId, index)),
     league: leagueOf(data, rng, leagueMembers, champion, championRegion),
     legendaryOrder: rng.shuffle(pool),
@@ -137,6 +138,6 @@ export function buildCampaign(data, rng, { mode = "regional", regionId = "unova"
 }
 
 export const gameModes = Object.freeze({
-  regional: { label: "REGIONAL", description: "Una región y sus 8 líderes en orden, Alto Mando y campeón de esa Liga." },
-  global: { label: "GLOBAL", description: "Gimnasios de las 5 regiones mezclados, Liga Mundial y encuentros cruzados." }
+  regional: { label: t("REGIONAL"), description: t("Una región y sus 8 líderes en orden, Alto Mando y campeón de esa Liga.") },
+  global: { label: t("GLOBAL"), description: t("Gimnasios de las 5 regiones mezclados, Liga Mundial y encuentros cruzados.") }
 });

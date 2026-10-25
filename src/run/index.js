@@ -10,4 +10,4 @@ export { consumeStoryLine, finalScene, legendaryCount, markStorySeen, pickStoryL
 export { estimateNodeLevel, partyLevel } from "./levelEstimate.js";
 export { logStoryLine, markStoryRead, readingTimeMs, storyLogLimit, unreadStoryCount } from "./storyLog.js";
 export { equipHeldItem, freeHeldItems, grantHeldItem, heldItemsOwned, heldTierCap, holderOf, rollHeldDrop, unequipHeldItem } from "./heldItems.js";
-export { grantStarPieces, learnableMoves, moveChangeCost, rollStarPieces, teachMove } from "./moveTutor.js";
+export { coverageTypes, grantStarPieces, learnableMoves, moveChangeCost, rollStarPieces, teachMove } from "./moveTutor.js";

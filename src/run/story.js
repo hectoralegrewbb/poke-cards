@@ -2,6 +2,7 @@
 // Las variantes y las tiradas se eligen con un hash de la semilla (nunca con el RNG de la corrida),
 // así la historia no altera el determinismo de combates, mapas ni recompensas.
 import { isAlive } from "../engine/index.js";
+import { t } from "../shared/i18n.js";
 import { addCardToCollection } from "./deckManager.js";
 import { getStage, pokeCenterStep } from "./mapGenerator.js";
 import { addItem, emitRun } from "./runState.js";
@@ -84,6 +85,9 @@ function gapAllows(run, line) {
   return gap === 0 || (run.nodesEntered ?? 0) - last >= gap;
 }
 
+// Un personaje no habla hasta haberse presentado: sus líneas dependen (requires) de su línea de presentación.
+const requirementsMet = (line, seen) => !line.requires || seen.includes(line.requires);
+
 // Devuelve la primera línea aplicable que aún no se mostró. No modifica la corrida.
 export function pickStoryLine(run) {
   if (!storyActive(run)) return null;
@@ -92,7 +96,7 @@ export function pickStoryLine(run) {
   const seen = run.storySeen ?? [];
   const context = storyContext(run);
   return run.data.story.lines.find((line) =>
-    !seen.includes(seenKey(run, line)) && lineMatches(line, context) && gapAllows(run, line) &&
+    !seen.includes(seenKey(run, line)) && requirementsMet(line, seen) && lineMatches(line, context) && gapAllows(run, line) &&
     (line.chance === undefined || roll(run, `${line.id}|c|${run.stageIndex}|${run.nodesEntered ?? 0}`) < line.chance)) ?? null;
 }
 
@@ -114,7 +118,7 @@ function applyGift(run, tier, salt) {
   }
   const result = addCardToCollection(run, gift.card);
   emitRun(run, { type: "storyGift", cardId: gift.card });
-  return { label: `${run.data.cards[gift.card]?.name ?? gift.card}${result.to === "chest" ? " (al cofre)" : ""}` };
+  return { label: `${run.data.cards[gift.card]?.name ?? gift.card}${result.to === "chest" ? ` ${t("(al cofre)")}` : ""}` };
 }
 
 // Elige la línea, la marca como vista, aplica su regalo y devuelve lo que la interfaz debe mostrar.

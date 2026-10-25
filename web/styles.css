@@ -1,4 +1,4 @@
-/* Pokécards Dungeon · estética Game Boy Advance / 16 bits · paleta de 16 colores */
+/* Pokémon Dream · estética Game Boy Advance / 16 bits · paleta de 16 colores */
 :root {
   --c0: #1a1c2c; --c1: #5d275d; --c2: #b13e53; --c3: #ef7d57; --c4: #ffcd75; --c5: #a7f070;
   --c6: #38b764; --c7: #257179; --c8: #29366f; --c9: #3b5dc9; --c10: #41a6f6; --c11: #73eff7;
@@ -793,3 +793,32 @@ button, .option, .member, .card, .stockItem, .starterCard { touch-action: manipu
 .tutorOption .price { position: absolute; top: 4px; right: 6px; font: 9px var(--px); color: var(--c4); }
 .tutorSlot .mname, .tutorOption .mname { font: 9px/1.5 var(--px); }
 .tutorSlot small, .tutorOption small { font: 17px/1.05 var(--body); color: var(--c13); }
+
+/* Texto que se escribe letra a letra: lo pendiente ocupa lugar pero no se ve. */
+.typedRest { visibility: hidden; }
+.typing { cursor: pointer; }
+.typing .typed::after { content: "▌"; margin-left: 1px; animation: caretBlink .7s steps(2, start) infinite; }
+@keyframes caretBlink { to { visibility: hidden; } }
+@media (prefers-reduced-motion: reduce) { .typing .typed::after { animation: none; } }
+
+.tutorFilter { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 8px; }
+.tutorFilter .typeFilter { border-left: 6px solid var(--chipColor, #888); }
+.themeRow .row { flex-wrap: wrap; }
+
+/* Pokémon que pasean por la pantalla de inicio */
+.title.mainMenu > :not(.titleWalkers) { position: relative; z-index: 1; }
+.titleWalkers { position: fixed; left: 0; right: 0; bottom: 0; height: 130px; pointer-events: none; z-index: 0; overflow: hidden; }
+.walker { position: absolute; bottom: 4px; left: 0; width: 100%; animation: walkAcross var(--dur) linear var(--delay) infinite alternate; }
+.walker.lane1 { bottom: 20px; opacity: .85; }
+.walkerFlip { position: absolute; left: 0; bottom: 0; width: 0; animation: walkFlip calc(var(--dur) * 2) steps(1, end) var(--delay) infinite; }
+.walkerHop { position: relative; transform: translateX(-50%) scale(var(--size)); transform-origin: bottom center; animation: walkHop .5s steps(2, end) infinite; }
+.walkerHop img, .walkerHop .sprite { max-height: 84px; width: auto; image-rendering: pixelated; display: block; }
+.walkerShadow { position: absolute; left: -22px; bottom: -4px; width: 44px; height: 8px; border-radius: 50%; background: rgba(0, 0, 0, .22); }
+@keyframes walkAcross { from { left: 6%; } to { left: calc(94% - 0px); } }
+@keyframes walkFlip { 0% { transform: scaleX(-1); } 50% { transform: scaleX(1); } }
+@keyframes walkHop { 0%, 100% { translate: 0 0; } 50% { translate: 0 -4px; } }
+@media (prefers-reduced-motion: reduce) {
+  .walker { animation: none; left: 20%; }
+  .walker:nth-child(2) { left: 40%; } .walker:nth-child(3) { left: 60%; } .walker:nth-child(4) { left: 80%; }
+  .walkerFlip, .walkerHop { animation: none; }
+}

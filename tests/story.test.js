@@ -17,6 +17,7 @@ test("las líneas se muestran una sola vez y respetan medallas y separación ent
   assert.equal(consumeStoryLine(run), null); // mismo nodo: sin segundo globo
   run.nodesEntered = 1;
   run.badges = Array(4).fill("x");
+  run.storySeen.push("jennyIntro");
   assert.equal(consumeStoryLine(run).id, "hint1");
   assert.equal(pickStoryLine(run), null); // hint1 ya se vio y falta separación
   run.badges = Array(8).fill("x");
@@ -37,7 +38,7 @@ test("Lina aparece en campamentos/tiendas y puede dar regalos de Amelie", () => 
   let gifts = 0;
   for (let seed = 1; seed <= 40; seed += 1) {
     const run = createRun({ data, seed, mode: "global" });
-    run.storySeen.push("welcome");
+    run.storySeen.push("welcome", "linaIntro");
     run.phase = "camp";
     run.nodesEntered = 3;
     const line = consumeStoryLine(run);
@@ -71,6 +72,8 @@ test("Aslo habla en los duelos con el rival y las pistas empiezan en la medalla 
   run.combat = { phase: "player", turn: 1, result: null };
   run.node = { type: "rival" };
   run.nodesEntered = 4;
+  assert.equal(consumeStoryLine(run).id, "asloFirst"); // primera aparición: se presenta
+  run.nodesEntered = 6;
   assert.equal(consumeStoryLine(run).id, "asloIntro");
   run.nodesEntered = 8;
   run.badges = Array(4).fill("x");
@@ -90,7 +93,7 @@ test("todo el texto de la historia está en tuteo (sin voseo)", () => {
 
 test("la escena final elige una variante por paso", () => {
   const scene = finalScene(globalRun());
-  assert.equal(scene.intro.length, 5);
+  assert.equal(scene.intro.length, 6);
   assert.ok(scene.intro.every((step) => typeof step.text === "string" && step.text.length > 0));
 });
 

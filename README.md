@@ -1,10 +1,12 @@
+> **v0.12 · Pokémon Dream:** nuevo nombre, inglés completo con selector de idioma, texto que se escribe con velocidad ajustable, personajes que se presentan, más historia de Amelie y Lina, tutor con ataques de cobertura para todos y Pokémon caminando en la portada. Ver [`docs/CHANGELOG-v0.12.md`](docs/CHANGELOG-v0.12.md).
+>
 > **v0.11:** diálogos como videollamada con campanita y registro, niveles de poder comparables en mapa/combate/equipo, Comodín que paga cualquier técnica (máx. 5), 29 objetos equipables únicos, Piezas de estrella y tutor de técnicas en el campamento, Amelie rebalanceada y retratos corregidos. Ver [`docs/CHANGELOG-v0.11.md`](docs/CHANGELOG-v0.11.md).
 > **v0.8:** mazo + cofre con editor, eventos opcionales sin riesgo de muerte, ataque del propio tipo garantizado, audio (volúmenes + música en loop sin cortes), tema visual moderno. Ver [`docs/CHANGELOG-v0.8.md`](docs/CHANGELOG-v0.8.md) y [`docs/QA-v0.8.md`](docs/QA-v0.8.md).
 
 > **v0.7:** catálogo completo de 649 especies, variocolores (shiny), HUD para móvil en vertical, cartas y pasivas nuevas, y efectos de sonido y pantalla por tipo. Ver [`docs/CHANGELOG-v0.7.md`](docs/CHANGELOG-v0.7.md) y [`docs/QA-v0.7.md`](docs/QA-v0.7.md).
 > **v0.6:** revisión completa: corrección de la semilla repetible, curva de dificultad calibrada con un bot de referencia, Liga y campeón más fuertes, carga de energía que reserva comodines para reforzar y confirmación al terminar turno con Pokémon sin actuar. Ver [`docs/CHANGELOG-v0.6.md`](docs/CHANGELOG-v0.6.md) y [`docs/QA-v0.6.md`](docs/QA-v0.6.md).
 
-# Pokécards Dungeon
+# Pokémon Dream
 
 Fan game roguelike táctico de cartas en navegador: elegí un inicial, capturá un equipo de hasta 6, superá 8 gimnasios y conquistá la Liga. Uso privado y sin fines de lucro. **Ahora muestra automáticamente los sprites GIF animados de Black/White (5.ª generación)** si hay conexión; los archivos gráficos originales no se redistribuyen en el ZIP. Consultá la sección «Sprites» para instalarlos offline.
 

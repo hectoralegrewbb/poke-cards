@@ -22,16 +22,38 @@ function lineageOf(data, speciesId) {
 }
 const lineageCache = new WeakMap();
 
-// Movimientos que puede aprender: los de su(s) tipo(s), los de tipo Normal y los de su familia evolutiva.
+// Tipos de cobertura que una especie puede aprender de un tutor, además de los suyos: se reparten por turnos
+// entre sus tipos (primero el principal) hasta el tope de balance.tutor.coverageCap.
+export function coverageTypes(data, speciesId) {
+  const rules = data.balance.tutor;
+  const species = data.species[speciesId];
+  if (!rules) return [];
+  const own = new Set(species.types);
+  const lists = species.types.map((type) => rules.coverage[type] ?? []);
+  const picked = [];
+  for (let round = 0; picked.length < rules.coverageCap && round < 8; round += 1) {
+    for (const list of lists) {
+      const type = list[round];
+      if (type && !own.has(type) && !picked.includes(type) && picked.length < rules.coverageCap) picked.push(type);
+    }
+  }
+  return picked;
+}
+
+// Movimientos que puede aprender: los de su(s) tipo(s), los de tipo Normal, los de su familia evolutiva
+// y los ataques de sus tipos de cobertura (solo los que hacen daño).
 export function learnableMoves(data, pokemon) {
   const species = data.species[pokemon.speciesId];
   const types = new Set([...species.types, "normal"]);
+  const coverage = new Set(coverageTypes(data, pokemon.speciesId));
   const key = pokemon.speciesId;
   if (!lineageCache.has(data.species)) lineageCache.set(data.species, new Map());
   const cache = lineageCache.get(data.species);
   if (!cache.has(key)) cache.set(key, lineageOf(data, key));
   const learnable = new Set();
-  for (const [moveId, move] of Object.entries(data.moves)) if (types.has(move.type)) learnable.add(moveId);
+  for (const [moveId, move] of Object.entries(data.moves)) {
+    if (types.has(move.type) || (coverage.has(move.type) && move.category !== "status" && move.power > 0)) learnable.add(moveId);
+  }
   for (const relative of cache.get(key)) for (const moveId of data.species[relative].moves) learnable.add(moveId);
   for (const known of pokemon.moves) learnable.delete(known);
   return [...learnable].sort((a, b) => data.moves[a].cost - data.moves[b].cost || data.moves[a].power - data.moves[b].power || a.localeCompare(b));
