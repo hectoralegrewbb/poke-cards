@@ -57,5 +57,51 @@
     2,
     3,
     3
-  ]
+  ],
+  "heldDrops": {
+    "chance": {
+      "gym": 1,
+      "eliteFour": 0.5,
+      "rival": 0.6,
+      "villain": 0.6,
+      "legendary": 0.6,
+      "elite": 0.3,
+      "combat": 0.1
+    },
+    "tierByBadges": [
+      0,
+      3,
+      6
+    ],
+    "tierWeight": {
+      "1": 3,
+      "2": 2,
+      "3": 1
+    },
+    "shopSlots": 1
+  },
+  "starPieces": {
+    "weights": [
+      30,
+      24,
+      18,
+      12,
+      8,
+      4,
+      2,
+      1,
+      0.7,
+      0.3
+    ],
+    "rolls": {
+      "combat": 1,
+      "elite": 2,
+      "rival": 1,
+      "villain": 1,
+      "legendary": 3,
+      "gym": 3,
+      "eliteFour": 3
+    },
+    "strongPower": 11
+  }
 }

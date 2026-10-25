@@ -23,6 +23,39 @@ export const faqSections = [
     ]
   },
   {
+    title: "Nivel de poder (Nv.)",
+    body: [
+      "El nivel resume los PS máximos y las cuatro estadísticas de combate. Se calcula igual para tus Pokémon y para los rivales, así que sirve para comparar de un vistazo.",
+      "En el mapa cada destino muestra el nivel aproximado de sus rivales contra el de tu equipo: verde = más débil, amarillo = parejo, naranja = más fuerte, rojo = mucho más fuerte."
+    ]
+  },
+  {
+    title: "Comodín",
+    body: [
+      "Una carta Comodín paga por sí sola cualquier técnica y además refuerza x2 si la usás para potenciar. Solo se gasta como pago si la energía normal no alcanza. Máximo 5 por mazo."
+    ]
+  },
+  {
+    title: "Objetos equipables",
+    body: [
+      "Hay 29 objetos únicos: cada uno existe una vez por partida y lo lleva un solo Pokémon. Se consiguen al ganar gimnasios y combates importantes, y en las tiendas.",
+      "Se equipan fuera de combate, desde el botón OBJETO de cada Pokémon en el panel de equipo. Los más fuertes aparecen con más medallas."
+    ]
+  },
+  {
+    title: "Piezas de estrella y tutor",
+    body: [
+      "Tras cada victoria (menos en zonas salvajes) ganás de 1 a 10 Piezas de estrella; los jefes dan más.",
+      "En los campamentos, el tutor cambia una técnica de un Pokémon por otra que pueda aprender. Cuesta de 1 a 5 piezas por cambio, sin límite de cambios, y no gasta tu acción del campamento. Las técnicas enseñadas se conservan al evolucionar."
+    ]
+  },
+  {
+    title: "Llamadas y campanita",
+    body: [
+      "Los personajes te hablan en una ventanita de llamada que se corta sola. Si no la atendés (OK), queda sin leer: la campanita muestra cuántas te perdiste y guarda el registro."
+    ]
+  },
+  {
     title: "¿Quién lo hace?",
     body: [
       "Soy Hector, de Argentina. Soy diseñador gráfico con posgrado en UI/UX y trabajo como programador en automatización industrial (TIA Portal, Node-RED).",

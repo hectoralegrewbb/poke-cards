@@ -1,6 +1,7 @@
 // Nodos sin combate: campamento y tienda.
 import { isAlive } from "../engine/index.js";
 import { addCardToCollection } from "./deckManager.js";
+import { grantHeldItem, pickShopHeldItems } from "./heldItems.js";
 import { addItem, emitRun, findInRoster } from "./runState.js";
 import { evolvePokemonByExp } from "./rewards.js";
 
@@ -19,7 +20,8 @@ export function openShop(run) {
     price: shop.cardPrices[id],
     sold: false
   }));
-  run.shop = { stock: [...items, ...cards] };
+  const held = pickShopHeldItems(run, run.data.balance.heldDrops?.shopSlots ?? 0).map((id) => ({ kind: "held", id, price: run.data.heldItems[id].price, sold: false }));
+  run.shop = { stock: [...items, ...cards, ...held] };
 }
 
 export function buyFromShop(run, stockIndex) {
@@ -29,7 +31,10 @@ export function buyFromShop(run, stockIndex) {
   if (run.gold < entry.price) return { ok: false, error: "notEnoughGold" };
 
   let placedIn = null;
-  if (entry.kind === "card") {
+  if (entry.kind === "held") {
+    const granted = grantHeldItem(run, entry.id);
+    if (!granted.ok) return granted;
+  } else if (entry.kind === "card") {
     const added = addCardToCollection(run, entry.id);
     if (!added.ok) return added;
     placedIn = added.to;

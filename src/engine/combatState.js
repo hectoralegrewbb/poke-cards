@@ -1,4 +1,5 @@
 import { drawCards } from "./deck.js";
+import { expMultiplier } from "./heldItems.js";
 import { isAlive } from "./pokemon.js";
 import { calculatePartyExpReward, grantExp } from "./progression.js";
 
@@ -44,7 +45,7 @@ export function checkCombatEnd(state) {
   if (state.result === "victory") {
     const living = getLiving(state, "player");
     const amount = calculatePartyExpReward(getTeam(state, "enemy"), state.data, living.length);
-    const recipients = living.filter((pokemon) => grantExp(pokemon, amount) > 0);
+    const recipients = living.filter((pokemon) => grantExp(pokemon, Math.round(amount * expMultiplier(state.data.heldItems, pokemon))) > 0);
     emit(state, { type: "expAwarded", amount, recipients: recipients.map((pokemon) => pokemon.uid) });
   }
   emit(state, { type: "combatEnded", result: state.result });

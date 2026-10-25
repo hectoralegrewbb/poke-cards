@@ -58,7 +58,12 @@ export const errorText = {
   invalidStock: "Ya no está disponible.",
   copyLimit: "Ya tenés el máximo de copias de esa carta en el mazo activo (2).",
   emptyDrawPile: "No quedan cartas en el mazo para buscar.",
-  invalidSearchTarget: "Elegí una carta de tu mazo."
+  invalidSearchTarget: "Elegí una carta de tu mazo.",
+  notOwned: "Todavía no tenés ese objeto.",
+  alreadyOwned: "Ya tenés ese objeto: cada uno es único.",
+  notLearnable: "Ese Pokémon no puede aprender esa técnica.",
+  notEnoughStars: "Te faltan Piezas de estrella.",
+  notInCamp: "El tutor solo está en los campamentos."
 };
 
 // Ícono de arte para cada tipo de efecto de carta (compartido por la mano y la pantalla de recompensas).
@@ -70,8 +75,9 @@ export const cardEffectIcons = Object.freeze({
 
 export function describeCard(card) {
   if (card.kind === "energy") {
-    const parts = [`Energía ${card.energyValue}`];
+    const parts = [card.fillsAnyCost ? "Paga cualquier técnica" : `Energía ${card.energyValue}`];
     if (card.boostMultiplier > 1) parts.push(`refuerzo x${card.boostMultiplier}`);
+    if (card.maxInDeck) parts.push(`Máx. ${card.maxInDeck} en el mazo`);
     return parts.join(" · ");
   }
   return card.effects
@@ -155,7 +161,9 @@ export function formatEvent(event, { names, data }) {
     case "statusCured": return `${name(event.targetId)} se curó del estado.`;
     case "revivedInCombat": return `¡${name(event.targetId)} volvió a la batalla con ${event.hp} PS!`;
     case "berryReady": return `${name(event.targetId)} se aferra a una Baya Zidra.`;
-    case "berrySaved": return `¡${name(event.targetId)} aguantó con la Baya Zidra y quedó con 1 PS!`;
+    case "berrySaved": return `¡${name(event.targetId)} aguantó con ${event.by === "sash" ? "la Banda Focus" : "la Baya Zidra"} y quedó con 1 PS!`;
+    case "heldTriggered": return `${name(event.pokemonId)}: ${event.name}.`;
+    case "recoil": return `${name(event.targetId)} pierde ${event.amount} PS.`;
     case "cardSearched": return `Buscás en tu mazo: ${data.cards[event.cardId]?.name ?? event.cardId} a la mano.`;
     case "passiveTriggered": return `${name(event.pokemonId)}: ${event.name}.`;
     case "enemySkipped": return `${name(event.actorId)} no puede actuar.`;

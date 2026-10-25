@@ -113,6 +113,7 @@ export function validateGameData(data) {
   if (data.region) validateRegion(data, check);
   if (data.campaigns) validateCampaigns(data, check);
   if (data.story) validateStory(data, check);
+  if (data.heldItems) validateHeldItems(data, check);
   return errors;
 }
 
@@ -213,5 +214,27 @@ function validateStory(data, check) {
   for (const enemy of story.boss.enemies) {
     check(Boolean(data.species[enemy.speciesId]), `story.boss: especie inválida ${enemy.speciesId}`);
     check(Boolean(data.enemyProfiles[enemy.profileId]), `story.boss: perfil inválido ${enemy.profileId}`);
+  }
+}
+
+const heldTriggerNames = ["combatStart", "turnStart", "onHit", "onDamaged", "onKO"];
+const heldModifierKinds = ["damageDealt", "damageTaken", "flatReduction", "critCoins", "expMult", "goldMult"];
+
+function validateHeldItems(data, check) {
+  const entries = Object.entries(data.heldItems);
+  check(entries.length >= 20, "heldItems: se requieren al menos 20 objetos equipables");
+  const names = new Set();
+  for (const [id, item] of entries) {
+    check(typeof item.name === "string" && item.name.length > 0 && !names.has(item.name), `heldItem ${id}: nombre faltante o repetido`);
+    names.add(item.name);
+    check([1, 2, 3].includes(item.tier), `heldItem ${id}: tier inválido`);
+    check(Number.isInteger(item.price) && item.price > 0, `heldItem ${id}: precio inválido`);
+    check(typeof item.description === "string" && item.description.length > 0, `heldItem ${id}: falta descripción`);
+    check(Boolean(item.triggers?.length || item.modifiers?.length), `heldItem ${id}: sin efectos`);
+    for (const trigger of item.triggers ?? []) {
+      check(heldTriggerNames.includes(trigger.on), `heldItem ${id}: disparador inválido "${trigger.on}"`);
+      (trigger.effects ?? []).forEach((effect) => check(hasEffect(effect.type), `heldItem ${id}: efecto desconocido "${effect.type}"`));
+    }
+    for (const modifier of item.modifiers ?? []) check(heldModifierKinds.includes(modifier.kind), `heldItem ${id}: modificador inválido "${modifier.kind}"`);
   }
 }

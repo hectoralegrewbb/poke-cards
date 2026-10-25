@@ -664,15 +664,10 @@ button, .option, .member, .card, .stockItem, .starterCard { touch-action: manipu
 @keyframes amGlitch { 0%, 70%, 100% { transform: translate(0, 0); } 75% { transform: translate(-3px, 1px); } 85% { transform: translate(3px, -1px); } }
 @keyframes amSway { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(1.5px); } }
 
-.storyToast { position: fixed; top: 10px; left: 50%; transform: translateX(-50%); z-index: 240; display: flex; align-items: center; gap: 10px; width: min(560px, calc(100vw - 20px)); padding: 8px 12px 8px 8px; background: var(--c15); border: 4px solid var(--c0); box-shadow: 0 4px 0 rgba(0, 0, 0, .35); clip-path: var(--notch); }
-.storyToast.enter { animation: storyIn .28s ease-out; }
-.storyToast.ex-glitch { border-color: var(--c10); }
-.storyToast.ex-dark { border-color: var(--c2); }
 .storyBody { flex: 1; min-width: 0; text-align: left; }
 .storyBody strong { display: block; font: 8px/1.4 var(--px); color: var(--c4); margin-bottom: 4px; }
 .storyBody p { margin: 0; font: 20px/1.1 var(--body); }
 .storyClose { flex: none; align-self: flex-start; background: none; border: 0; color: var(--c13); font: 12px var(--px); cursor: pointer; padding: 4px; }
-@keyframes storyIn { from { opacity: 0; transform: translate(-50%, -14px); } to { opacity: 1; transform: translate(-50%, 0); } }
 
 .storyOffer { display: flex; align-items: center; gap: 12px; width: min(640px, 100%); margin: 0 auto 10px; padding: 8px 12px; background: var(--c15); border: 4px solid var(--c0); }
 
@@ -687,20 +682,17 @@ button, .option, .member, .card, .stockItem, .starterCard { touch-action: manipu
 .ending-stay { filter: saturate(.8); }
 
 @media (max-width: 800px) {
-  .storyToast { top: 54px; gap: 8px; }
-  .storyToast .amelieFace { --amSize: 52px !important; }
   .storyBody p { font-size: 18px; }
   .sceneText { font-size: 22px; }
   .amelieScene .amelieFace { --amSize: 170px !important; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .amelieBust .amEyes, .amelieBust .amLayers, .storyToast.enter { animation: none !important; }
+  .amelieBust .amEyes, .amelieBust .amLayers, .callPanel.enter, .callBell.ringing { animation: none !important; }
 }
 
 /* ---------- v0.9.2 · NPC de la historia ---------- */
 .speakerBadge { flex: none; display: grid; place-items: center; width: 52px; height: 52px; border-radius: 50%; background: var(--badgeColor, #94b0c2); border: 3px solid var(--c0); font: 16px var(--px); color: var(--c0); text-shadow: 0 1px 0 rgba(255, 255, 255, .5); }
 .giftTag { display: inline-block; margin-top: 6px; padding: 2px 8px; background: var(--c4); color: var(--c0); border: 2px solid var(--c0); font: 8px/1.5 var(--px); }
-.storyToast.speaker-lina { border-color: var(--c10); }
 @media (max-width: 800px) { .speakerBadge { width: 44px; height: 44px; font-size: 13px; } }
 
 /* ---------- v0.9.4 · retratos definitivos de Amelie ---------- */
@@ -709,7 +701,7 @@ button, .option, .member, .card, .stockItem, .starterCard { touch-action: manipu
 .amelieFace.avatar { aspect-ratio: 1; width: var(--amSize); height: var(--amSize); border-radius: 50%; overflow: hidden; border: 3px solid var(--c0); background: #fff; }
 .amelieFace.avatar.photo .amelieImg { width: 210%; height: auto; max-width: none; margin: -33% 0 0 -49%; object-fit: initial; }
 .amelieFace.avatar:not(.photo) svg { transform: scale(1.25) translateY(8%); }
-.amelieFace.photo.ex-glitch, .amelieFace.photo.ex-error { animation: amPhotoGlitch 1.3s steps(2, end) infinite; }
+.amelieFace.photo.ex-glitch { animation: amPhotoGlitch 1.3s steps(2, end) infinite; }
 .amelieFace.photo.ex-dark { filter: drop-shadow(0 0 6px #b13e53); }
 @keyframes amPhotoGlitch { 0%, 70%, 100% { transform: translate(0, 0); } 75% { transform: translate(-3px, 1px); filter: hue-rotate(40deg); } 85% { transform: translate(3px, -1px); } }
 @media (prefers-reduced-motion: reduce) { .amelieFace.photo { animation: none !important; } }
@@ -720,6 +712,84 @@ button, .option, .member, .card, .stockItem, .starterCard { touch-action: manipu
 .endingPair { display: flex; gap: 12px; align-items: flex-end; justify-content: center; }
 .endingPair .spritePortrait { min-width: 130px; height: 150px; }
 .endingPair .spritePortrait > * { transform: scale(1.8); }
-.gardevoirScene.portrait-amelie-error, .gardevoirScene.portrait-sprite-gardevoir { box-shadow: 0 0 0 4px var(--c1); }
+.gardevoirScene.portrait-amelie-shock, .gardevoirScene.portrait-sprite-gardevoir { box-shadow: 0 0 0 4px var(--c1); }
 .gardevoirScene.portrait-sprite-froslass { box-shadow: 0 0 0 4px var(--c10); }
 .endingScreen.ending-true { box-shadow: 0 0 0 4px var(--c11); }
+
+/* Nivel de poder */
+.lvTag { display: inline-block; padding: 0 5px; margin-left: 4px; font-size: .72em; line-height: 1.5; border: 2px solid var(--c1, #333); background: #f4f4f4; color: #1a1c2c; white-space: nowrap; vertical-align: middle; }
+.lvTag.lv-easy { background: #a7f070; }
+.lvTag.lv-even { background: #ffcd75; }
+.lvTag.lv-hard { background: #ef7d57; }
+.lvTag.lv-deadly { background: #b13e53; color: #fff; }
+.optionLevel { display: block; font-size: .8em; margin-top: 4px; }
+
+/* ---------- v0.11 · Llamadas (videollamada), campanita y registro ---------- */
+.callPanel { position: fixed; top: 48px; right: 10px; z-index: 240; width: min(340px, calc(100vw - 20px)); background: var(--c15); border: 4px solid var(--c0); box-shadow: 0 4px 0 rgba(0, 0, 0, .35); clip-path: var(--notch); }
+.callPanel.enter { animation: callIn .28s ease-out; }
+.callPanel.ex-glitch, .callPanel.speaker-lina { border-color: var(--c10); }
+.callPanel.ex-dark { border-color: var(--c2); }
+.callBar { display: flex; align-items: center; gap: 8px; padding: 4px 6px 4px 8px; background: var(--c0); font: 8px/1.4 var(--px); color: var(--c4); }
+.callTitle { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.callDot { flex: none; width: 8px; height: 8px; border-radius: 50%; background: var(--c5); animation: blink 1.2s steps(2, start) infinite; }
+.callBody { display: flex; gap: 10px; padding: 8px; align-items: flex-start; }
+.callVideo { position: relative; flex: none; display: grid; place-items: center; width: 104px; height: 108px; overflow: hidden; background: linear-gradient(#dff1fb, #b9d9ee); border: 3px solid var(--c0); }
+.callVideo::after { content: ""; position: absolute; inset: 0; pointer-events: none; background: repeating-linear-gradient(0deg, rgba(0, 0, 0, .09) 0 1px, transparent 1px 3px); }
+.callVideo .amelieFace { align-self: start; }
+.callLive { position: absolute; left: 3px; bottom: 3px; z-index: 1; padding: 1px 4px; background: var(--c2); color: #fff; font: 6px/1.5 var(--px); }
+.speakerBadge.big { width: 84px; height: 84px; font-size: 28px; }
+.callText { flex: 1; min-width: 0; text-align: left; }
+.callText p { margin: 0; font: 20px/1.1 var(--body); }
+.callFoot { display: flex; align-items: center; gap: 8px; padding: 0 8px 8px; }
+.callTimer { flex: 1; height: 6px; background: var(--c0); }
+.callTimer i { display: block; height: 100%; background: var(--c4); transform-origin: left; animation: callTime linear forwards; }
+@keyframes callTime { from { transform: scaleX(1); } to { transform: scaleX(0); } }
+@keyframes callIn { from { opacity: 0; transform: translateY(-14px); } to { opacity: 1; transform: none; } }
+.callBell { position: fixed; right: 66px; top: 8px; z-index: 250; }
+.callBell.ringing { animation: bellShake 1.8s ease-in-out infinite; border-color: var(--c4); }
+.bellCount { position: absolute; top: -8px; right: -8px; min-width: 18px; padding: 1px 4px; background: var(--c2); color: #fff; border: 2px solid var(--c0); font: 8px/1.5 var(--px); }
+@keyframes bellShake { 0%, 60%, 100% { transform: rotate(0); } 66% { transform: rotate(-14deg); } 72% { transform: rotate(12deg); } 78% { transform: rotate(-9deg); } 84% { transform: rotate(6deg); } }
+.callLog { width: min(540px, 100%); max-height: 86vh; overflow: auto; }
+.callList { list-style: none; margin: 10px 0 0; padding: 0; display: grid; gap: 8px; }
+.callItem { display: flex; gap: 10px; align-items: flex-start; padding: 8px; background: var(--c15); border: 3px solid var(--c0); }
+.callItem.unread { border-color: var(--c4); }
+.newTag { color: var(--c3); }
+@media (max-width: 800px) {
+  .callPanel { top: 44px; right: 6px; left: 6px; width: auto; }
+  .callBar { padding: 2px 4px 2px 8px; }
+  .callBody { gap: 8px; padding: 6px; }
+  .callVideo { width: 58px; height: 64px; border-width: 2px; }
+  .callVideo .amelieFace { --amSize: 64px !important; }
+  .callLive { display: none; }
+  .speakerBadge.big { width: 46px; height: 46px; font-size: 16px; }
+  .callText p { font-size: 17px; line-height: 1.05; max-height: 6.4em; overflow-y: auto; }
+  .callFoot { padding: 0 6px 6px; }
+  .callBell { top: 6px; right: 56px; }
+}
+}
+
+/* ---------- v0.11 · Objetos equipables, piezas de estrella y tutor ---------- */
+.statusTag.held { background: var(--c4); color: var(--c0); }
+.heldBtn { justify-self: start; max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.heldBtn.on { background: var(--c4); color: var(--c0); }
+.freeDot { color: var(--c3); }
+.heldModal { width: min(560px, 100%); max-height: 88vh; overflow: auto; }
+.heldTabs { display: flex; flex-wrap: wrap; gap: 6px; margin: 8px 0; }
+.heldList { list-style: none; margin: 8px 0 0; padding: 0; display: grid; gap: 8px; }
+.heldRow { display: flex; gap: 10px; align-items: center; justify-content: space-between; padding: 8px; background: var(--c15); border: 3px solid var(--c0); }
+.heldRow.mine { border-color: var(--c4); }
+.heldInfo { min-width: 0; text-align: left; }
+.heldInfo strong { font: 9px/1.4 var(--px); color: var(--c4); }
+.heldInfo .tier { color: var(--c3); }
+.heldInfo p { margin: 2px 0 0; font: 19px/1.1 var(--body); }
+.starCount { color: var(--c4); font: 9px var(--px); }
+.tutorPanel { grid-column: 1 / -1; display: grid; gap: 8px; }
+.tutorHead { display: grid; gap: 6px; }
+.tutorSlots, .tutorOptions { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 6px; }
+.tutorSlot, .tutorOption { display: grid; gap: 3px; text-align: left; padding: 6px 8px; background: var(--c8); color: var(--c12); border: 4px solid var(--c0); cursor: pointer; font: inherit; position: relative; }
+.tutorSlot.selected { border-color: var(--c3); box-shadow: inset 0 0 0 3px var(--c4); }
+.tutorOption:hover { filter: brightness(1.15); border-color: var(--c4); }
+.tutorOption.poor { opacity: .55; }
+.tutorOption .price { position: absolute; top: 4px; right: 6px; font: 9px var(--px); color: var(--c4); }
+.tutorSlot .mname, .tutorOption .mname { font: 9px/1.5 var(--px); }
+.tutorSlot small, .tutorOption small { font: 17px/1.05 var(--body); color: var(--c13); }

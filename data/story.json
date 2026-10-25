@@ -17,7 +17,7 @@
   "happy",
   "wink",
   "think",
-  "error",
+  "sick",
   "cry",
   "gentle",
   "grin",
@@ -558,7 +558,7 @@
   {
    "id": "hint2",
    "speaker": "amelie",
-   "expression": "worried",
+   "expression": "gentle",
    "priority": 2,
    "when": {
     "phase": [
@@ -616,6 +616,26 @@
    ]
   },
   {
+   "id": "hint5",
+   "speaker": "amelie",
+   "expression": "sick",
+   "priority": 2,
+   "when": {
+    "phase": [
+     "center"
+    ],
+    "badges": {
+     "min": 6,
+     "max": 7
+    }
+   },
+   "variants": [
+    "Uf… el mundo da vueltas. Es solo un mareo, ya pasa. Reiniciar tantas veces cansa… digo, ¡nada! Sigue, sigue.",
+    "Perdona, me mareé un segundo. Panhea es grande y a veces me pesa. No es nada, de verdad.",
+    "Mmh… todo gira un poco. Descansa tú también aquí; yo me siento un momento."
+   ]
+  },
+  {
    "id": "turn6",
    "speaker": "amelie",
    "expression": "worried",
@@ -638,7 +658,7 @@
   {
    "id": "turn7",
    "speaker": "amelie",
-   "expression": "error",
+   "expression": "dark",
    "priority": 2,
    "when": {
     "phase": [
@@ -659,7 +679,7 @@
   {
    "id": "turn8",
    "speaker": "amelie",
-   "expression": "dark",
+   "expression": "glitch",
    "priority": 2,
    "when": {
     "phase": [
@@ -1330,7 +1350,7 @@
     ]
    },
    {
-    "expression": "error",
+    "expression": "glitch",
     "variants": [
      "Este mundo lo creé yo, con lo que recuerdo de tu viaje. Cada ruta, cada medalla, cada rival. Aquí nada termina, y tú tampoco.",
      "Panhea es tu camino, guardado. Lo construí con mi poder para que no se perdiera nada. Para que no te perdieras tú.",
@@ -1388,8 +1408,8 @@
  },
  "boss": {
   "scale": {
-   "hp": 1.65,
-   "stats": 1.3
+   "hp": 1.3,
+   "stats": 1.18
   },
   "enemies": [
    {
@@ -1435,7 +1455,7 @@
   },
   "intro": [
    {
-    "portrait": "amelie:error",
+    "portrait": "amelie:shock",
     "name": "AMELIE",
     "text": "No… no puede ser. Llegaste hasta aquí con tus propios compañeros, sin apoyarte en leyendas. Igual que cuando empezamos."
    },

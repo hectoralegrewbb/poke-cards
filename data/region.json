@@ -149,7 +149,7 @@
     "cardPrices": {
       "energyBasic": 10,
       "energyDouble": 20,
-      "wildcard": 25,
+      "wildcard": 40,
       "insight": 30,
       "potion": 20,
       "quickStep": 20,

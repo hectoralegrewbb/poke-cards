@@ -1,3 +1,4 @@
+> **v0.11:** diálogos como videollamada con campanita y registro, niveles de poder comparables en mapa/combate/equipo, Comodín que paga cualquier técnica (máx. 5), 29 objetos equipables únicos, Piezas de estrella y tutor de técnicas en el campamento, Amelie rebalanceada y retratos corregidos. Ver [`docs/CHANGELOG-v0.11.md`](docs/CHANGELOG-v0.11.md).
 > **v0.8:** mazo + cofre con editor, eventos opcionales sin riesgo de muerte, ataque del propio tipo garantizado, audio (volúmenes + música en loop sin cortes), tema visual moderno. Ver [`docs/CHANGELOG-v0.8.md`](docs/CHANGELOG-v0.8.md) y [`docs/QA-v0.8.md`](docs/QA-v0.8.md).
 
 > **v0.7:** catálogo completo de 649 especies, variocolores (shiny), HUD para móvil en vertical, cartas y pasivas nuevas, y efectos de sonido y pantalla por tipo. Ver [`docs/CHANGELOG-v0.7.md`](docs/CHANGELOG-v0.7.md) y [`docs/QA-v0.7.md`](docs/QA-v0.7.md).

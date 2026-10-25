@@ -1,4 +1,5 @@
-import { chooseNode } from "../../src/run/index.js";
+import { chooseNode, estimateNodeLevel, partyLevel } from "../../src/run/index.js";
+import { levelTag } from "./levelTag.js";
 import { difficultyPresets } from "../../src/run/difficulty.js";
 import { h } from "./dom.js";
 import { nodeLabels } from "./labels.js";
@@ -36,6 +37,13 @@ function routeStrip(ctx) {
   }));
 }
 
+// "Rival ≈Nv.24 · tu equipo Nv.21": cuánto más fuerte o débil es el destino que tenés delante.
+function enemyLevelLine(run, node, reference) {
+  const estimate = estimateNodeLevel(run, node);
+  if (!estimate) return null;
+  return h("span", { class: "optionLevel" }, "RIVAL ", levelTag(estimate.average, reference, { approx: true }), estimate.count > 1 ? ` · ${estimate.count} Pokémon` : "", ` · TU EQUIPO Nv.${reference}`);
+}
+
 export function renderMap(ctx) {
   const { run, data } = ctx;
   const inGyms = run.stageIndex < run.campaign.stages.length;
@@ -47,6 +55,7 @@ export function renderMap(ctx) {
     ? `GIMNASIO ${run.stageIndex + 1} DE 8 · PASO ${run.step + 1} DE ${run.campaign.stepPools.length + 1}`
     : `DESAFÍO FINAL · PASO ${run.step + 1} DE ${run.campaign.league.eliteFour.length + 2}`;
 
+  const reference = partyLevel(run);
   return h("section", { class: "window map" },
     h("div", { class: "sectionTop" }, h("span", { class: "eyebrow" }, status), h("span", { class: "modeTag" }, `${run.campaign.mode === "global" ? "GLOBAL" : "REGIONAL"} · ${run.campaign.name.toUpperCase()} · ${mode}`)),
     h("h2", {}, title.toUpperCase()),
@@ -81,6 +90,7 @@ export function renderMap(ctx) {
         h("span", { class: "optionIcon" }, nodeIcon(node.type)),
         h("strong", {}, customTitle.toUpperCase()),
         h("span", { class: "optionText" }, node.type === "gym" ? `${stage.gym.enemies.length} rivales · ${(stage.specialty ?? "MIXTO").toUpperCase()} · ${label.text.split(". ").slice(1).join(". ")}` : label.text),
+        enemyLevelLine(run, node, reference),
         h("span", { class: "optionReward" }, `◆ ${meta.reward}`));
     })),
     h("p", { class: "routeAdvice" }, run.options.length === 1

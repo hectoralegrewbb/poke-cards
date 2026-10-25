@@ -116,10 +116,19 @@ export function playUtility(state, { cardUid, targetUid, searchCardUid = null })
 }
 
 // Elige qué cartas de energía pagan un costo gastando lo menos valioso: primero la que cubre lo que falta
-// con el menor desperdicio y el menor refuerzo; así Comodines y cartas de refuerzo alto quedan para potenciar.
+// con el menor desperdicio y el menor refuerzo; así las cartas de refuerzo alto quedan para potenciar.
+// El Comodín (fillsAnyCost) paga cualquier técnica por sí solo, pero solo se gasta si la energía normal no alcanza.
 // Devuelve { pay, energy }; si las cartas no alcanzan, energy < cost y pay contiene todo lo que podía pagar.
 export function choosePayCards(cardDefs, cards, cost) {
-  let pool = cards.filter((card) => cardDefs[card.cardId].playModes.includes("pay"));
+  const payable = cards.filter((card) => cardDefs[card.cardId].playModes.includes("pay"));
+  const normal = payable.filter((card) => !cardDefs[card.cardId].fillsAnyCost);
+  const first = payWithPool(cardDefs, normal, cost);
+  if (first.energy >= cost) return first;
+  return payWithPool(cardDefs, payable, cost);
+}
+
+function payWithPool(cardDefs, cards, cost) {
+  let pool = cards;
   const pay = [];
   let energy = 0;
   const byWaste = (a, b) => cardDefs[a.cardId].energyValue - cardDefs[b.cardId].energyValue || cardDefs[a.cardId].boostMultiplier - cardDefs[b.cardId].boostMultiplier;

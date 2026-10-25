@@ -2,7 +2,7 @@
 // atenta: cuida la party, cambia caja/party, arma el mazo con energía fuerte y gasta oro con criterio.
 import { isAlive } from "../engine/index.js";
 import {
-  buyFromShop, chooseAmelieEnding, chooseGardevoirFight, consumeStoryLine, chooseNode, decideCapture, finishCombat, leaveCenter, leaveShop, moveCardToChest, moveCardToDeck, pickCard, playCamp, setRow, swapPartyBox, useItem
+  buyFromShop, equipHeldItem, freeHeldItems, learnableMoves, moveChangeCost, teachMove, chooseAmelieEnding, chooseGardevoirFight, consumeStoryLine, chooseNode, decideCapture, finishCombat, leaveCenter, leaveShop, moveCardToChest, moveCardToDeck, pickCard, playCamp, setRow, swapPartyBox, useItem
 } from "../run/index.js";
 import { playSmartTurn } from "./smartPlayer.js";
 
@@ -54,6 +54,36 @@ function useItems(run) {
   }
 }
 
+// Reparte los objetos equipables sin dueño: los de daño físico/especial al que más pega de ese tipo; el resto al más resistente.
+function manageHeldItems(run) {
+  for (const itemId of freeHeldItems(run)) {
+    const modifiers = run.data.heldItems[itemId].modifiers ?? [];
+    const category = modifiers.find((modifier) => modifier.when?.category)?.when.category;
+    const candidates = run.party.filter((pokemon) => !pokemon.heldItem && isAlive(pokemon));
+    if (candidates.length === 0) return;
+    const score = (pokemon) => category === "physical" ? pokemon.stats.atk : category === "special" ? pokemon.stats.spa : pokemon.maxHp + pokemon.stats.def + pokemon.stats.spd;
+    equipHeldItem(run, itemId, [...candidates].sort((a, b) => score(b) - score(a))[0].uid);
+  }
+}
+
+// Gasta piezas de estrella como una persona: reemplaza la técnica más floja por una más potente de su tipo.
+function tuneMoves(run) {
+  const { moves } = run.data;
+  for (let guard = 0; guard < 12; guard += 1) {
+    let changed = false;
+    for (const pokemon of run.party) {
+      const slots = pokemon.moves.map((id, index) => ({ id, index, move: moves[id] })).sort((a, b) => (a.move.power - b.move.power));
+      const weakest = slots[0];
+      const better = learnableMoves(run.data, pokemon)
+        .filter((id) => moves[id].power >= weakest.move.power + 3 && moves[id].cost <= 2 && pokemon.types.includes(moves[id].type) && moveChangeCost(run.data, id) <= (run.starPieces ?? 0))
+        .sort((a, b) => moves[b].power - moves[a].power)[0];
+      if (!better || weakest.move.power >= 6) continue;
+      if (teachMove(run, pokemon.uid, weakest.index, better).ok) changed = true;
+    }
+    if (!changed) break;
+  }
+}
+
 function pickOption(run) {
   const health = hpFraction(run);
   const fainted = run.party.some((pokemon) => !isAlive(pokemon));
@@ -96,6 +126,7 @@ function handleReward(run) {
 }
 
 function handleCamp(run) {
+  tuneMoves(run);
   const fainted = run.party.find((pokemon) => !isAlive(pokemon));
   if (fainted && hpFraction(run) > 0.5) return playCamp(run, "revive", fainted.uid);
   if (hpFraction(run) < 0.85 || fainted) return playCamp(run, "rest");
@@ -113,6 +144,7 @@ function handleShop(run) {
     if (index === -1 || run.gold < run.shop.stock[index].price) continue;
     buyFromShop(run, index);
   }
+  run.shop.stock.forEach((entry, index) => { if (entry.kind === "held" && !entry.sold && run.gold >= entry.price + 40) buyFromShop(run, index); });
   leaveShop(run);
 }
 
@@ -143,6 +175,7 @@ export function playSmartRun(run, { maxSteps = 600, onFight = null, qualifySecre
     consumeStoryLine(run); // acepta los regalos de Lina como lo haría un jugador
     if (run.phase === "map") {
       manageRoster(run);
+      manageHeldItems(run);
       useItems(run);
       optimizeDeck(run);
       chooseNode(run, pickOption(run));

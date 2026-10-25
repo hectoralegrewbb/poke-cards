@@ -1,0 +1,482 @@
+{
+ "leftovers": {
+  "name": "Restos",
+  "tier": 2,
+  "price": 150,
+  "description": "Cura el 6% de los PS máximos al empezar cada turno.",
+  "triggers": [
+   {
+    "on": "turnStart",
+    "effects": [
+     {
+      "type": "heal",
+      "fraction": 0.06,
+      "target": "self"
+     }
+    ]
+   }
+  ]
+ },
+ "lifeOrb": {
+  "name": "Vidasfera",
+  "tier": 3,
+  "price": 220,
+  "description": "Sus ataques hacen +30% de daño, pero pierde el 6% de sus PS máx. al atacar.",
+  "modifiers": [
+   {
+    "kind": "damageDealt",
+    "mult": 1.3
+   }
+  ],
+  "triggers": [
+   {
+    "on": "onHit",
+    "effects": [
+     {
+      "type": "selfDamage",
+      "fraction": 0.06,
+      "target": "self"
+     }
+    ]
+   }
+  ]
+ },
+ "focusSash": {
+  "name": "Banda Focus",
+  "tier": 2,
+  "price": 150,
+  "description": "Si un golpe lo debilitaría estando con PS al máximo, queda con 1 PS (una vez por combate).",
+  "triggers": [
+   {
+    "on": "combatStart",
+    "effects": [
+     {
+      "type": "focusSash",
+      "target": "self"
+     }
+    ]
+   }
+  ]
+ },
+ "expertBelt": {
+  "name": "Cinta Experto",
+  "tier": 2,
+  "price": 150,
+  "description": "Sus ataques súper eficaces hacen +25% de daño.",
+  "modifiers": [
+   {
+    "kind": "damageDealt",
+    "mult": 1.25,
+    "when": {
+     "superEffective": true
+    }
+   }
+  ]
+ },
+ "choiceBand": {
+  "name": "Banda Fuerte",
+  "tier": 2,
+  "price": 150,
+  "description": "Sus ataques físicos hacen +25% de daño.",
+  "modifiers": [
+   {
+    "kind": "damageDealt",
+    "mult": 1.25,
+    "when": {
+     "category": "physical"
+    }
+   }
+  ]
+ },
+ "choiceSpecs": {
+  "name": "Gafas Pro",
+  "tier": 2,
+  "price": 150,
+  "description": "Sus ataques especiales hacen +25% de daño.",
+  "modifiers": [
+   {
+    "kind": "damageDealt",
+    "mult": 1.25,
+    "when": {
+     "category": "special"
+    }
+   }
+  ]
+ },
+ "assaultVest": {
+  "name": "Chaleco Asalto",
+  "tier": 2,
+  "price": 150,
+  "description": "Recibe 25% menos de daño de ataques especiales.",
+  "modifiers": [
+   {
+    "kind": "damageTaken",
+    "mult": 0.75,
+    "when": {
+     "category": "special"
+    }
+   }
+  ]
+ },
+ "rockyHelmet": {
+  "name": "Casco Dentado",
+  "tier": 2,
+  "price": 150,
+  "description": "Quien lo golpee con un ataque físico pierde el 12% de sus PS máx.",
+  "triggers": [
+   {
+    "on": "onDamaged",
+    "when": {
+     "category": "physical"
+    },
+    "effects": [
+     {
+      "type": "damageAttacker",
+      "fraction": 0.12
+     }
+    ]
+   }
+  ]
+ },
+ "oranBerry": {
+  "name": "Baya Aranja",
+  "tier": 1,
+  "price": 90,
+  "description": "Al bajar del 50% de PS, recupera el 40% de sus PS máx. (una vez por combate).",
+  "triggers": [
+   {
+    "on": "onDamaged",
+    "once": true,
+    "when": {
+     "hpBelow": 0.5
+    },
+    "effects": [
+     {
+      "type": "heal",
+      "fraction": 0.4,
+      "target": "self"
+     }
+    ]
+   }
+  ]
+ },
+ "barrierCrystal": {
+  "name": "Cristal Barrera",
+  "tier": 1,
+  "price": 90,
+  "description": "Empieza cada combate con 8 de escudo.",
+  "triggers": [
+   {
+    "on": "combatStart",
+    "effects": [
+     {
+      "type": "shield",
+      "amount": 8,
+      "target": "self"
+     }
+    ]
+   }
+  ]
+ },
+ "shellBell": {
+  "name": "Concha Campana",
+  "tier": 2,
+  "price": 150,
+  "description": "Recupera PS equivalentes al 25% del daño que inflige.",
+  "triggers": [
+   {
+    "on": "onHit",
+    "effects": [
+     {
+      "type": "healFromDamage",
+      "ratio": 0.25,
+      "target": "self"
+     }
+    ]
+   }
+  ]
+ },
+ "quickClaw": {
+  "name": "Garra Rápida",
+  "tier": 2,
+  "price": 150,
+  "description": "Sus técnicas se recargan 1 turno más rápido.",
+  "triggers": [
+   {
+    "on": "turnStart",
+    "effects": [
+     {
+      "type": "reduceCooldown",
+      "amount": 1,
+      "target": "self"
+     }
+    ]
+   }
+  ]
+ },
+ "amuletCoin": {
+  "name": "Moneda Amuleto",
+  "tier": 1,
+  "price": 90,
+  "description": "Mientras esté en tu party, ganás +30% de oro al vencer.",
+  "modifiers": [
+   {
+    "kind": "goldMult",
+    "mult": 1.3
+   }
+  ]
+ },
+ "luckyEgg": {
+  "name": "Huevo Suerte",
+  "tier": 1,
+  "price": 90,
+  "description": "El portador gana +30% de EXP.",
+  "modifiers": [
+   {
+    "kind": "expMult",
+    "mult": 1.3
+   }
+  ]
+ },
+ "scopeLens": {
+  "name": "Lente Zoom",
+  "tier": 2,
+  "price": 150,
+  "description": "Sus ataques son críticos con más facilidad (una moneda menos).",
+  "modifiers": [
+   {
+    "kind": "critCoins",
+    "amount": -1
+   }
+  ]
+ },
+ "lumBerry": {
+  "name": "Baya Zanama",
+  "tier": 1,
+  "price": 90,
+  "description": "Cura su estado (veneno, quemadura, parálisis) al empezar el turno (una vez por combate).",
+  "triggers": [
+   {
+    "on": "turnStart",
+    "once": true,
+    "when": {
+     "hasStatus": true
+    },
+    "effects": [
+     {
+      "type": "cureStatus",
+      "target": "self"
+     }
+    ]
+   }
+  ]
+ },
+ "wiseCloth": {
+  "name": "Pañuelo Sabio",
+  "tier": 3,
+  "price": 220,
+  "description": "Robás 1 carta extra al empezar cada turno.",
+  "triggers": [
+   {
+    "on": "turnStart",
+    "effects": [
+     {
+      "type": "drawCards",
+      "amount": 1
+     }
+    ]
+   }
+  ]
+ },
+ "openingDie": {
+  "name": "Dado Pionero",
+  "tier": 1,
+  "price": 90,
+  "description": "Su primer ataque de cada combate hace +50% de daño.",
+  "modifiers": [
+   {
+    "kind": "damageDealt",
+    "mult": 1.5,
+    "when": {
+     "firstAttack": true
+    }
+   }
+  ]
+ },
+ "furyBand": {
+  "name": "Banda Furia",
+  "tier": 1,
+  "price": 90,
+  "description": "Con menos del 40% de PS, sus ataques hacen +40% de daño.",
+  "modifiers": [
+   {
+    "kind": "damageDealt",
+    "mult": 1.4,
+    "when": {
+     "hpBelow": 0.4
+    }
+   }
+  ]
+ },
+ "affinityCharm": {
+  "name": "Pendiente Afín",
+  "tier": 2,
+  "price": 150,
+  "description": "Aumenta el bono de ataques de su propio tipo (STAB x1.5 pasa a x1.75).",
+  "modifiers": [
+   {
+    "kind": "damageDealt",
+    "mult": 1.1667,
+    "when": {
+     "stab": true
+    }
+   }
+  ]
+ },
+ "critClaw": {
+  "name": "Garra Crítica",
+  "tier": 2,
+  "price": 150,
+  "description": "Sus golpes críticos hacen x2 en lugar de x1.5.",
+  "modifiers": [
+   {
+    "kind": "damageDealt",
+    "mult": 1.3333,
+    "when": {
+     "crit": true
+    }
+   }
+  ]
+ },
+ "stoneArmor": {
+  "name": "Armadura Piedra",
+  "tier": 2,
+  "price": 150,
+  "description": "Cada golpe recibido hace 2 de daño menos (mínimo 1).",
+  "modifiers": [
+   {
+    "kind": "flatReduction",
+    "amount": 2
+   }
+  ]
+ },
+ "emberClaw": {
+  "name": "Garra Ígnea",
+  "tier": 2,
+  "price": 150,
+  "description": "Sus ataques tienen 25% de quemar al rival.",
+  "triggers": [
+   {
+    "on": "onHit",
+    "effects": [
+     {
+      "type": "status",
+      "status": "burn",
+      "chance": 0.25
+     }
+    ]
+   }
+  ]
+ },
+ "toxicFang": {
+  "name": "Colmillo Tóxico",
+  "tier": 2,
+  "price": 150,
+  "description": "Sus ataques tienen 25% de envenenar al rival.",
+  "triggers": [
+   {
+    "on": "onHit",
+    "effects": [
+     {
+      "type": "status",
+      "status": "poison",
+      "chance": 0.25
+     }
+    ]
+   }
+  ]
+ },
+ "luckBell": {
+  "name": "Cascabel Suerte",
+  "tier": 1,
+  "price": 90,
+  "description": "Empieza cada combate con una moneda de la suerte (más chance de crítico).",
+  "triggers": [
+   {
+    "on": "combatStart",
+    "effects": [
+     {
+      "type": "luckyCoin",
+      "amount": 1
+     }
+    ]
+   }
+  ]
+ },
+ "shieldBalloon": {
+  "name": "Globo Escudo",
+  "tier": 1,
+  "price": 90,
+  "description": "Cada vez que recibe daño gana 3 de escudo.",
+  "triggers": [
+   {
+    "on": "onDamaged",
+    "effects": [
+     {
+      "type": "shield",
+      "amount": 3,
+      "target": "self"
+     }
+    ]
+   }
+  ]
+ },
+ "healFeather": {
+  "name": "Pluma Curativa",
+  "tier": 2,
+  "price": 150,
+  "description": "Al debilitar a un rival recupera el 30% de sus PS máx.",
+  "triggers": [
+   {
+    "on": "onKO",
+    "effects": [
+     {
+      "type": "heal",
+      "fraction": 0.3,
+      "target": "self"
+     }
+    ]
+   }
+  ]
+ },
+ "heavyWeight": {
+  "name": "Pesa Pesada",
+  "tier": 2,
+  "price": 150,
+  "description": "Sus técnicas de costo 2 o más hacen +25% de daño.",
+  "modifiers": [
+   {
+    "kind": "damageDealt",
+    "mult": 1.25,
+    "when": {
+     "minCost": 2
+    }
+   }
+  ]
+ },
+ "freeBall": {
+  "name": "Bola Libre",
+  "tier": 1,
+  "price": 90,
+  "description": "Sus técnicas LIBRE (costo 0) hacen +40% de daño.",
+  "modifiers": [
+   {
+    "kind": "damageDealt",
+    "mult": 1.4,
+    "when": {
+     "maxCost": 0
+    }
+   }
+  ]
+ }
+}

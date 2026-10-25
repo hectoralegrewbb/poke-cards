@@ -28,7 +28,7 @@
   "wildcard": {
     "name": "Comodín",
     "kind": "energy",
-    "energyValue": 1,
+    "energyValue": 9,
     "boostMultiplier": 2,
     "playModes": [
       "pay",
@@ -36,7 +36,9 @@
       "boostDefense"
     ],
     "target": "none",
-    "effects": []
+    "effects": [],
+    "fillsAnyCost": true,
+    "maxInDeck": 5
   },
   "insight": {
     "name": "Intuición",

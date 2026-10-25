@@ -1,5 +1,5 @@
 // Arranque: carga los JSON, crea la corrida y dibuja la pantalla según run.phase.
-import { consumeStoryLine, createRun, difficultyPresets, gameModes, finishCombat, restoreRun, serializeRun } from "../../src/run/index.js";
+import { consumeStoryLine, createRun, markStoryRead, readingTimeMs, difficultyPresets, gameModes, finishCombat, restoreRun, serializeRun } from "../../src/run/index.js";
 import { renderCombat } from "./combatView.js";
 import { animateBars, playEffects } from "./effects.js";
 import { icon } from "./pixelIcons.js";
@@ -16,11 +16,13 @@ import { adventureScreen, faqScreen, setupScreen, titleScreen } from "./titleScr
 import { runLoadingScreen } from "./loadingScreen.js";
 import { renderCamp, renderCenter, renderShop } from "./siteViews.js";
 import { amelieFace, loadAmelieAssets } from "./amelieArt.js";
-import { amelieScene, gardevoirScene, scenePortrait, starterOffer, storyToast } from "./storyView.js";
+import { amelieScene, gardevoirScene, scenePortrait, starterOffer } from "./storyView.js";
+import { heldModal } from "./heldView.js";
+import { callLog, callPanel, storyBell } from "./callView.js";
 import { createFinaleRun } from "../../src/run/debugFinale.js";
 import { createAnimatedSpriteProvider } from "./spriteProvider.js";
 
-const dataFiles = ["balance", "cards", "moves", "species", "typeChart", "enemyProfiles", "startingDeck", "encounters", "items", "region", "campaigns", "story"];
+const dataFiles = ["balance", "cards", "moves", "species", "typeChart", "enemyProfiles", "startingDeck", "encounters", "items", "heldItems", "region", "campaigns", "story"];
 
 async function loadData() {
   const entries = await Promise.all(dataFiles.map(async (name) => {
@@ -34,7 +36,7 @@ async function loadData() {
 const root = document.getElementById("app");
 const setup = { seed: "", difficulty: "trainer", mode: "regional", regionId: "random", confirmStart: false };
 const saveKey = "pokecards-dungeon-v2";
-const ctx = { storyLine: null, finalStep: 0, screen: "title", data: null, run: null, sprites: null, savedRun: null, fx: [], lastEvents: [], toast: "", rerender, notify, onCombatFinished };
+const ctx = { call: null, logOpen: false, finalStep: 0, screen: "title", data: null, run: null, sprites: null, savedRun: null, fx: [], lastEvents: [], toast: "", rerender, notify, onCombatFinished };
 if (location.search.includes("debug")) window.__ctx = ctx;
 
 function readSave() {
@@ -57,7 +59,7 @@ function persistRun(run) {
 function continueRun() {
   try {
     ctx.run = restoreRun(ctx.data, ctx.savedRun);
-    ctx.storyLine = null;
+    ctx.call = null; ctx.logOpen = false;
     ctx.starterPick = null;
     sfx.play("start");
     rerender();
@@ -85,7 +87,7 @@ function onCombatFinished() {
 function startRun(seed, starterId, difficulty, mode, regionId, loop = 0) {
   ctx.run = createRun({ data: ctx.data, seed, starterIds: [starterId], difficulty, mode, regionId, loop });
   ctx.starterPick = null;
-  ctx.storyLine = null;
+  ctx.call = null; ctx.logOpen = false;
   ctx.finalStep = 0;
   ctx.lastEvents = [];
   rerender();
@@ -148,14 +150,14 @@ function endScreen() {
   const won = run.result === "victory";
   const ending = run.ending ? ctx.data.story?.final.endings[run.ending] : null;
   const summary = h("p", {}, icon("medal", { scale: 3 }), ` Medallas: ${run.badges.length}/8 · ${run.campaign.name} · ${gameModes[run.mode]?.label ?? "CLÁSICO"} · ${difficultyPresets[run.difficulty ?? "trainer"].label} · Semilla ${run.seed}`);
-  const back = h("button", { class: "btn primary", onClick: () => { ctx.run = null; ctx.storyLine = null; ctx.screen = "title"; rerender(); } }, "VOLVER AL INICIO");
+  const back = h("button", { class: "btn primary", onClick: () => { ctx.run = null; ctx.call = null; ctx.logOpen = false; ctx.screen = "title"; rerender(); } }, "VOLVER AL INICIO");
   if (ending) {
     const portraits = { escape: () => amelieFace("cry", 190), stay: () => scenePortrait(ctx, "sprite:froslass"), true: () => h("div", { class: "endingPair" }, scenePortrait(ctx, "sprite:gardevoir"), scenePortrait(ctx, "sprite:froslass")) };
     const restart = run.ending === "stay"
       ? h("button", { class: "btn primary", onClick: () => {
           setup.mode = "global"; setup.difficulty = run.difficulty; setup.seed = String(run.seed);
           ctx.pendingLoop = (run.loop ?? 0) + 1;
-          ctx.run = null; ctx.storyLine = null; ctx.screen = "title";
+          ctx.run = null; ctx.call = null; ctx.logOpen = false; ctx.screen = "title";
           openStarterPick();
         } }, ctx.data.story.restart.button)
       : null;
@@ -189,6 +191,12 @@ function applyFx() {
   animateBars(root);
 }
 
+function closeLog() {
+  if (ctx.run) markStoryRead(ctx.run);
+  ctx.logOpen = false;
+  rerender();
+}
+
 function soundButton() {
   return audioButton(() => { ctx.audioOpen = true; rerender(); });
 }
@@ -209,20 +217,26 @@ function sceneFor(run) {
 }
 
 const storyPhases = ["map", "combat", "reward", "center", "camp", "shop"];
-const storyDurationMs = 9000;
 
-function closeStoryLine() {
-  ctx.storyLine = null;
+// Cierra la llamada. answered=true: el jugador la atendió (queda leída); si se corta sola queda sin leer en la campanita.
+function closeCall(answered) {
+  const call = ctx.call;
+  if (!call) return;
+  if (answered && ctx.run) markStoryRead(ctx.run, call.line.seq);
+  ctx.call = null;
   rerender();
 }
 
-// Elige (una sola vez por partida) el diálogo de Amelie que corresponde al momento actual.
+// Elige (una sola vez por partida) el diálogo que corresponde al momento actual y lo muestra como llamada.
+// Si el jugador cambió de pantalla (p. ej. entró a combatir), la llamada vieja se corta y espera en la campanita.
 function refreshStoryLine(run) {
-  if (ctx.storyLine || !storyPhases.includes(run.phase)) return;
+  if (ctx.call && ctx.call.phase !== run.phase) ctx.call = null;
+  if (ctx.call || !storyPhases.includes(run.phase)) return;
   const line = consumeStoryLine(run);
   if (!line) return;
-  ctx.storyLine = { line, fresh: true };
-  setTimeout(() => { if (ctx.storyLine?.line === line) closeStoryLine(); }, storyDurationMs);
+  const ms = readingTimeMs(line.text);
+  ctx.call = { line, phase: run.phase, shownAt: Date.now(), ms, fresh: true };
+  setTimeout(() => { if (ctx.call?.line === line) closeCall(false); }, ms);
 }
 
 function rerender() {
@@ -240,7 +254,10 @@ function rerender() {
     h("div", { class: inCombat ? "layout single" : "layout" }, screenFor(run), inCombat ? null : renderRoster(ctx)),
     ctx.deckOpen && !inCombat && run.phase !== "ended" ? renderDeckEditor(ctx) : null,
     ctx.toast ? h("div", { class: "toast", role: "status", "aria-live": "polite" }, ctx.toast) : null,
-    storyToast(ctx, closeStoryLine),
+    heldModal(ctx),
+    callPanel(ctx, { onAnswer: () => closeCall(true) }),
+    callLog(ctx, closeLog),
+    storyBell(ctx),
     soundButton(),
     audioLayer()
   ];

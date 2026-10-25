@@ -17,6 +17,8 @@ export function renderReward(ctx) {
   const summary = ctx.lastEvents.map((event) => {
     if (event.type === "goldGained") return [icon("coin", { scale: 2 }), ` +${event.amount} de oro`];
     if (event.type === "itemGained") return [itemImage(event.itemId, 24), ` ${data.items[event.itemId].name}`];
+    if (event.type === "heldItemGained") return [icon("star", { scale: 2 }), ` ¡Objeto nuevo: ${data.heldItems[event.itemId].name}! (equipalo en el panel de equipo)`];
+    if (event.type === "starPiecesGained") return [icon("star", { scale: 2 }), ` +${event.amount} Pieza${event.amount > 1 ? "s" : ""} de estrella`];
     if (event.type === "badgeEarned") return [icon("medal", { scale: 2 }), ` ${event.badge}`];
     if (event.type === "evolved") return [icon("star", { scale: 2 }), ` ${data.species[event.from].name} evolucionó a ${data.species[event.to].name}`];
     return null;

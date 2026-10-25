@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { chooseAmelieEnding, chooseGardevoirFight, chooseNode, consumeStoryLine, legendaryCount, secretEligible, createRun, finalScene, finishCombat, pickStoryLine, restoreRun, serializeRun, storyActive } from "../src/run/index.js";
+import { logStoryLine, markStoryRead, readingTimeMs, storyLogLimit, unreadStoryCount, chooseAmelieEnding, chooseGardevoirFight, chooseNode, consumeStoryLine, legendaryCount, secretEligible, createRun, finalScene, finishCombat, pickStoryLine, restoreRun, serializeRun, storyActive } from "../src/run/index.js";
 import { data } from "./helpers.js";
 
 const globalRun = (mode = "global") => createRun({ data, seed: 7, mode });
@@ -68,6 +68,7 @@ test("Aslo habla en los duelos con el rival y las pistas empiezan en la medalla 
   run.storySeen.push("welcome");
   run.storySeen.push("tipCombat", "tipRows");
   run.phase = "combat";
+  run.combat = { phase: "player", turn: 1, result: null };
   run.node = { type: "rival" };
   run.nodesEntered = 4;
   assert.equal(consumeStoryLine(run).id, "asloIntro");
@@ -223,4 +224,52 @@ test("atajo ?finale: arma el final listo y cumple (o no) el requisito secreto", 
   const jump = createFinaleRun({ data, mode: "gardevoir" });
   finishCombat(jump);
   assert.equal(jump.phase, "gardevoirIntro");
+});
+
+test("en combate los diálogos esperan la fase del jugador y no salen con el combate cerrado", () => {
+  const run = globalRun();
+  run.storySeen.push("welcome");
+  run.phase = "combat";
+  run.node = { type: "wild" };
+  run.combat = { phase: "enemy", turn: 3, result: null };
+  assert.equal(pickStoryLine(run), null);
+  run.combat = { phase: "player", turn: 3, result: "victory" };
+  assert.equal(pickStoryLine(run), null);
+  run.combat = { phase: "player", turn: 1, result: null };
+  assert.equal(pickStoryLine(run).id, "tipCombat");
+});
+
+test("cada diálogo queda en el registro como no leído y se puede marcar como leído", () => {
+  const run = globalRun();
+  const line = consumeStoryLine(run);
+  assert.equal(unreadStoryCount(run), 1);
+  assert.equal(run.storyLog[0].id, line.id);
+  markStoryRead(run, line.seq);
+  assert.equal(unreadStoryCount(run), 0);
+  const restored = restoreRun(data, serializeRun(run));
+  assert.equal(restored.storyLog.length, 1);
+  assert.equal(restored.storyLog[0].read, true);
+});
+
+test("el registro tiene tope y descarta primero lo ya leído", () => {
+  const run = globalRun();
+  for (let index = 0; index < storyLogLimit + 5; index += 1) {
+    const entry = logStoryLine(run, { id: `x${index}`, speaker: "amelie", expression: "neutral", name: "A", text: "t" });
+    if (index % 2 === 0) markStoryRead(run, entry.seq);
+  }
+  assert.equal(run.storyLog.length, storyLogLimit);
+  assert.ok(readingTimeMs("hola") >= 4500 && readingTimeMs("x".repeat(500)) <= 14000);
+});
+
+test("la cara verde (mareo) solo se usa en la línea del mareo y todas las expresiones tienen arte", async () => {
+  const sick = data.story.lines.filter((line) => line.expression === "sick").map((line) => line.id);
+  assert.deepEqual(sick, ["hint5"]);
+  const final = [...data.story.final.intro.map((step) => step.expression), ...data.story.gardevoir.intro.map((step) => step.portrait.replace("amelie:", ""))];
+  assert.ok(!final.includes("sick"));
+  const { readFileSync, existsSync } = await import("node:fs");
+  const manifest = JSON.parse(readFileSync(new URL("../assets/story/manifest.json", import.meta.url), "utf8"));
+  for (const expression of data.story.expressions) {
+    assert.ok(manifest[expression], `falta ${expression} en el manifiesto`);
+    assert.ok(existsSync(new URL(`../assets/story/${manifest[expression]}`, import.meta.url)), `falta el archivo de ${expression}`);
+  }
 });

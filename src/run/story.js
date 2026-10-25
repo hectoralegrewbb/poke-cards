@@ -5,6 +5,7 @@ import { isAlive } from "../engine/index.js";
 import { addCardToCollection } from "./deckManager.js";
 import { getStage, pokeCenterStep } from "./mapGenerator.js";
 import { addItem, emitRun } from "./runState.js";
+import { logStoryLine } from "./storyLog.js";
 
 export const storyActive = (run) => Boolean(run?.data?.story) && run.mode === "global" && run.data.story.modes.includes(run.mode);
 
@@ -86,6 +87,8 @@ function gapAllows(run, line) {
 // Devuelve la primera línea aplicable que aún no se mostró. No modifica la corrida.
 export function pickStoryLine(run) {
   if (!storyActive(run)) return null;
+  // En combate los diálogos respetan el turno: solo salen al empezar la fase del jugador, nunca a mitad de la resolución.
+  if (run.phase === "combat" && (run.combat?.phase !== "player" || run.combat?.result)) return null;
   const seen = run.storySeen ?? [];
   const context = storyContext(run);
   return run.data.story.lines.find((line) =>
@@ -124,10 +127,12 @@ export function consumeStoryLine(run) {
   const speaker = run.data.story.speakers[line.speaker] ?? { name: line.speaker.toUpperCase() };
   const variant = line.variants[pickIndex(run, `${line.id}|v|${run.stageIndex}`, line.variants.length)];
   const gift = line.gift ? applyGift(run, line.gift, `${line.id}|${run.stageIndex}`) : null;
-  return {
+  const shown = {
     id: line.id, speaker: line.speaker, expression: line.expression ?? "neutral",
     name: fill(line.name ?? speaker.name, context), text: fill(variant, context), gift
   };
+  const entry = logStoryLine(run, shown);
+  return { ...shown, seq: entry.seq };
 }
 
 // Escena final con la variante de cada paso ya elegida.

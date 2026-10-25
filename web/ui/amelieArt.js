@@ -7,7 +7,7 @@ import { h } from "./dom.js";
 
 export const expressions = ["neutral", "smile", "worried", "glitch", "dark"];
 // Expresiones del arte definitivo que el busto SVG de respaldo no dibuja: se aproximan con la más cercana.
-const svgFallback = { happy: "smile", wink: "smile", grin: "smile", gentle: "smile", think: "neutral", surprised: "neutral", error: "glitch", cry: "worried", scared: "worried", confused: "worried", shock: "worried" };
+const svgFallback = { happy: "smile", wink: "smile", grin: "smile", gentle: "smile", think: "neutral", surprised: "neutral", sick: "worried", cry: "worried", scared: "worried", confused: "worried", shock: "worried" };
 const storyPath = "../assets/story/";
 let customAssets = null;
 

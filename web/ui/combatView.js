@@ -4,12 +4,16 @@
 // Las cartas sobrantes vuelven a la mano si el Pokémon no las usa.
 // Jugar: arrastrá energía sobre un Pokémon (zona CARGAR) o sobre ESCUDO; arrastrá una técnica sobre un rival.
 // Con clic: Pokémon -> cartas (se cargan) -> técnica -> objetivo -> ¡USAR!
-import { calculateMoveDamage, endPlayerTurn, getIncomingThreats, getMoveCost, getPowerBonus, getMoveTargets, getValidTargets, isAlive, playMove, playShield, playUtility, splitCharge } from "../../src/engine/index.js";
+import { averageLevel, calculateMoveDamage, endPlayerTurn, getIncomingThreats, getMoveCost, getPowerBonus, getMoveTargets, getValidTargets, isAlive, playMove, playShield, playUtility, pokemonLevel, splitCharge } from "../../src/engine/index.js";
+import { levelTag } from "./levelTag.js";
 import { attachDrag } from "./dragDrop.js";
 import { h } from "./dom.js";
 import { icon } from "./pixelIcons.js";
 import { cardEffectIcons, describeCard, describeEffects, errorText, formatEvent, statusInfo, typeColors, typeNames } from "./labels.js";
 import { sfx } from "./sfx.js";
+
+// Nivel de referencia para colorear a los rivales: el promedio de tu equipo.
+const referenceLevel = (state) => averageLevel(state.teams.player.filter(isAlive));
 
 let searchCardUid = null; // carta Buscador abierta (modal con la pila de robo)
 const sel = { ref: null, actorUid: null, moveIndex: null, targetUid: null, cardUids: [], mode: "attack", utilityUid: null };
@@ -76,7 +80,7 @@ function loadFor(state, actor, move) {
   if (!move) return { pay: [], boost: [], energy: 0, cost, boostPower: 0 };
   const { pay, boost, energy } = splitCharge(cards, staged, { cost, power: move.power, maxBoostCards: balance.combat.maxBoostCardsPerAttack });
   const boostPower = boost.reduce((total, card) => total + cards[card.cardId].boostMultiplier, 0) * balance.combat.attackBoostPerCard;
-  return { pay, boost, energy, cost, boostPower };
+  return { pay, boost, energy: Math.min(energy, cost), cost, boostPower };
 }
 
 // Cuántas cartas puede tener cargadas un Pokémon: lo que necesita su técnica más cara + el tope de refuerzo.
@@ -102,7 +106,7 @@ const stagedOwner = (cardUid) => Object.keys(staged).find((uid) => staged[uid].i
 
 function previewDamage(state, actor, move, target, boostPower) {
   if (move.power <= 0) return null;
-  const result = calculateMoveDamage({ attacker: actor, defender: target, move, boostPower: boostPower + getPowerBonus(state, actor, move), isCrit: false, balance: state.data.balance, typeChart: state.data.typeChart, targetCount: getMoveTargets(state, actor, move, target).length });
+  const result = calculateMoveDamage({ attacker: actor, defender: target, move, boostPower: boostPower + getPowerBonus(state, actor, move), isCrit: false, balance: state.data.balance, typeChart: state.data.typeChart, heldItems: state.data.heldItems, targetCount: getMoveTargets(state, actor, move, target).length });
   return result;
 }
 
@@ -266,7 +270,8 @@ function pokemonTile(ctx, state, pokemon, validSet, threats) {
     alive && isOutOfReach(state, pokemon) ? h("div", { class: "reachNote" }, "FUERA DE ALCANCE") : null,
     h("div", { class: "spriteBox" }, h("div", { class: "platform" }), ctx.sprites.element(pokemon.speciesId, { facing: isPlayer ? "back" : "front", spriteKey: `${state.seed}:${pokemon.side}:${pokemon.uid}`, shiny: Boolean(pokemon.shiny) }), pokemon.shiny ? h("span", { class: "shinyMark", title: "Variocolor" }, "✦") : null),
     h("div", { class: "plate" },
-      h("div", { class: "pname" }, pokemon.shiny ? "✦ " : "", pokemon.name, h("small", {}, pokemon.row === "front" ? "F" : "B")),
+      h("div", { class: "pname" }, pokemon.shiny ? "✦ " : "", pokemon.name, h("small", {}, pokemon.row === "front" ? "F" : "B"), levelTag(pokemonLevel(pokemon), isPlayer ? 0 : referenceLevel(state))),
+      pokemon.heldItem ? h("span", { class: "statusTag held", title: `${state.data.heldItems[pokemon.heldItem].name}: ${state.data.heldItems[pokemon.heldItem].description}` }, `◆ ${state.data.heldItems[pokemon.heldItem].name}`) : null,
       pokemon.berryGuard ? h("span", { class: "statusTag berry", title: "Baya Zidra: aguanta un golpe letal con 1 PS" }, "BAYA") : null,
       pokemon.status ? h("span", { class: `statusTag ${pokemon.status}`, title: statusInfo[pokemon.status].hint }, statusInfo[pokemon.status].short) : null,
       h("div", { class: "types" }, pokemon.types.map(typeChip)),

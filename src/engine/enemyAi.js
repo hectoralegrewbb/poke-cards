@@ -56,6 +56,7 @@ export function planEnemyIntent(state, enemy) {
           isCrit: false,
           balance: state.data.balance,
           typeChart: state.data.typeChart,
+          heldItems: state.data.heldItems,
           targetCount: getMoveTargets(state, enemy, move, target).length
         }).damage
       : 0;
@@ -80,7 +81,7 @@ export function getIncomingThreats(state) {
     for (const defender of targets) {
       const { damage } = calculateMoveDamage({
         attacker: enemy, defender, move, isCrit: false, balance: state.data.balance,
-        typeChart: state.data.typeChart, targetCount: targets.length
+        typeChart: state.data.typeChart, heldItems: state.data.heldItems, targetCount: targets.length
       });
       const entry = threats.get(defender.uid) ?? { damage: 0, hits: 0 };
       entry.damage += damage;

@@ -114,3 +114,17 @@ test("guardar y restaurar a mitad de combate no cambia el desenlace", () => {
     assert.equal(finish(run.combat), finish(restored.combat), `seed ${seed} divergió tras restaurar`);
   }
 });
+
+test("el comodín solo se gasta si la energía normal no alcanza, y paga un costo 3 solo", () => {
+  const spare = [card("a", "energyBasic"), card("b", "energyBasic"), card("c", "wildcard")];
+  assert.deepEqual(choosePayCards(data.cards, spare, 2).pay.map((entry) => entry.uid).sort(), ["a", "b"]);
+  const short = [card("a", "energyBasic"), card("c", "wildcard")];
+  const three = choosePayCards(data.cards, short, 3);
+  assert.equal(three.energy >= 3, true);
+  assert.deepEqual(three.pay.map((entry) => entry.uid), ["c"]);
+});
+
+test("el comodín tiene tope de 5 copias por mazo", () => {
+  assert.equal(data.cards.wildcard.maxInDeck, 5);
+  assert.equal(data.cards.wildcard.fillsAnyCost, true);
+});

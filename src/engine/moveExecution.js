@@ -1,7 +1,10 @@
 import { applyDamage, calculateMoveDamage, flipCritCoins } from "./damage.js";
 import { emit } from "./combatState.js";
 import { applyEffects } from "./effects.js";
+import { critCoinDelta } from "./heldItems.js";
+import { runHeldTriggers } from "./heldTriggers.js";
 import { getPowerBonus } from "./modifiers.js";
+import { isAlive } from "./pokemon.js";
 import { getMoveTargets } from "./targeting.js";
 import { getTypeMultiplier } from "./typeChart.js";
 
@@ -21,13 +24,13 @@ export function executeMove(state, actor, moveIndex, target, options = {}) {
   if (move.power > 0) {
     boostPower += getPowerBonus(state, actor, move);
     const isPlayer = actor.side === "player";
-    const coins = move.critCoins ?? data.balance.combat.critCoins;
+    const coins = Math.max(1, (move.critCoins ?? data.balance.combat.critCoins) + critCoinDelta(data.heldItems, actor));
     const crit = flipCritCoins(rng, coins, isPlayer ? state.luckyCoins : 0);
     if (isPlayer) state.luckyCoins -= crit.luckyCoinsUsed;
 
     for (const defender of targets) {
       if (defender.hp <= 0) continue;
-      const result = calculateMoveDamage({ attacker: actor, defender, move, boostPower, isCrit: crit.isCrit, balance: data.balance, typeChart: data.typeChart, targetCount: targets.length });
+      const result = calculateMoveDamage({ attacker: actor, defender, move, boostPower, isCrit: crit.isCrit, balance: data.balance, typeChart: data.typeChart, heldItems: data.heldItems, targetCount: targets.length });
       const amount = result.damage;
       const applied = applyDamage(defender, amount);
       emit(state, {
@@ -35,10 +38,17 @@ export function executeMove(state, actor, moveIndex, target, options = {}) {
         absorbed: applied.absorbed, hpLost: applied.hpLost, typeMultiplier: result.typeMultiplier,
         stab: result.stab, boostPower, isCrit: result.isCrit, spread: targets.length > 1
       });
-      if (applied.saved) emit(state, { type: "berrySaved", targetId: defender.uid });
+      if (applied.saved) emit(state, { type: "berrySaved", targetId: defender.uid, by: applied.savedBy });
       if (applied.fainted) emit(state, { type: "fainted", pokemonId: defender.uid });
       else if (result.typeMultiplier > 0) applyEffects(state, move.effects, { side: actor.side, source: actor, target: defender });
+      // Objetos equipables: el atacante golpeó, el defensor recibió daño, y quizá hubo un KO.
+      if (applied.hpLost > 0) {
+        runHeldTriggers(state, "onHit", actor, { target: defender, damage: applied.hpLost, move });
+        if (isAlive(defender)) runHeldTriggers(state, "onDamaged", defender, { attacker: actor, damage: applied.hpLost, move });
+        if (applied.fainted) runHeldTriggers(state, "onKO", actor, { target: defender, move });
+      }
     }
+    (actor.heldState ??= { spent: false, struck: false }).struck = true;
   } else {
     for (const defender of targets) {
       // Los movimientos de estado ofensivos tampoco atraviesan inmunidades de tipo.

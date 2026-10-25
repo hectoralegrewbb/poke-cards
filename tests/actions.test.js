@@ -44,10 +44,10 @@ test("el costo se paga con cartas de la mano y van al descarte", () => {
   assert.ok(state.deck.discardPile.some((card) => card.uid === "t0"));
 });
 
-test("costo 2: el comodín (valor 1) no alcanza, la energía doble sí", () => {
+test("costo 2: una energía básica no alcanza, el comodín paga cualquier técnica por sí solo", () => {
   const state = makeCombat({ party: ["serperior"], enemies: [{ speciesId: "gigalith" }] });
   makeSturdy(state);
-  setHand(state, ["wildcard", "energyDouble"]);
+  setHand(state, ["energyBasic", "wildcard"]);
 
   const leafStorm = attack({ moveIndex: 2 });
   assert.deepEqual(playMove(state, { ...leafStorm, payCardUids: ["t0"] }), { ok: false, error: "insufficientEnergy" });

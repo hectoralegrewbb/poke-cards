@@ -1,5 +1,7 @@
 // Panel lateral fuera de combate: party, caja, inventario y uso de ítems.
-import { isAlive } from "../../src/engine/index.js";
+import { isAlive, pokemonLevel } from "../../src/engine/index.js";
+import { levelTag } from "./levelTag.js";
+import { bagButton, heldButton } from "./heldView.js";
 import { deckStatus, setRow, swapPartyBox, useItem } from "../../src/run/index.js";
 import { h } from "./dom.js";
 import { errorText, statusInfo, typeColors, typeNames } from "./labels.js";
@@ -52,10 +54,11 @@ function memberRow(ctx, pokemon, inBox) {
   return h("div", { class: `member ${alive ? "" : "dead"} ${ui.boxUid === pokemon.uid ? "selected" : ""}`, onClick },
     ctx.sprites.element(pokemon.speciesId, { facing: "front", spriteKey: `roster:${pokemon.uid}`, shiny: Boolean(pokemon.shiny) }),
     h("div", { class: "memberInfo" },
-      h("div", { class: "pname" }, pokemon.shiny ? "✦ " : "", pokemon.name, pokemon.status ? h("span", { class: `statusTag ${pokemon.status}`, title: statusInfo[pokemon.status].hint }, ` ${statusInfo[pokemon.status].short}`) : null),
+      h("div", { class: "pname" }, pokemon.shiny ? "✦ " : "", pokemon.name, " ", levelTag(pokemonLevel(pokemon)), pokemon.status ? h("span", { class: `statusTag ${pokemon.status}`, title: statusInfo[pokemon.status].hint }, ` ${statusInfo[pokemon.status].short}`) : null),
       h("div", { class: "types" }, pokemon.types.map((type) => h("span", { class: "chip", style: `background:${typeColors[type]}` }, typeNames[type]))),
       alive ? h("div", { class: "hp" }, h("span", { class: "hpLabel" }, "PS"), h("div", { class: "hpTrack" }, h("div", { class: `hpFill ${tone}`, style: `width:${percent}%` })), h("span", { class: "hpNum" }, `${pokemon.hp}/${pokemon.maxHp}`)) : h("div", { class: "fainted" }, "DEBILITADO"),
-      h("small", {}, expInfo(ctx, pokemon))),
+      h("small", {}, expInfo(ctx, pokemon)),
+      heldButton(ctx, pokemon)),
     inBox ? null : h("button", { class: "btn mini", onClick: (event) => { event.stopPropagation(); setRow(ctx.run, pokemon.uid, pokemon.row === "front" ? "back" : "front"); sfx.play("select"); ctx.rerender(); } }, pokemon.row === "front" ? "FRENTE" : "FONDO"));
 }
 
@@ -67,6 +70,8 @@ export function renderRoster(ctx) {
       h("span", {}, icon("coin", { scale: 2 }), ` ${run.gold}`),
       h("button", { class: `btn mini deckBtn ${deckStatus(run).valid ? "" : "danger"}`, title: "Editar mazo", onClick: () => { ctx.deckOpen = true; sfx.play("select"); ctx.rerender(); } },
         icon("cards", { scale: 2 }), ` ${deckStatus(run).size}/${deckStatus(run).max}`, run.chestCardIds.length ? ` +${run.chestCardIds.length}` : ""),
+      h("span", { title: "Piezas de estrella: se usan en el tutor de técnicas del campamento" }, icon("star", { scale: 2 }), ` ${run.starPieces ?? 0}`),
+      bagButton(ctx),
       h("span", {}, icon("medal", { scale: 2 }), ` ${run.badges.length}/8`)),
     h("h3", {}, "PARTY"),
     run.party.map((pokemon) => memberRow(ctx, pokemon, false)),

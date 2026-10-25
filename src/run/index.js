@@ -7,3 +7,7 @@ export { difficultyPresets, getDifficulty } from "./difficulty.js";
 export { buildCampaign, gameModes } from "./campaignBuilder.js";
 export { restoreRun, saveVersion, serializeRun } from "./saveGame.js";
 export { consumeStoryLine, finalScene, legendaryCount, markStorySeen, pickStoryLine, secretEligible, seenKey, storyActive } from "./story.js";
+export { estimateNodeLevel, partyLevel } from "./levelEstimate.js";
+export { logStoryLine, markStoryRead, readingTimeMs, storyLogLimit, unreadStoryCount } from "./storyLog.js";
+export { equipHeldItem, freeHeldItems, grantHeldItem, heldItemsOwned, heldTierCap, holderOf, rollHeldDrop, unequipHeldItem } from "./heldItems.js";
+export { grantStarPieces, learnableMoves, moveChangeCost, rollStarPieces, teachMove } from "./moveTutor.js";

@@ -15,6 +15,7 @@ const fileNames = [
   "startingDeck",
   "encounters",
   "items",
+  "heldItems",
   "region",
   "campaigns",
   "story"

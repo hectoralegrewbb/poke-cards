@@ -165,6 +165,18 @@ const icons = {
     ".oaaaaao.",
     "..ooooo.."
   ] },
+  bell: { main: "#ffcd75", alt: "#ef7d57", rows: [
+    "....o....",
+    "...ooo...",
+    "..o###o..",
+    "..o###o..",
+    ".o#w###o.",
+    ".o#####o.",
+    "o#######o",
+    "oaaaaaaao",
+    "ooooooooo",
+    "...oao..."
+  ] },
   arrow: { main: "#1a1c2c", alt: "#1a1c2c", rows: [
     "#.....",
     "##....",

@@ -38,7 +38,9 @@ export function applyEffects(state, effects, context) {
 registerEffect("heal", (state, effect, { targets }) => {
   for (const pokemon of targets) {
     if (!isAlive(pokemon)) continue;
-    const healed = Math.min(effect.amount, pokemon.maxHp - pokemon.hp);
+    // amount fijo, o fraction de los PS máximos (Restos, Baya Aranja...).
+    const wanted = effect.amount ?? Math.max(1, Math.round(pokemon.maxHp * effect.fraction));
+    const healed = Math.min(wanted, pokemon.maxHp - pokemon.hp);
     pokemon.hp += healed;
     emit(state, { type: "healed", targetId: pokemon.uid, amount: healed });
   }
@@ -148,4 +150,53 @@ registerEffect("searchDeck", (state, effect, { side, choice }) => {
   const [card] = state.deck.drawPile.splice(index, 1);
   state.deck.hand.push(card);
   emit(state, { type: "cardSearched", cardUid: card.uid, cardId: card.cardId });
+});
+
+// ---- Objetos equipables (heldTriggers.js) ----
+// Cura una proporción del daño que acaba de infligir el portador (Concha Campana).
+registerEffect("healFromDamage", (state, effect, { targets, held }) => {
+  const wanted = Math.max(1, Math.round((held?.damage ?? 0) * effect.ratio));
+  if (!held?.damage) return;
+  for (const pokemon of targets) {
+    if (!isAlive(pokemon)) continue;
+    const healed = Math.min(wanted, pokemon.maxHp - pokemon.hp);
+    if (healed <= 0) continue;
+    pokemon.hp += healed;
+    emit(state, { type: "healed", targetId: pokemon.uid, amount: healed });
+  }
+});
+
+// El portador se hace daño a sí mismo (Vidasfera); nunca lo debilita: como mínimo le queda 1 PS.
+registerEffect("selfDamage", (state, effect, { targets }) => {
+  for (const pokemon of targets) {
+    if (!isAlive(pokemon)) continue;
+    const lost = Math.min(pokemon.hp - 1, Math.max(1, Math.round(pokemon.maxHp * effect.fraction)));
+    if (lost <= 0) continue;
+    pokemon.hp -= lost;
+    emit(state, { type: "recoil", targetId: pokemon.uid, amount: lost });
+  }
+});
+
+// Daña al atacante que golpeó al portador (Casco Dentado). Ignora el escudo, como el daño de estado.
+registerEffect("damageAttacker", (state, effect, { held }) => {
+  const attacker = held?.attacker;
+  if (!attacker || !isAlive(attacker)) return;
+  const lost = Math.min(attacker.hp, Math.max(1, Math.round(attacker.maxHp * effect.fraction)));
+  attacker.hp -= lost;
+  emit(state, { type: "recoil", targetId: attacker.uid, amount: lost });
+  if (attacker.hp === 0) {
+    attacker.fainted = true;
+    attacker.status = null;
+    attacker.staggered = false;
+    emit(state, { type: "fainted", pokemonId: attacker.uid });
+  }
+});
+
+// Banda Focus: este combate, un golpe letal con los PS al máximo deja al portador con 1 PS.
+registerEffect("focusSash", (state, effect, { targets }) => {
+  for (const pokemon of targets) {
+    if (!isAlive(pokemon)) continue;
+    pokemon.focusSash = true;
+    emit(state, { type: "sashReady", targetId: pokemon.uid });
+  }
 });

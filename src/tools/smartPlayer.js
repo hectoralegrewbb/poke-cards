@@ -28,7 +28,7 @@ function estimate(state, actor, move, target, boostPower = 0) {
   for (const defender of hits) {
     const result = calculateMoveDamage({
       attacker: actor, defender, move, boostPower: boostPower + getPowerBonus(state, actor, move), isCrit: false,
-      balance: state.data.balance, typeChart: state.data.typeChart, targetCount: hits.length
+      balance: state.data.balance, typeChart: state.data.typeChart, heldItems: state.data.heldItems, targetCount: hits.length
     });
     const effective = Math.min(result.damage, defender.hp + defender.shield);
     damage += effective;

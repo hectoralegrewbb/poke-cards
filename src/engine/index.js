@@ -14,3 +14,6 @@ export { choosePayCards, playMove, playShield, playUtility, splitCharge } from "
 export { createCombat, endPlayerTurn } from "./combat.js";
 export { validateGameData } from "./validateData.js";
 export { consumeFlinch, inflictStatus, statusNames, tickStatusForSide } from "./status.js";
+export { averageLevel, levelFromRating, levelTone, pokemonLevel, powerRating, speciesLevel } from "./level.js";
+export { critCoinDelta, damageItemMultiplier, expMultiplier, flatDamageReduction, getHeldItem, goldMultiplier } from "./heldItems.js";
+export { runHeldForTeam, runHeldTriggers } from "./heldTriggers.js";

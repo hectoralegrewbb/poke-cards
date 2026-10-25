@@ -1,3 +1,4 @@
+import { damageItemMultiplier, flatDamageReduction } from "./heldItems.js";
 import { getTypeMultiplier } from "./typeChart.js";
 
 const clamp = (value, min, max) => Math.min(max, Math.max(min, value));
@@ -12,7 +13,7 @@ export function flipCritCoins(rng, coins, luckyCoins = 0) {
   return { isCrit: heads === effectiveCoins, luckyCoinsUsed: coins - effectiveCoins };
 }
 
-export function calculateDamage({ attacker, defender, move, boostPower = 0, isCrit, balance, typeChart }) {
+export function calculateDamage({ attacker, defender, move, boostPower = 0, isCrit, balance, typeChart, heldItems = null }) {
   const combat = balance.combat;
   const isPhysical = move.category === "physical";
   const attackStat = (isPhysical ? attacker.stats.atk : attacker.stats.spa) * (isPhysical && attacker.status === "burn" ? 0.75 : 1);
@@ -22,8 +23,9 @@ export function calculateDamage({ attacker, defender, move, boostPower = 0, isCr
   const stab = attacker.types.includes(move.type) ? combat.stabMultiplier : 1;
   const critMultiplier = isCrit ? combat.critMultiplier : 1;
 
-  const raw = (move.power + boostPower) * statRatio * stab * typeMultiplier * critMultiplier;
-  const damage = typeMultiplier === 0 ? 0 : Math.max(1, Math.round(raw));
+  const itemMultiplier = damageItemMultiplier(heldItems, { attacker, defender, move, typeMultiplier, stab: stab > 1, isCrit });
+  const raw = (move.power + boostPower) * statRatio * stab * typeMultiplier * critMultiplier * itemMultiplier;
+  const damage = typeMultiplier === 0 ? 0 : Math.max(1, Math.round(raw) - flatDamageReduction(heldItems, defender));
   return { damage, typeMultiplier, isCrit, stab: stab > 1 };
 }
 
@@ -41,10 +43,15 @@ export function applyDamage(target, amount) {
   target.shield -= absorbed;
   let hpLost = Math.min(target.hp, amount - absorbed);
   // Baya Zidra: un golpe letal deja al Pokémon con 1 PS y consume la baya.
-  const saved = hpLost > 0 && hpLost >= target.hp && Boolean(target.berryGuard);
+  // Banda Focus: lo mismo, pero solo si estaba con los PS al máximo.
+  const lethal = hpLost > 0 && hpLost >= target.hp;
+  const byBerry = lethal && Boolean(target.berryGuard);
+  const bySash = lethal && !byBerry && Boolean(target.focusSash) && target.hp === target.maxHp;
+  const saved = byBerry || bySash;
   if (saved) {
     hpLost = target.hp - 1;
-    target.berryGuard = false;
+    if (byBerry) target.berryGuard = false;
+    else target.focusSash = false;
   }
   target.hp -= hpLost;
   if (target.hp <= 0) {
@@ -53,5 +60,5 @@ export function applyDamage(target, amount) {
     target.status = null;
     target.staggered = false;
   }
-  return { absorbed, hpLost, fainted: target.fainted, saved };
+  return { absorbed, hpLost, fainted: target.fainted, saved, savedBy: bySash ? "sash" : byBerry ? "berry" : null };
 }

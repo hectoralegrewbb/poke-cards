@@ -2,6 +2,7 @@ import { createDeck } from "./deck.js";
 import { checkCombatEnd, drawForPlayer, emit, getLiving, getTeam } from "./combatState.js";
 import { applyEffects } from "./effects.js";
 import { planEnemyIntent, resolveEnemyIntent } from "./enemyAi.js";
+import { runHeldForTeam } from "./heldTriggers.js";
 import { tickModifiers } from "./modifiers.js";
 import { createPokemon, isAlive, resetForCombat, tickCooldowns } from "./pokemon.js";
 import { createRng } from "./rng.js";
@@ -46,6 +47,7 @@ export function createCombat({ data, party, enemies, deckCardIds, seed = 1, kind
   emit(state, { type: "combatStarted", kind });
   startPlayerTurn(state);
   runPassives(state, "combatStart");
+  runHeldForTeam(state, "combatStart");
   return state;
 }
 
@@ -79,6 +81,7 @@ function startPlayerTurn(state) {
   if (state.turn > 1) {
     tickModifiers(state);
     runPassives(state, "turnStart");
+    runHeldForTeam(state, "turnStart");
   }
 
   for (const enemy of getLiving(state, "enemy")) {

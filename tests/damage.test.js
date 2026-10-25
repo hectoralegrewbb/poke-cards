@@ -54,7 +54,7 @@ test("daño: inmunidad da 0 y la relación de stats está acotada", () => {
 
 test("applyDamage: el escudo absorbe primero y marca fainted", () => {
   const target = { hp: 10, shield: 5, fainted: false };
-  assert.deepEqual(applyDamage(target, 8), { absorbed: 5, hpLost: 3, fainted: false, saved: false });
+  assert.deepEqual(applyDamage(target, 8), { absorbed: 5, hpLost: 3, fainted: false, saved: false, savedBy: null });
   assert.equal(target.hp, 7);
   assert.equal(target.shield, 0);
 

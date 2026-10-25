@@ -28,10 +28,14 @@ export function findEvolution(pokemon, data, { itemId = null, badges = 0 } = {})
   return match ?? null;
 }
 
-// Reemplaza especie, stats y los 4 movimientos. Conserva las heridas: solo suma la vida ganada.
+// Reemplaza especie, stats y los 4 movimientos de especie. Conserva las heridas: solo suma la vida ganada.
+// Las técnicas enseñadas por el tutor (distintas a las de la especie) se conservan al evolucionar.
 export function evolve(pokemon, evolution, data) {
   const previousMaxHp = pokemon.maxHp;
+  const speciesMoves = data.species[pokemon.speciesId].moves;
+  const taught = pokemon.moves.map((moveId, index) => (moveId !== speciesMoves[index] ? moveId : null));
   applySpecies(pokemon, evolution.to, data);
+  taught.forEach((moveId, index) => { if (moveId) pokemon.moves[index] = moveId; });
   const hpGained = Math.max(0, pokemon.maxHp - previousMaxHp);
   pokemon.hp = Math.min(pokemon.maxHp, pokemon.hp + hpGained);
   pokemon.exp = Math.max(0, pokemon.exp - (evolution.expRequired ?? 0));

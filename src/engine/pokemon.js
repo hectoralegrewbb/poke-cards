@@ -32,7 +32,8 @@ export function createPokemon({ uid, speciesId, side, row = "front", profileId =
     fainted: false,
     status: null,
     staggered: false,
-    intent: null
+    intent: null,
+    heldItem: null
   };
   if (shiny) pokemon.shiny = true; // Solo cosmético: no altera estadísticas.
   applySpecies(pokemon, speciesId, data);
@@ -47,6 +48,8 @@ export function resetForCombat(pokemon) {
   pokemon.intent = null;
   pokemon.staggered = false; // El retroceso no queda pendiente entre combates.
   pokemon.berryGuard = false; // La Baya Zidra solo dura un combate.
+  pokemon.focusSash = false; // La Banda Focus se rearma al empezar cada combate (heldTriggers).
+  pokemon.heldState = { spent: false, struck: false }; // objetos de un solo uso / primer ataque
   pokemon.cooldowns = pokemon.moves.map(() => 0);
 }
 

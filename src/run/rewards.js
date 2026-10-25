@@ -1,7 +1,9 @@
 // Recompensas tras ganar un combate: oro, ítems, medalla, elección de carta y oferta de captura.
-import { calculateExpReward, evolve, findEvolution, isAlive } from "../engine/index.js";
+import { calculateExpReward, evolve, findEvolution, goldMultiplier, isAlive } from "../engine/index.js";
 import { getStage } from "./mapGenerator.js";
 import { addCardToCollection } from "./deckManager.js";
+import { grantHeldItem, rollHeldDrop } from "./heldItems.js";
+import { grantStarPieces, rollStarPieces } from "./moveTutor.js";
 import { addItem, addToRoster, emitRun, newPokemon } from "./runState.js";
 
 function pickCardChoices(run, count) {
@@ -31,9 +33,11 @@ export function grantVictoryRewards(run, node, defeatedEnemies) {
   const rule = run.campaign.nodeRules[node.type];
   const events = [];
 
-  const gold = Math.round(calculateExpReward(defeatedEnemies, run.data) * rule.goldPerExp);
+  const gold = Math.round(calculateExpReward(defeatedEnemies, run.data) * rule.goldPerExp * goldMultiplier(run.data.heldItems, run.party));
   run.gold += gold;
   events.push(emitRun(run, { type: "goldGained", amount: gold }));
+
+  events.push(...grantStarPieces(run, rollStarPieces(run, node.type)));
 
   let itemId = null;
   if (node.type === "legendary") {
@@ -51,6 +55,9 @@ export function grantVictoryRewards(run, node, defeatedEnemies) {
     addItem(run, itemId);
     events.push(emitRun(run, { type: "itemGained", itemId }));
   }
+
+  const heldId = rollHeldDrop(run, node.type);
+  if (heldId) events.push(...grantHeldItem(run, heldId).events);
 
   // Un variocolor derrotado siempre se ofrece para capturar (es raro y solo cosmético).
   const shinyEnemy = defeatedEnemies.find((enemy) => enemy.shiny && (rule.captureChance ?? 0) > 0);
