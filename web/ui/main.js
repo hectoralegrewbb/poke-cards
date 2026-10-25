@@ -148,7 +148,7 @@ function endScreen() {
   const back = h("button", { class: "btn primary", onClick: () => { ctx.run = null; ctx.storyLine = null; ctx.screen = "title"; rerender(); } }, "VOLVER AL INICIO");
   if (ending) {
     return h("section", { class: `window title endingScreen ending-${run.ending}` },
-      amelieFace(run.ending === "escape" ? "smile" : "dark", 150),
+      amelieFace(run.ending === "escape" ? "cry" : "gentle", 190),
       h("h2", { class: "win" }, ending.title),
       ending.lines.map((line) => h("p", { class: "endingLine" }, line)),
       summary, back);

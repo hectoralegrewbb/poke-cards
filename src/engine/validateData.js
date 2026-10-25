@@ -184,7 +184,7 @@ function validateCampaigns(data, check) {
 
 function validateStory(data, check) {
   const { story } = data;
-  const expressions = ["neutral", "smile", "worried", "glitch", "dark"];
+  const expressions = story.expressions;
   const ids = new Set();
   for (const line of story.lines) {
     check(!ids.has(line.id), `story: línea repetida ${line.id}`);

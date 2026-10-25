@@ -7,7 +7,7 @@ import { sfx } from "./sfx.js";
 // Globo no bloqueante. ctx.storyLine = { line, fresh }. onClose limpia el estado.
 // Retrato: Amelie usa su busto; el resto de hablantes, una placa con inicial y color propios.
 function speakerAvatar(ctx, line) {
-  if (line.speaker === "amelie") return amelieFace(line.expression, 64);
+  if (line.speaker === "amelie") return amelieFace(line.expression, 64, { avatar: true });
   const speaker = ctx.data.story.speakers[line.speaker] ?? {};
   return h("span", { class: "speakerBadge", style: `--badgeColor:${speaker.color ?? "#94b0c2"}`, "aria-hidden": "true" }, speaker.glyph ?? line.name.charAt(0));
 }
@@ -27,7 +27,7 @@ export function storyToast(ctx, onClose) {
 
 export function starterOffer(story) {
   return h("div", { class: "storyOffer" },
-    amelieFace(story.starter.expression, 88),
+    amelieFace(story.starter.expression, 84, { avatar: true }),
     h("div", { class: "storyBody" }, h("strong", {}, story.starter.title), h("p", {}, story.starter.text)));
 }
 

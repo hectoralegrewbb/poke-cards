@@ -6,6 +6,8 @@ import { svgNode, flatInk } from "./flatArt.js";
 import { h } from "./dom.js";
 
 export const expressions = ["neutral", "smile", "worried", "glitch", "dark"];
+// Expresiones del arte definitivo que el busto SVG de respaldo no dibuja: se aproximan con la más cercana.
+const svgFallback = { happy: "smile", wink: "smile", grin: "smile", gentle: "smile", think: "neutral", surprised: "neutral", error: "glitch", cry: "worried", scared: "worried", confused: "worried", shock: "worried" };
 const storyPath = "../assets/story/";
 let customAssets = null;
 
@@ -15,6 +17,8 @@ export async function loadAmelieAssets() {
     if (!response.ok) return;
     const manifest = await response.json();
     customAssets = manifest && typeof manifest === "object" && Object.keys(manifest).length ? manifest : null;
+    // Precarga para que el cambio de expresión no parpadee.
+    for (const file of Object.values(customAssets ?? {})) new Image().src = `${storyPath}${file}`;
   } catch { customAssets = null; }
 }
 
@@ -103,11 +107,11 @@ function drawBust(expression) {
   return svg;
 }
 
-// Devuelve el retrato listo para insertar. size = alto en px.
-export function amelieFace(expression = "neutral", size = 96) {
+// Devuelve el retrato listo para insertar. size = alto en px. avatar = recorte circular de la cara (globos y paneles chicos).
+export function amelieFace(expression = "neutral", size = 96, { avatar = false } = {}) {
   const file = customAssets?.[expression] ?? customAssets?.neutral;
-  const holder = h("span", { class: `amelieFace ex-${expression}`, style: `--amSize:${size}px` });
+  const holder = h("span", { class: `amelieFace ex-${expression} ${file ? "photo" : ""} ${avatar ? "avatar" : ""}`, style: `--amSize:${size}px` });
   if (file) holder.append(h("img", { src: `${storyPath}${file}`, alt: "Profesora Amelie", class: "amelieImg", draggable: "false" }));
-  else holder.append(drawBust(expression));
+  else holder.append(drawBust(svgFallback[expression] ?? expression));
   return holder;
 }

@@ -44,3 +44,9 @@ Regional/entrenador 25 % (antes 21 %), global 23 %, explorador 79 % (antes 73 %)
 
 - Los legendarios opcionales ya no aparecen antes de la 3.ª medalla y su probabilidad baja de 20 % a 12 %. Los legendarios de hito (3.ª y 6.ª medalla) no cambian.
 - La Oficial Jenny aparece con más frecuencia en el mapa (consejos de ruta y de Centro).
+
+## v0.9.4 · Retratos definitivos de Amelie
+
+- 16 retratos (`assets/story/amelie-*.webp` + `manifest.json`) recortados de las dos hojas de expresiones. Se usan en el globo y el panel del inicial (recorte circular de la cara), en la escena final y en las pantallas de final.
+- Nuevas expresiones en las líneas: happy, wink, think, error (reveal y "no te vas a ir"), cry (final de escape) y gentle (final de quedarse). El SVG de respaldo las aproxima a las 5 básicas si falta algún archivo.
+- Efecto de glitch en pantalla para las expresiones glitch/error.
