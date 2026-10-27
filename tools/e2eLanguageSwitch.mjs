@@ -1,0 +1,21 @@
+import { createRequire } from "node:module";
+const require = createRequire("/opt/npm-tools/node_modules/");
+const { chromium } = require("playwright");
+const b = await chromium.launch({ executablePath: "/opt/pw-browsers/chromium-1194/chrome-linux/chrome" });
+const p = await b.newPage({ viewport: { width: 390, height: 800 } });
+const errs=[]; p.on("pageerror", (e) => errs.push(e.message));
+await p.addInitScript(() => { try { sessionStorage.getItem("x") ; if(!sessionStorage.getItem("seeded")){ localStorage.setItem("pokemon-dream.lang","es"); localStorage.setItem("pokecards.textSpeed","instant"); sessionStorage.setItem("seeded","1"); } } catch {} });
+await p.goto("http://localhost:8080/web/?debug&fastload"); await p.waitForSelector(".title");
+console.log("lang", await p.evaluate(()=>document.documentElement.lang), await p.locator(".startButton").textContent());
+await p.click(".startButton"); await p.click(".adventureCard >> nth=1"); await p.click(".startButton");
+await p.waitForSelector(".starterCard"); await p.click(".starterCard >> nth=1"); await p.click(".starterButtons .primary");
+await p.waitForTimeout(500);
+await p.click(".sound");                       // ajustes
+await p.screenshot({ path: "/tmp/shot.png" });
+await p.click("button[lang=en]");
+await p.waitForSelector(".callPanel, .mapView, .layout", { timeout: 8000 });
+await p.waitForTimeout(800);
+console.log("lang", await p.evaluate(()=>document.documentElement.lang), "phase", await p.evaluate(()=>window.__ctx.run?.phase));
+await p.screenshot({ path: "/tmp/shot.png" });
+console.log(errs);
+await b.close();

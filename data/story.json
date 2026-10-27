@@ -24,7 +24,15 @@
   "scared",
   "confused",
   "surprised",
-  "shock"
+  "shock",
+  "laugh",
+  "unsure",
+  "gasp",
+  "cheer",
+  "flustered",
+  "gloom",
+  "sad",
+  "nauseous"
  ],
  "speakers": {
   "amelie": {

@@ -45,3 +45,16 @@ test("idioma: detectLanguage usa la preferencia guardada y, si no, el idioma del
   assert.equal(detectLanguage(storage, "en-US"), "es");
   assert.ok(!saveLanguage("fr", storage));
 });
+
+test("cartas: todas tienen sprite PNG de 18×30 px (marco incluido) y los retratos de Amelie existen", async () => {
+  const { readFileSync, existsSync } = await import("node:fs");
+  for (const [id, card] of Object.entries(data.cards)) {
+    assert.ok(card.art, `${id}: falta "art"`);
+    const file = new URL(`../assets/cards/${card.art}`, import.meta.url);
+    assert.ok(existsSync(file), `${id}: falta ${card.art}`);
+    const png = readFileSync(file);
+    assert.equal(png.readUInt32BE(16), 18, `${id}: el ancho debe ser 18`);
+    assert.equal(png.readUInt32BE(20), 30, `${id}: el alto debe ser 30`);
+  }
+  assert.equal(data.story.expressions.length, 24);
+});

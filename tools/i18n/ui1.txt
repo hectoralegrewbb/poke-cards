@@ -1,0 +1,245 @@
++{amount} Pieza de estrella ||| +{amount} Star Piece
++{amount} Piezas de estrella ||| +{amount} Star Pieces
++{amount} de oro ||| +{amount} gold
+BUSCADOR ||| SEARCH
+CAMPAMENTO ||| CAMP
+CENTRO POKÉMON ||| POKÉMON CENTER
+Cargá energía (solo si cuesta) ||| Load energy (only if it costs)
+LLAMADAS ||| CALLS
+Medallas: {badges}/8 · {campaign} · {mode} · {difficulty} · Semilla {seed} ||| Badges: {badges}/8 · {campaign} · {mode} · {difficulty} · Seed {seed}
+NUEVO ||| NEW
+SUERTE x{luckyCoins} ||| LUCK x{luckyCoins}
+Seleccioná un aliado ||| Select an ally
+TIENDA ||| SHOP
+TURNO TÁCTICO ||| TACTICAL TURN
+Técnica → objetivo → ¡USAR! ||| Move → target → USE!
+a todo el equipo ||| to the whole team
+al equipo ||| to the team
+{name} evolucionó a {name2} ||| {name} evolved into {name2}
+¡Objeto nuevo: {name}! (equipalo en el panel de equipo) ||| New item: {name}! (equip it in the team panel)
+· +{boostPower} POD ||| · +{boostPower} PWR
+· CC ||| · MELEE
+· ELEGÍ OBJETIVO ||| · CHOOSE A TARGET
+· EVO {minBadges} MED. ||| · EVO {minBadges} BDG.
+· FALTAN {energy} ENERGÍA ||| · {energy} MORE ENERGY NEEDED
+· FILA ||| · ROW
+· LIBRE: no gasta las cartas cargadas ||| · FREE: doesn't spend the loaded cards
+· TU EQUIPO Nv.{reference} ||| · YOUR TEAM Lv.{reference}
+· falta energía {energy}/{cost} ||| · not enough energy {energy}/{cost}
+· {count} Pokémon ||| · {count} Pokémon
+· {readyCount} Pokémon por actuar ||| · {readyCount} Pokémon yet to act
+· ÁREA ||| · AREA
+(al cofre) ||| (to the chest)
++{amount} energías a la mano ||| +{amount} energy cards to hand
++{amount} poder {category} · {turns} turnos ||| +{amount} {category} power · {turns} turns
++{boostPower} refuerzo ||| +{boostPower} boost
++{trainExp} EXP a un Pokémon. ||| +{trainExp} EXP to one Pokémon.
+-{amount} cooldown ||| -{amount} cooldown
+1 Pokémon recuperó sus PS y se curó de estados. ||| 1 Pokémon recovered its HP and was cured of status conditions.
+1 Pokémon revivió. ||| 1 Pokémon was revived.
+1-2 salvajes. Podés capturar uno. ||| 1-2 wild Pokémon. You can capture one.
+1-3 rivales. Oro y una carta. ||| 1-3 rivals. Gold and a card.
+1. Elegí tu Pokémon · 2. Cargá energía · 3. Técnica y objetivo. ||| 1. Pick your Pokémon · 2. Load energy · 3. Move and target.
+3 rivales fuertes. Más oro y un ítem. ||| 3 strong rivals. More gold and an item.
+5 rivales. Sin descanso. ||| 5 rivals. No rest.
+6 rivales. El combate final. ||| 6 rivals. The final battle.
+AJUSTES ||| SETTINGS
+ALTO MANDO ||| ELITE FOUR
+ALTO MANDO · {leader} ||| ELITE FOUR · {leader}
+AMELIE ||| AMELIE
+APLICAR ESCUDO ||| APPLY SHIELD
+APOYO ||| SUPPORT
+AVENTURA · {label} ||| ADVENTURE · {label}
+Acero ||| Steel
+Agua ||| Water
+Ajustes ||| Settings
+Ajustes de audio y estilo ||| Audio and style settings
+Alto Mando ||| Elite Four
+Aprendé, capturá y experimentá con menos castigo. ||| Learn, capture and experiment with less punishment.
+Audio ||| Audio
+BATALLA FINAL ||| FINAL BATTLE
+BAYA ||| BERRY
+Baya Zidra: aguanta un golpe letal con 1 PS ||| Sitrus Berry: survives a lethal hit with 1 HP
+Bicho ||| Bug
+Buscar una carta en el mazo ||| Search the deck for a card
+Buscás 1 carta de tu mazo y la tomás. Máx. 2 en el mazo ||| Search your deck for 1 card and take it. Max. 2 in the deck
+Buscás en tu mazo: {cardId} a la mano. ||| You search your deck: {cardId} to your hand.
+CAJA ||| BOX
+CAMPEÓN ||| CHAMPION
+CAMPEÓN · {leader} ||| CHAMPION · {leader}
+CANCELAR ||| CANCEL
+CAPTURAR ||| CAPTURE
+CARGANDO ||| LOADING
+CARGAR ||| CHARGE
+CD {cooldown} ||| CD {cooldown}
+CERRAR ✕ ||| CLOSE ✕
+CLÁSICO ||| CLASSIC
+COFRE ||| CHEST
+COFRE {chestSize} ||| CHEST {chestSize}
+CONSEJO · Las zonas salvajes favorecen nuevas capturas. Tiendas y campamentos permiten preparar un equipo variado. ||| TIP · Wild areas favor new captures. Shops and camps let you build a varied team.
+CONTINUAR ▶ ||| CONTINUE ▶
+COSTO {cost} ||| COST {cost}
+CURADO ||| HEALED
+Cada moneda quita una moneda al próximo tiro de crítico (más chance). Se gasta al atacar. ||| Each coin removes a coin from the next critical roll (better odds). It is spent when attacking.
+Cada objeto es único: lo lleva un solo Pokémon. Equipalos antes de combatir. ||| Each item is unique: only one Pokémon can hold it. Equip them before battling.
+Cada ruta tiene un Centro Pokémon, a partir del 3.º o 4.º evento, que cura y revive a todo el equipo. ||| Every route has a Pokémon Center, from the 3rd or 4th event onward, that heals and revives the whole team.
+Cambiá una técnica por otra que pueda aprender. Cuesta 1-5 Piezas de estrella por cambio, sin límite. No gasta tu acción del campamento. ||| Swap a move for another one it can learn. Costs 1-5 Star Pieces per change, with no limit. It doesn't use your camp action.
+Campamento ||| Camp
+Campeón ||| Champion
+Captura garantizada al vencer. Si perdés, huye y no perdés nada ||| Guaranteed capture on victory. If you lose, it flees and you lose nothing
+Capturá aliados en las zonas salvajes: un equipo variado cubre más tipos. ||| Capture allies in wild areas: a varied team covers more types.
+Cargar en {name} ({uid}/{actor}) ||| Load into {name} ({uid}/{actor})
+Centro Pokémon ||| Pokémon Center
+Cerrar llamada ||| Close call
+Combate ||| Battle
+Comodín ||| Wildcard
+Comprar mejoras ||| Buy upgrades
+Conflicto regional ||| Regional conflict
+Conseguiste {length} medallas. Te espera {name}. Si ganás, podrás capturarlo. ||| You earned {length} badges. {name} awaits you. If you win, you can capture it.
+Costo base {cost} ||| Base cost {cost}
+Costos {amount} este turno ||| Costs {amount} this turn
+Cuerpo a cuerpo: solo llega a la fila frontal rival mientras quede alguien en ella ||| Melee: only reaches the enemy front row while someone remains there
+Cura el estado ||| Cures the status condition
+Cura y revive a todo el equipo ||| Heals and revives the whole team
+Cura {amount} PS{who} ||| Heals {amount} HP{who}
+Cura {restHealFraction}% de los PS máximos a todos los que siguen en pie. ||| Heals {restHealFraction}% of max HP to everyone still standing.
+Curar / revivir / entrenar ||| Heal / revive / train
+Curás {amount} PS ||| You heal {amount} HP
+DEBILITADO ||| FAINTED
+DEJAR IR ||| LET GO
+DERROTA ||| DEFEAT
+DESAFÍO FINAL · PASO {step} DE {eliteFour} ||| FINAL CHALLENGE · STEP {step} OF {eliteFour}
+DESC. ||| DISC.
+DESCANSAR ||| REST
+DREAM ||| DREAM
+Demasiadas cartas de refuerzo. ||| Too many boost cards.
+Derrota... ||| Defeat...
+Derrotalo para tener una captura garantizada. ||| Defeat it for a guaranteed capture.
+Desarrollo videojuegos por hobby y esto es un proyecto indie: me gusta probar herramientas y técnicas nuevas mientras lo construyo. ||| I develop video games as a hobby and this is an indie project: I like trying new tools and techniques while I build it.
+Descansar, revivir o entrenar. ||| Rest, revive or train.
+Dificultad desconocida: {id} ||| Unknown difficulty: {id}
+Dragón ||| Dragon
+Duelo con el rival ||| Rival duel
+EFECTOS ||| EFFECTS
+ELEGIR INICIAL ||| CHOOSE STARTER
+ELEGÍ EL SIGUIENTE DESTINO ||| CHOOSE THE NEXT DESTINATION
+ELEGÍ LA DIFICULTAD ||| CHOOSE THE DIFFICULTY
+ELEGÍ TU AVENTURA ||| CHOOSE YOUR ADVENTURE
+ELEGÍ TU INICIAL ||| CHOOSE YOUR STARTER
+ELEGÍ UNA CARTA ||| CHOOSE A CARD
+ELEGÍ UNO ||| CHOOSE ONE
+ENCUENTRO ÚNICO · SIN PENA ||| ONE-TIME ENCOUNTER · NO PENALTY
+ENFRENTAMIENTO OBLIGATORIO · Antes de entrar, revisá tus PS, estados e ítems en el panel de equipo. ||| MANDATORY BATTLE · Before entering, check your HP, status conditions and items in the team panel.
+ENTRENADOR ||| TRAINER
+ENTRENAR ||| TRAIN
+EQUIPAR ||| EQUIP
+ESCUDO ||| SHIELD
+ESPECIAL ||| SPECIAL
+ESPERA {cooldown} ||| WAIT {cooldown}
+ESTILO ||| STYLE
+EXP {exp} ||| EXP {exp}
+EXP {exp} · {name} ||| EXP {exp} · {name}
+EXP {exp}/{required} ||| EXP {exp}/{required}
+EXPLORADOR ||| EXPLORER
+Editar mazo ||| Edit deck
+El Centro Pokémon aparece una vez por ruta y cura a todo el equipo. ||| The Pokémon Center appears once per route and heals the whole team.
+El cofre está vacío. ||| The chest is empty.
+El guardado estaba dañado o era incompatible. ||| The save was corrupted or incompatible.
+El legendario huyó. Tu equipo quedó como estaba. ||| The legendary fled. Your team stayed as it was.
+El mazo activo está lleno (máx. 45). Mové una carta al cofre primero. ||| The active deck is full (max. 45). Move a card to the chest first.
+El nivel resume los PS máximos y las cuatro estadísticas de combate. Se calcula igual para tus Pokémon y para los rivales, así que sirve para comparar de un vistazo. ||| The level sums up max HP and the four combat stats. It is calculated the same way for your Pokémon and for rivals, so you can compare at a glance.
+El tutor solo está en los campamentos. ||| The tutor is only available at camps.
+Elegí a qué aliado aplicarla. ||| Choose which ally to apply it to.
+Elegí un Pokémon (o arrastrá la carta sobre él) para cargarla. ||| Choose a Pokémon (or drag the card onto it) to load it.
+Elegí un aliado y cartas de energía. ||| Choose an ally and energy cards.
+Elegí una carta de tu mazo. ||| Choose a card from your deck.
+Elegí una carta del mazo ({length} restantes) y pasa a tu mano. ||| Choose a card from the deck ({length} left) and it goes to your hand.
+Elegí una ruta para preparar al equipo. Capturá aliados, cuidá tus PS y llegá al gimnasio. ||| Choose a route to prepare your team. Capture allies, look after your HP and reach the gym.
+Elegí una sola opción de arriba. El tutor de técnicas es aparte y no gasta tu elección. ||| Choose only one option above. The move tutor is separate and doesn't use up your choice.
+Elegí uno de tus Pokémon. ||| Choose one of your Pokémon.
+Eléctrico ||| Electric
+Empezar otra corrida reemplazará el progreso actual al elegir tu inicial. ||| Starting another run will replace your current progress once you choose your starter.
+En cada turno cada Pokémon actúa una vez: cargás energía, elegís una técnica y un objetivo. Para ganar tenés que superar los 8 gimnasios, el Alto Mando y al campeón. Si todo tu equipo cae, la corrida termina. ||| Each turn every Pokémon acts once: you load energy, choose a move and a target. To win you must beat the 8 gyms, the Elite Four and the champion. If your whole team faints, the run ends.
+En el mapa cada destino muestra el nivel aproximado de sus rivales contra el de tu equipo: verde = más débil, amarillo = parejo, naranja = más fuerte, rojo = mucho más fuerte. ||| On the map each destination shows the approximate level of its rivals against your team's: green = weaker, yellow = even, orange = stronger, red = much stronger.
+En los campamentos, el tutor cambia una técnica de un Pokémon por otra que pueda aprender. Cuesta de 1 a 5 piezas por cambio, sin límite de cambios, y no gasta tu acción del campamento. Las técnicas enseñadas se conservan al evolucionar. ||| At camps, the tutor swaps one of a Pokémon's moves for another it can learn. It costs 1 to 5 pieces per change, with no limit on changes, and doesn't use your camp action. Taught moves are kept when evolving.
+Encuentro legendario ||| Legendary encounter
+Energía {energyValue} ||| Energy {energyValue}
+Enfrentate a la organización rival de esta región. ||| Face the rival organization of this region.
+Entrenar a ||| Train
+Envenenado: pierde PS cada turno ||| Poisoned: loses HP every turn
+Equipar un objeto ||| Equip an item
+Equipo del líder. Medalla, evolución desbloqueable e ítem raro. ||| The leader's team. Badge, unlockable evolution and a rare item.
+Es un evento: no pierdes la partida. Tu equipo vuelve como estaba, sin recompensas. ||| It's an event: you don't lose the game. Your team returns as it was, with no rewards.
+Esa carta no está en el cofre. ||| That card isn't in the chest.
+Esa carta no está en el mazo. ||| That card isn't in the deck.
+Esa carta no se puede usar así. ||| That card can't be used that way.
+Esas cartas no están en tu mano. ||| Those cards aren't in your hand.
+Escudo +{amount} a {name}. ||| Shield +{amount} to {name}.
+Escudo +{defenseBoostPerCard} a {name} ||| Shield +{defenseBoostPerCard} to {name}
+Escudo {amount} ||| Shield {amount}
+Escudo {amount}{who} ||| Shield {amount}{who}
+Ese Pokémon está debilitado. ||| That Pokémon has fainted.
+Ese Pokémon no puede aprender esa técnica. ||| That Pokémon can't learn that move.
+Ese Pokémon ya actuó este turno. ||| That Pokémon has already acted this turn.
+Ese movimiento está en cooldown. ||| That move is on cooldown.
+Ese movimiento no se puede reforzar. ||| That move can't be boosted.
+FAQ ||| FAQ
+FILA ||| ROW
+FIN DE LA CORRIDA ||| END OF THE RUN
+FIN TURNO ({readyCount}) ▶ ||| END TURN ({readyCount}) ▶
+FIN TURNO ▶ ||| END TURN ▶
+FONDO ||| BACK
+FRENTE ||| FRONT
+FUERA DE ALCANCE ||| OUT OF RANGE
+Falta energía para pagar el movimiento. ||| Not enough energy to pay for the move.
+Falta energía: cargá {cost} en {name} (arrastrá cartas sobre él). ||| Not enough energy: load {cost} into {name} (drag cards onto it).
+Faltan {size} cartas para poder avanzar. ||| {size} more cards are needed to advance.
+Fan game privado sin fines de lucro · sprites Gen 5 de Black/White. ||| Private non-profit fan game · Gen 5 Black/White sprites.
+Fantasma ||| Ghost
+Fuego ||| Fire
+FÍSICO ||| PHYSICAL
+GARDEVOIR ||| GARDEVOIR
+GENERAL ||| MASTER
+GIMNASIO ||| GYM
+GIMNASIO {stageIndex} DE 8 · PASO {step} DE {stepPools} ||| GYM {stageIndex} OF 8 · STEP {step} OF {stepPools}
+GIMNASIO · {leader} ||| GYM · {leader}
+GLOBAL ||| GLOBAL
+Ganás una moneda de la suerte: tu próximo ataque crítica con más chance. ||| You gain a lucky coin: your next attack has a better crit chance.
+Gastá tu oro en ítems y cartas. ||| Spend your gold on items and cards.
+Gimnasio ||| Gym
+Gimnasios de las 5 regiones mezclados, Liga Mundial y encuentros cruzados. ||| Gyms from all 5 regions mixed together, a World League and crossover encounters.
+Golpe anunciado ||| Announced hit
+Guardar {name} en el cofre ||| Store {name} in the chest
+HAY UNA PARTIDA GUARDADA ||| THERE IS A SAVED GAME
+HISTORIA · SIN PENA ||| STORY · NO PENALTY
+Hay 29 objetos únicos: cada uno existe una vez por partida y lo lleva un solo Pokémon. Se consiguen al ganar gimnasios y combates importantes, y en las tiendas. ||| There are 29 unique items: each exists once per game and only one Pokémon can hold it. You get them by winning gyms and important battles, and in shops.
+Hielo ||| Ice
+INICIAR ▶ ||| START ▶
+INMUNE ||| IMMUNE
+INSTANTÁNEA ||| INSTANT
+JEFE ||| BOSS
+JEFE DE LIGA ||| LEAGUE BOSS
+JESSIE Y JAMES · TEAM ROCKET ||| JESSIE & JAMES · TEAM ROCKET
+LEGENDARIO · {name} ||| LEGENDARY · {name}
+LENTA ||| SLOW
+LIBRE ||| FREE
+LIBRE no gasta cartas · ÁREA alcanza a todos · FILA golpea a una fila · CC (cuerpo a cuerpo) solo llega a la fila frontal rival · ⚠ marca el daño que recibirá un aliado · VEN y QUE hacen daño por turno, PAR puede anular una acción; se curan con ítems. ||| FREE doesn't spend cards · AREA hits everyone · ROW hits one row · MELEE only reaches the enemy front row · ⚠ marks the damage an ally will take · PSN and BRN deal damage each turn, PAR can cancel an action; cure them with items.
+LIGA {league} · {stage} ||| {league} LEAGUE · {stage}
+LLAMADA · {name} ||| CALL · {name}
+La Baya Zidra te salva de un golpe letal. ||| The Sitrus Berry saves you from a lethal hit.
+La enfermera Joy cura y revive a todo tu equipo. ||| Nurse Joy heals and revives your whole team.
+La experiencia roguelike original, con riesgo real. ||| The original roguelike experience, with real risk.
+La llamada se corta sola; la encontrás en la campanita ||| The call ends on its own; you'll find it under the bell
+Las técnicas LIBRE no gastan energía ni cartas. ||| FREE moves don't spend energy or cards.
+Las técnicas LIBRE no gastan energía ni las cartas cargadas. Las demás se pagan con cartas de energía; las que sobran refuerzan el ataque. ||| FREE moves don't spend energy or loaded cards. The rest are paid for with energy cards; any extras boost the attack.
+Listo para combatir. ||| Ready to battle.
+Llamada de {name} ||| Call from {name}
+Llamadas y campanita ||| Calls and the bell
+Lo lleva {name} ||| Held by {name}
+Los 8 gimnasios pueden ser de regiones diferentes. La semilla fija el sorteo. ||| The 8 gyms can come from different regions. The seed fixes the draw.
+Los Pokémon de la fila frontal protegen a los de atrás de los ataques cuerpo a cuerpo (CC). ||| Pokémon in the front row protect those behind them from melee attacks.
+Los Pokémon de la fila trasera están a salvo de los ataques cuerpo a cuerpo. ||| Pokémon in the back row are safe from melee attacks.
+Los personajes te hablan en una ventanita de llamada que se corta sola. Si no la atendés (OK), queda sin leer: la campanita muestra cuántas te perdiste y guarda el registro. ||| Characters talk to you in a small call window that ends on its own. If you don't answer it (OK), it stays unread: the bell shows how many you missed and keeps a log.
+Los sprites de Pokémon (Gen 5 de Black/White) se cargan desde un repositorio externo; el resto del arte y los efectos son propios. ||| Pokémon sprites (Gen 5 Black/White) are loaded from an external repository; the rest of the art and effects are original.
+Lucha ||| Fighting
+LÍDER ||| LEADER

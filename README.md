@@ -1,3 +1,5 @@
+> **v0.12.1:** cartas con sprite pixel art 18×30 (nombre al tocar, efecto al mantener) y 24 retratos pixel art de Amelie. Ver [`docs/CHANGELOG-v0.12.md`](docs/CHANGELOG-v0.12.md).
+>
 > **v0.12 · Pokémon Dream:** nuevo nombre, inglés completo con selector de idioma, texto que se escribe con velocidad ajustable, personajes que se presentan, más historia de Amelie y Lina, tutor con ataques de cobertura para todos y Pokémon caminando en la portada. Ver [`docs/CHANGELOG-v0.12.md`](docs/CHANGELOG-v0.12.md).
 >
 > **v0.11:** diálogos como videollamada con campanita y registro, niveles de poder comparables en mapa/combate/equipo, Comodín que paga cualquier técnica (máx. 5), 29 objetos equipables únicos, Piezas de estrella y tutor de técnicas en el campamento, Amelie rebalanceada y retratos corregidos. Ver [`docs/CHANGELOG-v0.11.md`](docs/CHANGELOG-v0.11.md).

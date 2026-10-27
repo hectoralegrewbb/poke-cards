@@ -7,3 +7,9 @@
 - **Amelie y Lina:** más diálogo y desarrollo. Corregida la frase confusa del líder ("siempre sabe cuándo vas a venir").
 - **Tutor con cobertura:** todo Pokémon puede aprender ataques de hasta 4 tipos de cobertura (lista por tipo + ampliada por especie, `balance.tutor`). Filtro por tipo en la vista del tutor.
 - **Portada:** Pokémon caminando, 4 distintos en cada arranque (sprites animados de PokeAPI).
+
+## v0.12.1 — arte pixel art
+- **Cartas con sprite propio:** las 15 cartas usan su sprite completo de **18×30 px con marco**, siempre a escala entera (5× escritorio, 3× móvil; 7×/5× en recompensas). Pulsar una carta escribe su nombre encima; mantenerla pulsada muestra qué hace (esa pulsación larga no juega la carta). En las recompensas el nombre y el efecto van debajo del sprite.
+- **Sprites provisionales (recoloreados):** Prisa, Paso ágil, Remedio y Revivir reutilizan otro sprite con el tono cambiado; reemplazar `assets/cards/<id>.png` (18×30) para darles arte propio. Cada carta enlaza su sprite con el campo `art` de `data/cards.json`.
+- **Amelie en pixel art:** 24 expresiones (276×292, fondo transparente) reemplazan a las anteriores; 8 nuevas disponibles para diálogos: laugh, unsure, gasp, cheer, flustered, gloom, sad, nauseous.
+- Herramientas: `tools/sliceCardArt.py` y `tools/sliceAmelie.py` regeneran los recortes desde `tools/art/`.

@@ -10,7 +10,8 @@
       "boostDefense"
     ],
     "target": "none",
-    "effects": []
+    "effects": [],
+    "art": "energyBasic.png"
   },
   "energyDouble": {
     "name": "Energía doble",
@@ -23,7 +24,8 @@
       "boostDefense"
     ],
     "target": "none",
-    "effects": []
+    "effects": [],
+    "art": "energyDouble.png"
   },
   "wildcard": {
     "name": "Comodín",
@@ -38,7 +40,8 @@
     "target": "none",
     "effects": [],
     "fillsAnyCost": true,
-    "maxInDeck": 5
+    "maxInDeck": 5,
+    "art": "wildcard.png"
   },
   "insight": {
     "name": "Intuición",
@@ -54,7 +57,8 @@
         "type": "drawCards",
         "amount": 2
       }
-    ]
+    ],
+    "art": "insight.png"
   },
   "potion": {
     "name": "Poción",
@@ -71,7 +75,8 @@
         "amount": 15,
         "target": "target"
       }
-    ]
+    ],
+    "art": "potion.png"
   },
   "quickStep": {
     "name": "Paso ágil",
@@ -88,7 +93,8 @@
         "amount": 1,
         "target": "target"
       }
-    ]
+    ],
+    "art": "quickStep.png"
   },
   "luckyCoin": {
     "name": "Moneda de la suerte",
@@ -104,7 +110,8 @@
         "type": "luckyCoin",
         "amount": 1
       }
-    ]
+    ],
+    "art": "luckyCoin.png"
   },
   "barrier": {
     "name": "Barrera",
@@ -121,7 +128,8 @@
         "amount": 8,
         "target": "target"
       }
-    ]
+    ],
+    "art": "barrier.png"
   },
   "recharge": {
     "name": "Recarga",
@@ -138,7 +146,8 @@
         "cardId": "energyBasic",
         "amount": 2
       }
-    ]
+    ],
+    "art": "recharge.png"
   },
   "focus": {
     "name": "Concentración",
@@ -156,7 +165,8 @@
         "turns": 1,
         "label": "Concentración"
       }
-    ]
+    ],
+    "art": "focus.png"
   },
   "haste": {
     "name": "Prisa",
@@ -175,7 +185,8 @@
         "minCost": 1,
         "label": "Prisa"
       }
-    ]
+    ],
+    "art": "haste.png"
   },
   "remedy": {
     "name": "Remedio",
@@ -196,7 +207,8 @@
         "amount": 6,
         "target": "target"
       }
-    ]
+    ],
+    "art": "remedy.png"
   },
   "revive": {
     "name": "Revivir",
@@ -213,7 +225,8 @@
         "hpFraction": 0.5,
         "target": "target"
       }
-    ]
+    ],
+    "art": "revive.png"
   },
   "sitrusBerry": {
     "name": "Baya Zidra",
@@ -229,7 +242,8 @@
         "type": "berryGuard",
         "target": "target"
       }
-    ]
+    ],
+    "art": "sitrusBerry.png"
   },
   "finder": {
     "name": "Buscador",
@@ -245,6 +259,7 @@
       {
         "type": "searchDeck"
       }
-    ]
+    ],
+    "art": "finder.png"
   }
 }

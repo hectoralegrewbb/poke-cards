@@ -696,10 +696,10 @@ button, .option, .member, .card, .stockItem, .starterCard { touch-action: manipu
 @media (max-width: 800px) { .speakerBadge { width: 44px; height: 44px; font-size: 13px; } }
 
 /* ---------- v0.9.4 · retratos definitivos de Amelie ---------- */
-.amelieFace.photo { aspect-ratio: 360 / 389; }
-.amelieFace.photo .amelieImg { object-fit: cover; object-position: 50% 0; }
+.amelieFace.photo { aspect-ratio: 276 / 292; }
+.amelieFace.photo .amelieImg { object-fit: cover; object-position: 50% 0; image-rendering: pixelated; }
 .amelieFace.avatar { aspect-ratio: 1; width: var(--amSize); height: var(--amSize); border-radius: 50%; overflow: hidden; border: 3px solid var(--c0); background: #fff; }
-.amelieFace.avatar.photo .amelieImg { width: 210%; height: auto; max-width: none; margin: -33% 0 0 -49%; object-fit: initial; }
+.amelieFace.avatar.photo .amelieImg { width: 165%; height: auto; max-width: none; margin: -44% 0 0 -32%; object-fit: initial; }
 .amelieFace.avatar:not(.photo) svg { transform: scale(1.25) translateY(8%); }
 .amelieFace.photo.ex-glitch { animation: amPhotoGlitch 1.3s steps(2, end) infinite; }
 .amelieFace.photo.ex-dark { filter: drop-shadow(0 0 6px #b13e53); }

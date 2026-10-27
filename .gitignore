@@ -2,3 +2,4 @@ node_modules/
 
 # Sprites de Pokémon descargados (se regeneran con npm run sprites:download): no se versionan.
 assets/sprites/
+tools/.uikeys.json

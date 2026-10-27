@@ -1,0 +1,280 @@
+MAZO ||| DECK
+MAZO ACTIVO ||| ACTIVE DECK
+MAZO {size} ||| DECK {size}
+MIEMBRO {n} ||| MEMBER {n}
+MISIÓN: CONVERTITE EN CAMPEÓN ||| MISSION: BECOME CHAMPION
+MISIÓN: GANÁ LA MEDALLA ||| MISSION: WIN THE BADGE
+MIXTO ||| MIXED
+MODERNO ||| MODERN
+Mazo lleno: la carta fue al COFRE. ||| Deck full: the card went to the CHEST.
+Mazo vacío. ||| Empty deck.
+Medalla + recompensa ||| Badge + reward
+Medalla {index} ||| Badge {index}
+Modo desconocido: {mode} ||| Unknown mode: {mode}
+Modo escudo: elegí aliado y cartas. ||| Shield mode: choose an ally and cards.
+Modo {label} · Dificultad {label2} · Elegí tu inicial. Los demás se capturan. ||| {label} mode · {label2} difficulty · Choose your starter. The others are captured.
+Modos de aventura ||| Adventure modes
+Movimiento inválido. ||| Invalid move.
+Mucho más fuerte que tu equipo ||| Much stronger than your team
+MÚSICA ||| MUSIC
+Más débil que tu equipo ||| Weaker than your team
+Más fuerte que tu equipo ||| Stronger than your team
+Máx. {maxInDeck} en el mazo ||| Max. {maxInDeck} in the deck
+NO AFECTA ||| NO EFFECT
+NORMAL ||| NORMAL
+Nadie disponible. ||| Nobody available.
+Ningún Pokémon está debilitado. ||| No Pokémon has fainted.
+Nivel de dificultad ||| Difficulty level
+Nivel de poder ||| Power level
+Nivel de poder (Nv.) ||| Power level (Lv.)
+No es tu turno. ||| It's not your turn.
+No quedan cartas en el mazo para buscar. ||| There are no cards left in the deck to search.
+No se pudo cargar data/{name}.json ||| Could not load data/{name}.json
+No se pudo entrar en este destino. ||| Couldn't enter this destination.
+No se pudo guardar la corrida: ||| Couldn't save the run:
+No se puede editar el mazo en combate. ||| The deck can't be edited during battle.
+No te alcanza el oro. ||| You don't have enough gold.
+No tendría ningún efecto. ||| It would have no effect.
+No tenés ese ítem. ||| You don't have that item.
+No. Es un fan game privado y sin fines de lucro. Pokémon y todo su universo pertenecen a Nintendo, Game Freak y The Pokémon Company; este proyecto no está afiliado a ellos. ||| No. It's a private, non-profit fan game. Pokémon and its entire universe belong to Nintendo, Game Freak and The Pokémon Company; this project is not affiliated with them.
+Normal ||| Normal
+Nv. ||| Lv.
+OCULTAR GUÍA − ||| HIDE GUIDE −
+OK ✓ ||| OK ✓
+OPCIONES ||| OPTIONS
+Objetivo inválido para ese movimiento. ||| Invalid target for that move.
+Objetos equipables ||| Held items
+Oportunidad de captura ||| Capture opportunity
+Organización rival ||| Rival organization
+Oro + carta ||| Gold + card
+Oro + ítem ||| Gold + item
+Oro, cartas e ítems al ganar; si perdés, no perdés nada ||| Gold, cards and items on victory; if you lose, you lose nothing
+PAR ||| PAR
+PARTY ||| PARTY
+PARÁLISIS ||| PARALYSIS
+PIXEL ||| PIXEL
+POCO EFICAZ ||| NOT VERY EFFECTIVE
+POD +{amount} este turno ||| PWR +{amount} this turn
+POD {bonus} ||| PWR {bonus}
+POD {power} ||| PWR {power}
+POKÉ WORLD ||| POKÉ WORLD
+POKÉ WORLD: gimnasios de las 5 regiones mezclados, Liga Mundial y encuentros cruzados. ||| POKÉ WORLD: gyms from all 5 regions mixed together, a World League and crossover encounters.
+POKÉMON ||| POKÉMON
+PREPARACIÓN ||| PREPARATION
+PS ||| HP
+PS {hp} · ATQ {atk} · ESP {spa} ||| HP {hp} · ATK {atk} · SPA {spa}
+PUEDE APRENDER ||| CAN LEARN
+Paga cualquier técnica ||| Pays for any move
+Parejo con tu equipo ||| Even with your team
+Parálisis: 25% de perder la acción por turno ||| Paralysis: 25% chance to lose the action each turn
+Paso {step} de {total} ||| Step {step} of {total}
+Perdiste el enfrentamiento, pero tu equipo quedó como estaba. ||| You lost the encounter, but your team stayed as it was.
+Piezas de estrella y tutor ||| Star Pieces and tutor
+Piezas de estrella: se usan en el tutor de técnicas del campamento ||| Star Pieces: used at the camp's move tutor
+Planta ||| Grass
+Pokémon Dream es un roguelike táctico de cartas con combate por turnos. Elegís un inicial, capturás hasta 6 Pokémon y armás un mazo de 40 a 45 cartas. ||| Pokémon Dream is a tactical card roguelike with turn-based combat. You choose a starter, capture up to 6 Pokémon and build a deck of 40 to 45 cards.
+Pokémon desconocido. ||| Unknown Pokémon.
+Profesora Amelie ||| Professor Amelie
+Profesora Amelie, expresión {expression} ||| Professor Amelie, {expression} expression
+Próx. ataque: más chance de crítico ||| Next attack: better crit chance
+Psíquico ||| Psychic
+QUE ||| BRN
+QUEMA ||| BURN
+QUITAR ||| REMOVE
+Quemado: pierde PS y baja su ataque físico ||| Burned: loses HP and its physical attack drops
+Quitar la carga ||| Remove the load
+RECOMPENSAS ||| REWARDS
+REGALO: {label} ||| GIFT: {label}
+REGIONAL ||| REGIONAL
+REGIÓN ||| REGION
+REGIÓN DE LA CAMPAÑA ||| CAMPAIGN REGION
+REGIÓN: recorrés una región con sus 8 líderes en orden, el Alto Mando y el campeón de esa Liga. ||| REGION: you travel one region with its 8 leaders in order, the Elite Four and that League's champion.
+RETROCESO ||| FLINCH
+REVIVIR ||| REVIVE
+RIESGO ALTO ||| HIGH RISK
+RIESGO BAJO ||| LOW RISK
+RIESGO MEDIO ||| MEDIUM RISK
+RIVAL ||| RIVAL
+RIVAL · SIN PENA ||| RIVAL · NO PENALTY
+ROGUELIKE TÁCTICO · CARTAS + COMBATE POR TURNOS ||| TACTICAL ROGUELIKE · CARDS + TURN-BASED COMBAT
+RUTA ||| ROUTE
+Recibe {hits} golpes anunciados ||| Takes {hits} announced hits
+Recibís {amount} energía ||| You receive {amount} energy
+Recibís {count} carta(s). ||| You receive {count} card(s).
+Recompensa al ganar; si perdés, no perdés nada ||| Reward on victory; if you lose, you lose nothing
+Registro de llamadas ||| Call log
+Región desconocida: {chosen} ||| Unknown region: {chosen}
+Reglas rápidas ||| Quick rules
+Resolver acciones enemigas ||| Resolve enemy actions
+Revive a un aliado con {hpFraction}% de PS ||| Revives an ally with {hpFraction}% HP
+Revivir a ||| Revive
+Rivales más resistentes, menos recursos de inicio. ||| Tougher rivals, fewer starting resources.
+Robás {amount} ||| You draw {amount}
+Robás {count} carta(s). ||| You draw {count} card(s).
+Roca ||| Rock
+RÁPIDA ||| FAST
+SALIR ▶ ||| LEAVE ▶
+SALTAR ||| SKIP
+SEMILLA (OPCIONAL) ||| SEED (OPTIONAL)
+SEMILLA PARA REPETIR UNA CORRIDA ||| SEED TO REPEAT A RUN
+SIGUIENTE ▶ ||| NEXT ▶
+SILENCIAR TODO ||| MUTE ALL
+SIN COMBATE ||| NO BATTLE
+SIN COMBATE · UNA VEZ POR RUTA ||| NO BATTLE · ONCE PER ROUTE
+SORPRESA ||| SURPRISE
+STAB ||| STAB
+Se equipan fuera de combate, desde el botón OBJETO de cada Pokémon en el panel de equipo. Los más fuertes aparecen con más medallas. ||| They are equipped outside battle, from each Pokémon's ITEM button in the team panel. The strongest ones appear with more badges.
+Se suma a tu party. ||| It joins your party.
+Semilla de la partida ||| Game seed
+Si el juego muestra un cartel rojo de error, tocá BORRAR GUARDADO Y RECARGAR. ||| If the game shows a red error banner, tap DELETE SAVE AND RELOAD.
+Si recibe un golpe letal, queda con 1 PS (una vez por combate) ||| If it takes a lethal hit, it survives with 1 HP (once per battle)
+Sin descanso entre combates ||| No rest between battles
+Sin ítems. ||| No items.
+Siniestro ||| Dark
+Sobran {status} cartas. ||| {status} cards too many.
+Soy Hector, de Argentina. Soy diseñador gráfico con posgrado en UI/UX y trabajo como programador en automatización industrial (TIA Portal, Node-RED). ||| I'm Hector, from Argentina. I'm a graphic designer with a postgraduate degree in UI/UX and I work as an industrial automation programmer (TIA Portal, Node-RED).
+SÍ, NUEVA PARTIDA ||| YES, NEW GAME
+Sí, automáticamente en este navegador. Si borrás los datos del sitio o cambiás de dispositivo, la partida no se transfiere. ||| Yes, automatically in this browser. If you clear the site data or switch devices, your game doesn't transfer.
+TEXTO ||| TEXT
+TODAS ({allOptions}) ||| ALL ({allOptions})
+TOMAR ||| TAKE
+TURNO {turn} ||| TURN {turn}
+TUTOR DE TÉCNICAS ||| MOVE TUTOR
+Te faltan Piezas de estrella. ||| You need more Star Pieces.
+Tenés {gold} de oro. ||| You have {gold} gold.
+Tienda ||| Shop
+Tierra ||| Ground
+Tocá para completar el texto ||| Tap to complete the text
+Tocá uno y luego un miembro para cambiar. ||| Tap one and then a member to swap.
+Todavía hay 1 Pokémon sin actuar. Tocá de nuevo para terminar el turno. ||| 1 Pokémon hasn't acted yet. Tap again to end the turn.
+Todavía hay {readyCount} Pokémon sin actuar. Tocá de nuevo para terminar el turno. ||| {readyCount} Pokémon haven't acted yet. Tap again to end the turn.
+Todavía no recibiste ninguna llamada. ||| You haven't received any calls yet.
+Todavía no tenés ese objeto. ||| You don't have that item yet.
+Todavía no tenés objetos. Se consiguen al ganar combates importantes y en las tiendas. ||| You don't have any items yet. You get them by winning important battles and in shops.
+Tras cada victoria (menos en zonas salvajes) ganás de 1 a 10 Piezas de estrella; los jefes dan más. ||| After each victory (except in wild areas) you earn 1 to 10 Star Pieces; bosses give more.
+Tu equipo gana {amount} EXP. ||| Your team gains {amount} EXP.
+Tu equipo ya estaba en perfecto estado. ||| Your team was already in perfect shape.
+Tu mazo activo debe tener entre 40 y 45 cartas para salir. Abrí MAZO y ajustalo. ||| Your active deck must have between 40 and 45 cards to leave. Open DECK and adjust it.
+Tu party está llena: irá a la caja. ||| Your party is full: it will go to the box.
+Tu próximo ataque tiene el doble de chance de crítico ||| Your next attack has double the crit chance
+Tu rival reaparece con un nuevo equipo. ||| Your rival returns with a new team.
+Tus archivos de música van en assets/music (ver assets/music/README.md). Sin archivos suena la música original del juego. ||| Put your music files in assets/music (see assets/music/README.md). Without files, the game's original music plays.
+TÉCNICAS ||| MOVES
+Técnicas {sign}{amount} costo · {turns} turnos ||| Moves {sign}{amount} cost · {turns} turns
+Un debilitado vuelve con {reviveHpFraction}% de PS. ||| A fainted Pokémon returns with {reviveHpFraction}% HP.
+Una carta Comodín paga por sí sola cualquier técnica y además refuerza x2 si la usás para potenciar. Solo se gasta como pago si la energía normal no alcanza. Máximo 5 por mazo. ||| A Wildcard card pays for any move on its own and boosts x2 if you use it to power up. It's only spent as payment if normal energy isn't enough. Max. 5 per deck.
+Una corrida. Un equipo que crece. Cada decisión cuenta. ||| One run. A growing team. Every decision counts.
+Una región y sus 8 líderes en orden, Alto Mando y campeón de esa Liga. ||| One region and its 8 leaders in order, Elite Four and that League's champion.
+Usar {name} en el mazo ||| Use {name} in the deck
+VEN ||| PSN
+VENDIDO ||| SOLD
+VENENO ||| POISON
+VETERANO ||| VETERAN
+VOLVER AL INICIO ||| BACK TO TITLE
+Variocolor ||| Shiny
+Veneno ||| Poison
+Victoria de la corrida ||| Run victory
+Volador ||| Flying
+Volumen {label} ||| {label} volume
+Ya no está disponible. ||| It's no longer available.
+Ya tenés el máximo de copias de esa carta en el mazo activo (2). ||| You already have the maximum copies of that card in the active deck (2).
+Ya tenés ese objeto: cada uno es único. ||| You already have that item: each one is unique.
+Ya tenés las ocho medallas. Administrá tus recursos: la Liga no ofrece descanso entre rivales. ||| You already have all eight badges. Manage your resources: the League offers no rest between rivals.
+Zona salvaje ||| Wild area
+costo {minCost}+ ||| cost {minCost}+
+fondo ||| back
+frente ||| front
+físico ||| physical
+muy eficaz x{mult} ||| super effective x{mult}
+nada ||| nothing
+no afecta ||| no effect
+poco eficaz x{mult} ||| not very effective x{mult}
+quemadura ||| burn
+refuerzo x{boostMultiplier} ||| boost x{boostMultiplier}
+sin costo ||| no cost
+toda una fila ||| an entire row
+todo tu equipo ||| your whole team
+veneno ||| poison
+x{mult} POCO ||| x{mult} WEAK
+x{mult} ¡EFICAZ! ||| x{mult} EFFECTIVE!
+{actorId} no puede actuar. ||| {actorId} can't act.
+{actorId} usó {moveId}. ||| {actorId} used {moveId}.
+{actor}: {move}{effect}{targets} · {energy}/{cost} EN ||| {actor}: {move}{effect}{targets} · {energy}/{cost} EN
+{count} rivales · {specialty} · {text} ||| {count} rivals · {specialty} · {text}
+{description} Tocá un Pokémon. ||| {description} Tap a Pokémon.
+{free} sin equipar ||| {free} unequipped
+{healed} Pokémon recuperaron sus PS y se curaron de estados. ||| {healed} Pokémon recovered their HP and were cured of status conditions.
+{label} terminó. ||| {label} ended.
+{label}: costos {amount} por {turns} turnos. ||| {label}: costs {amount} for {turns} turns.
+{label}: poder +{amount} por {turns} turnos. ||| {label}: power +{amount} for {turns} turns.
+{label}: quedan {turnsLeft} turno(s) ||| {label}: {turnsLeft} turn(s) left
+{name} está listo. Elegí una técnica; las de costo LIBRE no necesitan cartas. ||| {name} is ready. Choose a move; FREE-cost ones don't need cards.
+{name} lleva: {item} ||| {name} holds: {item}
+{name} ya tiene el máximo de cartas cargadas. ||| {name} already has the maximum loaded cards.
+{name}, {hp} de {maxHp} PS ||| {name}, {hp} of {maxHp} HP
+{name}: elegí la técnica a reemplazar ||| {name}: choose the move to replace
+{name}: golpea a {target} ||| {name}: hits {target}
+{note} Mínimo {status}, máximo {status2}. Las cartas del cofre quedan guardadas; no se usan en combate. ||| {note} Minimum {status}, maximum {status2}. Cards in the chest are kept safe; they aren't used in battle.
+{pokemonId} se debilitó. ||| {pokemonId} fainted.
+{readyCount} Pokémon todavía pueden actuar ||| {readyCount} Pokémon can still act
+{revived} Pokémon revivieron. ||| {revived} Pokémon were revived.
+{targetId} es inmune a {moveId}. ||| {targetId} is immune to {moveId}.
+{targetId} gana {amount} de escudo. ||| {targetId} gains {amount} shield.
+{targetId} pierde {amount} PS. ||| {targetId} loses {amount} HP.
+{targetId} recupera {amount} PS. ||| {targetId} recovers {amount} HP.
+{targetId} se aferra a una Baya Zidra. ||| {targetId} clings on thanks to a Sitrus Berry.
+{targetId} se curó del estado. ||| {targetId} was cured of its status condition.
+{targetId}: -{amount} de cooldown. ||| {targetId}: -{amount} cooldown.
+{target} pierde {amount} PS por {cause}. ||| {target} loses {amount} HP from {cause}.
+{target} recibe {amount} de daño ({notes}). ||| {target} takes {amount} damage ({notes}).
+{target} recibe {amount} de daño. ||| {target} takes {amount} damage.
+{target}: {state} ||| {target}: {state}
+{tone} (tu equipo: Nv. {reference}) ||| {tone} (your team: Lv. {reference})
+{unread} llamada(s) sin atender ||| {unread} unanswered call(s)
+¡AGUANTÓ! ||| HELD ON!
+¡Aparecen: {names}! ||| Appearing: {names}!
+¡CAMPEÓN DE LA LIGA! ||| LEAGUE CHAMPION!
+¡ENCUENTRO LEGENDARIO! ||| LEGENDARY ENCOUNTER!
+¡Es variocolor! ||| It's shiny!
+¡MONEDA DE LA SUERTE! ||| LUCKY COIN!
+¡MUY EFICAZ! ||| SUPER EFFECTIVE!
+¡PARALIZADO! ||| PARALYZED!
+¡RETROCESO! ||| FLINCH!
+¡REVIVE! ||| REVIVED!
+¡TE RETIRAS! ||| YOU RETREAT!
+¡Te desafían: {names}! ||| Challenged by: {names}!
+¡UN POKÉMON QUIERE UNIRSE! ||| A POKÉMON WANTS TO JOIN YOU!
+¡USAR! ||| USE!
+¡VAMOS, {name}! ▶ ||| LET'S GO, {name}! ▶
+¡VICTORIA! ||| VICTORY!
+¡Victoria! ||| Victory!
+¡crítico! ||| critical hit!
+¡envenenado! ||| poisoned!
+¡paralizado! ||| paralyzed!
+¡puede retroceder! ||| may flinch!
+¡quemado! ||| burned!
+¡{targetId} está paralizado y no puede moverse! ||| {targetId} is paralyzed and can't move!
+¡{targetId} retrocedió y no pudo actuar! ||| {targetId} flinched and couldn't act!
+¡{targetId} volvió a la batalla con {hp} PS! ||| {targetId} is back in the battle with {hp} HP!
+¡{target} aguantó con la Banda Focus y quedó con 1 PS! ||| {target} hung on with the Focus Sash and was left with 1 HP!
+¡{target} aguantó con la Baya Zidra y quedó con 1 PS! ||| {target} hung on with the Sitrus Berry and was left with 1 HP!
+«¡Bienvenido al Centro Pokémon! Dejaremos a tus Pokémon como nuevos. …¡Listo! Esperamos verte pronto.» ||| "Welcome to the Pokémon Center! We'll restore your Pokémon to full health. …All done! We hope to see you again soon."
+¿A quién aplicás la carta? ||| Who do you apply the card to?
+¿A quién revivís? Tocá un Pokémon debilitado. ||| Who do you revive? Tap a fainted Pokémon.
+¿CÓMO JUGAR? + ||| HOW TO PLAY? +
+¿De qué va el juego? ||| What is the game about?
+¿Es un juego oficial? ||| Is it an official game?
+¿Quién lo hace? ||| Who makes it?
+¿SEGURO? ▶ ||| SURE? ▶
+¿Se guarda mi partida? ||| Is my game saved?
+ÁREA ||| AREA
+Élite ||| Elite
+ÍTEMS ||| ITEMS
+← MAZO ||| ← DECK
+→ COFRE ||| → CHEST
+◀ VOLVER ||| ◀ BACK
+◀ VOLVER A TÉCNICAS ||| ◀ BACK TO MOVES
+◆ OBJETOS ||| ◆ ITEMS
+● EN VIVO ||| ● LIVE
+＋ OBJETO ||| ＋ ITEM
+IDIOMA ||| LANGUAGE

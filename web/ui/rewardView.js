@@ -3,12 +3,17 @@ import { h } from "./dom.js";
 import { cardEffectIcons, describeCard, errorText } from "./labels.js";
 import { itemImage } from "./itemIcons.js";
 import { icon } from "./pixelIcons.js";
+import { cardImage, hasSprite } from "./cardSprite.js";
 import { sfx } from "./sfx.js";
 import { t } from "../../src/shared/i18n.js";
 
 export function bigCard(def, onClick) {
-  const art = def.kind === "energy" ? (def.boostMultiplier > 1 ? [icon("wild", { scale: 5 })] : Array.from({ length: def.energyValue }, () => icon("bolt", { scale: 5 }))) : [icon(cardEffectIcons[def.effects[0]?.type] ?? "star", { scale: 5 })];
   const kind = def.kind === "utility" ? "utility" : def.boostMultiplier > 1 ? "wild" : "energy";
+  // Al elegir una recompensa hace falta leer el efecto: el texto va debajo del sprite.
+  if (hasSprite(def)) {
+    return h("button", { class: `card big sprite ${kind}`, onClick }, cardImage(def), h("strong", { class: "cardCaption" }, def.name), h("span", { class: "cardCaptionText" }, describeCard(def)));
+  }
+  const art = def.kind === "energy" ? (def.boostMultiplier > 1 ? [icon("wild", { scale: 5 })] : Array.from({ length: def.energyValue }, () => icon("bolt", { scale: 5 }))) : [icon(cardEffectIcons[def.effects[0]?.type] ?? "star", { scale: 5 })];
   return h("button", { class: `card big ${kind}`, onClick }, h("div", { class: "cardTop" }, def.name), h("div", { class: "cardArt" }, art), h("div", { class: "cardText" }, describeCard(def)));
 }
 

@@ -9,6 +9,7 @@ import { levelTag } from "./levelTag.js";
 import { attachDrag } from "./dragDrop.js";
 import { h } from "./dom.js";
 import { icon } from "./pixelIcons.js";
+import { attachCardHold, cardImage, hasSprite, showCardName } from "./cardSprite.js";
 import { cardEffectIcons, describeCard, describeEffects, errorText, formatEvent, statusInfo, typeColors, typeNames } from "./labels.js";
 import { sfx } from "./sfx.js";
 import { t } from "../../src/shared/i18n.js";
@@ -286,13 +287,18 @@ function cardIcon(def) {
     if (def.boostMultiplier > 1) return [icon("wild", { scale: 4 })];
     return Array.from({ length: def.energyValue }, () => icon("bolt", { scale: 4 }));
   }
-  const first = def.effects[0]?.type;
-  return [icon(cardEffectIcons[first] ?? "star", { scale: 4 })];
+  return [icon(cardEffectIcons[def.effects[0]?.type] ?? "star", { scale: 4 })];
 }
 
+// Con sprite propio la carta es solo la imagen (marco incluido); sin sprite, el diseño de texto anterior.
 function cardView(card, def, { role = "", picked = false, armed = false } = {}) {
   const kindClass = def.kind === "utility" ? "utility" : def.boostMultiplier > 1 ? "wild" : "energy";
-  return h("div", { class: `card ${kindClass} ${picked ? "picked" : ""} ${armed ? "armed" : ""}`, "data-card": card.uid },
+  const state = `${picked ? "picked" : ""} ${armed ? "armed" : ""}`;
+  if (hasSprite(def)) {
+    return h("div", { class: `card sprite ${kindClass} ${state}`, "data-card": card.uid, title: `${def.name}: ${describeCard(def)}` },
+      cardImage(def), role ? h("div", { class: "cardRole" }, role) : null);
+  }
+  return h("div", { class: `card ${kindClass} ${state}`, "data-card": card.uid },
     h("div", { class: "cardTop" }, def.name),
     h("div", { class: "cardArt" }, cardIcon(def)),
     h("div", { class: "cardText" }, describeCard(def)),
@@ -510,6 +516,10 @@ function handView(ctx, state) {
     element.setAttribute("role", "button");
     element.setAttribute("tabindex", "0");
     element.setAttribute("aria-label", `${def.name}: ${describeCard(def)}`);
+    if (hasSprite(def)) {
+      attachCardHold(element, def);
+      element.addEventListener("click", () => showCardName(element, def));
+    }
     element.addEventListener("click", onCardClick);
     element.addEventListener("keydown", (event) => {
       if (event.key === "Enter" || event.key === " ") { event.preventDefault(); onCardClick(); }
@@ -581,7 +591,7 @@ function searchModal(ctx, state) {
           sfx.play("card");
           runAction(ctx, state, playUtility(state, { cardUid, targetUid: null, searchCardUid: entry.uid }));
           ctx.rerender();
-        } }, h("span", { class: "searchArt" }, cardIcon(def).slice(0, 1)), h("strong", {}, `${def.name} ×${entry.count}`), h("small", {}, describeCard(def)));
+        } }, h("span", { class: "searchArt" }, hasSprite(def) ? cardImage(def, "cardImg listImg") : cardIcon(def).slice(0, 1)), h("strong", {}, `${def.name} ×${entry.count}`), h("small", {}, describeCard(def)));
       })),
       h("button", { class: "btn", onClick: close }, t("CANCELAR"))));
 }

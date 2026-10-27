@@ -1,6 +1,6 @@
 {
   "name": "pokemon-dream",
-  "version": "0.12.0",
+  "version": "0.12.1",
   "private": true,
   "type": "module",
   "description": "Motor de combate y datos de un fan game roguelike de cartas. Uso privado, sin fines de lucro.",
