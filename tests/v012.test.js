@@ -46,10 +46,10 @@ test("idioma: detectLanguage usa la preferencia guardada y, si no, el idioma del
   assert.ok(!saveLanguage("fr", storage));
 });
 
-test("cartas: todas tienen sprite PNG de 18×30 px (marco incluido) y los retratos de Amelie existen", async () => {
+test("cartas: si una carta declara sprite `art`, el PNG existe y mide 18×30 px (marco incluido)", async () => {
   const { readFileSync, existsSync } = await import("node:fs");
   for (const [id, card] of Object.entries(data.cards)) {
-    assert.ok(card.art, `${id}: falta "art"`);
+    if (!card.art) continue; // sin sprite se usa el diseño de texto con icono pixelado
     const file = new URL(`../assets/cards/${card.art}`, import.meta.url);
     assert.ok(existsSync(file), `${id}: falta ${card.art}`);
     const png = readFileSync(file);

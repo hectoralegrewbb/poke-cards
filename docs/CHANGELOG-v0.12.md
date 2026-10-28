@@ -13,3 +13,7 @@
 - **Sprites provisionales (recoloreados):** Prisa, Paso ágil, Remedio y Revivir reutilizan otro sprite con el tono cambiado; reemplazar `assets/cards/<id>.png` (18×30) para darles arte propio. Cada carta enlaza su sprite con el campo `art` de `data/cards.json`.
 - **Amelie en pixel art:** 24 expresiones (276×292, fondo transparente) reemplazan a las anteriores; 8 nuevas disponibles para diálogos: laugh, unsure, gasp, cheer, flustered, gloom, sad, nauseous.
 - Herramientas: `tools/sliceCardArt.py` y `tools/sliceAmelie.py` regeneran los recortes desde `tools/art/`.
+
+## v0.12.2
+- Se retiran los sprites de cartas (`assets/cards/`, campo `art` de `data/cards.json`, `tools/sliceCardArt.py`): las cartas vuelven al diseño de texto con icono pixelado. El sistema de sprites 18×30 sigue en el código (`web/ui/cardSprite.js`, `web/cardSprites.css`) y se reactiva por carta añadiendo `"art": "<id>.png"` y el PNG en `assets/cards/`.
+- Los retratos pixel art de Amelie se mantienen.

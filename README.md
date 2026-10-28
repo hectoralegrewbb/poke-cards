@@ -1,4 +1,4 @@
-> **v0.12.1:** cartas con sprite pixel art 18×30 (nombre al tocar, efecto al mantener) y 24 retratos pixel art de Amelie. Ver [`docs/CHANGELOG-v0.12.md`](docs/CHANGELOG-v0.12.md).
+> **v0.12.2:** 24 retratos pixel art de Amelie; los sprites de cartas se retiran (vuelven al diseño con iconos). Ver [`docs/CHANGELOG-v0.12.md`](docs/CHANGELOG-v0.12.md).
 >
 > **v0.12 · Pokémon Dream:** nuevo nombre, inglés completo con selector de idioma, texto que se escribe con velocidad ajustable, personajes que se presentan, más historia de Amelie y Lina, tutor con ataques de cobertura para todos y Pokémon caminando en la portada. Ver [`docs/CHANGELOG-v0.12.md`](docs/CHANGELOG-v0.12.md).
 >

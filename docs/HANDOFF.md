@@ -1,4 +1,4 @@
-# Pokémon Dream — documento de traspaso (v0.12.1)
+# Pokémon Dream — documento de traspaso (v0.12.2)
 
 Para retomar el proyecto en un chat nuevo. Léelo entero antes de tocar código.
 
@@ -43,7 +43,7 @@ tests/       207 tests
 - **i18n**: el texto fuente en español ES la clave. En código: `t("Texto {x}", {x})`. `main.js` detecta idioma (preferencia guardada, si no `navigator.language`: es→es, otro→en), carga `en.js` por import dinámico **antes** de importar `app.js` (varios módulos llaman `t()` al importarse). Los datos del juego se traducen con `localizeData(data, dict)` (cualquier string que sea clave del diccionario). Cambiar idioma = guardar, marcar resume, `location.reload()`; `app.js` retoma la corrida. El registro de llamadas conserva el idioma de recepción.
 - **Tutor de cobertura** (`src/run/moveTutor.js`, `data/balance.json → tutor`): `coverage[tipo]` da 5 tipos extra por tipo; `coverageCap=4`, repartidos round‑robin entre los tipos de la especie; solo se agregan movimientos que dañan. Validado en `validateData.js`. Filtro por tipo en `web/ui/tutorView.js`.
 - **Portada** (`web/ui/titleWalkers.js`): 4 especies no legendarias al azar, sprites animados de PokeAPI, CSS keyframes, contenedor `position:fixed`.
-- **Cartas con sprite** (`web/ui/cardSprite.js`, `web/cardSprites.css`, `assets/cards/`, campo `art` en `data/cards.json`): cada carta es su sprite **18×30 px con marco**, SIEMPRE a escala entera (`--cs`: 5 escritorio, 3 móvil; big 7/5). No tocar proporciones ni recortar el marco (requisito del autor). Clic = escribe el nombre encima (`showCardName`); pulsación larga 450 ms = descripción (`attachCardHold`, no juega la carta). En recompensas (`bigCard`) el texto va debajo. Cartas sin `art` caen al diseño de texto anterior. Prisa/Paso ágil/Remedio/Revivir usan sprites **recoloreados provisionales** (`tools/sliceCardArt.py`). Para arte nuevo: reemplazar `assets/cards/<id>.png` (18×30).
+- **Cartas con sprite (INACTIVO desde v0.12.2):** el autor retiró sus sprites por críticas al arte y las rehará. Hoy ninguna carta tiene `art`, así que se usa el diseño de texto con icono pixelado. El sistema sigue listo (`web/ui/cardSprite.js`, `web/cardSprites.css`): una carta con `"art": "<id>.png"` en `data/cards.json` y el PNG en `assets/cards/` se dibuja como sprite **18×30 px con marco**, SIEMPRE a escala entera (`--cs`: 5 escritorio, 3 móvil; big 7/5), sin deformar ni recortar el marco (requisito del autor). Clic = escribe el nombre encima; pulsación larga 450 ms = descripción (no juega la carta); en recompensas el texto va debajo.
 - **Retratos de Amelie** (`assets/story/`, `web/ui/amelieArt.js`): 24 expresiones pixel art 276×292 generadas desde `tools/art/amelieSheet.jpg` con `tools/sliceAmelie.py` (mapa posición→nombre en el script). Nuevas utilizables: laugh, unsure, gasp, cheer, flustered, gloom, sad, nauseous (lista permitida en `tools/buildStory.py`). `glitch` es un retrato neutro con efecto CSS.
 - **Piezas de estrella / tutor / objetos equipables / Comodín / llamadas**: ver `docs/CHANGELOG-v0.11.md`.
 
@@ -70,7 +70,7 @@ Los scripts Playwright asumen `npm start` activo y Playwright en `/opt/npm-tools
 - Responder: ¿corregir el mensaje del commit v0.11.0? ¿quitar `assets/story/amelie-error.webp`? ¿pasar toda la UI a tuteo?
 - Revisión visual manual del inglés en: pantalla de recompensa, modal de objetos equipados, escenas de Amelie/Gardevoir (el escaneo automático no las cubrió a fondo) y largo de textos en móvil (390 px).
 - Retratos propios para Gardevoir/Froslass; diferenciar el diseño de Amelie si el juego se hace público.
-- Arte propio para Prisa, Paso ágil, Remedio y Revivir (hoy recoloreados). Ver si el nombre-al-tocar de las cartas convence en móvil real; el deck editor, la tienda y el cofre siguen mostrando cartas como texto (sin sprite).
+- Sprites de cartas: los rehace el autor (ver arriba). Si vuelven, el deck editor, la tienda y el cofre siguen mostrando cartas como texto.
 - Los scripts `tools/e2e*.mjs` y los dos `slice*.py` son de entorno de desarrollo (Playwright/Pillow/numpy).
 - Logros (diferidos).
 - Los sprites de la portada son el frente espejado, no ciclos de caminata reales.
