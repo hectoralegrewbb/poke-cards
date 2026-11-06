@@ -172,3 +172,11 @@ Cada Pokémon salvaje tiene 1/64 de ser **variocolor** (`src/run/shiny.js`, sin 
 ## Móvil en vertical (v0.7)
 
 Hasta 640 px de ancho, el combate pone los rivales arriba, los aliados abajo (3 por fila) y la mano fija al pie con MAZO, DESC., ESCUDO y FIN TURNO en una fila. La guía arranca plegada. Todo el CSS móvil está en un bloque al final de `web/styles.css`.
+
+## Mejoras UX/UI (v0.12.3)
+
+- Diálogos reescritos para sonar más naturales y menos robóticos (Amelie, Lina, líderes, escena final).
+- Efectos de combate mejorados: partículas más ricas, proyectiles con estela, impactos más claros.
+- Pantalla de carga con Poké Ball animada y tips más dinámicos.
+- Sprites con leve animación idle, mejor feedback visual en botones y typewriter.
+

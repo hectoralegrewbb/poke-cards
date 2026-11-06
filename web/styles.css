@@ -822,3 +822,97 @@ button, .option, .member, .card, .stockItem, .starterCard { touch-action: manipu
   .walker:nth-child(2) { left: 40%; } .walker:nth-child(3) { left: 60%; } .walker:nth-child(4) { left: 80%; }
   .walkerFlip, .walkerHop { animation: none; }
 }
+
+/* ========== Mejoras UX/UI v0.12.3 · Diálogos más naturales + efectos ricos ========== */
+
+/* Loading screen: Poké Ball animada */
+.loadBall {
+  width: 64px; height: 64px; position: relative;
+  animation: ballSpin 1.2s linear infinite;
+  margin: 4px 0;
+}
+.ballTop, .ballBottom {
+  position: absolute; left: 0; width: 100%; height: 50%;
+  border-radius: 64px 64px 0 0;
+  border: 4px solid #1a1c2c;
+}
+.ballTop { top: 0; background: #e33; border-bottom: none; }
+.ballBottom { bottom: 0; background: #fff; border-radius: 0 0 64px 64px; border-top: none; }
+.ballButton {
+  position: absolute; top: 50%; left: 50%; width: 18px; height: 18px;
+  margin: -9px 0 0 -9px; background: #fff; border: 4px solid #1a1c2c; border-radius: 50%;
+  z-index: 2;
+}
+@keyframes ballSpin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.loadTip { transition: opacity .18s ease; }
+
+/* Partículas mejoradas */
+.px {
+  position: absolute; left: 50%; top: 50%; width: 8px; height: 8px; z-index: 29;
+  pointer-events: none; border-radius: 2px;
+  animation: scatter .75s cubic-bezier(.2,.7,.3,1) forwards;
+}
+@keyframes scatter {
+  to { transform: translate(var(--dx), var(--dy)) scale(.3); opacity: 0; }
+}
+
+/* Proyectiles con estela */
+.fxTrail {
+  position: absolute; left: 50%; top: 50%; width: 18px; height: 6px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,.7));
+  transform-origin: left center; pointer-events: none;
+  animation: trailFade .45s linear forwards;
+}
+@keyframes trailFade { to { opacity: 0; transform: scaleX(.4); } }
+
+/* Impactos más visibles */
+.fxImpact {
+  position: absolute; width: 40px; height: 40px; margin: -20px 0 0 -20px;
+  border-radius: 50%; pointer-events: none; z-index: 28;
+  animation: impactPop .48s ease-out forwards;
+}
+@keyframes impactPop {
+  0% { transform: scale(.2); opacity: 1; box-shadow: 0 0 0 0 currentColor; }
+  70% { transform: scale(1.4); opacity: .6; }
+  100% { transform: scale(1.8); opacity: 0; }
+}
+
+/* Idle sutil en sprites de combate */
+.tile .spriteBox .sprite,
+.tile .spriteBox .spriteAnimated {
+  animation: idleBob 2.4s ease-in-out infinite;
+}
+@keyframes idleBob {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-3px); }
+}
+.tile.dead .spriteBox .sprite,
+.tile.faint .spriteBox .sprite { animation: none; }
+
+/* Mejor feedback en botones */
+.btn:active { transform: translateY(1px); }
+.btn.primary:hover { filter: brightness(1.08); }
+
+/* Typewriter más legible */
+.typedRest { opacity: .35; }
+.typing { cursor: pointer; }
+
+/* Mejoras de combate: flash más suave en hit */
+.tile.hit .sprite { animation: blinkSprite .45s steps(2) 2; }
+
+/* Banner de efectos más elegante */
+.fxBanner {
+  position: absolute; top: 12%; left: 50%; transform: translateX(-50%);
+  background: rgba(26,28,44,.88); color: #ffcd75; padding: 8px 18px;
+  font: 13px var(--px); letter-spacing: .04em; border: 3px solid #ffcd75;
+  border-radius: 8px; z-index: 40; animation: bannerIn .35s ease-out;
+  text-shadow: 1px 1px 0 #000;
+}
+@keyframes bannerIn {
+  from { opacity: 0; transform: translate(-50%, -8px); }
+  to { opacity: 1; transform: translate(-50%, 0); }
+}

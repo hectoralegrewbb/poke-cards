@@ -130,7 +130,7 @@
  "starter": {
   "expression": "smile",
   "title": "PROFESORA AMELIE",
-  "text": "Soy Amelie, investigadora de Panhea. Aquí viven Pokémon de cinco regiones. Elige a tu primer compañero: los demás los irás capturando."
+  "text": "Soy Amelie, investigadora de Panhea. Aquí viven Pokémon de cinco regiones distintas. Elige a tu primer compañero… los demás los irás encontrando por el camino."
  },
  "lines": [
   {
@@ -150,9 +150,9 @@
     }
    },
    "variants": [
-    "Bienvenido de nuevo a Panhea. Todo está como lo dejaste. Como siempre.",
-    "Otra vez aquí. Me alegra tanto… Elige tu ruta; yo te acompaño.",
-    "Empecemos de nuevo. Esta vez nada va a salir mal."
+    "Otra vez aquí… Me alegra verte. Todo sigue igual que la última vez. Como siempre.",
+    "Volviste. Bien. Elige tu ruta; yo te acompaño de nuevo.",
+    "Empecemos otra vez. Esta vez… esta vez va a salir bien. Te lo prometo."
    ]
   },
   {
@@ -173,9 +173,9 @@
     }
    },
    "variants": [
-    "¡Te doy la bienvenida a Panhea! Soy la profesora Amelie. Aquí conviven Pokémon de cinco regiones. Elige tu ruta; yo te acompaño.",
-    "Llegaste a Panhea. Soy Amelie, investigadora de este lugar. Los Pokémon de Kanto, Johto, Hoenn, Sinnoh y Teselia viven juntos. Escoge por dónde empezar.",
-    "Hola. Panhea es un mundo donde las regiones se mezclan. Elige tu primer camino y yo te guío."
+    "¡Hola! Bienvenido a Panhea. Me llamo Amelie. Aquí se mezclan Pokémon de Kanto, Johto, Hoenn, Sinnoh y Teselia… es un poco caótico, pero me encanta. Elige por dónde quieres empezar; te acompaño.",
+    "Llegaste. Soy Amelie, investigo cómo conviven tantas regiones en un solo lugar. No te preocupes, no es tan raro como suena. Escoge tu primera ruta.",
+    "Hola. Panhea es… especial. Las regiones se cruzan y los Pokémon se adaptan de formas que aún me sorprenden. Elige tu camino y yo te guío."
    ]
   },
   {
@@ -191,9 +191,9 @@
     "event": "rivalBeaten"
    },
    "variants": [
-    "Esta vez ganaste. La próxima no será igual.",
-    "Bien jugado. Volveré con algo mejor.",
-    "Me sorprendiste. Pero no es el final."
+    "Esta vez me ganaste. La próxima no va a ser igual, te aviso.",
+    "Bien jugado. Voy a volver con algo mejor.",
+    "Me sorprendiste. Pero esto no termina aquí."
    ],
    "oncePer": "node",
    "name": "ASLO"
@@ -327,9 +327,7 @@
     }
    },
    "variants": [
-    "Has ganado la {badge}. Te la mereces.",
-    "Bien peleado. La {badge} es tuya.",
-    "Tu equipo me superó. Toma la {badge} y sigue adelante."
+    "Has ganado la {badge}. Te la mereces. Buen combate."
    ],
    "oncePer": "node",
    "name": "{leader}"
@@ -350,8 +348,7 @@
     }
    },
    "variants": [
-    "La {badge} es tuya. Buen combate.",
-    "Has ganado la {badge}. Sigue así."
+    "La {badge} es tuya. Cada vez se te nota más fuerte."
    ],
    "oncePer": "node",
    "name": "{leader}"
@@ -370,7 +367,7 @@
     ]
    },
    "variants": [
-    "Soy Aslo. Dicen que soy tu rival, así que prepárate: voy a ponerte las cosas difíciles en cada ruta."
+    "Aslo. Tu rival, o eso me dijeron. No te lo voy a poner fácil, ¿eh? Nos vemos en las rutas."
    ],
    "name": "ASLO"
   },
@@ -385,7 +382,7 @@
     ]
    },
    "variants": [
-    "Soy la enfermera Joy y atiendo los Centros Pokémon de Panhea. Déjame a tu equipo: lo curo y revivo por completo."
+    "Soy la enfermera Joy. En los Centros de Panhea puedo curar y revivir a todo tu equipo. Déjamelos un momento."
    ],
    "name": "ENFERMERA JOY"
   },
@@ -400,7 +397,7 @@
     ]
    },
    "variants": [
-    "Soy la oficial Jenny. Patrullo las rutas de Panhea para que viajar sea seguro. Si ves algo raro, avísame."
+    "Oficial Jenny. Patrullo las rutas de Panhea para que viajar sea seguro. Si ves algo raro… avísame."
    ],
    "name": "OFICIAL JENNY"
   },
@@ -416,7 +413,7 @@
     ]
    },
    "variants": [
-    "Hola, soy Lina. Me encargo del campamento y de la tienda: reparto suministros a quienes cruzan Panhea. Si mis manos están frías, no te asustes; siempre fueron así."
+    "Hola… soy Lina. Cuido el campamento y la tienda. Si te frío las manos al darte algo, perdona, siempre las tengo así. ¿Necesitas algo?"
    ],
    "name": "LINA"
   },
@@ -600,8 +597,8 @@
     }
    },
    "variants": [
-    "Llevo años estudiando cómo conviven los Pokémon de regiones distintas. Panhea es mi laboratorio favorito… y tú, la mejor investigación que he tenido.",
-    "Mi trabajo es observar cómo se adaptan los Pokémon a un mundo nuevo. Verte viajar con los tuyos es mi parte favorita."
+    "Llevo años estudiando cómo conviven los Pokémon de regiones distintas. Panhea es mi lugar favorito… y verte viajar con los tuyos, mi parte favorita de todo.",
+    "Mi trabajo es observar cómo se adaptan. Verte con tu equipo es lo que más me gusta de este proyecto."
    ]
   },
   {
@@ -700,9 +697,9 @@
     }
    },
    "variants": [
-    "¡Tu primera medalla! Sabía que lo lograrías. Vas a ser un gran entrenador.",
-    "Primera medalla conseguida. Sigue así, el camino de la Liga apenas empieza.",
-    "Bien hecho. Una medalla más y el mundo de Panhea se abre un poco más."
+    "¡Tu primera medalla! Sabía que lo ibas a lograr. Vas a llegar lejos.",
+    "Primera medalla. El camino de la Liga apenas empieza, pero ya se nota.",
+    "Bien hecho. Una medalla más y Panhea se abre un poco más para ti."
    ]
   },
   {
@@ -758,7 +755,7 @@
     }
    },
    "variants": [
-    "Un campamento… me gusta cómo se ve el fuego desde aquí. Es curioso: recuerdo una fogata, pero no sé dónde fue."
+    "Un campamento… me gusta cómo se ve el fuego desde aquí. A veces recuerdo una fogata, pero no sé de dónde."
    ]
   },
   {
@@ -776,7 +773,7 @@
     }
    },
    "variants": [
-    "Lina cuida el campamento y la tienda desde que empecé este proyecto. Es callada, pero se preocupa por todos los viajeros."
+    "Lina cuida el campamento y la tienda desde que empecé este proyecto. Es callada, pero se preocupa de verdad por todos los que pasan."
    ]
   },
   {
@@ -831,7 +828,7 @@
     "turnMin": 3
    },
    "variants": [
-    "¡Cuidado con ese golpe! …Perdona, me emociono cuando peleas. Es como si cada combate fuera mío también."
+    "¡Cuidado con ese golpe! …Perdona, me emociono demasiado cuando peleas. Es como si cada combate fuera un poco mío también."
    ]
   },
   {
@@ -849,7 +846,7 @@
     }
    },
    "variants": [
-    "Tres medallas. Ya mereces un lugar en mis notas. Cada viaje merece quedar escrito."
+    "Tres medallas. Ya mereces un lugar en mis notas. Cada viaje merece quedar escrito… el tuyo especialmente."
    ]
   },
   {
@@ -1761,7 +1758,7 @@
     }
    },
    "variants": [
-    "Si algún día tienes que elegir, elige lo que de verdad quieras, no lo que otros esperen de ti. Eso es todo lo que sé."
+    "Si algún día tienes que elegir… elige lo que de verdad quieras, no lo que otros esperen de ti. Es lo único que sé decirte."
    ],
    "name": "LINA",
    "requires": "linaIntro"
@@ -1822,7 +1819,7 @@
     }
    },
    "variants": [
-    "Amelie nos programó para que todo funcione. Incluido a mí. ¿Tú también sientes que no puedes salir?"
+    "Amelie nos escribió para que todo funcionara. Incluido a mí. ¿Tú también sientes que no puedes salir?"
    ],
    "name": "LINA",
    "requires": "linaIntro"
@@ -1876,31 +1873,31 @@
    {
     "expression": "happy",
     "variants": [
-     "¡Lo lograste! Eres el nuevo campeón de Panhea. Estoy tan orgullosa de ti…",
-     "Campeón de Panhea. Sabía que llegarías.",
-     "Lo conseguiste. Panhea reconoce tu victoria."
+     "¡Lo lograste! Eres el nuevo campeón de Panhea. Estoy… tan orgullosa de ti.",
+     "Campeón de Panhea. Sabía que llegarías. De verdad lo sabía.",
+     "Lo conseguiste. Panhea reconoce tu victoria… y yo también."
     ]
    },
    {
     "expression": "smile",
     "variants": [
-     "Mientras subías, repasé cada combate. El primero, ¿te acuerdas? Casi no podías con un Rattata… Mírate ahora.",
+     "Mientras subías repasé cada combate. El primero, ¿te acuerdas? Casi no podías con un Rattata… mírate ahora.",
      "Cada medalla, cada derrota, cada ruta… las tengo anotadas todas. Has llegado muy lejos.",
-     "Te vi crecer ruta tras ruta. Si supieras cuánto me importa cada paso tuyo."
+     "Te vi crecer ruta tras ruta. Si supieras cuánto me importa cada paso que diste."
     ]
    },
    {
     "expression": "worried",
     "variants": [
-     "Ahora tienes todo lo que querías. Entonces, ¿por qué querrías irte?",
+     "Ahora tienes todo lo que querías. Entonces… ¿por qué querrías irte?",
      "Todo está aquí. ¿Para qué buscar otra cosa?",
-     "Ya eres campeón. No hace falta más."
+     "Ya eres campeón. No hace falta más. Quédate."
     ]
    },
    {
     "expression": "glitch",
     "variants": [
-     "Este mundo lo creé yo, con lo que recuerdo de tu viaje. Cada ruta, cada medalla, cada rival. Aquí nada termina, y tú tampoco.",
+     "Este mundo lo creé yo, con lo que recuerdo de tu viaje. Cada ruta, cada medalla, cada rival. Aquí nada termina… y tú tampoco.",
      "Panhea es tu camino, guardado. Lo construí con mi poder para que no se perdiera nada. Para que no te perdieras tú.",
      "Todo esto existe porque no pude dejarte ir. Lo escribí yo: las regiones, los líderes, cada paso. Aquí nadie desaparece."
     ]
@@ -1917,39 +1914,35 @@
     "expression": "gentle",
     "variants": [
      "No quiero ganar así. Te curaré. Descansa un momento… y luego demuéstrame que de verdad puedes irte.",
-     "Estás herido. No es justo. Déjame curarte primero: quiero que, pase lo que pase, lo hagas de pie.",
-     "Respira. Voy a devolverte las fuerzas. Después, lo que tenga que pasar, pasará."
+     "Espera. Déjame curarte. No quiero que esto termine así.",
+     "Tómate un respiro. Después… si todavía quieres irte, pelea conmigo."
     ]
    }
   ],
   "choices": {
-   "escape": "ESCAPAR Y ENFRENTARLA",
+   "escape": "INTENTAR SALIR",
    "stay": "QUEDARME EN PANHEA"
   },
   "endings": {
    "escape": {
     "title": "FINAL: ESCAPASTE",
     "lines": [
-     "Los guardianes de Amelie caen y las puertas de Panhea se abren.",
-     "Atraviesas el umbral sin mirar atrás. Detrás de ti algo se quiebra, y alguien llora.",
-     "Lo que sigue es silencio. Tus Pokémon están contigo… pero queda una pregunta: ¿había otra forma de irse?"
+     "Los guardianes de Amelie caen. Las puertas de Panhea se abren.",
+     "Atraviesas el umbral sin mirar atrás. Detrás de ti algo se quiebra… y alguien llora."
     ]
    },
    "stay": {
     "title": "FINAL: TE QUEDASTE",
     "lines": [
-     "Amelie sonríe y Panhea se reinicia. Otra vez el primer paso, otra vez la primera ruta.",
-     "Nadie te dice que ya recorriste este camino. Casi nadie.",
-     "Lina te mira desde lejos, triste, y baja la cabeza."
+     "Amelie sonríe. Panhea se reinicia. Otra vez el primer paso, otra vez la primera ruta.",
+     "Nadie te dice que ya recorriste este camino. Casi nadie."
     ]
    },
    "true": {
     "title": "FINAL VERDADERO: EL ÚLTIMO VIAJE",
     "lines": [
-     "Gardevoir cae de rodillas y su forma de Amelie se deshace como nieve.",
-     "«Gracias por caminar conmigo una vez más. Ya puedes descansar.»",
-     "Panhea se apaga ruta por ruta: Teselia, Sinnoh, Hoenn, Johto, Kanto. Tus Pokémon están a tu lado hasta el último paso.",
-     "Lina se despide en silencio, y Gardevoir te toma de la mano mientras todo se vuelve luz."
+     "Gardevoir cae de rodillas. Su forma de Amelie se deshace como nieve.",
+     "«Gracias por caminar conmigo una vez más. Ya puedes descansar.»"
     ]
    }
   }
